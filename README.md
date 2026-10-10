@@ -35,6 +35,12 @@ Cada componente tiene su propio repositorio e historial Git. Este repositorio co
 
 Documento compartido: [Google Docs del equipo](https://docs.google.com/document/d/1Q70r6_MAmjk9BNTKyIEDe3r9cuEV_UPJrb6Ec3v47Tk/edit?tab=t.0).
 
+El capítulo V del documento compartido está actualizado: veinte apartados
+verificados, tablas y enlaces a diecinueve imágenes de evidencia distintas.
+Los capítulos anteriores se conservaron. La inserción de imágenes dentro de
+Google Docs requiere iniciar sesión; el [Word de entrega](entrega/FinanZen-Reporte-Actualizado.docx)
+ya las integra. [Verificación de la actualización](evidencias/cierre-sprint-1/google-doc-update.json).
+
 El PDF no registra fechas ni autores en su tabla de versiones. Esta tabla
 documenta los artefactos disponibles, sin atribuir nuevas entrevistas ni
 trabajo de desarrollo a integrantes específicos.

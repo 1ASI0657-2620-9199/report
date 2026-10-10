@@ -22,6 +22,7 @@ Fecha: 10 de octubre de 2026 (America/Lima). Backend v0.1.1, biblioteca 0.1.0.
 | [OpenAPI](openapi.json) | 5.3.1.5 | Contrato publicado |
 | [Video explicado](demostracion-explicada.mp4) / [timing y guion](video-timeline.json) | 5.3.1.4 | Capturas reales con voz sintética identificada |
 | [Grabación del navegador](publico/demostracion.webm) | 5.3.1.4 | Interacción real de Swagger; sin narración |
+| [Actualización Google Docs](google-doc-update.json) | Capítulo V | Veinte apartados guardados, capítulos anteriores conservados y enlaces de evidencia comprobados |
 
 Las capturas de registros son vistas identificadas de salidas originales; no
 se presentan como interfaces de proveedores. Las imágenes Swagger, Trello y
