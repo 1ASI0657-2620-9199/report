@@ -24,6 +24,7 @@ Cada componente tiene su propio repositorio e historial Git. Este repositorio co
 | Actualización del informe | 2026-10-10 | PDF proporcionado y código del MVP | Datos de portada corregidos; capítulos II–V ampliados; fuentes y figuras conservadas y evidencia reproducible |
 | Repositorios independientes | 2026-10-10 | Organización 1ASI0657-2620-9199 | Cinco repositorios: back, report, landing, front y mobile; enlaces, ejecución y validaciones adaptados |
 | Evidencias del Sprint 1 | 2026-10-10 | Backend/API existentes y statement 202620 | Capítulo V ampliado: Repository, configuración, diagrama local, commits, endpoints, respuestas reales, log de pruebas y guía de capturas/video |
+| Persistencia y capturas | 2026-10-10 | Backend con SQLite/PostgreSQL y ejecución HTTP local | Render Free + Neon preparado, 8 tests, 11 comprobaciones Newman, 13 capturas y grabación real; publicación cloud pendiente de conexión |
 
 El PDF no registra fechas ni autores en su tabla de versiones. Esta tabla
 documenta los artefactos disponibles, sin atribuir nuevas entrevistas ni
@@ -48,6 +49,8 @@ trabajo de desarrollo a integrantes específicos.
 8. [README del hito anterior](historico/README_hito1.md).
 9. [Evidencias del Sprint 1 y archivos por agregar](evidencias/sprint-1/README.md),
    con colección de Postman y resultados reales de la API.
+10. [Deployment y capturas incorporadas](evidencias/deployment/README.md):
+    logs, Swagger, Newman, persistencia y grabación; estado del despliegue público.
 
 ## Criterio de actualización
 
@@ -69,7 +72,7 @@ lo propuesto de lo implementado.
 
 | Componente | Evidencia actual | Pendientes |
 | --- | --- | --- |
-| [Back](https://github.com/1ASI0657-2620-9199/back/blob/main/README.md) | FastAPI, SQLite, registros idempotentes y resumen mensual | Identidad real, servicios de presupuesto, eventos, IoT, análisis, educación y auditoría |
+| [Back](https://github.com/1ASI0657-2620-9199/back/blob/main/README.md) | FastAPI, SQLite/PostgreSQL, registros idempotentes, resumen, 8 pruebas y configuración gratuita Render/Neon | Conectar cuentas y publicar; identidad real, presupuesto, eventos, IoT, análisis, educación y auditoría |
 | [Front](https://github.com/1ASI0657-2620-9199/front/blob/main/README.md) | Panel web conectado a la API | Autenticación y pantallas de las capacidades pendientes |
 | [Landing](https://github.com/1ASI0657-2620-9199/landing/blob/main/README.md) | Repositorio preparado, sin código | Diseño, implementación y contenido de US13/US14 |
 | [Mobile](https://github.com/1ASI0657-2620-9199/mobile/blob/main/README.md) | Repositorio preparado, sin código | Implementación del cliente móvil |

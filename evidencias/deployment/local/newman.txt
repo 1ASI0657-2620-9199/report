@@ -1,0 +1,68 @@
+{
+  "captured_at_utc": "2026-10-10T08:15:41.596Z",
+  "timezone": "America/Lima",
+  "base_url": "http://127.0.0.1:8766",
+  "environment": "Local Uvicorn with PostgreSQL 17 in Docker",
+  "backend_commit": "f218113d0e8cc4f2f431d4573eac40e47cbb0ee3"
+}
+
+newman
+
+FinanZen - Sprint 1 evidence
+
+→ 01-health
+  GET http://127.0.0.1:8766/health [200 OK, 178B, 27ms]
+  √  HTTP 200
+
+→ 02-income
+  POST http://127.0.0.1:8766/api/v1/transactions [201 Created, 492B, 39ms]
+  √  HTTP 201
+
+→ 03-replay
+  POST http://127.0.0.1:8766/api/v1/transactions [200 OK, 486B, 36ms]
+  √  HTTP 200
+  √  Same movement ID
+
+→ 04-conflict
+  POST http://127.0.0.1:8766/api/v1/transactions [409 Conflict, 211B, 26ms]
+  √  HTTP 409
+
+→ 05-expense
+  POST http://127.0.0.1:8766/api/v1/transactions [201 Created, 488B, 52ms]
+  √  HTTP 201
+
+→ 06-list
+  GET http://127.0.0.1:8766/api/v1/transactions [200 OK, 791B, 24ms]
+  √  HTTP 200
+  √  Two movements
+
+→ 07-summary
+  GET http://127.0.0.1:8766/api/v1/summary?month=2026-10&currency=PEN [200 OK, 300B, 23ms]
+  √  HTTP 200
+  √  Monthly totals
+
+→ 08-invalid-month
+  GET http://127.0.0.1:8766/api/v1/summary?month=2026-13&currency=PEN [422 Unprocessable Entity, 189B, 8ms]
+  √  HTTP 422
+
+┌─────────────────────────┬──────────────────┬──────────────────┐
+│                         │         executed │           failed │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│              iterations │                1 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│                requests │                8 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│            test-scripts │                8 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│      prerequest-scripts │                1 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│              assertions │               11 │                0 │
+├─────────────────────────┴──────────────────┴──────────────────┤
+│ total run duration: 890ms                                     │
+├───────────────────────────────────────────────────────────────┤
+│ total data received: 2.01kB (approx)                          │
+├───────────────────────────────────────────────────────────────┤
+│ average response time: 29ms [min: 8ms, max: 52ms, s.d.: 12ms] │
+└───────────────────────────────────────────────────────────────┘
+(node:47684) [DEP0176] DeprecationWarning: fs.F_OK is deprecated, use fs.constants.F_OK instead
+(Use `node --trace-deprecation ...` to show where the warning was created)

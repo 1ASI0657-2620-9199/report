@@ -1,0 +1,107 @@
+{
+  "captured_at_utc": "2026-10-10T08:15:41.596Z",
+  "timezone": "America/Lima",
+  "base_url": "http://127.0.0.1:8766",
+  "environment": "Local Uvicorn with PostgreSQL 17 in Docker",
+  "backend_commit": "f218113d0e8cc4f2f431d4573eac40e47cbb0ee3",
+  "requests": [
+    {
+      "operation": "operations-Operations-health_health_get",
+      "method": "GET",
+      "url": "http://127.0.0.1:8766/health",
+      "status": 200,
+      "body": {
+        "status": "ok",
+        "service": "financial-records-service"
+      }
+    },
+    {
+      "operation": "operations-Transactions-create_transaction_api_v1_transactions_post",
+      "method": "POST",
+      "url": "http://127.0.0.1:8766/api/v1/transactions",
+      "status": 201,
+      "body": {
+        "account_id": "cash-account",
+        "type": "income",
+        "amount": "1000.00",
+        "currency": "PEN",
+        "category": "salary",
+        "occurred_at": "2026-10-01T10:00:00Z",
+        "description": "Evidencia HTTP real",
+        "id": "0469e82b-f2e5-40ff-9c78-474e9de48bfc",
+        "user_id": "browser-1d3930ea-d520-4aae-8f69-e0d62d743ca3",
+        "created_at": "2026-10-10T08:16:06.611292Z"
+      }
+    },
+    {
+      "operation": "replay",
+      "status": 200,
+      "body": {
+        "account_id": "cash-account",
+        "type": "income",
+        "amount": "1000.00",
+        "currency": "PEN",
+        "category": "salary",
+        "occurred_at": "2026-10-01T10:00:00Z",
+        "description": "Evidencia HTTP real",
+        "id": "0469e82b-f2e5-40ff-9c78-474e9de48bfc",
+        "user_id": "browser-1d3930ea-d520-4aae-8f69-e0d62d743ca3",
+        "created_at": "2026-10-10T08:16:06.611292Z"
+      }
+    },
+    {
+      "operation": "conflict",
+      "status": 409,
+      "body": {
+        "detail": "The Idempotency-Key was already used with a different request body."
+      }
+    },
+    {
+      "operation": "operations-Transactions-list_transactions_api_v1_transactions_get",
+      "method": "GET",
+      "url": "http://127.0.0.1:8766/api/v1/transactions",
+      "status": 200,
+      "body": [
+        {
+          "account_id": "cash-account",
+          "type": "expense",
+          "amount": "125.50",
+          "currency": "PEN",
+          "category": "food",
+          "occurred_at": "2026-10-01T10:00:00Z",
+          "description": "Evidencia HTTP real",
+          "id": "2795e70e-418f-4192-836e-2f950254e3a4",
+          "user_id": "browser-1d3930ea-d520-4aae-8f69-e0d62d743ca3",
+          "created_at": "2026-10-10T08:16:10.035736Z"
+        },
+        {
+          "account_id": "cash-account",
+          "type": "income",
+          "amount": "1000.00",
+          "currency": "PEN",
+          "category": "salary",
+          "occurred_at": "2026-10-01T10:00:00Z",
+          "description": "Evidencia HTTP real",
+          "id": "0469e82b-f2e5-40ff-9c78-474e9de48bfc",
+          "user_id": "browser-1d3930ea-d520-4aae-8f69-e0d62d743ca3",
+          "created_at": "2026-10-10T08:16:06.611292Z"
+        }
+      ]
+    },
+    {
+      "operation": "operations-Reports-monthly_summary_api_v1_summary_get",
+      "method": "GET",
+      "url": "http://127.0.0.1:8766/api/v1/summary?month=2026-10&currency=PEN",
+      "status": 200,
+      "body": {
+        "user_id": "browser-1d3930ea-d520-4aae-8f69-e0d62d743ca3",
+        "month": "2026-10",
+        "currency": "PEN",
+        "income": "1000.00",
+        "expenses": "125.50",
+        "balance": "874.50",
+        "transaction_count": 2
+      }
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "captured_at_utc": "2026-10-10T08:15:41.596Z",
+  "timezone": "America/Lima",
+  "base_url": "http://127.0.0.1:8766",
+  "environment": "Local Uvicorn with PostgreSQL 17 in Docker",
+  "backend_commit": "f218113d0e8cc4f2f431d4573eac40e47cbb0ee3",
+  "verification": "Local Uvicorn process stopped and restarted",
+  "before_ids": [
+    "2795e70e-418f-4192-836e-2f950254e3a4",
+    "0469e82b-f2e5-40ff-9c78-474e9de48bfc"
+  ],
+  "after_ids": [
+    "2795e70e-418f-4192-836e-2f950254e3a4",
+    "0469e82b-f2e5-40ff-9c78-474e9de48bfc"
+  ],
+  "preserved": true
+}

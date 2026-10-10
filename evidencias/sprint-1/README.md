@@ -4,7 +4,12 @@
 
 Actualización: **10 de octubre de 2026**, America/Lima.
 Referencia: statement `Trabajo Final_1ASI0657_202620.docx`.
-Los nombres sugeridos de imágenes son tareas pendientes, no archivos existentes.
+Los nombres sugeridos del checklist inicial no son rutas a archivos existentes.
+
+**Actualización:** ya se incorporaron [13 capturas, logs y una grabación real](../deployment/README.md)
+de Swagger, pytest, Newman, persistencia local y GitHub. La tabla de nombres
+sugeridos de abajo conserva el checklist inicial; consultar el nuevo índice
+para los archivos que ya existen. La publicación cloud espera las cuentas conectadas.
 
 ## Evidencias disponibles
 
@@ -18,7 +23,8 @@ Los nombres sugeridos de imágenes son tareas pendientes, no archivos existentes
 | Diagrama del capítulo V | Clientes, proceso Uvicorn/FastAPI, panel opcional y SQLite | 5.2.4 |
 
 La [colección Postman preparada](FinanZen-Sprint1.postman_collection.json)
-sirve para obtener capturas; no demuestra una ejecución ya realizada en Postman.
+se ejecutó con Newman: ocho peticiones y once aserciones, sin fallos. Los logs
+están en el nuevo índice; no se presenta esa ejecución como Postman Desktop.
 
 ## Preparar la demostración
 
@@ -47,15 +53,18 @@ El frontend usa `demo-user`: no muestra automáticamente los movimientos del
 usuario de Postman. Para capturar el panel, registrar datos desde la interfaz
 y explicar que corresponden a otra demostración.
 
-## Capturas por agregar
+## Checklist inicial de capturas
 
-Guardar las imágenes en esta carpeta. Cada figura debe tener explicación,
-fecha, entorno y resultado; después enlazarla desde el capítulo V.
+Este checklist conserva los objetivos originales. Health, ingreso, repetición,
+conflicto, listado, resumen, Swagger, arranque, pytest y commit ya tienen
+evidencia en el [índice actualizado](../deployment/README.md), con nombres distintos.
+Contribuciones, Kanban y los demás objetivos sin correspondencia siguen pendientes.
+Para futuras figuras, añadir explicación, fecha, entorno y resultado.
 
 | Nombre sugerido | Qué debe mostrar | Apartado |
 | --- | --- | --- |
 | `01-entorno.png` | Versiones, dependencias instaladas y herramienta usada | 5.2.1 |
-| `02-pytest.png` | Comando y resultado completo de las cuatro pruebas | 5.1.1 / 5.3.1.3 |
+| `02-pytest.png` | Comando y resultado completo de las ocho pruebas actuales | 5.1.1 / 5.3.1.3 |
 | `03-repository.png` | Repository y endpoint que delega en él, con explicación | 5.1.2 |
 | `04-commits.png` | Historial/diff de los commits reales de back/front | 5.3.1.2 |
 | `05-health.png` | GET `/health`, URL, HTTP 200 y cuerpo | 5.3.1.4 |
@@ -74,6 +83,9 @@ fecha, entorno y resultado; después enlazarla desde el capítulo V.
 
 ## Video de ejecución
 
+Ya se adjunta una [grabación de Swagger y registros locales](../deployment/local/demostracion.webm),
+sin narración. Para completar el formato explicativo de la entrega:
+
 Grabar una demostración que explique el alcance y muestre health, creación de
 ingreso/gasto, repetición idempotente, conflicto, listado, resumen y Swagger.
 Publicar el video, comprobar acceso para el docente y agregar su enlace en
@@ -89,7 +101,8 @@ Duración sugerida: 3–5 minutos; no es una duración exigida por el statement.
 - **Colaboración (5.3.1.7):** explicar trabajo real e incluir analíticas de GitHub,
   PR o revisiones que efectivamente existan.
 - **Refactorización (5.1.4):** cambio de patrón real, código antes/después,
-  commits y pruebas. La incorporación del proyecto no demuestra ese cambio.
+  commits y pruebas. Ya se añadió la separación de conexión SQLite/PostgreSQL
+  en `f218113`; el capítulo V documenta ese cambio y los patrones aún pendientes.
 - **Librería propia (5.1.3):** paquete reutilizable, patrones, consumo y pruebas.
   `finanzen_common` sigue siendo una propuesta.
 - **Deployment:** pasos realizados durante el sprint. Añadir recursos, URL y

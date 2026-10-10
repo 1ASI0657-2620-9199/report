@@ -20,6 +20,17 @@ apuntan a GitHub; los enlaces relativos del informe se resuelven dentro de repor
 
 ## Suite del backend
 
+La validación vigente para la preparación cloud está en
+[deployment](deployment/README.md): **8 passed in 1.43s** con SQLite/PostgreSQL,
+8 peticiones y 11 aserciones Newman sin fallos, capturas de Swagger y reinicio
+del proceso Uvicorn conservando IDs. Los registros siguientes preservan las
+comprobaciones anteriores a la incorporación de PostgreSQL.
+
+El [workflow del backend](https://github.com/1ASI0657-2620-9199/back/actions/runs/38037169861)
+también terminó con éxito sobre `f218113`. Se adjuntan
+[captura real de GitHub](deployment/local/12-github-actions.png) y
+[estado consultado por API](deployment/local/github-actions.json).
+
 Dentro del repositorio `back`, con sus dependencias instaladas:
 
 ```powershell
@@ -40,7 +51,8 @@ En la ampliación del capítulo V se volvió a ejecutar la misma suite el
 identifica el commit y la hora de ejecución en America/Lima. Se conservaron
 [ocho respuestas reales](sprint-1/respuestas-api.json) obtenidas con TestClient,
 SQLite temporal y datos de muestra. La [guía del Sprint 1](sprint-1/README.md)
-identifica las capturas de Postman, Swagger y colaboración todavía pendientes.
+conserva el checklist original. Las nuevas capturas técnicas se incorporaron
+en deployment; colaboración, Kanban y la publicación cloud siguen pendientes.
 
 ## Frontend e integración
 
@@ -87,8 +99,9 @@ Report: 58 internal links OK; original PDF checksum OK.
 Después de ampliar el capítulo V y agregar la guía del Sprint 1, el verificador
 reporta **73 enlaces internos correctos** y mantiene intacto el checksum del PDF.
 La colección preparada contiene ocho peticiones; sus scripts JavaScript pasan
-la comprobación de sintaxis de Node. Queda pendiente ejecutarla en Postman y
-capturar la interacción; esta comprobación no acredita una ejecución allí.
+la comprobación de sintaxis de Node. Posteriormente se ejecutó con Newman y
+se capturó Swagger; consultar el índice de deployment. No se presenta como
+una ejecución de la interfaz de Postman Desktop.
 
 ## Integración continua y límites
 

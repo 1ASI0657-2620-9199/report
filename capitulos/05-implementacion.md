@@ -13,9 +13,10 @@ evidencias ya obtenidas. Consultar la [guía de evidencias del Sprint 1](../evid
 
 ### 5.1.1. Backend Application Core Testing Suite
 
-El núcleo utiliza Python, FastAPI, Pydantic y SQLite. Las pruebas de API se
-ejecutan con pytest y FastAPI TestClient, sin depender de un servidor externo.
-Usan bases temporales para no modificar datos de ejecución.
+El núcleo utiliza Python, FastAPI y Pydantic, con SQLite local o PostgreSQL
+mediante `DATABASE_URL`. Las pruebas utilizan pytest/TestClient: cinco casos
+con SQLite temporal y tres con PostgreSQL 17 real. Estos últimos usan usuarios
+de muestra únicos y una base de validación separada.
 
 La suite actual está en [back/tests/test_api.py](https://github.com/1ASI0657-2620-9199/back/blob/main/tests/test_api.py):
 
@@ -25,9 +26,14 @@ La suite actual está en [back/tests/test_api.py](https://github.com/1ASI0657-26
 | `test_summary_calculates_balance_and_isolates_users` | Ingresos, gastos, saldo y filtrado por usuario | Corresponde a `test_summary_balance_and_user_isolation` en la fuente |
 | `test_frontend_is_served` | Entrega de una interfaz desde una ruta configurable | Prueba de entrega estática, independiente de incluir el frontend en el paquete del backend |
 | `test_backend_runs_without_frontend` | Health/Swagger disponibles sin archivos del cliente | Añadida durante la separación del proyecto |
+| `test_transactions_survive_application_restart` | Datos e idempotencia sobreviven al recrear la aplicación con SQLite | Nueva evidencia de persistencia |
+| `test_postgres_transactions_summary_and_isolation` | Registro, resumen, aislamiento, repetición y conflicto en PostgreSQL | Nueva integración con PostgreSQL |
+| `test_postgres_data_and_idempotency_survive_application_restart` | Persistencia e idempotencia al recrear la aplicación con PostgreSQL | Nueva evidencia de persistencia |
+| `test_concurrent_postgres_replays_create_only_one_movement` | Ocho solicitudes concurrentes crean un solo movimiento | Nueva prueba de concurrencia idempotente |
 
 El PDF describe tres pruebas con los nombres históricos anteriores. Esta
-versión documenta los nombres reales y una cuarta prueba. Los resultados y
+versión documenta ocho pruebas reales. Los tres casos PostgreSQL están en
+[tests/test_postgres.py](https://github.com/1ASI0657-2620-9199/back/blob/f218113d0e8cc4f2f431d4573eac40e47cbb0ee3/tests/test_postgres.py). Los resultados y
 comandos ejecutados se registran en [validación](../evidencias/validacion.md).
 
 El filtrado por `X-User-Id` comprueba aislamiento lógico para una identidad
@@ -36,7 +42,7 @@ Tampoco se ejecutan escenarios de carga, telemetría, proyecciones o auditoría.
 
 Para futuros incrementos, el PDF propone separar pruebas unitarias,
 integración, persistencia y contratos. Esa estructura sigue siendo una propuesta;
-la suite actual conserva un archivo de pruebas de API.
+la suite actual separa pruebas de API y de integración con PostgreSQL.
 
 Para repetir la suite desde `back`:
 
@@ -44,31 +50,40 @@ Para repetir la suite desde `back`:
 python -m pytest -q -p no:cacheprovider
 ```
 
-La ejecución del 10 de octubre de 2026 produjo **4 passed in 0.77s**; se adjunta
-la [salida real de pytest](../evidencias/sprint-1/pytest.txt). Las aserciones comprueban
-estados HTTP y datos: mismo ID ante una repetición, conflicto ante otro cuerpo,
-saldo de `874.50` y dos movimientos visibles para el usuario de prueba.
-La captura de terminal y los escenarios BDD requeridos para la revisión del
-sprint permanecen pendientes; se detallan en 5.3.1.3 y en la guía de evidencias.
+Para ejecutar los ocho casos, `TEST_DATABASE_URL` debe apuntar a una base
+PostgreSQL exclusiva de pruebas; sin esa variable, tres casos se omiten.
+El workflow configura PostgreSQL 17 como servicio de CI.
+La ejecución del 10 de octubre de 2026 produjo **8 passed in 1.43s**:
+[salida real](../evidencias/deployment/local/pytest.txt) y
+[vista del registro](../evidencias/deployment/local/02-pytest.png).
+El resultado anterior de cuatro pruebas se conserva como evidencia histórica.
+Los escenarios BDD siguen pendientes; consultar 5.3.1.3.
 
 ### 5.1.2. Pattern Based Backend Application(s)
 
 Repository está implementado en `FinancialRecordsRepository`. Los contratos
 REST se exponen bajo `/api/v1`, y FastAPI genera OpenAPI/Swagger.
-La persistencia local usa una única tabla de transacciones.
+La persistencia usa una única tabla de transacciones en SQLite o PostgreSQL.
 
 | Elemento | Responsabilidad | Código |
 | --- | --- | --- |
 | `app/main.py` | Rutas HTTP, cabeceras, respuestas y composición de la aplicación | [Endpoints](https://github.com/1ASI0657-2620-9199/back/blob/6ff8141000371271d8b91ebc8d0b7ed5fdea1906/app/main.py) |
 | `app/models.py` | Contratos Pydantic para validar movimientos y representar respuestas | [Modelos](https://github.com/1ASI0657-2620-9199/back/blob/6ff8141000371271d8b91ebc8d0b7ed5fdea1906/app/models.py) |
 | `FinancialRecordsRepository` | Esquema, inserción, consulta y cálculo del resumen | [Repository](https://github.com/1ASI0657-2620-9199/back/blob/6ff8141000371271d8b91ebc8d0b7ed5fdea1906/app/repository.py) |
+| `Database` / `DatabaseSession` | Adaptación de conexiones, parámetros SQL y transacciones para SQLite/PostgreSQL | [Adaptador actual](https://github.com/1ASI0657-2620-9199/back/blob/f218113d0e8cc4f2f431d4573eac40e47cbb0ee3/app/database.py) |
+
+Las tres primeras referencias conservan el incremento inicial. La
+[implementación actual](https://github.com/1ASI0657-2620-9199/back/tree/f218113d0e8cc4f2f431d4573eac40e47cbb0ee3/app)
+incorpora el adaptador y bloqueo transaccional de claves idempotentes en PostgreSQL.
 
 ```mermaid
 flowchart LR
     C[Cliente HTTP: panel, Postman o Swagger] --> A[Rutas FastAPI]
     A --> M[Contratos Pydantic]
     A --> R[FinancialRecordsRepository]
-    R --> D[(SQLite: transactions)]
+    R --> D[Database / DatabaseSession]
+    D --> S[(SQLite: transactions)]
+    D --> P[(PostgreSQL: transactions)]
 ```
 
 Repository concentra el SQL fuera de los endpoints: estos delegan en
@@ -103,26 +118,30 @@ semántico y distribución deberán definirse cuando se implemente.
 | Aspecto | Propuesta del PDF | Estado de esta organización |
 | --- | --- | --- |
 | Controladores | Delegar en casos de uso y mantener routers delgados | Endpoints siguen en `app/main.py`; refactorización pendiente |
-| Persistencia | Interfaces de repositorio y adaptador SQLite | Repositorio existente conservado; no se añadió una interfaz abstracta |
+| Persistencia | Interfaces de repositorio y adaptador SQLite | Adaptador `Database` para SQLite/PostgreSQL; sin interfaz abstracta de repositorio |
 | Errores | Excepciones de aplicación y contrato uniforme | Handler de conflicto idempotente existente; normalización completa pendiente |
-| Configuración | Variables de entorno y eliminación de rutas dependientes de máquina | `FINANZEN_DB_PATH` y `FINANZEN_FRONTEND_PATH`; frontend vecino `front/` |
+| Configuración | Variables de entorno y eliminación de rutas dependientes de máquina | `DATABASE_URL`, `FINANZEN_DB_PATH` y `FINANZEN_FRONTEND_PATH`; validación al arrancar en Render |
 | Observabilidad | Correlation ID y logs estructurados | Pendiente |
 | Eventos | Publicación para alertas, análisis y auditoría | Pendiente |
 
 La organización adapta la ruta del frontend y conserva la API independiente.
 La descripción OpenAPI se corrigió para no afirmar que US10–US12 estén completas.
-No se realizó la refactorización arquitectónica completa ni se cambió la
-tecnología de persistencia.
+Se extrajo el acceso a conexiones/transacciones a `app/database.py` y se añadió
+PostgreSQL conservando SQLite local. La refactorización completa de casos de
+uso, errores, observabilidad y eventos sigue pendiente.
 
 El código actual selecciona el frontend mediante `FINANZEN_FRONTEND_PATH` o
 la carpeta vecina `front`, y solo monta archivos estáticos si la ruta existe.
 Las pruebas `test_frontend_is_served` y `test_backend_runs_without_frontend`
 respaldan la ruta personalizada y la ejecución de la API sin cliente web.
 
-El commit `6ff8141` incorpora el proyecto independiente; su padre solo contiene
-el README inicial. Ese historial no permite presentar un diff de refactorización
-del backend anterior. Para completar este apartado se necesita un cambio de
-patrón identificable, comparación antes/después y pruebas que preserven el comportamiento.
+Comparación verificable:
+[antes/después del adaptador](https://github.com/1ASI0657-2620-9199/back/compare/8acb9b29b3086010ac4e13fad26519ced425024f...f218113d0e8cc4f2f431d4573eac40e47cbb0ee3).
+Antes, el repositorio abría conexiones SQLite directamente; después delega en
+`Database`, que adapta parámetros/resultados y asegura commit, rollback y cierre.
+En PostgreSQL se serializa la creación por usuario/clave con
+`pg_advisory_xact_lock`, preservando la respuesta 201/200/409 del contrato.
+Las ocho pruebas y la ejecución de Newman verifican el comportamiento conservado.
 
 ## 5.2. Software Configuration Management
 
@@ -135,9 +154,10 @@ patrón identificable, comparación antes/después y pruebas que preserven el co
 | Pydantic | 2.12.5 | Implementado |
 | Uvicorn | 0.38.0 | Servidor local |
 | SQLite | Módulo estándar de Python | Persistencia local |
+| PostgreSQL / pg8000 | PostgreSQL 17 / pg8000 1.31.5 | Integración local probada; Neon cloud por crear |
 | pytest / httpx | 8.3.5 / 0.28.1 | Pruebas automatizadas |
 | HTML, CSS, JavaScript | Panel sin compilación | Implementado |
-| Postman | Capturas del PDF | Evidencia histórica; no nueva ejecución de Postman |
+| Postman / Newman | Colección del Sprint 1 ejecutada con Newman | 8 peticiones, 11 aserciones; capturas originales de Postman Desktop históricas |
 | Apache Kafka | Mensajería propuesta | Pendiente |
 | Angular / Flutter / C# | Tecnologías del diagrama original | Sin proyecto Angular, Flutter o C# incorporado |
 
@@ -155,7 +175,8 @@ python -m venv .venv
 ```
 
 Se utilizan Git/GitHub para versionar código, pytest/TestClient para pruebas,
-Swagger/OpenAPI para documentar la API y Postman para las capturas por realizar.
+Swagger/OpenAPI para documentar la API y Newman para ejecutar la colección de
+Postman. Node.js, Playwright y Chrome se usan solo para capturar evidencias.
 La elección del gestor de tareas y las referencias de acceso/descarga de las
 herramientas utilizadas por el equipo deben completar este apartado.
 
@@ -251,8 +272,18 @@ El panel es opcional y se sirve desde el mismo proceso que expone la API.
 indica cómo usar una base separada para las capturas. Este diagrama representa
 ejecución local, no infraestructura cloud.
 
-No hay Dockerfile, infraestructura de nube ni URL pública de despliegue
-verificada. CON-05 sigue pendiente.
+Se añadió el [Blueprint Render Free](https://github.com/1ASI0657-2620-9199/back/blob/main/render.yaml),
+validado contra el schema oficial, y la
+[guía de deployment](https://github.com/1ASI0657-2620-9199/back/blob/main/DEPLOYMENT.md).
+La API se prepara para Render Free y los datos para Neon Free PostgreSQL,
+con `DATABASE_URL` privada y conexión TLS. No se requiere disco de pago.
+El arranque en Render falla si falta PostgreSQL, evitando escribir datos en SQLite efímero.
+`DATABASE_URL` selecciona PostgreSQL; `FINANZEN_DB_PATH` conserva el modo SQLite local.
+El comando cloud escucha en `0.0.0.0:$PORT` y utiliza `/health` como health check.
+
+La [vista de arquitectura prevista y evidencias](../evidencias/deployment/README.md)
+identifica los recursos por crear. Las cuentas siguen por conectar y no existe
+URL pública verificada. CON-05 sigue pendiente.
 
 ## 5.3. MicroServices Implementation
 
@@ -288,10 +319,10 @@ Trazabilidad comprobable del incremento:
 
 | Trabajo del backlog fuente | Código y comportamiento actual | Alcance |
 | --- | --- | --- |
-| TASK-02/03/06/08 | Modelo, POST, idempotencia y tabla SQLite | Registro de movimientos |
+| TASK-02/03/06/08 | Modelo, POST, idempotencia y tabla SQLite/PostgreSQL | Registro de movimientos; PostgreSQL añadido en esta actualización |
 | TASK-04/07 | GET de movimientos filtrado por `X-User-Id` | Separación lógica por identidad suministrada; no login |
 | TASK-05 | GET de resumen por mes y moneda | Ingresos, gastos, saldo y cantidad de movimientos |
-| TASK-09/10 | OpenAPI y cuatro pruebas pytest | Contrato y pruebas disponibles; BDD pendiente |
+| TASK-09/10 | OpenAPI y ocho pruebas pytest | Contrato y pruebas disponibles; BDD pendiente |
 | TASK-11 | Panel del repositorio `front` conectado a la API | Cliente web existente |
 
 Faltan captura y URL pública del board y la tabla con descomposición US → tarea,
@@ -316,6 +347,7 @@ America/Lima (`UTC-05:00`):
 | --- | --- | --- | --- | --- | --- |
 | `1ASI0657-2620-9199/back` | `main` | [6ff8141](https://github.com/1ASI0657-2620-9199/back/commit/6ff8141000371271d8b91ebc8d0b7ed5fdea1906) | `feat: initialize independent FinanZen back project` | Sin cuerpo | 2026-10-10 02:39:35 -05:00 |
 | `1ASI0657-2620-9199/front` | `main` | [e0b1ac5](https://github.com/1ASI0657-2620-9199/front/commit/e0b1ac5b272004863300c2a8a4eb2c5222a58111) | `feat: initialize independent FinanZen front project` | Sin cuerpo | 2026-10-10 02:39:53 -05:00 |
+| `1ASI0657-2620-9199/back` | `main` | [f218113](https://github.com/1ASI0657-2620-9199/back/commit/f218113d0e8cc4f2f431d4573eac40e47cbb0ee3) | `feat: support PostgreSQL for free persistent cloud deployment` | Sin cuerpo | 2026-10-10 03:14:03 -05:00 |
 
 El commit de back incluye rutas, contratos, persistencia, tests y workflow;
 el de front incluye el panel y su comprobación de integración. No hay un commit
@@ -325,15 +357,17 @@ El equipo debe añadir futuros avances reales con la misma estructura.
 #### 5.3.1.3. Testing Suite Evidence for Sprint Review
 
 El PDF registra tres comportamientos con resultado Passed. La suite incorporada
-contiene cuatro pruebas y se ejecuta nuevamente para esta entrega. Los resultados
+contiene ocho pruebas y se ejecuta nuevamente con PostgreSQL real. Los resultados
 actuales se detallan en [evidencias/validacion.md](../evidencias/validacion.md).
 
 | Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on (Date) | Evidencia de testing |
 | --- | --- | --- | --- | --- | --- | --- |
 | `1ASI0657-2620-9199/back` | `main` | [6ff8141](https://github.com/1ASI0657-2620-9199/back/commit/6ff8141000371271d8b91ebc8d0b7ed5fdea1906) | `feat: initialize independent FinanZen back project` | Sin cuerpo | 2026-10-10 02:39:35 -05:00 | Incorpora `tests/test_api.py` y el workflow de pytest |
+| `1ASI0657-2620-9199/back` | `main` | [f218113](https://github.com/1ASI0657-2620-9199/back/commit/f218113d0e8cc4f2f431d4573eac40e47cbb0ee3) | `feat: support PostgreSQL for free persistent cloud deployment` | Sin cuerpo | 2026-10-10 03:14:03 -05:00 | Añade tres pruebas PostgreSQL y servicio PostgreSQL en CI |
 
-La [salida capturada](../evidencias/sprint-1/pytest.txt) contiene cuatro pruebas
-aprobadas. La suite respalda el recorte de registro de movimientos de US01 y el
+La [salida actual](../evidencias/deployment/local/pytest.txt) contiene ocho pruebas
+aprobadas; se incorpora una [vista del registro real](../evidencias/deployment/local/02-pytest.png).
+La suite respalda el recorte de registro de movimientos de US01 y el
 resumen mensual de PF-02; no valida todos los criterios de US01 ni presupuestos/alertas.
 
 El statement solicita archivos `.feature`, escenarios Gherkin, relación con
@@ -374,9 +408,14 @@ solicitud, estado HTTP y cuerpo de respuesta:
 | Consultar mes `2026-13` | HTTP 422; mes inválido |
 
 La [colección de Postman](../evidencias/sprint-1/FinanZen-Sprint1.postman_collection.json)
-permite reproducir estas operaciones en el servidor local. Faltan capturas
-nuevas y enlace al video explicativo. El JSON de TestClient no se presenta
-como evidencia de una ejecución en Postman.
+se ejecutó contra Uvicorn/PostgreSQL local con Newman: **8 peticiones, 11
+aserciones y 0 fallos**. Consultar el [log real](../evidencias/deployment/local/newman.txt),
+el [reporte JSON](../evidencias/deployment/local/newman.json) y las
+[trece capturas explicadas](../evidencias/deployment/README.md).
+Las vistas de registros identifican a Newman como runner; no son capturas de
+Postman Desktop. La [grabación real](../evidencias/deployment/local/demostracion.webm)
+muestra Swagger y registros locales, sin narración. El enlace publicado y la
+explicación oral del equipo quedan pendientes si la entrega los requiere.
 
 #### 5.3.1.5. Microservices Documentation Evidence for Sprint Review
 
@@ -439,14 +478,26 @@ consultados. Los importes se serializan como cadenas decimales.
 | [back](https://github.com/1ASI0657-2620-9199/back) | [6ff8141](https://github.com/1ASI0657-2620-9199/back/commit/6ff8141000371271d8b91ebc8d0b7ed5fdea1906) | Metadatos/contratos FastAPI y README de Swagger/OpenAPI |
 | [report](https://github.com/1ASI0657-2620-9199/report) | [5176faa](https://github.com/1ASI0657-2620-9199/report/commit/5176faa24f59e8506e6eedb564bdd7b208d3cfeb) | `evidencias/openapi.json` y guía del servicio |
 
-Faltan capturas explicadas de peticiones, parámetros y respuestas en Swagger.
+Se incorporan capturas reales de Swagger local con peticiones, parámetros y
+respuestas: [contrato](../evidencias/deployment/local/03-swagger-endpoints.png),
+[POST con HTTP 201](../evidencias/deployment/local/05-create-income.png) y
+[resumen con HTTP 200](../evidencias/deployment/local/07-summary.png).
+El [índice completo](../evidencias/deployment/README.md) explica cada captura y su apartado.
 
 #### 5.3.1.6. Software Deployment Evidence for Sprint Review
 
-La configuración disponible es local: instalación de dependencias, arranque
-con Uvicorn, inicialización de SQLite y rutas de estado/documentación. Faltan
-capturas y explicación de los pasos de deployment realizados durante el sprint.
-Las cuentas, recursos e integración cloud deben documentarse cuando existan.
+Se preparó la configuración gratuita Render/Neon y se ejecutó Uvicorn con
+PostgreSQL 17 local. Se incorporan el
+[registro de arranque y peticiones](../evidencias/deployment/local/11-server-log.png),
+la [comprobación de persistencia](../evidencias/deployment/local/persistencia.json)
+y su [vista antes/después](../evidencias/deployment/local/10-persistence.png).
+La comprobación detuvo y reinició realmente el proceso Uvicorn: los dos IDs
+permanecieron iguales. Esta prueba acredita persistencia PostgreSQL local.
+
+El [índice de deployment](../evidencias/deployment/README.md) documenta actividades,
+arquitectura preparada y evidencias pendientes. Faltan conectar cuentas, crear
+recursos gratuitos, obtener URL HTTPS, capturar build/Live y verificar la
+persistencia en nube. Ninguna captura local se presenta como deployment cloud.
 
 El índice del statement ubica el despliegue cloud completo en TF1 y permite
 URL local para documentar sprints previos al despliegue de Web Services.
@@ -474,6 +525,9 @@ enlaces y datos del equipo que faltan para completar los apartados del Sprint 1.
 - PDF, transcripción de las 109 páginas, figuras y README histórico conservados.
 - Informe ampliado con entrevistas, 14 historias, drivers y cinco iteraciones ADD.
 - Pruebas, contrato OpenAPI, script de comprobación y empaquetado reproducible.
+- Adaptador SQLite/PostgreSQL, ocho pruebas aprobadas y configuración Render Free/Neon Free preparada.
+- Once capturas reales, colección ejecutada con Newman y grabación local de Swagger.
+- Capturas reales de GitHub Actions aprobado y del commit de PostgreSQL; trece imágenes en total.
 - Repositorios landing y mobile preparados sin código, según confirmación del usuario.
 
 Siguen pendientes autenticación, cuentas/saldos, presupuestos, alertas,
