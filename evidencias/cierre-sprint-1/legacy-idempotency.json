@@ -1,0 +1,12 @@
+{
+  "checked_at_utc": "2026-10-10T09:39:59.750378+00:00",
+  "scope": "Previously created synthetic demonstration user only",
+  "original_deployed_commit": "525ac3fd678b72340aaec689f444301b5afe073c",
+  "updated_api_version": "0.1.1",
+  "original_transaction_id": "2d434a99-47b5-421f-90c4-93824f9ae8e7",
+  "replay_http_status": 200,
+  "same_id": true,
+  "replayed": "true",
+  "balance": "874.50",
+  "transaction_count": 2
+}

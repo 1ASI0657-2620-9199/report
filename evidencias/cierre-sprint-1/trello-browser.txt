@@ -1,0 +1,36 @@
+Ir a:
+Tablero
+Selector de tablero
+Funciones
+Soluciones
+Planes
+Precios
+Recursos
+Iniciar sesión
+Obtener Trello gratis
+Atlassian utiliza cookies para mejorar tu experiencia de navegación, realizar análisis e investigaciones y gestionar la publicidad. Acepta todas las cookies para indicar que aceptas su uso en tu dispositivo. Aviso de cookies y seguimiento de Atlassian
+, (opens new window)
+Preferencias
+Solo necesarias
+Aceptar todas
+FinanZen - Sprint 1
+TO DO
+0
+IN PROGRESS
+0
+TO REVIEW
+0
+DONE
+12
+US01 - Registrar datos financieros
+TASK-01 - Crear Financial Records Service
+TASK-02 - Definir modelo de transacción
+TASK-03 - Implementar POST /api/v1/transactions
+TASK-04 - Implementar GET /api/v1/transactions
+TASK-05 - Implementar GET /api/v1/summary
+TASK-06 - Implementar idempotencia
+TASK-07 - Aislamiento por usuario
+TASK-08 - Implementar persistencia con SQLite
+TASK-09 - Documentar API con Swagger
+TASK-10 - Implementar Testing Suite
+TASK-11 - Integrar frontend funcional

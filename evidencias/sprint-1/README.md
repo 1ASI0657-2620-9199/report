@@ -6,6 +6,14 @@ Actualización: **10 de octubre de 2026**, America/Lima.
 Referencia: statement `Trabajo Final_1ASI0657_202620.docx`.
 Los nombres sugeridos del checklist inicial no son rutas a archivos existentes.
 
+**Estado vigente:** consultar el [cierre del Sprint 1](../cierre-sprint-1/README.md).
+Se completaron doce pruebas, seis escenarios Gherkin locales y cinco públicos,
+biblioteca reutilizable, release 0.1.1 desplegada, diagrama C4, captura del board
+público y video explicado con voz sintética. El contenido inferior conserva
+el checklist y resultados de los incrementos anteriores. Colaboración de todos
+los integrantes, aceptación del proveedor por el docente y las capturas nuevas
+de Postman Desktop no se declaran completadas sin esa evidencia.
+
 **Actualización:** ya se incorporaron [13 capturas, logs y una grabación real](../deployment/README.md)
 de Swagger, pytest, Newman, persistencia local y GitHub. La tabla de nombres
 sugeridos de abajo conserva el checklist inicial; consultar el nuevo índice

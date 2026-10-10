@@ -1,0 +1,107 @@
+{
+  "captured_at_utc": "2026-10-10T09:42:30.489Z",
+  "timezone": "America/Lima",
+  "base_url": "https://finanzen-financial-records.onrender.com",
+  "environment": "Public HTTPS service",
+  "backend_commit": "f9d837e35b0f15eab7aa02b85c7a0b49a62a8d1b",
+  "requests": [
+    {
+      "operation": "operations-Operations-health_health_get",
+      "method": "GET",
+      "url": "https://finanzen-financial-records.onrender.com/health",
+      "status": 200,
+      "body": {
+        "status": "ok",
+        "service": "financial-records-service"
+      }
+    },
+    {
+      "operation": "operations-Transactions-create_transaction_api_v1_transactions_post",
+      "method": "POST",
+      "url": "https://finanzen-financial-records.onrender.com/api/v1/transactions",
+      "status": 201,
+      "body": {
+        "account_id": "cash-account",
+        "type": "income",
+        "amount": "1000.00",
+        "currency": "PEN",
+        "category": "salary",
+        "occurred_at": "2026-10-01T10:00:00Z",
+        "description": "Evidencia HTTP real",
+        "id": "b4952769-255c-4634-a388-deae3766e722",
+        "user_id": "browser-a1e6c628-162e-4b02-b311-b7bcd50b7a19",
+        "created_at": "2026-10-10T09:42:47.920092Z"
+      }
+    },
+    {
+      "operation": "replay",
+      "status": 200,
+      "body": {
+        "account_id": "cash-account",
+        "type": "income",
+        "amount": "1000.00",
+        "currency": "PEN",
+        "category": "salary",
+        "occurred_at": "2026-10-01T10:00:00Z",
+        "description": "Evidencia HTTP real",
+        "id": "b4952769-255c-4634-a388-deae3766e722",
+        "user_id": "browser-a1e6c628-162e-4b02-b311-b7bcd50b7a19",
+        "created_at": "2026-10-10T09:42:47.920092Z"
+      }
+    },
+    {
+      "operation": "conflict",
+      "status": 409,
+      "body": {
+        "detail": "The Idempotency-Key was already used with a different request body."
+      }
+    },
+    {
+      "operation": "operations-Transactions-list_transactions_api_v1_transactions_get",
+      "method": "GET",
+      "url": "https://finanzen-financial-records.onrender.com/api/v1/transactions",
+      "status": 200,
+      "body": [
+        {
+          "account_id": "cash-account",
+          "type": "expense",
+          "amount": "125.50",
+          "currency": "PEN",
+          "category": "food",
+          "occurred_at": "2026-10-01T10:00:00Z",
+          "description": "Evidencia HTTP real",
+          "id": "f016f9ab-19b4-486e-add0-0c565b784814",
+          "user_id": "browser-a1e6c628-162e-4b02-b311-b7bcd50b7a19",
+          "created_at": "2026-10-10T09:42:52.591717Z"
+        },
+        {
+          "account_id": "cash-account",
+          "type": "income",
+          "amount": "1000.00",
+          "currency": "PEN",
+          "category": "salary",
+          "occurred_at": "2026-10-01T10:00:00Z",
+          "description": "Evidencia HTTP real",
+          "id": "b4952769-255c-4634-a388-deae3766e722",
+          "user_id": "browser-a1e6c628-162e-4b02-b311-b7bcd50b7a19",
+          "created_at": "2026-10-10T09:42:47.920092Z"
+        }
+      ]
+    },
+    {
+      "operation": "operations-Reports-monthly_summary_api_v1_summary_get",
+      "method": "GET",
+      "url": "https://finanzen-financial-records.onrender.com/api/v1/summary?month=2026-10&currency=PEN",
+      "status": 200,
+      "body": {
+        "user_id": "browser-a1e6c628-162e-4b02-b311-b7bcd50b7a19",
+        "month": "2026-10",
+        "currency": "PEN",
+        "income": "1000.00",
+        "expenses": "125.50",
+        "balance": "874.50",
+        "transaction_count": 2
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "id": "dep-db50emvlot8c73d9e8p0",
+  "commit": {
+    "id": "f9d837e35b0f15eab7aa02b85c7a0b49a62a8d1b",
+    "message": "chore: release backend 0.1.1\n\nRelease 0.1.1: compatible fingerprint library and tested acceptance scenarios",
+    "createdAt": "2026-10-10T09:36:11Z"
+  },
+  "status": "live",
+  "trigger": "api",
+  "createdAt": "2026-10-10T09:37:31.718509Z",
+  "updatedAt": "2026-10-10T09:38:42.511097Z",
+  "startedAt": "2026-10-10T09:37:31.688973Z",
+  "finishedAt": "2026-10-10T09:38:09.875688Z"
+}

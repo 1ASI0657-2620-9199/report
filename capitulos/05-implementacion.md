@@ -1,638 +1,381 @@
 # Capítulo V: Product Implementation, Validation & Deployment
 
-[Volver al informe](../README.md) · Fuente: páginas físicas 95–109 del PDF,
-actualizada con el código y la validación de esta entrega.
-
-Esta ampliación documenta el **Financial Records Service** existente: registro
-de ingresos/egresos, consulta de movimientos y resumen mensual. Los requisitos
-de evidencia se contrastan con `Trabajo Final_1ASI0657_202620.docx`, proporcionado
-como statement. Las propuestas y las capturas pendientes se distinguen de las
-evidencias ya obtenidas. Consultar la [guía de evidencias del Sprint 1](../evidencias/sprint-1/README.md).
+[Volver al informe](../README.md). Fuente académica conservada; actualización verificada el 10 de octubre de 2026.
 
 ## 5.1. Testing Suites & General Patterns
 
+El Financial Records Service combina FastAPI/Pydantic, Repository, adaptación de persistencia SQLite/PostgreSQL y una biblioteca propia con Strategy. La entrega verifica el recorte de registro de movimientos de US01 y el resumen mensual de PF-02; presupuestos, autenticación, eventos y alertas no están implementados.
+
+Estado verificado el **10 de octubre de 2026**, America/Lima. API publicada **0.1.1**; biblioteca **0.1.0**.
+
 ### 5.1.1. Backend Application Core Testing Suite
 
-El núcleo utiliza Python, FastAPI y Pydantic, con SQLite local o PostgreSQL
-mediante `DATABASE_URL`. Las pruebas utilizan pytest/TestClient: cinco casos
-con SQLite temporal y tres con PostgreSQL 17 real. Estos últimos usan usuarios
-de muestra únicos y una base de validación separada.
+Se ejecutaron **12 casos pytest aprobados**: cinco SQLite, tres PostgreSQL 17 real y cuatro de la biblioteca. La ejecución local obtuvo **12 passed in 1.71s**. [CI de main](https://github.com/1ASI0657-2620-9199/back/actions/runs/38041971339) aprobó la suite, BDD y build del paquete.
 
-La suite actual está en [back/tests/test_api.py](https://github.com/1ASI0657-2620-9199/back/blob/main/tests/test_api.py):
-
-| Prueba actual | Comportamiento comprobado | Relación con el PDF |
+| Grupo | Casos | Validación |
 | --- | --- | --- |
-| `test_create_is_idempotent_and_rejects_key_reuse` | HTTP 201, repetición HTTP 200 con el mismo ID y conflicto HTTP 409 | Corresponde al comportamiento llamado `test_idempotency_and_conflict` en la fuente |
-| `test_summary_calculates_balance_and_isolates_users` | Ingresos, gastos, saldo y filtrado por usuario | Corresponde a `test_summary_balance_and_user_isolation` en la fuente |
-| `test_frontend_is_served` | Entrega de una interfaz desde una ruta configurable | Prueba de entrega estática, independiente de incluir el frontend en el paquete del backend |
-| `test_backend_runs_without_frontend` | Health/Swagger disponibles sin archivos del cliente | Añadida durante la separación del proyecto |
-| `test_transactions_survive_application_restart` | Datos e idempotencia sobreviven al recrear la aplicación con SQLite | Nueva evidencia de persistencia |
-| `test_postgres_transactions_summary_and_isolation` | Registro, resumen, aislamiento, repetición y conflicto en PostgreSQL | Nueva integración con PostgreSQL |
-| `test_postgres_data_and_idempotency_survive_application_restart` | Persistencia e idempotencia al recrear la aplicación con PostgreSQL | Nueva evidencia de persistencia |
-| `test_concurrent_postgres_replays_create_only_one_movement` | Ocho solicitudes concurrentes crean un solo movimiento | Nueva prueba de concurrencia idempotente |
+| SQLite / TestClient | 5 | Registro 201, replay 200, conflicto 409; resumen/aislamiento; frontend configurable; API sin frontend; persistencia al recrear app |
+| PostgreSQL 17 | 3 | Operaciones/aislamiento; persistencia; ocho solicitudes concurrentes crean solo un movimiento |
+| finanzen-common | 4 | Compatibilidad con huellas históricas Unicode; orden de claves; cambio de contenido sin mutar entrada; estrategia inyectable |
 
-El PDF describe tres pruebas con los nombres históricos anteriores. Esta
-versión documenta ocho pruebas reales. Los tres casos PostgreSQL están en
-[tests/test_postgres.py](https://github.com/1ASI0657-2620-9199/back/blob/f218113d0e8cc4f2f431d4573eac40e47cbb0ee3/tests/test_postgres.py). Los resultados y
-comandos ejecutados se registran en [validación](../evidencias/validacion.md).
+Código: [test_api.py](https://github.com/1ASI0657-2620-9199/back/blob/v0.1.1/tests/test_api.py), [test_postgres.py](https://github.com/1ASI0657-2620-9199/back/blob/v0.1.1/tests/test_postgres.py), [test_common.py](https://github.com/1ASI0657-2620-9199/back/blob/v0.1.1/tests/test_common.py). Para reproducir desde back: instalar requirements-dev.txt y ejecutar `python -m pytest -q -p no:cacheprovider`. `TEST_DATABASE_URL` debe señalar una base exclusiva de validación; sin ella se omiten tres casos PostgreSQL.
 
-El filtrado por `X-User-Id` comprueba aislamiento lógico para una identidad
-indicada por el cliente. No demuestra autenticación ni autorización real.
-Tampoco se ejecutan escenarios de carga, telemetría, proyecciones o auditoría.
+![Resultado real de pytest: 12 pruebas aprobadas](../evidencias/cierre-sprint-1/pytest.png)
 
-Para futuros incrementos, el PDF propone separar pruebas unitarias,
-integración, persistencia y contratos. Esa estructura sigue siendo una propuesta;
-la suite actual separa pruebas de API y de integración con PostgreSQL.
-
-Para repetir la suite desde `back`:
-
-```powershell
-python -m pytest -q -p no:cacheprovider
-```
-
-Para ejecutar los ocho casos, `TEST_DATABASE_URL` debe apuntar a una base
-PostgreSQL exclusiva de pruebas; sin esa variable, tres casos se omiten.
-El workflow configura PostgreSQL 17 como servicio de CI.
-La ejecución del 10 de octubre de 2026 produjo **8 passed in 1.43s**:
-[salida real](../evidencias/deployment/local/pytest.txt) y
-[vista del registro](../evidencias/deployment/local/02-pytest.png).
-El resultado anterior de cuatro pruebas se conserva como evidencia histórica.
-Los escenarios BDD siguen pendientes; consultar 5.3.1.3.
-
-![Figura 5.1: vista del registro real de pytest, ocho pruebas aprobadas con SQLite y PostgreSQL local, 10 de octubre de 2026](../evidencias/deployment/local/02-pytest.png)
+[Registro original](../evidencias/cierre-sprint-1/pytest.txt). `X-User-Id` acredita separación lógica de datos de demostración, no login ni autorización real.
 
 ### 5.1.2. Pattern Based Backend Application(s)
 
-Repository está implementado en `FinancialRecordsRepository`. Los contratos
-REST se exponen bajo `/api/v1`, y FastAPI genera OpenAPI/Swagger.
-La persistencia usa una única tabla de transacciones en SQLite o PostgreSQL.
-
-| Elemento | Responsabilidad | Código |
+| Patrón / elemento | Implementación | Responsabilidad |
 | --- | --- | --- |
-| `app/main.py` | Rutas HTTP, cabeceras, respuestas y composición de la aplicación | [Endpoints](https://github.com/1ASI0657-2620-9199/back/blob/6ff8141000371271d8b91ebc8d0b7ed5fdea1906/app/main.py) |
-| `app/models.py` | Contratos Pydantic para validar movimientos y representar respuestas | [Modelos](https://github.com/1ASI0657-2620-9199/back/blob/6ff8141000371271d8b91ebc8d0b7ed5fdea1906/app/models.py) |
-| `FinancialRecordsRepository` | Esquema, inserción, consulta y cálculo del resumen | [Repository](https://github.com/1ASI0657-2620-9199/back/blob/6ff8141000371271d8b91ebc8d0b7ed5fdea1906/app/repository.py) |
-| `Database` / `DatabaseSession` | Adaptación de conexiones, parámetros SQL y transacciones para SQLite/PostgreSQL | [Adaptador actual](https://github.com/1ASI0657-2620-9199/back/blob/f218113d0e8cc4f2f431d4573eac40e47cbb0ee3/app/database.py) |
+| Repository | FinancialRecordsRepository | Esquema, inserción, consultas y resumen mensual |
+| Adaptación de persistencia | Database / DatabaseSession | Conexiones SQLite/PostgreSQL, parámetros ligados, resultados, commit/rollback/cierre |
+| Strategy | FingerprintStrategy / CanonicalJsonSha256 / FingerprintService | Huella determinista reemplazable usada para idempotencia |
+| Contratos HTTP | FastAPI / Pydantic | Validación de entradas y generación de OpenAPI |
 
-Las tres primeras referencias conservan el incremento inicial. La
-[implementación actual](https://github.com/1ASI0657-2620-9199/back/tree/f218113d0e8cc4f2f431d4573eac40e47cbb0ee3/app)
-incorpora el adaptador y bloqueo transaccional de claves idempotentes en PostgreSQL.
+Flujo actual: cliente HTTPS → rutas FastAPI → Repository → Database → PostgreSQL; el repositorio utiliza FingerprintService para la huella del payload. El bloqueo transaccional PostgreSQL mantiene un único movimiento por usuario/clave ante concurrencia.
 
-```mermaid
-flowchart LR
-    C[Cliente HTTP: panel, Postman o Swagger] --> A[Rutas FastAPI]
-    A --> M[Contratos Pydantic]
-    A --> R[FinancialRecordsRepository]
-    R --> D[Database / DatabaseSession]
-    D --> S[(SQLite: transactions)]
-    D --> P[(PostgreSQL: transactions)]
-```
-
-Repository concentra el SQL fuera de los endpoints: estos delegan en
-`create_transaction`, `list_transactions` y `monthly_summary`. La restricción
-única por usuario/clave y el hash del cuerpo permiten reconocer repeticiones y
-conflictos. `Decimal` permite sumar importes. La dependencia es sobre la clase
-concreta; no existe una interfaz abstracta ni una capa independiente de casos de uso.
-
-Microservicios adicionales, Facade entre subsistemas, Observer, Gateway y
-Database per Service para múltiples dominios forman parte del diseño objetivo,
-sin implementación adicional en esta entrega.
+Evidencias: [código publicado](https://github.com/1ASI0657-2620-9199/back/tree/v0.1.1/app), [biblioteca](https://github.com/1ASI0657-2620-9199/back/tree/v0.1.1/libraries/finanzen_common) y doce pruebas. Facade, Observer, gateway y Kafka permanecen como propuestas del diseño original, sin componentes desplegados.
 
 ### 5.1.3. Pattern Based Custom Software Library
 
-El PDF propone `finanzen_common`, una librería pequeña de capacidades
-transversales. No hay un paquete de ese nombre en el código incorporado.
+**Implementado:** `finanzen-common` 0.1.0 es una distribución Python independiente de FastAPI y de las bases de datos, almacenada en `libraries/finanzen_common`. Se empaqueta con pyproject.toml y layout src, se instala desde requirements.txt y el backend la consume en `FinancialRecordsRepository._request_hash`.
 
-| Módulo propuesto | Responsabilidad |
+| Elemento | Función |
 | --- | --- |
-| `errors` | Modelo común de errores |
-| `observability` | Correlation ID y logging estructurado |
-| `security` | Identidad propagada y validaciones comunes |
-| `events` | Envelope, identificadores y metadatos |
-| `idempotency` | Utilidades para claves idempotentes |
-| `testing` | Fixtures y factories |
+| FingerprintStrategy (Protocol) | Contrato de estrategia para un payload JSON |
+| CanonicalJsonSha256 | JSON ordenado, separadores compactos y SHA-256 compatibles con el backend previo |
+| FingerprintService | Delega en una estrategia inyectada; utiliza CanonicalJsonSha256 por defecto |
 
-No debe concentrar reglas o entidades de todos los dominios. Su versionado
-semántico y distribución deberán definirse cuando se implemente.
+El paquete mantiene el algoritmo anterior, evitando invalidar las claves ya persistidas. Se verificó compatibilidad en pruebas y mediante un replay de un movimiento sintético creado en la versión pública anterior: HTTP 200, mismo ID, replay=true y saldo 874.50 conservado.
+
+Instalación desde back: `python -m pip install ./libraries/finanzen_common`. Consumo: `from finanzen_common import FingerprintService`; `FingerprintService().fingerprint(payload)`. Build: `python -m build libraries/finanzen_common`.
+
+![Construcción real de wheel y sdist](../evidencias/cierre-sprint-1/library-build.png)
+
+[Registro original del build](../evidencias/cierre-sprint-1/library-build.txt), [pruebas de consumo/compatibilidad](https://github.com/1ASI0657-2620-9199/back/blob/v0.1.1/tests/test_common.py), [paquetes descargables en la release](https://github.com/1ASI0657-2620-9199/back/releases/tag/v0.1.1) y [prueba pública de compatibilidad](../evidencias/cierre-sprint-1/legacy-idempotency.json). La biblioteca se distribuye desde GitHub; no se declara una publicación en PyPI. Los módulos propuestos de eventos/errores no forman parte de este paquete.
 
 ### 5.1.4. Framework Pattern Driven Refactoring Report
 
-| Aspecto | Propuesta del PDF | Estado de esta organización |
+| Antes | Después | Evidencia |
 | --- | --- | --- |
-| Controladores | Delegar en casos de uso y mantener routers delgados | Endpoints siguen en `app/main.py`; refactorización pendiente |
-| Persistencia | Interfaces de repositorio y adaptador SQLite | Adaptador `Database` para SQLite/PostgreSQL; sin interfaz abstracta de repositorio |
-| Errores | Excepciones de aplicación y contrato uniforme | Handler de conflicto idempotente existente; normalización completa pendiente |
-| Configuración | Variables de entorno y eliminación de rutas dependientes de máquina | `DATABASE_URL`, `FINANZEN_DB_PATH` y `FINANZEN_FRONTEND_PATH`; validación al arrancar en Render |
-| Observabilidad | Correlation ID y logs estructurados | Pendiente |
-| Eventos | Publicación para alertas, análisis y auditoría | Pendiente |
+| Repository abría conexiones SQLite directamente | Database / DatabaseSession adaptan SQLite/PostgreSQL y administran transacciones | [comparación del adaptador](https://github.com/1ASI0657-2620-9199/back/compare/8acb9b29b3086010ac4e13fad26519ced425024f...f218113d0e8cc4f2f431d4573eac40e47cbb0ee3) |
+| `_request_hash` implementaba JSON + SHA-256 dentro del Repository | Delega en FingerprintService de una biblioteca instalable con Strategy | [diff de extracción](https://github.com/1ASI0657-2620-9199/back/commit/9e9e9f9) |
+| Pruebas API y persistencia | Doce casos y seis escenarios BDD, con build del paquete en CI | [CI](https://github.com/1ASI0657-2620-9199/back/actions/runs/38041971339) |
 
-La organización adapta la ruta del frontend y conserva la API independiente.
-La descripción OpenAPI se corrigió para no afirmar que US10–US12 estén completas.
-Se extrajo el acceso a conexiones/transacciones a `app/database.py` y se añadió
-PostgreSQL conservando SQLite local. La refactorización completa de casos de
-uso, errores, observabilidad y eventos sigue pendiente.
-
-El código actual selecciona el frontend mediante `FINANZEN_FRONTEND_PATH` o
-la carpeta vecina `front`, y solo monta archivos estáticos si la ruta existe.
-Las pruebas `test_frontend_is_served` y `test_backend_runs_without_frontend`
-respaldan la ruta personalizada y la ejecución de la API sin cliente web.
-
-Comparación verificable:
-[antes/después del adaptador](https://github.com/1ASI0657-2620-9199/back/compare/8acb9b29b3086010ac4e13fad26519ced425024f...f218113d0e8cc4f2f431d4573eac40e47cbb0ee3).
-Antes, el repositorio abría conexiones SQLite directamente; después delega en
-`Database`, que adapta parámetros/resultados y asegura commit, rollback y cierre.
-En PostgreSQL se serializa la creación por usuario/clave con
-`pg_advisory_xact_lock`, preservando la respuesta 201/200/409 del contrato.
-Las ocho pruebas y la ejecución de Newman verifican el comportamiento conservado.
+Se conserva el formato de la huella; [el replay público de un registro anterior](../evidencias/cierre-sprint-1/legacy-idempotency.json) confirma compatibilidad después de desplegar la nueva versión. La API puede ejecutarse sin archivos del frontend. La normalización completa de errores, casos de uso separados, Correlation ID y publicación de eventos no se presentan como refactorizaciones realizadas.
 
 ## 5.2. Software Configuration Management
 
+La configuración versionada permite instalar, validar y publicar el backend. Los repositorios son independientes y la rama main contiene la release desplegada; las credenciales se configuran fuera del código y del reporte.
+
 ### 5.2.1. Software Development Environment Configuration
 
-| Elemento | Versión / uso | Estado |
+| Herramienta | Uso / versión verificada | Acceso o instalación |
 | --- | --- | --- |
-| Python | 3.10 o superior; validación local con 3.11 | Disponible para el backend |
-| FastAPI | 0.122.0 | Implementado |
-| Pydantic | 2.12.5 | Implementado |
-| Uvicorn | 0.38.0 | Servidor local |
-| SQLite | Módulo estándar de Python | Persistencia local |
-| PostgreSQL / pg8000 | PostgreSQL 17 / pg8000 1.31.5 | Integración local y deployment Neon Free verificados |
-| pytest / httpx | 8.3.5 / 0.28.1 | Pruebas automatizadas |
-| HTML, CSS, JavaScript | Panel sin compilación | Implementado |
-| Postman / Newman | Colección del Sprint 1 ejecutada con Newman | 8 peticiones, 11 aserciones; capturas originales de Postman Desktop históricas |
-| Apache Kafka | Mensajería propuesta | Pendiente |
-| Angular / Flutter / C# | Tecnologías del diagrama original | Sin proyecto Angular, Flutter o C# incorporado |
+| Python | 3.11.9; backend y scripts | [Python](https://www.python.org/downloads/) |
+| FastAPI / Pydantic / Uvicorn | 0.122.0 / 2.12.5 / 0.38.0 | [FastAPI](https://fastapi.tiangolo.com/); requirements.txt |
+| PostgreSQL / pg8000 | 17 / 1.31.5; persistencia y CI | [PostgreSQL](https://www.postgresql.org/download/); requirements.txt |
+| pytest / httpx | 8.3.5 / 0.28.1; integración | [pytest](https://docs.pytest.org/en/stable/); requirements.txt |
+| Behave / build | 1.3.3 / 1.4.0; Gherkin y distribución | [Behave](https://behave.readthedocs.io/en/stable/); requirements-dev.txt |
+| Git / GitHub | Versionado, ramas, PR, release y CI | [Git](https://git-scm.com/downloads); [organización](https://github.com/orgs/1ASI0657-2620-9199/repositories) |
+| Postman / Newman | Colección HTTP y runner | [Postman](https://www.postman.com/downloads/); [Newman](https://learning.postman.com/docs/collections/using-newman-cli/installing-running-newman/) |
+| Trello | Sprint Backlog / Kanban | [Board público](https://trello.com/b/BIj8fpkf/finanzen-sprint-1) |
+| Render / Neon | API Free / PostgreSQL Free | [Render](https://dashboard.render.com/); [Neon](https://console.neon.tech/) |
+| Structurizr / PlantUML | Deployment DSL y render SVG/PNG | [Structurizr](https://docs.structurizr.com/); [PlantUML](https://plantuml.com/) |
+| Node.js / Chrome / Playwright | Capturas y grabación de evidencia | [Node.js](https://nodejs.org/en/download); [Chrome](https://www.google.com/chrome/); [Playwright](https://playwright.dev/docs/intro) |
 
-Dependencias fijadas en [requirements.txt](https://github.com/1ASI0657-2620-9199/back/blob/main/requirements.txt).
-Los pasos de instalación están en [back](https://github.com/1ASI0657-2620-9199/back/blob/main/README.md) y
-[front](https://github.com/1ASI0657-2620-9199/front/blob/main/README.md).
-
-Preparación del entorno Windows desde `back`:
+Desde back:
 
 ```powershell
 python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
 .\.venv\Scripts\python.exe -m pytest -q -p no:cacheprovider
+.\.venv\Scripts\python.exe -m behave features --junit --junit-directory reports/bdd
 .\.venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
 
-Se utilizan Git/GitHub para versionar código, pytest/TestClient para pruebas,
-Swagger/OpenAPI para documentar la API y Newman para ejecutar la colección de
-Postman. Node.js, Playwright y Chrome se usan solo para capturar evidencias.
-La elección del gestor de tareas y las referencias de acceso/descarga de las
-herramientas utilizadas por el equipo deben completar este apartado.
+PostgreSQL requiere TEST_DATABASE_URL exclusiva de validación para ejecutar sus tres pruebas. El frontend incorporado utiliza HTML/CSS/JavaScript; landing y mobile siguen preparados sin implementación, según alcance indicado. Kafka, Angular, Flutter y C# del diseño original no se declaran implementados.
 
 ### 5.2.2. Source Code Management
 
-La ubicación común es la [organización FinanZen](https://github.com/orgs/1ASI0657-2620-9199/repositories).
-Los cinco repositorios independientes son `back`, `report`, `landing`, `front`
-y `mobile`. Cada uno tiene su historial, README, remoto y configuración.
+La [organización](https://github.com/orgs/1ASI0657-2620-9199/repositories) agrupa [back](https://github.com/1ASI0657-2620-9199/back), [front](https://github.com/1ASI0657-2620-9199/front), [report](https://github.com/1ASI0657-2620-9199/report), [landing](https://github.com/1ASI0657-2620-9199/landing) y [mobile](https://github.com/1ASI0657-2620-9199/mobile).
 
-Se conserva el historial existente de `report`. Los repositorios iniciales
-`FinanSmart-Back`, `FinanSmart-Platform` y `Landing-Page` se reutilizaron como
-`back`, `front` y `landing`; `mobile` se creó para reservar su desarrollo.
-El repositorio personal anterior conserva la organización inicial como antecedente.
+**GitFlow realizado en back:** main → develop → feature/us01-common-library-bdd → develop mediante [PR #1](https://github.com/1ASI0657-2620-9199/back/pull/1); release/0.1.1 → main mediante [PR #2](https://github.com/1ASI0657-2620-9199/back/pull/2); release/0.1.1 → develop mediante [PR #3](https://github.com/1ASI0657-2620-9199/back/pull/3). Las integraciones se realizaron después de CI aprobada. La [etiqueta y release v0.1.1](https://github.com/1ASI0657-2620-9199/back/releases/tag/v0.1.1) aplican SemVer; la biblioteca conserva su versión 0.1.0.
 
-El PDF menciona un repositorio `platform`, ramas `main` y `develop` y el commit
-histórico `41ff14d` atribuido a Renzo Revilla. Esa información se conserva como
-evidencia del documento, no como un commit importado a este historial.
+Convenciones: feature/&lt;historia&gt;-&lt;descripcion&gt;, release/&lt;MAJOR.MINOR.PATCH&gt; y hotfix/&lt;incidencia&gt;-&lt;descripcion&gt;. Se utilizaron feat:, test:, fix: y chore:; hotfix permanece reservado, sin inventar una incidencia. Los PR y merges se gestionaron con la cuenta Darkdren; no se atribuye una revisión por pares que no exista. Front y report conservan su propio historial; no se afirma que todos los componentes ya hayan adoptado GitFlow.
 
-La estrategia académica propuesta es GitFlow (`main`, `develop`, `feature/*`,
-`release/*`, `hotfix/*`), Conventional Commits y SemVer. No se presentan ramas
-propuestas como ramas ya creadas. La versión de API existente es `0.1.0`; eso
-no constituye una etiqueta de release publicada.
+![PR real de integración de la feature](../evidencias/cierre-sprint-1/github-feature-pr.png)
 
-Al revisar el remoto de `back` el 10 de octubre de 2026 se encuentra la rama
-`main`, sin etiquetas publicadas. Las convenciones propuestas son
-`feature/<id>-<descripcion>`, `release/<version>` y `hotfix/<descripcion>`, con
-nombres en inglés y versiones `MAJOR.MINOR.PATCH`. Se debe evidenciar su uso
-real cuando el equipo las adopte. Los commits de 5.3.1.2 incorporan los proyectos;
-no prueban la autoría histórica de cada tarea del PDF.
+[Registro de ramas, commits y contribuidores](../evidencias/cierre-sprint-1/github-collaboration.json), [release y assets](../evidencias/cierre-sprint-1/github-release.json), [integración feature](../evidencias/cierre-sprint-1/feature-merge.json), [release](../evidencias/cierre-sprint-1/release-merge.json), [sincronización develop](../evidencias/cierre-sprint-1/develop-sync.json).
 
 ### 5.2.3. Source Code Style Guide & Conventions
 
-Se conservan los nombres del código. El PDF propone PEP 8, PEP 257,
-`snake_case` para funciones/módulos, `PascalCase` para clases,
-`UPPER_SNAKE_CASE` para constantes, endpoints de recursos en plural y type hints.
-También propone errores sin secretos y pruebas de comportamiento.
-
-El [workflow del backend](https://github.com/1ASI0657-2620-9199/back/blob/main/.github/workflows/validacion.yml)
-instala dependencias y ejecuta su suite. El frontend valida su JavaScript y
-la integración con una copia del backend. El reporte comprueba sus enlaces
-internos y la integridad del PDF fuente mediante su propio workflow.
-No se afirma haber ejecutado linter, formatter o verificación de tipos.
-
-| Convención | Ejemplo verificable del backend |
+| Convención | Ejemplo |
 | --- | --- |
-| Nombres en inglés y `snake_case` | `create_transaction`, `monthly_summary`, `database_path` |
-| Clases en `PascalCase` | `TransactionCreate`, `MonthlySummary`, `FinancialRecordsRepository` |
-| Constantes en mayúsculas | `MONTH_PATTERN`; valores `INCOME` y `EXPENSE` del enum |
-| Anotaciones de tipos | `list[TransactionResponse]`, `Decimal`, `str \| None` |
-| Recursos REST en plural | `/api/v1/transactions` |
-| Pruebas nombradas por comportamiento | `test_create_is_idempotent_and_rejects_key_reuse` |
+| Funciones/módulos snake_case y nombres en inglés | create_transaction, request_summary, fingerprints.py |
+| Clases PascalCase | TransactionCreate, FinancialRecordsRepository, FingerprintService |
+| Constantes en mayúsculas | MONTH_PATTERN |
+| Tipos explícitos | Decimal, str \| None, FingerprintStrategy |
+| REST versionado y recursos plurales | /api/v1/transactions |
+| Gherkin por comportamiento | Given / When / Then, tags @US01 / @PF02 / @local |
+| Mensajes de commit | feat:, test:, fix:, chore: |
 
-Las convenciones del frontend y de Gherkin deben completarse por separado.
-Estos ejemplos no constituyen una auditoría automática de estilo.
+Referencias: [PEP 8](https://peps.python.org/pep-0008/), [PEP 257](https://peps.python.org/pep-0257/), [Gherkin](https://cucumber.io/docs/gherkin/reference/), [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) y [SemVer](https://semver.org/). Los escenarios describen resultados observables, emplean datos sintéticos únicos y no acreditan autenticación por usar X-User-Id. CI ejecuta pruebas y build; no se afirma haber ejecutado linter, formatter ni auditoría estática de estilo.
 
 ### 5.2.4. Software Deployment Configuration
 
-El apartado aparece vacío en el PDF. En esta entrega se documenta una ejecución
-local reproducible, sin inventar un despliegue remoto:
+**Render Free + Neon Free**, API [https://finanzen-financial-records.onrender.com](https://finanzen-financial-records.onrender.com), [Swagger](https://finanzen-financial-records.onrender.com/docs), [health](https://finanzen-financial-records.onrender.com/health) y [OpenAPI](https://finanzen-financial-records.onrender.com/openapi.json). API 0.1.1 publicada desde main en commit f9d837e.
 
-```powershell
-cd back
-python -m pip install -r requirements.txt
-python -m uvicorn app.main:app --host 127.0.0.1 --port 8000
-```
-
-Panel en `http://127.0.0.1:8000`, Swagger en `/docs`, OpenAPI en `/openapi.json`
-y estado en `/health`. La carpeta `data` y la tabla se inicializan al arrancar.
-SQLite, cachés, secretos y entornos virtuales no se versionan.
-
-Vista del despliegue local con los elementos de una vista C4 de despliegue:
-
-```mermaid
-flowchart TB
-    subgraph Local[Equipo de desarrollo - entorno local]
-        B[Navegador: panel o Swagger]
-        P[Postman: cliente HTTP]
-        subgraph Runtime[Proceso Python - Uvicorn - puerto 8000]
-            API[Financial Records Service - FastAPI]
-        end
-        F[Archivos del repositorio front: HTML, CSS y JavaScript]
-        DB[(Archivo SQLite: data/financial_records.db)]
-        B -->|HTTP / y /api/v1| API
-        P -->|HTTP /health y /api/v1| API
-        API -->|Lee archivos estáticos si existen| F
-        API -->|Lectura y escritura con sqlite3| DB
-    end
-```
-
-El panel es opcional y se sirve desde el mismo proceso que expone la API.
-`FINANZEN_DB_PATH` cambia el archivo de persistencia y
-`FINANZEN_FRONTEND_PATH` cambia la ubicación del panel. La guía del Sprint 1
-indica cómo usar una base separada para las capturas. Este diagrama representa
-ejecución local, no infraestructura cloud.
-
-Se añadió el [Blueprint Render Free](https://github.com/1ASI0657-2620-9199/back/blob/main/render.yaml),
-validado contra el schema oficial, y la
-[guía de deployment](https://github.com/1ASI0657-2620-9199/back/blob/main/DEPLOYMENT.md).
-La API está publicada en Render Free y los datos en Neon Free PostgreSQL,
-con `DATABASE_URL` privada y conexión TLS. No se requiere disco de pago.
-El arranque en Render falla si falta PostgreSQL, evitando escribir datos en SQLite efímero.
-`DATABASE_URL` selecciona PostgreSQL; `FINANZEN_DB_PATH` conserva el modo SQLite local.
-El comando cloud escucha en `0.0.0.0:$PORT` y utiliza `/health` como health check.
-
-La [vista de arquitectura y evidencias](../evidencias/deployment/README.md)
-identifica los recursos creados y su validación pública el 10 de octubre de 2026:
-
-| Elemento cloud | Configuración verificada |
+| Recurso | Configuración verificada |
 | --- | --- |
-| URL API | https://finanzen-financial-records.onrender.com |
-| Render Web Service | `srv-db4vl25ckfvc738e4hp0`, plan **Free**, Virginia, Python 3.11.9 |
-| Neon PostgreSQL | Proyecto `dawn-bird-07958545`, PostgreSQL 17, organización **Free**, `aws-us-east-1` |
-| Conexión | `DATABASE_URL` privada, pooling PostgreSQL y TLS verificado |
-| Datos | En Neon; sin disco de pago en Render |
-| Health y contrato | `/health`, `/docs`, `/openapi.json`: HTTP 200 |
+| Render | srv-db4vl25ckfvc738e4hp0; Web Service Free; Virginia; Python 3.11.9 |
+| Build | python -m pip install -r requirements.txt; instala finanzen-common desde el repositorio |
+| Arranque | python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT --workers 1 |
+| Health check | /health |
+| Neon | dawn-bird-07958545; PostgreSQL 17; organización Free; aws-us-east-1 |
+| Conexión | DATABASE_URL privada; pooling y TLS verificado con pg8000 |
 
-```mermaid
-flowchart LR
-    C[Cliente HTTPS: Swagger o Postman] --> R[Render Free: FastAPI y Uvicorn]
-    R -->|PostgreSQL con TLS| N[(Neon Free: transactions)]
-    G[GitHub: back/main] -->|Código y configuración| R
-```
+Pasos reproducibles: clonar back; instalar dependencias; configurar PostgreSQL en Neon; suministrar DATABASE_URL como secreto de Render; publicar main y validar health/Swagger/OpenAPI; ejecutar las suites y comprobar persistencia. [render.yaml](https://github.com/1ASI0657-2620-9199/back/blob/v0.1.1/render.yaml) y [DEPLOYMENT.md](https://github.com/1ASI0657-2620-9199/back/blob/v0.1.1/DEPLOYMENT.md) detallan el procedimiento. Render falla al arrancar sin DATABASE_URL; SQLite queda reservado al desarrollo local. No se usa disco de pago.
 
-Los [registros del servicio](../evidencias/deployment/publico/render-service.json)
-y [recursos Neon](../evidencias/deployment/publico/neon-resources.json) documentan
-esta configuración sin revelar credenciales. CON-05 conserva la restricción
-original del PDF; la decisión aplicada en esta entrega usa Render y Neon.
+![C4 Deployment: cliente, Render y Neon](../evidencias/cierre-sprint-1/../../arquitectura/deployment.png)
 
-## 5.3. MicroServices Implementation
+Fuente editable [deployment.dsl](../arquitectura/deployment.dsl), [SVG](../arquitectura/deployment.svg) y [export PlantUML](../arquitectura/export/structurizr-FinanZenDeployment.puml). El DSL se validó con Structurizr CLI 2025.11.09 y se renderizó con PlantUML 1.2026.8; [validación original](../evidencias/cierre-sprint-1/structurizr-validation.txt) y [export original](../evidencias/cierre-sprint-1/structurizr-export.txt). La imagen representa la infraestructura implementada, no una captura de consola cloud.
+
+El statement enumera AWS/Azure/GCP. Render/Neon fue la alternativa gratuita elegida; la aceptación académica de esta diferencia requiere confirmación del docente, que no se inventa.
+
+## 5.3. Microservices Implementation
+
+Este sprint publica un servicio de registros financieros. Se documentan su alcance, pruebas, contrato, despliegue y colaboración observable; no se afirma haber desplegado todos los bounded contexts del diseño original.
 
 ### 5.3.1. Sprint 1
 
+Objetivo: registrar ingresos/egresos idempotentes, consultar movimientos por identidad lógica y obtener el resumen mensual, con pruebas, documentación y persistencia remota verificadas.
+
 #### 5.3.1.1. Sprint Backlog 1
 
-Objetivo registrado en la fuente: permitir crear ingresos/egresos, consultar
-movimientos por usuario y obtener un resumen mensual con API documentada y
-pruebas. La siguiente tabla conserva estimaciones y responsables del PDF;
-no atribuye la organización posterior a esos integrantes.
+El [board público Trello](https://trello.com/b/BIj8fpkf/finanzen-sprint-1) presenta US01 y once tareas. La captura y su export real muestran **12 tarjetas en DONE**. El objetivo corresponde al recorte de registro de movimientos; cuentas/saldos iniciales y otros criterios de la historia completa no se acreditan por esta marca.
 
-| ID | Trabajo del PDF | Estimación | Responsable registrado | Estado del PDF |
-| --- | --- | --- | --- | --- |
-| US01 | Registrar datos financieros | 8 SP | Rodrigo Oblitas | Done |
-| TASK-01 | Crear Financial Records Service | 3 h | Renzo Revilla | Done |
-| TASK-02 | Modelo de transacción | 2 h | Joan Aguirre | Done |
-| TASK-03 | Registrar transacción | 3 h | Renzo Revilla | Done |
-| TASK-04 | Consultar transacciones | 2 h | Rodrigo Oblitas | Done |
-| TASK-05 | Resumen mensual | 3 h | Joan Aguirre | Done |
-| TASK-06 | Idempotencia | 2 h | Renzo Revilla | Done |
-| TASK-07 | Aislamiento mediante X-User-Id | 2 h | Rodrigo Oblitas | Done |
-| TASK-08 | Persistencia SQLite | 2 h | Joan Aguirre | Done |
-| TASK-09 | OpenAPI/Swagger | 1 h | Renzo Revilla | Done |
-| TASK-10 | Testing Suite | 3 h | Joan Aguirre | Done |
-| TASK-11 | Frontend funcional | 3 h | Rodrigo Oblitas | Done |
+![Board público real del Sprint 1](../evidencias/cierre-sprint-1/trello-board.png)
 
-La marca Done de US01 corresponde al recorte del sprint en el PDF. Sus
-criterios de cuentas/saldos y su equivalencia con el registro de movimientos
-requieren revisión; se documentan como cobertura parcial en el capítulo III.
+| User Story | Task | Descripción | Estimación | Responsable en descripción | Estado del board |
+| --- | --- | --- | --- | --- | --- |
+| US01 (recorte del Sprint) | [TASK-01 - Crear Financial Records Service](https://trello.com/c/XOrqEx1p/2-task-01-crear-financial-records-service) | Implementar la estructura inicial del microservicio utilizando Python y FastAPI. | 3 horas | Renzo Revilla | DONE |
+| US01 (recorte del Sprint) | [TASK-02 - Definir modelo de transacción](https://trello.com/c/cdq5YiiL/3-task-02-definir-modelo-de-transacci%C3%B3n) | Definir el modelo para ingresos y egresos, incluyendo cuenta, tipo, importe, moneda, categoría, fecha y descripción. | 2 horas | Joan Aguirre | DONE |
+| US01 (recorte del Sprint) | [TASK-03 - Implementar POST /api/v1/transactions](https://trello.com/c/c0NIcxuz/4-task-03-implementar-post-api-v1-transactions) | Implementar el endpoint para registrar movimientos financieros. | 3 horas | Renzo Revilla | DONE |
+| US01 (recorte del Sprint) | [TASK-04 - Implementar GET /api/v1/transactions](https://trello.com/c/HvS31S9K/5-task-04-implementar-get-api-v1-transactions) | Implementar el endpoint para consultar los movimientos correspondientes al usuario. | 2 horas | Rodrigo Oblitas | DONE |
+| US01 (recorte del Sprint) | [TASK-05 - Implementar GET /api/v1/summary](https://trello.com/c/NAs3HIGO/6-task-05-implementar-get-api-v1-summary) | Implementar el endpoint para obtener ingresos, egresos, saldo y cantidad de movimientos del periodo. | 3 horas | Joan Aguirre | DONE |
+| US01 (recorte del Sprint) | [TASK-06 - Implementar idempotencia](https://trello.com/c/h2T222iQ/7-task-06-implementar-idempotencia) | Incorporar Idempotency-Key para evitar registros duplicados durante reintentos. | 2 horas | Renzo Revilla | DONE |
+| US01 (recorte del Sprint) | [TASK-07 - Aislamiento por usuario](https://trello.com/c/qvfWQcwJ/8-task-07-aislamiento-por-usuario) | Utilizar temporalmente X-User-Id para separar las transacciones correspondientes a cada usuario. | 2 horas | Rodrigo Oblitas | DONE |
+| US01 (recorte del Sprint) | [TASK-08 - Implementar persistencia con SQLite](https://trello.com/c/2dB1M1PH/9-task-08-implementar-persistencia-con-sqlite) | Implementar persistencia local utilizando SQLite. | 2 horas | Joan Aguirre | DONE |
+| US01 (recorte del Sprint) | [TASK-09 - Documentar API con Swagger](https://trello.com/c/uYYotQ1U/10-task-09-documentar-api-con-swagger) | Documentar automáticamente los endpoints REST mediante OpenAPI/Swagger. | 1 hora | Renzo Revilla | DONE |
+| US01 (recorte del Sprint) | [TASK-10 - Implementar Testing Suite](https://trello.com/c/sEUdRkUI/11-task-10-implementar-testing-suite) | Implementar pruebas automatizadas para idempotencia, resumen, aislamiento entre usuarios y disponibilidad del frontend. | 3 horas | Joan Aguirre | DONE |
+| US01 (recorte del Sprint) | [TASK-11 - Integrar frontend funcional](https://trello.com/c/MUC2Cxm5/12-task-11-integrar-frontend-funcional) | Implementar una interfaz básica conectada al microservicio para visualizar y registrar movimientos. | 3 horas | Rodrigo Oblitas | DONE |
 
-Trazabilidad comprobable del incremento:
+US01 conserva la estimación de 8 SP indicada en el tablero. Los responsables se extraen de las descripciones de las tarjetas; los arrays idMembers están vacíos y no se presentan como asignaciones de cuentas Trello. [Export original sanitizado](../evidencias/cierre-sprint-1/trello-board.json).
 
-| Trabajo del backlog fuente | Código y comportamiento actual | Alcance |
-| --- | --- | --- |
-| TASK-02/03/06/08 | Modelo, POST, idempotencia y tabla SQLite/PostgreSQL | Registro de movimientos; PostgreSQL añadido en esta actualización |
-| TASK-04/07 | GET de movimientos filtrado por `X-User-Id` | Separación lógica por identidad suministrada; no login |
-| TASK-05 | GET de resumen por mes y moneda | Ingresos, gastos, saldo y cantidad de movimientos |
-| TASK-09/10 | OpenAPI y ocho pruebas pytest | Contrato y pruebas disponibles; BDD pendiente |
-| TASK-11 | Panel del repositorio `front` conectado a la API | Cliente web existente |
-
-Faltan captura y URL pública del board y la tabla con descomposición US → tarea,
-descripción, horas, responsable y estado, validada por el equipo. La tabla
-histórica no reemplaza un tablero actual ni acredita cuentas/saldos iniciales de US01.
+Incrementos adicionales completados: biblioteca reutilizable, BDD local/público, PostgreSQL persistente, release 0.1.1, CI y evidencias de deployment. No se inventan horas ni autores personales para estas acciones automatizadas desde Darkdren; los commits documentan el trabajo. Las tarjetas originales no incluyen todavía ese desglose adicional.
 
 #### 5.3.1.2. Development Evidence for Sprint Review
 
-La evidencia original describe once archivos del servicio inicial y el commit
-`41ff14d` de `platform`. Se conserva su captura:
+El incremento conserva el contrato de movimientos, añade una distribución reutilizable y despliega la release 0.1.1. Historial real, fechas en America/Lima:
 
-![Captura histórica del repositorio platform](../assets/pagina-105-1.png)
-
-La evidencia actual está en [back/app](https://github.com/1ASI0657-2620-9199/back/tree/main/app),
-[back/tests](https://github.com/1ASI0657-2620-9199/back/tree/main/tests) y [front](https://github.com/1ASI0657-2620-9199/front/tree/main/). El README del repositorio
-ya dirige al informe y a cada componente, en lugar de contener todo el reporte.
-
-Commits reales de incorporación a los repositorios independientes; fechas en
-America/Lima (`UTC-05:00`):
-
-| Repository | Branch de integración | Commit Id | Commit Message | Commit Message Body | Committed on (Date) |
+| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on (Date) |
 | --- | --- | --- | --- | --- | --- |
-| `1ASI0657-2620-9199/back` | `main` | [6ff8141](https://github.com/1ASI0657-2620-9199/back/commit/6ff8141000371271d8b91ebc8d0b7ed5fdea1906) | `feat: initialize independent FinanZen back project` | Sin cuerpo | 2026-10-10 02:39:35 -05:00 |
-| `1ASI0657-2620-9199/front` | `main` | [e0b1ac5](https://github.com/1ASI0657-2620-9199/front/commit/e0b1ac5b272004863300c2a8a4eb2c5222a58111) | `feat: initialize independent FinanZen front project` | Sin cuerpo | 2026-10-10 02:39:53 -05:00 |
-| `1ASI0657-2620-9199/back` | `main` | [f218113](https://github.com/1ASI0657-2620-9199/back/commit/f218113d0e8cc4f2f431d4573eac40e47cbb0ee3) | `feat: support PostgreSQL for free persistent cloud deployment` | Sin cuerpo | 2026-10-10 03:14:03 -05:00 |
+| `1ASI0657-2620-9199/back` | `feature/us01-common-library-bdd` | [9e9e9f9](https://github.com/1ASI0657-2620-9199/back/commit/9e9e9f9e16ce5d35ff8207aa434c7f982f1c8afa) | feat: extract reusable compatible request fingerprint strategy | Sin cuerpo | 2026-10-10 04:29:23-05:00 |
+| `1ASI0657-2620-9199/back` | `feature/us01-common-library-bdd` | [275bbcd](https://github.com/1ASI0657-2620-9199/back/commit/275bbcdd87f45fdefe7a0811692fb18ab5afdd7e) | test: add executable Gherkin acceptance suites and package build CI | Sin cuerpo | 2026-10-10 04:29:23-05:00 |
+| `1ASI0657-2620-9199/back` | `release/0.1.1` | [53b8961](https://github.com/1ASI0657-2620-9199/back/commit/53b896185a0a1686f7cbb09a91e08b5578a07c40) | chore: prepare backend release 0.1.1 | Sin cuerpo | 2026-10-10 04:33:38-05:00 |
+| `1ASI0657-2620-9199/back` | `main` | [f9d837e](https://github.com/1ASI0657-2620-9199/back/commit/f9d837e35b0f15eab7aa02b85c7a0b49a62a8d1b) | chore: release backend 0.1.1 | Release 0.1.1: compatible fingerprint library and tested acceptance scenarios | 2026-10-10 04:36:11-05:00 |
 
-El commit de back incluye rutas, contratos, persistencia, tests y workflow;
-el de front incluye el panel y su comprobación de integración. No hay un commit
-por cada TASK ni se atribuye esta incorporación al sprint histórico del PDF.
-El equipo debe añadir futuros avances reales con la misma estructura.
+[PR feature](https://github.com/1ASI0657-2620-9199/back/pull/1), [PR release](https://github.com/1ASI0657-2620-9199/back/pull/2), [sincronización develop](https://github.com/1ASI0657-2620-9199/back/pull/3) y [release descargable](https://github.com/1ASI0657-2620-9199/back/releases/tag/v0.1.1). El frontend también recibió [el ajuste de instalación de la biblioteca en CI](https://github.com/1ASI0657-2620-9199/front/commit/ebe4909).
 
-![Figura 5.2: página real del commit f218113 que incorpora PostgreSQL y configuración gratuita, GitHub, 10 de octubre de 2026](../evidencias/deployment/local/13-backend-commit.png)
+![Integración real del incremento mediante PR](../evidencias/cierre-sprint-1/github-feature-pr.png)
+
+El commit histórico 41ff14d del repositorio platform se conserva como fuente del informe original, no como commit importado al historial actual:
+
+![Captura histórica de platform](../assets/pagina-105-1.png)
 
 #### 5.3.1.3. Testing Suite Evidence for Sprint Review
 
-El PDF registra tres comportamientos con resultado Passed. La suite incorporada
-contiene ocho pruebas y se ejecuta nuevamente con PostgreSQL real. Los resultados
-actuales se detallan en [evidencias/validacion.md](../evidencias/validacion.md).
+**BDD implementado y ejecutado:** seis escenarios locales, 29 pasos aprobados; cinco escenarios públicos, 24 pasos aprobados y el escenario local de recreación excluido. La API pública no se presenta como reiniciada por el runner local. Pytest aprobó doce casos con PostgreSQL real.
 
-| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on (Date) | Evidencia de testing |
-| --- | --- | --- | --- | --- | --- | --- |
-| `1ASI0657-2620-9199/back` | `main` | [6ff8141](https://github.com/1ASI0657-2620-9199/back/commit/6ff8141000371271d8b91ebc8d0b7ed5fdea1906) | `feat: initialize independent FinanZen back project` | Sin cuerpo | 2026-10-10 02:39:35 -05:00 | Incorpora `tests/test_api.py` y el workflow de pytest |
-| `1ASI0657-2620-9199/back` | `main` | [f218113](https://github.com/1ASI0657-2620-9199/back/commit/f218113d0e8cc4f2f431d4573eac40e47cbb0ee3) | `feat: support PostgreSQL for free persistent cloud deployment` | Sin cuerpo | 2026-10-10 03:14:03 -05:00 | Añade tres pruebas PostgreSQL y servicio PostgreSQL en CI |
+| Scenario | Historia / criterio | Resultado observable |
+| --- | --- | --- |
+| Register an income | US01, recorte de registro | HTTP 201 y monto conservado |
+| Retry a registration | US01, idempotencia | HTTP 200, mismo ID y replay=true |
+| Reject a reused key | US01, conflicto | HTTP 409 |
+| Calculate a monthly summary | PF-02, resumen parcial | 1000.00 − 125.50 = 874.50; otro usuario sin movimientos |
+| Reject an invalid calendar month | Validación del contrato | HTTP 422 |
+| Preserve identifier after recreating app | US01, persistencia local | mismo ID y ningún duplicado |
 
-La [salida actual](../evidencias/deployment/local/pytest.txt) contiene ocho pruebas
-aprobadas; se incorpora una [vista del registro real](../evidencias/deployment/local/02-pytest.png).
-La suite respalda el recorte de registro de movimientos de US01 y el
-resumen mensual de PF-02; no valida todos los criterios de US01 ni presupuestos/alertas.
+| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on (Date) |
+| --- | --- | --- | --- | --- | --- |
+| `1ASI0657-2620-9199/back` | `feature/us01-common-library-bdd` | [9e9e9f9](https://github.com/1ASI0657-2620-9199/back/commit/9e9e9f9e16ce5d35ff8207aa434c7f982f1c8afa) | feat: extract reusable compatible request fingerprint strategy | Sin cuerpo | 2026-10-10 04:29:23-05:00 |
+| `1ASI0657-2620-9199/back` | `feature/us01-common-library-bdd` | [275bbcd](https://github.com/1ASI0657-2620-9199/back/commit/275bbcdd87f45fdefe7a0811692fb18ab5afdd7e) | test: add executable Gherkin acceptance suites and package build CI | Sin cuerpo | 2026-10-10 04:29:23-05:00 |
 
-El [workflow verificado](https://github.com/1ASI0657-2620-9199/back/actions/runs/38037169861)
-terminó con estado **Success** sobre `f218113`. Su
-[registro de estado](../evidencias/deployment/local/github-actions.json)
-identifica el run y el commit; la imagen siguiente muestra la página real de GitHub.
+Código de los escenarios [financial_records.feature](https://github.com/1ASI0657-2620-9199/back/blob/v0.1.1/features/financial_records.feature):
 
-![Figura 5.3: validación del backend aprobada en GitHub Actions, 10 de octubre de 2026](../evidencias/deployment/local/12-github-actions.png)
+```gherkin
+Feature: Financial records acceptance for the Sprint 1 increment
+  The current US01 increment registers transactions, and PF-02 provides a
+  monthly summary. Budgets, authentication and alerts are outside this feature.
 
-El statement solicita archivos `.feature`, escenarios Gherkin, relación con
-historias y commits. El backend utiliza pytest/TestClient y no contiene
-`.feature`; esta parte queda pendiente de implementación y ejecución.
+  Background:
+    Given a separate demonstration user
+
+  @US01 @create
+  Scenario: Register an income without losing its amount
+    When I register an income of "1000.00" with key "income-0001"
+    Then the API responds with status 201
+    And the movement amount is "1000.00"
+
+  @US01 @idempotency
+  Scenario: Retry a registration without creating a duplicate
+    Given an income of "1000.00" registered with key "income-0001"
+    When I repeat the same registration
+    Then the API responds with status 200
+    And the movement keeps its original identifier
+    And the replay header is "true"
+
+  @US01 @conflict
+  Scenario: Reject a reused key with different financial content
+    Given an income of "1000.00" registered with key "income-0001"
+    When I register an income of "2000.00" with key "income-0001"
+    Then the API responds with status 409
+
+  @PF02 @summary
+  Scenario: Calculate a monthly summary and isolate the demonstration users
+    Given an income of "1000.00" registered with key "income-0001"
+    And an expense of "125.50" registered with key "expense-0001"
+    When I request the monthly summary for "2026-10"
+    Then the API responds with status 200
+    And income, expenses and balance are "1000.00", "125.50" and "874.50"
+    And another demonstration user has no movements
+
+  @validation
+  Scenario: Reject an invalid calendar month
+    When I request the monthly summary for "2026-13"
+    Then the API responds with status 422
+
+  @local @US01 @persistence
+  Scenario: Preserve the identifier after recreating the local application
+    Given an income of "1000.00" registered with key "income-0001"
+    When I recreate the local application and repeat the registration
+    Then the API responds with status 200
+    And the movement keeps its original identifier
+```
+
+[Pasos ejecutables](https://github.com/1ASI0657-2620-9199/back/blob/v0.1.1/features/steps/financial_records.py) y [entorno aislado](https://github.com/1ASI0657-2620-9199/back/blob/v0.1.1/features/environment.py).
+
+![Resultado real de seis escenarios locales](../evidencias/cierre-sprint-1/bdd-local.png)
+
+[Log local](../evidencias/cierre-sprint-1/bdd-local.txt), [log público](../evidencias/cierre-sprint-1/bdd-public.txt) y [CI aprobada](https://github.com/1ASI0657-2620-9199/back/actions/runs/38041971339). El workflow publica JUnit y distribuciones como artefactos. Comando público: `python -m behave features --tags="not @local" -D base_url=https://finanzen-financial-records.onrender.com`.
+
+![GitHub Actions: validación real aprobada](../evidencias/cierre-sprint-1/github-actions.png)
 
 #### 5.3.1.4. Execution Evidence for Sprint Review
 
-Las capturas de Postman del PDF muestran pruebas históricas del servicio local:
+La colección Postman del Sprint 1 se ejecutó con Newman contra la API pública 0.1.1: **ocho solicitudes, once aserciones, cero fallos**. [Colección](../evidencias/sprint-1/FinanZen-Sprint1.postman_collection.json), [resultado original](../evidencias/cierre-sprint-1/publico/newman.json) y [salida](../evidencias/cierre-sprint-1/publico/newman.txt).
 
-![Estado del servicio en Postman, fuente original](../assets/pagina-108-1.png)
+![Ejecución real de la colección Postman con Newman](../evidencias/cierre-sprint-1/publico/01-newman.png)
 
-![Registro de transacción en Postman, fuente original](../assets/pagina-108-2.png)
-
-| Método | Ruta | Uso |
-| --- | --- | --- |
-| GET | `/health` | Estado operativo |
-| POST | `/api/v1/transactions` | Registrar movimiento |
-| GET | `/api/v1/transactions` | Consultar movimientos |
-| GET | `/api/v1/summary` | Resumen mensual por moneda y usuario |
-
-La comprobación de esta entrega utiliza TestClient y registra por separado sus
-resultados; las capturas originales no se presentan como nuevas ejecuciones.
-
-Se adjuntan [ocho respuestas reales de la API](../evidencias/sprint-1/respuestas-api.json)
-obtenidas con TestClient y SQLite temporal. Incluyen cuerpo y cabeceras de
-solicitud, estado HTTP y cuerpo de respuesta:
-
-| Operación | Resultado observado |
+| Operación pública | Resultado |
 | --- | --- |
-| Health | HTTP 200; servicio `financial-records-service` en estado `ok` |
-| Crear ingreso de PEN 1000.00 | HTTP 201; ID del movimiento generado |
-| Repetir ingreso con la misma clave y cuerpo | HTTP 200; mismo ID; `Idempotent-Replayed: true` |
-| Reutilizar clave con otro importe | HTTP 409; conflicto idempotente |
-| Crear gasto de PEN 125.50 | HTTP 201 |
-| Consultar movimientos | HTTP 200; dos movimientos del usuario de muestra |
-| Resumen de octubre de 2026 | HTTP 200; ingresos 1000.00, gastos 125.50, saldo 874.50 |
-| Consultar mes `2026-13` | HTTP 422; mes inválido |
+| GET /health | 200, servicio operativo |
+| POST /api/v1/transactions | 201, ingreso creado |
+| Repetir el POST | 200, mismo ID, replay=true |
+| Reutilizar clave con otro monto | 409 |
+| GET /api/v1/transactions | 200, dos movimientos del usuario sintético |
+| GET /api/v1/summary?month=2026-10&currency=PEN | 200; income=1000.00, expenses=125.50, balance=874.50 |
 
-La [colección de Postman](../evidencias/sprint-1/FinanZen-Sprint1.postman_collection.json)
-se ejecutó contra Uvicorn/PostgreSQL local con Newman: **8 peticiones, 11
-aserciones y 0 fallos**. Consultar el [log real](../evidencias/deployment/local/newman.txt),
-el [reporte JSON](../evidencias/deployment/local/newman.json) y las
-[trece capturas explicadas](../evidencias/deployment/README.md).
-Las vistas de registros identifican a Newman como runner; no son capturas de
-Postman Desktop. La [grabación real](../evidencias/deployment/local/demostracion.webm)
-muestra Swagger y registros locales, sin narración. El enlace publicado y la
-explicación oral del equipo quedan pendientes si la entrega los requiere.
+![Creación real en Swagger público](../evidencias/cierre-sprint-1/publico/05-create-income.png)
 
-Evidencias de ejecución ubicadas en este apartado; todas corresponden al
-servidor local Uvicorn con PostgreSQL del 10 de octubre de 2026:
+![Repetición idempotente, mismo identificador](../evidencias/cierre-sprint-1/publico/08-replay.png)
 
-| Evidencia | Resultado demostrado |
-| --- | --- |
-| [Ejecución Newman](../evidencias/deployment/local/01-newman.png) | Ocho peticiones y once aserciones sin fallos |
-| [Health en Swagger](../evidencias/deployment/local/04-health.png) | HTTP 200, servicio operativo |
-| [Crear ingreso](../evidencias/deployment/local/05-create-income.png) | HTTP 201 para PEN 1000.00 |
-| [Repetición idempotente](../evidencias/deployment/local/08-replay.png) | HTTP 200 y mismo ID |
-| [Conflicto idempotente](../evidencias/deployment/local/09-conflict.png) | HTTP 409 por otro importe con la misma clave |
-| [Listado](../evidencias/deployment/local/06-list.png) | Dos movimientos del usuario de muestra |
-| [Resumen mensual](../evidencias/deployment/local/07-summary.png) | Ingreso 1000.00, gasto 125.50 y saldo 874.50 |
-| [Registro HTTP](../evidencias/deployment/local/swagger-http.json) | Operaciones y respuestas observadas en Swagger |
-| [Grabación](../evidencias/deployment/local/demostracion.webm) | Interacciones reales con Swagger y vistas de los registros, sin narración |
+![Conflicto de clave idempotente](../evidencias/cierre-sprint-1/publico/09-conflict.png)
 
-![Figura 5.4: vista de la salida real de Newman; no es la interfaz de Postman Desktop, ejecución local, 10 de octubre de 2026](../evidencias/deployment/local/01-newman.png)
+![Resumen mensual público](../evidencias/cierre-sprint-1/publico/07-summary.png)
 
-**Validación adicional en nube:** la misma colección se ejecutó contra
-`https://finanzen-financial-records.onrender.com`: **8 peticiones, 11 aserciones,
-0 fallos**. Se adjuntan [log público](../evidencias/deployment/publico/newman.txt),
-[reporte JSON](../evidencias/deployment/publico/newman.json),
-[respuestas Swagger públicas](../evidencias/deployment/publico/swagger-http.json)
-y [grabación del servicio público](../evidencias/deployment/publico/demostracion.webm).
-Los POST demostraron 201/200/409 y el resumen devolvió saldo PEN 874.50.
-La grabación muestra interacción real, sin narración.
+Se adjunta [video explicativo con voz sintética y capturas reales](../evidencias/cierre-sprint-1/demostracion-explicada.mp4), con [guion, fuentes y marcas de tiempo](../evidencias/cierre-sprint-1/video-timeline.json), y [grabación real de la interacción Swagger](../evidencias/cierre-sprint-1/publico/demostracion.webm). Los datos son sintéticos. La narración no se atribuye a un integrante.
 
-![Figura 5.5: resumen mensual ejecutado en Swagger contra la URL pública, HTTP 200 y saldo PEN 874.50, 10 de octubre de 2026](../evidencias/deployment/publico/07-summary.png)
+Las capturas de Postman Desktop de la fuente se mantienen como antecedente local; la ejecución nueva de la colección corresponde a Newman y las imágenes HTTP actuales a Swagger. No se presentan como capturas nuevas de Postman Desktop:
+
+![Captura histórica de ejecución en Postman](../assets/pagina-108-1.png)
+
+![Segunda captura histórica de ejecución en Postman](../assets/pagina-108-2.png)
 
 #### 5.3.1.5. Microservices Documentation Evidence for Sprint Review
 
-FastAPI genera Swagger y OpenAPI a partir de la aplicación. Se conserva un
-[contrato OpenAPI de esta entrega](../evidencias/openapi.json), además de la
-guía del backend. El contrato describe el servicio disponible, sin endpoints
-inventados para capacidades futuras.
+FastAPI publica OpenAPI 3.1.0 y API 0.1.1. [Swagger público](https://finanzen-financial-records.onrender.com/docs), [contrato desplegado](https://finanzen-financial-records.onrender.com/openapi.json), [contrato capturado](../evidencias/cierre-sprint-1/openapi.json) y [repositorio de Web Services](https://github.com/1ASI0657-2620-9199/back/tree/v0.1.1/app).
 
-Base local: `http://127.0.0.1:8000`. [Swagger local](http://127.0.0.1:8000/docs)
-y [OpenAPI local](http://127.0.0.1:8000/openapi.json) requieren el servidor iniciado.
+| Método y sintaxis | Parámetros / cabeceras | Acción y ejemplo de respuesta | Documentación |
+| --- | --- | --- | --- |
+| GET /health | Ninguno | 200: status=ok, service=financial-records-service | [Health](https://finanzen-financial-records.onrender.com/docs#/Operations/health_health_get) |
+| POST /api/v1/transactions | X-User-Id; Idempotency-Key; JSON account_id, type, amount, currency, category, occurred_at, description | 201: movimiento con id y created_at; 200 replay con mismo id; 409 clave con otro contenido; 422 entrada inválida | [Registro](https://finanzen-financial-records.onrender.com/docs#/Transactions/create_transaction_api_v1_transactions_post) |
+| GET /api/v1/transactions | X-User-Id | 200: array de movimientos de la identidad lógica; [] cuando no hay registros | [Listado](https://finanzen-financial-records.onrender.com/docs#/Transactions/list_transactions_api_v1_transactions_get) |
+| GET /api/v1/summary?month=2026-10&currency=PEN | X-User-Id; month YYYY-MM; currency, PEN por defecto | 200: income=1000.00, expenses=125.50, balance=874.50, transaction_count=2; 422 mes/moneda inválidos | [Resumen](https://finanzen-financial-records.onrender.com/docs#/Reports/monthly_summary_api_v1_summary_get) |
 
-Servicio publicado: [Swagger público](https://finanzen-financial-records.onrender.com/docs)
-y [OpenAPI público](https://finanzen-financial-records.onrender.com/openapi.json).
-Se conserva el [contrato descargado del servidor cloud](../evidencias/deployment/publico/openapi.json).
-
-| Acción | Llamada y parámetros | Respuesta |
-| --- | --- | --- |
-| Estado | `GET /health`; sin cabeceras financieras | 200: `status` y `service` |
-| Registrar movimiento | `POST /api/v1/transactions`; `X-User-Id`, `Idempotency-Key` y cuerpo JSON | 201 nuevo, 200 repetido, 409 conflicto, 422 datos inválidos |
-| Consultar movimientos | `GET /api/v1/transactions`; `X-User-Id`; sin query params | 200: arreglo de movimientos; 422 si falta la cabecera |
-| Resumen mensual | `GET /api/v1/summary?month=2026-10&currency=PEN`; `X-User-Id`; mes obligatorio, moneda opcional (PEN) | 200: ingresos, gastos, saldo y cantidad; 422 para entradas inválidas o requeridas ausentes |
-
-`X-User-Id` admite de 1 a 80 caracteres. `Idempotency-Key` admite de 8 a 120
-caracteres y es obligatorio en el POST. El cuerpo requiere `account_id`, `type`
-(`income` o `expense`), `amount` positivo con hasta dos decimales y `category`.
-`currency` es opcional (PEN, tres letras mayúsculas), `occurred_at` es opcional
-(fecha/hora actual UTC) y `description` es opcional (hasta 240 caracteres).
-Se fija `occurred_at` en los ejemplos para que el cuerpo sea idéntico al repetirlo.
-
-Ejemplo de registro incluido en la colección:
+Solicitud de ejemplo, sustituir la identidad/clave por un usuario sintético nuevo:
 
 ```json
-{
-  "account_id": "cash-account",
-  "type": "income",
-  "amount": "1000.00",
-  "currency": "PEN",
-  "category": "salary",
-  "occurred_at": "2026-10-01T10:00:00Z",
-  "description": "Ingreso de demostración Sprint 1"
-}
+{"account_id":"cash-account","type":"income","amount":"1000.00","currency":"PEN","category":"salary","occurred_at":"2026-10-01T10:00:00Z","description":"Evidencia HTTP real"}
 ```
 
-La respuesta agrega `id`, `user_id` y `created_at`. Los valores generados se
-conservan en el JSON capturado. Resumen observado después del ingreso y gasto:
+El tipo admite income/expense, amount usa Decimal positivo, currency requiere tres letras mayúsculas y occurred_at es fecha-hora. La respuesta agrega id, user_id y created_at. Idempotent-Replayed señala si el POST es una repetición. X-User-Id es identidad de demostración; no OAuth/JWT. No se incorporan PUT/PATCH/DELETE como operaciones que no existen.
 
-```json
-{
-  "user_id": "sprint1-evidence-user",
-  "month": "2026-10",
-  "currency": "PEN",
-  "income": "1000.00",
-  "expenses": "125.50",
-  "balance": "874.50",
-  "transaction_count": 2
-}
-```
+![Swagger público con versión y endpoints](../evidencias/cierre-sprint-1/publico/03-swagger-endpoints.png)
 
-El saldo es ingresos menos gastos y el conteo corresponde al mes y moneda
-consultados. Los importes se serializan como cadenas decimales.
+![Listado público de movimientos](../evidencias/cierre-sprint-1/publico/06-list.png)
 
-| Repository | Commit de documentación | Artefacto |
-| --- | --- | --- |
-| [back](https://github.com/1ASI0657-2620-9199/back) | [6ff8141](https://github.com/1ASI0657-2620-9199/back/commit/6ff8141000371271d8b91ebc8d0b7ed5fdea1906) | Metadatos/contratos FastAPI y README de Swagger/OpenAPI |
-| [report](https://github.com/1ASI0657-2620-9199/report) | [5176faa](https://github.com/1ASI0657-2620-9199/report/commit/5176faa24f59e8506e6eedb564bdd7b208d3cfeb) | `evidencias/openapi.json` y guía del servicio |
+[Respuestas HTTP originales](../evidencias/cierre-sprint-1/publico/swagger-http.json). Commits relacionados con documentación/contrato:
 
-Se incorporan capturas reales de Swagger local con peticiones, parámetros y
-respuestas: [contrato](../evidencias/deployment/local/03-swagger-endpoints.png),
-[POST con HTTP 201](../evidencias/deployment/local/05-create-income.png) y
-[resumen con HTTP 200](../evidencias/deployment/local/07-summary.png).
-El [índice completo](../evidencias/deployment/README.md) explica cada captura y su apartado.
-
-![Figura 5.6: contrato y operaciones disponibles en Swagger local, 10 de octubre de 2026](../evidencias/deployment/local/03-swagger-endpoints.png)
-
-![Figura 5.7: contrato de Swagger publicado en Render, con sus operaciones disponibles, 10 de octubre de 2026](../evidencias/deployment/publico/03-swagger-endpoints.png)
+| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on (Date) |
+| --- | --- | --- | --- | --- | --- |
+| `1ASI0657-2620-9199/back` | `release/0.1.1` | [53b8961](https://github.com/1ASI0657-2620-9199/back/commit/53b896185a0a1686f7cbb09a91e08b5578a07c40) | chore: prepare backend release 0.1.1 | Sin cuerpo | 2026-10-10 04:33:38-05:00 |
 
 #### 5.3.1.6. Software Deployment Evidence for Sprint Review
 
-**Despliegue realizado:** Render Free + Neon Free, verificado el 10 de octubre
-de 2026. URL real: https://finanzen-financial-records.onrender.com.
+**Despliegue vigente realizado:** Render Free + Neon Free; [API pública](https://finanzen-financial-records.onrender.com), versión 0.1.1. Deploy `dep-db50emvlot8c73d9e8p0`, estado **live**, commit `f9d837e35b0f15eab7aa02b85c7a0b49a62a8d1b`; finalización UTC `2026-10-10T09:38:09.875688Z`. [Registro original de la release desplegada](../evidencias/cierre-sprint-1/render-release-deploy.json).
 
-| Actividad realizada | Resultado y evidencia |
-| --- | --- |
-| Crear PostgreSQL | Neon Free, PostgreSQL 17, región US East 1; [recursos verificados](../evidencias/deployment/publico/neon-resources.json) |
-| Crear servicio API | Render Free desde `back/main`, Python/Uvicorn y variable privada; [configuración](../evidencias/deployment/publico/render-service.json) |
-| Instalar y construir | Build successful; [log original](../evidencias/deployment/publico/render-build-logs.json) y [vista](../evidencias/deployment/publico/14-render-build.png) |
-| Publicar | Deploy `dep-db4vl2tckfvc738e4j60`, commit `525ac3f`, estado `live`; [registro](../evidencias/deployment/publico/render-deploys.json) |
-| Validar acceso público | Health, Swagger y OpenAPI HTTP 200; [resultado](../evidencias/deployment/publico/public-endpoints.json) |
-| Validar operaciones | Newman: 8 peticiones, 11 aserciones, 0 fallos; [reporte](../evidencias/deployment/publico/newman.json) |
-| Reiniciar Render | Solicitud aceptada y nuevo arranque en logs; [solicitud](../evidencias/deployment/publico/reinicio-solicitud.json), [log original](../evidencias/deployment/publico/render-runtime-logs.json) y [vista](../evidencias/deployment/publico/15-render-runtime.png) |
-| Comprobar persistencia | Dos IDs conservados, saldo PEN 92.66 y replay HTTP 200 sin duplicados; [resultado antes/después](../evidencias/deployment/publico/persistencia.json) |
+Se construyó e instaló el paquete finanzen-common junto con requirements.txt; el servicio arrancó con Uvicorn y mantuvo DATABASE_URL privada. Health/Swagger/OpenAPI respondieron 200. Gherkin público aprobó cinco escenarios y Newman once aserciones. [Compatibilidad pública con un movimiento creado antes de la release](../evidencias/cierre-sprint-1/legacy-idempotency.json): HTTP 200, mismo ID, replay=true y saldo 874.50 conservado.
 
-La prueba de persistencia creó datos sintéticos con un usuario independiente:
-ingreso 105.00 y gasto 12.34. El nuevo arranque quedó registrado a las 03:46:03
-America/Lima. Por eso su saldo difiere del saldo 874.50 de la demostración Swagger.
-La configuración mantiene la conexión PostgreSQL privada y no utiliza disco de pago.
+La evidencia del despliegue inicial y del reinicio real de Render sigue disponible: [servicio Free](../evidencias/deployment/publico/render-service.json), [Neon Free](../evidencias/deployment/publico/neon-resources.json), [build](../evidencias/deployment/publico/render-build-logs.json), [reinicio](../evidencias/deployment/publico/reinicio-solicitud.json), [runtime](../evidencias/deployment/publico/render-runtime-logs.json) y [datos antes/después](../evidencias/deployment/publico/persistencia.json). Esa prueba usó otro usuario sintético con ingreso 105.00, egreso 12.34 y saldo 92.66.
 
-![Figura 5.8: vista de la respuesta real de Render, servicio Free y deploy live; no es el dashboard, 10 de octubre de 2026](../evidencias/deployment/publico/12-render-live.png)
+![Deployment inicial: respuesta real de Render, identificado como vista de API](../evidencias/deployment/publico/12-render-live.png)
 
-![Figura 5.9: vista de la prueba real de persistencia tras reiniciar Render, 10 de octubre de 2026](../evidencias/deployment/publico/16-persistence.png)
+![Persistencia verificada tras reinicio real de Render](../evidencias/deployment/publico/16-persistence.png)
 
-El [índice cloud completo](../evidencias/deployment/publico/README.md) reúne
-13 capturas públicas, grabación y registros originales. Las vistas de logs/API
-están identificadas; las capturas de Swagger muestran el servicio HTTPS real.
-
-**Antecedente local:** se conserva la verificación previa realizada antes de publicar.
-
-Se preparó la configuración gratuita Render/Neon y se ejecutó Uvicorn con
-PostgreSQL 17 local. Se incorporan el
-[registro de arranque y peticiones](../evidencias/deployment/local/11-server-log.png),
-la [comprobación de persistencia](../evidencias/deployment/local/persistencia.json)
-y su [vista antes/después](../evidencias/deployment/local/10-persistence.png).
-La comprobación detuvo y reinició realmente el proceso Uvicorn: los dos IDs
-permanecieron iguales. Esta prueba acredita persistencia PostgreSQL local.
-
-El [registro del entorno](../evidencias/deployment/local/metadata.json) identifica
-la URL local, fecha y commit utilizado. El
-[log original de Uvicorn](../evidencias/deployment/local/uvicorn.txt) complementa
-la captura del arranque.
-
-![Figura 5.10: IDs conservados al detener y reiniciar Uvicorn con PostgreSQL local, 10 de octubre de 2026](../evidencias/deployment/local/10-persistence.png)
-
-El [índice de deployment](../evidencias/deployment/README.md) distingue evidencias
-locales y públicas. La publicación, los logs y la persistencia remota ya están
-verificados; las capturas locales anteriores conservan su identificación de entorno.
-
-El índice del statement ubica el despliegue cloud completo en TF1 y permite
-URL local para documentar sprints previos al despliegue de Web Services.
-El proveedor aplicado por decisión del usuario es Render/Neon. CON-05 del PDF
-menciona AWS, Azure o Google Cloud; se conserva como restricción académica original.
-No se presenta el servicio Render como un deployment directo en esos proveedores.
+El [índice del cierre](../evidencias/cierre-sprint-1/README.md) relaciona las nuevas evidencias. Los registros no contienen credenciales; los diagramas y vistas de metadatos se identifican y no se presentan como dashboards. La aceptación de Render/Neon frente al listado AWS/Azure/GCP del statement requiere validación del docente.
 
 #### 5.3.1.7. Team Collaboration Insights during Sprint
 
-El PDF contiene el título sin desarrollo. Se conserva el backlog y sus
-responsables, sin inventar reuniones, revisiones ni conclusiones de colaboración.
+El equipo conserva en el backlog público los responsables Rodrigo Oblitas, Renzo Revilla y Joan Aguirre, según las descripciones de Trello. El incremento automatizado de esta entrega se publicó desde Darkdren mediante commits, CI, PR y release reales.
+
+| Repositorio | Commits consultados en main | Cuentas contribuidoras verificadas |
+| --- | --- | --- |
+| back | 11 | Darkdren |
+| front | 3 | Darkdren |
+| report | 9 | Darkdren |
+
+
+[Consulta original de GitHub sanitizada](../evidencias/cierre-sprint-1/github-collaboration.json), [PR feature](https://github.com/1ASI0657-2620-9199/back/pull/1), [PR release](https://github.com/1ASI0657-2620-9199/back/pull/2) y [PR de sincronización](https://github.com/1ASI0657-2620-9199/back/pull/3). No existen revisiones por otros integrantes en estos PR al momento de esta comprobación; no se describen como peer review.
+
+![PR real y trazabilidad de integración](../evidencias/cierre-sprint-1/github-feature-pr.png)
+
+**Pendiente del equipo:** relacionar sus cuentas con commits/revisiones reales y evidenciar participación de todos los integrantes en Web Services. El API solo verifica Darkdren en estos historiales; nombres en el backlog no prueban autoría de código. No se inventan reuniones, horas ni contribuciones para completar este criterio.
 
 #### 5.3.1.8. Kanban Board
 
-El PDF contiene el título sin enlace o tablero verificable. Queda pendiente
-incorporar una evidencia real de Kanban.
+[FinanZen — Sprint 1, Trello público](https://trello.com/b/BIj8fpkf/finanzen-sprint-1). Captura del 10 de octubre de 2026: TO DO=0, IN PROGRESS=0, TO REVIEW=0, DONE=12. Las descripciones incluyen responsables y estimaciones; las tarjetas no tienen idMembers asignados. La captura representa el tablero real y no una reconstrucción.
 
-La [guía de evidencias](../evidencias/sprint-1/README.md) especifica las capturas,
-enlaces y datos del equipo que faltan para completar los apartados del Sprint 1.
+![Kanban real con doce tarjetas en DONE](../evidencias/cierre-sprint-1/trello-board.png)
 
-## Cambios y pendientes de esta entrega
+[Export del tablero](../evidencias/cierre-sprint-1/trello-board.json). El backlog y el alcance se explican en 5.3.1.1. Los nuevos incrementos de biblioteca/BDD/release todavía no tienen tarjetas adicionales en ese tablero; se trazan mediante los PR y commits del reporte.
 
-- Cinco repositorios independientes en una organización, con documentación y estados explícitos.
-- Backend y frontend incorporados desde los proyectos organizados previamente.
-- Ruta automática actualizada a `front/`, conservando API sin cliente web.
-- PDF, transcripción de las 109 páginas, figuras y README histórico conservados.
-- Informe ampliado con entrevistas, 14 historias, drivers y cinco iteraciones ADD.
-- Pruebas, contrato OpenAPI, script de comprobación y empaquetado reproducible.
-- Adaptador SQLite/PostgreSQL, ocho pruebas aprobadas y configuración Render Free/Neon Free publicada.
-- Once capturas reales, colección ejecutada con Newman y grabación local de Swagger.
-- Capturas reales de GitHub Actions aprobado y del commit de PostgreSQL; trece imágenes en total.
-- API publicada en Render Free con Neon Free, trece capturas públicas adicionales, grabación y persistencia remota verificada.
-- Repositorios landing y mobile preparados sin código, según confirmación del usuario.
+## Pendientes que requieren evidencia externa
 
-Siguen pendientes autenticación, cuentas/saldos, presupuestos, alertas,
-eventos, IoT, proyecciones, educación y auditoría.
+- Participación verificable de todos los integrantes en código y revisiones.
+- Aceptación por el docente del proveedor Render/Neon frente al listado académico.
+- Capturas nuevas de Postman Desktop si se exige esa interfaz: la ejecución pública actual utiliza la colección Postman con Newman y las capturas HTTP corresponden a Swagger.
+- Actualizar las tarjetas Trello con los incrementos adicionales, cuando el equipo gestione su tablero.
+- Landing/mobile y los bounded contexts fuera del recorte siguen sin implementación; no se incluyen como logros del Sprint 1.

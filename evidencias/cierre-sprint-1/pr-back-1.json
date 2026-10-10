@@ -1,0 +1,10 @@
+{
+  "number": 1,
+  "html_url": "https://github.com/1ASI0657-2620-9199/back/pull/1",
+  "title": "Extract compatible idempotency library and add Gherkin acceptance evidence",
+  "state": "open",
+  "created_at": "2026-10-10T09:30:49Z",
+  "head": "feature/us01-common-library-bdd",
+  "base": "develop",
+  "author": "Darkdren"
+}

@@ -1,0 +1,78 @@
+running egg_info
+writing src\finanzen_common.egg-info\PKG-INFO
+writing dependency_links to src\finanzen_common.egg-info\dependency_links.txt
+writing top-level names to src\finanzen_common.egg-info\top_level.txt
+reading manifest file 'src\finanzen_common.egg-info\SOURCES.txt'
+writing manifest file 'src\finanzen_common.egg-info\SOURCES.txt'
+running sdist
+running egg_info
+writing src\finanzen_common.egg-info\PKG-INFO
+writing dependency_links to src\finanzen_common.egg-info\dependency_links.txt
+writing top-level names to src\finanzen_common.egg-info\top_level.txt
+reading manifest file 'src\finanzen_common.egg-info\SOURCES.txt'
+writing manifest file 'src\finanzen_common.egg-info\SOURCES.txt'
+running check
+creating finanzen_common-0.1.0
+creating finanzen_common-0.1.0\src\finanzen_common
+creating finanzen_common-0.1.0\src\finanzen_common.egg-info
+copying files to finanzen_common-0.1.0...
+copying README.md -> finanzen_common-0.1.0
+copying pyproject.toml -> finanzen_common-0.1.0
+copying src\finanzen_common\__init__.py -> finanzen_common-0.1.0\src\finanzen_common
+copying src\finanzen_common\fingerprints.py -> finanzen_common-0.1.0\src\finanzen_common
+copying src\finanzen_common.egg-info\PKG-INFO -> finanzen_common-0.1.0\src\finanzen_common.egg-info
+copying src\finanzen_common.egg-info\SOURCES.txt -> finanzen_common-0.1.0\src\finanzen_common.egg-info
+copying src\finanzen_common.egg-info\dependency_links.txt -> finanzen_common-0.1.0\src\finanzen_common.egg-info
+copying src\finanzen_common.egg-info\top_level.txt -> finanzen_common-0.1.0\src\finanzen_common.egg-info
+Writing finanzen_common-0.1.0\setup.cfg
+Creating tar archive
+removing 'finanzen_common-0.1.0' (and everything under it)
+running egg_info
+writing src\finanzen_common.egg-info\PKG-INFO
+writing dependency_links to src\finanzen_common.egg-info\dependency_links.txt
+writing top-level names to src\finanzen_common.egg-info\top_level.txt
+reading manifest file 'src\finanzen_common.egg-info\SOURCES.txt'
+writing manifest file 'src\finanzen_common.egg-info\SOURCES.txt'
+running bdist_wheel
+running build
+running build_py
+creating build\lib\finanzen_common
+copying src\finanzen_common\fingerprints.py -> build\lib\finanzen_common
+copying src\finanzen_common\__init__.py -> build\lib\finanzen_common
+running egg_info
+writing src\finanzen_common.egg-info\PKG-INFO
+writing dependency_links to src\finanzen_common.egg-info\dependency_links.txt
+writing top-level names to src\finanzen_common.egg-info\top_level.txt
+reading manifest file 'src\finanzen_common.egg-info\SOURCES.txt'
+writing manifest file 'src\finanzen_common.egg-info\SOURCES.txt'
+installing to build\bdist.win-amd64\wheel
+running install
+running install_lib
+creating build\bdist.win-amd64\wheel
+creating build\bdist.win-amd64\wheel\finanzen_common
+copying build\lib\finanzen_common\fingerprints.py -> build\bdist.win-amd64\wheel\.\finanzen_common
+copying build\lib\finanzen_common\__init__.py -> build\bdist.win-amd64\wheel\.\finanzen_common
+running install_egg_info
+Copying src\finanzen_common.egg-info to build\bdist.win-amd64\wheel\.\finanzen_common-0.1.0-py3.11.egg-info
+running install_scripts
+creating build\bdist.win-amd64\wheel\finanzen_common-0.1.0.dist-info\WHEEL
+creating 'C:\\Users\\rodri\\Downloads\\FinanZen-MVP-Backend-Frontend\\FinanZen-MVP\\repositorios-finanzen\\back\\libraries\\finanzen_common\\dist\\.tmp-1dqr9zn8\\finanzen_common-0.1.0-py3-none-any.whl' and adding 'build\\bdist.win-amd64\\wheel' to it
+adding 'finanzen_common/__init__.py'
+adding 'finanzen_common/fingerprints.py'
+adding 'finanzen_common-0.1.0.dist-info/METADATA'
+adding 'finanzen_common-0.1.0.dist-info/WHEEL'
+adding 'finanzen_common-0.1.0.dist-info/top_level.txt'
+adding 'finanzen_common-0.1.0.dist-info/RECORD'
+removing build\bdist.win-amd64\wheel
+Successfully built finanzen_common-0.1.0.tar.gz and finanzen_common-0.1.0-py3-none-any.whl
+* Creating isolated environment: venv+pip...
+* Installing packages in isolated environment:
+  - setuptools>=61
+* Getting build dependencies for sdist...
+* Building sdist...
+* Building wheel from sdist
+* Creating isolated environment: venv+pip...
+* Installing packages in isolated environment:
+  - setuptools>=61
+* Getting build dependencies for wheel...
+* Building wheel...

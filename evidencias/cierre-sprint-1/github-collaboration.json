@@ -1,0 +1,300 @@
+{
+  "back": {
+    "contributors": [
+      {
+        "login": "Darkdren",
+        "id": 182564152,
+        "node_id": "U_kgDOCuG1OA",
+        "avatar_url": "https://avatars.githubusercontent.com/u/182564152?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/Darkdren",
+        "html_url": "https://github.com/Darkdren",
+        "followers_url": "https://api.github.com/users/Darkdren/followers",
+        "following_url": "https://api.github.com/users/Darkdren/following{/other_user}",
+        "gists_url": "https://api.github.com/users/Darkdren/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/Darkdren/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/Darkdren/subscriptions",
+        "organizations_url": "https://api.github.com/users/Darkdren/orgs",
+        "repos_url": "https://api.github.com/users/Darkdren/repos",
+        "events_url": "https://api.github.com/users/Darkdren/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/Darkdren/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false,
+        "contributions": 11
+      }
+    ],
+    "commits": [
+      {
+        "sha": "f9d837e35b0f15eab7aa02b85c7a0b49a62a8d1b",
+        "url": "https://github.com/1ASI0657-2620-9199/back/commit/f9d837e35b0f15eab7aa02b85c7a0b49a62a8d1b",
+        "author": "Darkdren",
+        "name": "Darkdren",
+        "date": "2026-10-10T09:36:11Z",
+        "message": "chore: release backend 0.1.1\n\nRelease 0.1.1: compatible fingerprint library and tested acceptance scenarios"
+      },
+      {
+        "sha": "53b896185a0a1686f7cbb09a91e08b5578a07c40",
+        "url": "https://github.com/1ASI0657-2620-9199/back/commit/53b896185a0a1686f7cbb09a91e08b5578a07c40",
+        "author": "Darkdren",
+        "name": "Rodrigo Oblitas",
+        "date": "2026-10-10T09:33:38Z",
+        "message": "chore: prepare backend release 0.1.1"
+      },
+      {
+        "sha": "b8111d196eaf529ab5bb9cb4526a24c74ec891cc",
+        "url": "https://github.com/1ASI0657-2620-9199/back/commit/b8111d196eaf529ab5bb9cb4526a24c74ec891cc",
+        "author": "Darkdren",
+        "name": "Darkdren",
+        "date": "2026-10-10T09:32:45Z",
+        "message": "feat: integrate compatible common library and BDD into develop\n\nExtract compatible idempotency library and add Gherkin acceptance evidence"
+      },
+      {
+        "sha": "275bbcdd87f45fdefe7a0811692fb18ab5afdd7e",
+        "url": "https://github.com/1ASI0657-2620-9199/back/commit/275bbcdd87f45fdefe7a0811692fb18ab5afdd7e",
+        "author": "Darkdren",
+        "name": "Rodrigo Oblitas",
+        "date": "2026-10-10T09:29:23Z",
+        "message": "test: add executable Gherkin acceptance suites and package build CI"
+      },
+      {
+        "sha": "9e9e9f9e16ce5d35ff8207aa434c7f982f1c8afa",
+        "url": "https://github.com/1ASI0657-2620-9199/back/commit/9e9e9f9e16ce5d35ff8207aa434c7f982f1c8afa",
+        "author": "Darkdren",
+        "name": "Rodrigo Oblitas",
+        "date": "2026-10-10T09:29:23Z",
+        "message": "feat: extract reusable compatible request fingerprint strategy"
+      },
+      {
+        "sha": "3eb527d0cd47e35ac373b6364ed9131b676b01ec",
+        "url": "https://github.com/1ASI0657-2620-9199/back/commit/3eb527d0cd47e35ac373b6364ed9131b676b01ec",
+        "author": "Darkdren",
+        "name": "Rodrigo Oblitas",
+        "date": "2026-10-10T08:50:55Z",
+        "message": "docs: publish live backend URL and persistent cloud validation"
+      },
+      {
+        "sha": "525ac3fd678b72340aaec689f444301b5afe073c",
+        "url": "https://github.com/1ASI0657-2620-9199/back/commit/525ac3fd678b72340aaec689f444301b5afe073c",
+        "author": "Darkdren",
+        "name": "Rodrigo Oblitas",
+        "date": "2026-10-10T08:29:15Z",
+        "message": "docs: clarify deployment access after plugin installation"
+      },
+      {
+        "sha": "f218113d0e8cc4f2f431d4573eac40e47cbb0ee3",
+        "url": "https://github.com/1ASI0657-2620-9199/back/commit/f218113d0e8cc4f2f431d4573eac40e47cbb0ee3",
+        "author": "Darkdren",
+        "name": "Rodrigo Oblitas",
+        "date": "2026-10-10T08:14:03Z",
+        "message": "feat: support PostgreSQL for free persistent cloud deployment"
+      },
+      {
+        "sha": "8acb9b29b3086010ac4e13fad26519ced425024f",
+        "url": "https://github.com/1ASI0657-2620-9199/back/commit/8acb9b29b3086010ac4e13fad26519ced425024f",
+        "author": "Darkdren",
+        "name": "Rodrigo Oblitas",
+        "date": "2026-10-10T08:05:29Z",
+        "message": "feat: configure Render deployment with persistent SQLite"
+      },
+      {
+        "sha": "6ff8141000371271d8b91ebc8d0b7ed5fdea1906",
+        "url": "https://github.com/1ASI0657-2620-9199/back/commit/6ff8141000371271d8b91ebc8d0b7ed5fdea1906",
+        "author": "Darkdren",
+        "name": "Rodrigo Oblitas",
+        "date": "2026-10-10T07:39:35Z",
+        "message": "feat: initialize independent FinanZen back project"
+      },
+      {
+        "sha": "586e5843f7dfd707a2c9bc76086fc48874f0a43a",
+        "url": "https://github.com/1ASI0657-2620-9199/back/commit/586e5843f7dfd707a2c9bc76086fc48874f0a43a",
+        "author": "Darkdren",
+        "name": "Darkdren",
+        "date": "2026-09-16T17:09:23Z",
+        "message": "Initial commit"
+      }
+    ],
+    "branches": [
+      {
+        "name": "develop",
+        "protected": false
+      },
+      {
+        "name": "feature/us01-common-library-bdd",
+        "protected": false
+      },
+      {
+        "name": "main",
+        "protected": false
+      },
+      {
+        "name": "release/0.1.1",
+        "protected": false
+      }
+    ]
+  },
+  "front": {
+    "contributors": [
+      {
+        "login": "Darkdren",
+        "id": 182564152,
+        "node_id": "U_kgDOCuG1OA",
+        "avatar_url": "https://avatars.githubusercontent.com/u/182564152?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/Darkdren",
+        "html_url": "https://github.com/Darkdren",
+        "followers_url": "https://api.github.com/users/Darkdren/followers",
+        "following_url": "https://api.github.com/users/Darkdren/following{/other_user}",
+        "gists_url": "https://api.github.com/users/Darkdren/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/Darkdren/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/Darkdren/subscriptions",
+        "organizations_url": "https://api.github.com/users/Darkdren/orgs",
+        "repos_url": "https://api.github.com/users/Darkdren/repos",
+        "events_url": "https://api.github.com/users/Darkdren/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/Darkdren/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false,
+        "contributions": 2
+      }
+    ],
+    "commits": [
+      {
+        "sha": "ebe490952295fa1f8972f5e6ab52ad889e6f4d70",
+        "url": "https://github.com/1ASI0657-2620-9199/front/commit/ebe490952295fa1f8972f5e6ab52ad889e6f4d70",
+        "author": "Darkdren",
+        "name": "Rodrigo Oblitas",
+        "date": "2026-10-10T09:36:54Z",
+        "message": "fix: install backend package from its working directory in integration CI"
+      },
+      {
+        "sha": "e0b1ac5b272004863300c2a8a4eb2c5222a58111",
+        "url": "https://github.com/1ASI0657-2620-9199/front/commit/e0b1ac5b272004863300c2a8a4eb2c5222a58111",
+        "author": "Darkdren",
+        "name": "Rodrigo Oblitas",
+        "date": "2026-10-10T07:39:53Z",
+        "message": "feat: initialize independent FinanZen front project"
+      },
+      {
+        "sha": "662d024871ecdfba71aac0f184f57d44ca36e4e7",
+        "url": "https://github.com/1ASI0657-2620-9199/front/commit/662d024871ecdfba71aac0f184f57d44ca36e4e7",
+        "author": "Darkdren",
+        "name": "Darkdren",
+        "date": "2026-09-16T17:09:26Z",
+        "message": "Initial commit"
+      }
+    ],
+    "branches": [
+      {
+        "name": "main",
+        "protected": false
+      }
+    ]
+  },
+  "report": {
+    "contributors": [
+      {
+        "login": "Darkdren",
+        "id": 182564152,
+        "node_id": "U_kgDOCuG1OA",
+        "avatar_url": "https://avatars.githubusercontent.com/u/182564152?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/Darkdren",
+        "html_url": "https://github.com/Darkdren",
+        "followers_url": "https://api.github.com/users/Darkdren/followers",
+        "following_url": "https://api.github.com/users/Darkdren/following{/other_user}",
+        "gists_url": "https://api.github.com/users/Darkdren/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/Darkdren/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/Darkdren/subscriptions",
+        "organizations_url": "https://api.github.com/users/Darkdren/orgs",
+        "repos_url": "https://api.github.com/users/Darkdren/repos",
+        "events_url": "https://api.github.com/users/Darkdren/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/Darkdren/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false,
+        "contributions": 8
+      }
+    ],
+    "commits": [
+      {
+        "sha": "cd1884cbdf0d92ad8781f6fb2ca91a4d4542dfa9",
+        "url": "https://github.com/1ASI0657-2620-9199/report/commit/cd1884cbdf0d92ad8781f6fb2ca91a4d4542dfa9",
+        "author": "Darkdren",
+        "name": "Rodrigo Oblitas",
+        "date": "2026-10-10T08:54:34Z",
+        "message": "docs: add verified public deployment and cloud persistence evidence"
+      },
+      {
+        "sha": "9955e95aed1c48cfd720d29b549c9140f2d5ef6d",
+        "url": "https://github.com/1ASI0657-2620-9199/report/commit/9955e95aed1c48cfd720d29b549c9140f2d5ef6d",
+        "author": "Darkdren",
+        "name": "Rodrigo Oblitas",
+        "date": "2026-10-10T08:33:13Z",
+        "message": "docs: place API evidence directly in chapter V sections"
+      },
+      {
+        "sha": "29dfa84be431ff95682ddeda046702be1aab7825",
+        "url": "https://github.com/1ASI0657-2620-9199/report/commit/29dfa84be431ff95682ddeda046702be1aab7825",
+        "author": "Darkdren",
+        "name": "Rodrigo Oblitas",
+        "date": "2026-10-10T08:29:18Z",
+        "message": "docs: record installed cloud plugins and pending tool access"
+      },
+      {
+        "sha": "4686e3a9bba607d37cbea52e80b782f89eabd795",
+        "url": "https://github.com/1ASI0657-2620-9199/report/commit/4686e3a9bba607d37cbea52e80b782f89eabd795",
+        "author": "Darkdren",
+        "name": "Rodrigo Oblitas",
+        "date": "2026-10-10T08:25:51Z",
+        "message": "docs: add real API captures and PostgreSQL deployment evidence"
+      },
+      {
+        "sha": "326508a057c9bda2d60a2cc2098ff0155a8f9664",
+        "url": "https://github.com/1ASI0657-2620-9199/report/commit/326508a057c9bda2d60a2cc2098ff0155a8f9664",
+        "author": "Darkdren",
+        "name": "Rodrigo Oblitas",
+        "date": "2026-10-10T07:56:44Z",
+        "message": "docs: expand Sprint 1 API evidence and capture guide"
+      },
+      {
+        "sha": "5176faa24f59e8506e6eedb564bdd7b208d3cfeb",
+        "url": "https://github.com/1ASI0657-2620-9199/report/commit/5176faa24f59e8506e6eedb564bdd7b208d3cfeb",
+        "author": "Darkdren",
+        "name": "Rodrigo Oblitas",
+        "date": "2026-10-10T07:39:39Z",
+        "message": "docs: update FinanZen report and independent repository links"
+      },
+      {
+        "sha": "9f70ee2eed40832c03e02fe259b77aba6c451dd1",
+        "url": "https://github.com/1ASI0657-2620-9199/report/commit/9f70ee2eed40832c03e02fe259b77aba6c451dd1",
+        "author": "Darkdren",
+        "name": "Darkdren",
+        "date": "2026-09-11T14:10:24Z",
+        "message": "Merge pull request #1 from Darkdren/origin/docs/hito1\n\ndocs: Readme capitulo 1"
+      },
+      {
+        "sha": "426c99fb94d23cb54787130d5d27ee463c13ab6d",
+        "url": "https://github.com/1ASI0657-2620-9199/report/commit/426c99fb94d23cb54787130d5d27ee463c13ab6d",
+        "author": null,
+        "name": "Rodrigo Oblitas",
+        "date": "2026-09-11T14:07:15Z",
+        "message": "docs: Readme capitulo 1"
+      },
+      {
+        "sha": "64c33d0335a76e400f1078eb606856abca4f0ff5",
+        "url": "https://github.com/1ASI0657-2620-9199/report/commit/64c33d0335a76e400f1078eb606856abca4f0ff5",
+        "author": "Darkdren",
+        "name": "Darkdren",
+        "date": "2026-09-11T13:47:28Z",
+        "message": "Initial commit"
+      }
+    ],
+    "branches": [
+      {
+        "name": "main",
+        "protected": false
+      }
+    ]
+  }
+}

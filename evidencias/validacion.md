@@ -1,3 +1,15 @@
+# Validación vigente del cierre del Sprint 1
+
+Backend **v0.1.1**, biblioteca **finanzen-common 0.1.0**, 10 de octubre de 2026.
+Se ejecutaron 12 pruebas pytest con PostgreSQL 17 real; seis escenarios Gherkin
+locales y cinco públicos; build wheel/sdist; ocho solicitudes y once aserciones
+Newman contra la API pública; validación Structurizr del diagrama C4; y replay
+de un movimiento sintético de la versión anterior conservando su ID y saldo.
+GitHub Actions de main aprobó pruebas y build; Render publicó la release.
+Consultar los [registros originales y capturas](cierre-sprint-1/README.md).
+
+El texto inferior conserva las validaciones anteriores como historial.
+
 # Validación — Repositorios independientes de FinanZen
 
 Fecha de organización: **10 de octubre de 2026**, America/Lima.

@@ -1,0 +1,71 @@
+USING RUNNER: behave.runner:Runner
+Feature: Financial records acceptance for the Sprint 1 increment # features/financial_records.feature:1
+  The current US01 increment registers transactions, and PF-02 provides a
+  monthly summary. Budgets, authentication and alerts are outside this feature.
+  Feature: Financial records acceptance for the Sprint 1 increment  # features/financial_records.feature:1
+
+  @US01 @create
+  Scenario: Register an income without losing its amount          # features/financial_records.feature:9
+    Given a separate demonstration user                           # features/steps/financial_records.py:19
+    When I register an income of "1000.00" with key "income-0001" # features/steps/financial_records.py:24
+    Then the API responds with status 201                         # features/steps/financial_records.py:68
+    And the movement amount is "1000.00"                          # features/steps/financial_records.py:73
+
+  @US01 @idempotency
+  Scenario: Retry a registration without creating a duplicate      # features/financial_records.feature:15
+    Given a separate demonstration user                            # features/steps/financial_records.py:19
+    Given an income of "1000.00" registered with key "income-0001" # features/steps/financial_records.py:29
+    When I repeat the same registration                            # features/steps/financial_records.py:42
+    Then the API responds with status 200                          # features/steps/financial_records.py:68
+    And the movement keeps its original identifier                 # features/steps/financial_records.py:78
+    And the replay header is "true"                                # features/steps/financial_records.py:85
+
+  @US01 @conflict
+  Scenario: Reject a reused key with different financial content   # features/financial_records.feature:23
+    Given a separate demonstration user                            # features/steps/financial_records.py:19
+    Given an income of "1000.00" registered with key "income-0001" # features/steps/financial_records.py:29
+    When I register an income of "2000.00" with key "income-0001"  # features/steps/financial_records.py:24
+    Then the API responds with status 409                          # features/steps/financial_records.py:68
+
+  @PF02 @summary
+  Scenario: Calculate a monthly summary and isolate the demonstration users  # features/financial_records.feature:29
+    Given a separate demonstration user                                      # features/steps/financial_records.py:19
+    Given an income of "1000.00" registered with key "income-0001"           # features/steps/financial_records.py:29
+    And an expense of "125.50" registered with key "expense-0001"            # features/steps/financial_records.py:36
+    When I request the monthly summary for "2026-10"                         # features/steps/financial_records.py:50
+    Then the API responds with status 200                                    # features/steps/financial_records.py:68
+    And income, expenses and balance are "1000.00", "125.50" and "874.50"    # features/steps/financial_records.py:90
+    And another demonstration user has no movements                          # features/steps/financial_records.py:98
+
+  @validation
+  Scenario: Reject an invalid calendar month         # features/financial_records.feature:38
+    Given a separate demonstration user              # features/steps/financial_records.py:19
+    When I request the monthly summary for "2026-13" # features/steps/financial_records.py:50
+    Then the API responds with status 422            # features/steps/financial_records.py:68
+
+  @local @US01 @persistence
+  Scenario: Preserve the identifier after recreating the local application  # features/financial_records.feature:43
+    Given a separate demonstration user                                     # features/steps/financial_records.py:19
+    Given an income of "1000.00" registered with key "income-0001"          # features/steps/financial_records.py:29
+    When I recreate the local application and repeat the registration       # features/steps/financial_records.py:58
+    Then the API responds with status 200                                   # features/steps/financial_records.py:68
+    And the movement keeps its original identifier                          # features/steps/financial_records.py:78
+
+1 feature passed, 0 failed, 0 skipped
+6 scenarios passed, 0 failed, 0 skipped
+29 steps passed, 0 failed, 0 skipped
+Took 0min 0.094s
+LOG_INFO:httpx: HTTP Request: POST http://testserver/api/v1/transactions "HTTP/1.1 201 Created"
+LOG_INFO:httpx: HTTP Request: POST http://testserver/api/v1/transactions "HTTP/1.1 201 Created"
+LOG_INFO:httpx: HTTP Request: POST http://testserver/api/v1/transactions "HTTP/1.1 200 OK"
+LOG_INFO:httpx: HTTP Request: GET http://testserver/api/v1/transactions "HTTP/1.1 200 OK"
+LOG_INFO:httpx: HTTP Request: POST http://testserver/api/v1/transactions "HTTP/1.1 201 Created"
+LOG_INFO:httpx: HTTP Request: POST http://testserver/api/v1/transactions "HTTP/1.1 409 Conflict"
+LOG_INFO:httpx: HTTP Request: POST http://testserver/api/v1/transactions "HTTP/1.1 201 Created"
+LOG_INFO:httpx: HTTP Request: POST http://testserver/api/v1/transactions "HTTP/1.1 201 Created"
+LOG_INFO:httpx: HTTP Request: GET http://testserver/api/v1/summary?month=2026-10&currency=PEN "HTTP/1.1 200 OK"
+LOG_INFO:httpx: HTTP Request: GET http://testserver/api/v1/transactions "HTTP/1.1 200 OK"
+LOG_INFO:httpx: HTTP Request: GET http://testserver/api/v1/summary?month=2026-13&currency=PEN "HTTP/1.1 422 Unprocessable Entity"
+LOG_INFO:httpx: HTTP Request: POST http://testserver/api/v1/transactions "HTTP/1.1 201 Created"
+LOG_INFO:httpx: HTTP Request: POST http://testserver/api/v1/transactions "HTTP/1.1 200 OK"
+LOG_INFO:httpx: HTTP Request: GET http://testserver/api/v1/transactions "HTTP/1.1 200 OK"

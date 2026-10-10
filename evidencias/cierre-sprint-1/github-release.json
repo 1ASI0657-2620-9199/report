@@ -1,0 +1,16 @@
+{
+  "url": "https://github.com/1ASI0657-2620-9199/back/releases/tag/v0.1.1",
+  "tag": "v0.1.1",
+  "assets": [
+    {
+      "name": "finanzen_common-0.1.0-py3-none-any.whl",
+      "url": "https://github.com/1ASI0657-2620-9199/back/releases/download/v0.1.1/finanzen_common-0.1.0-py3-none-any.whl",
+      "sha256": "20be836053b25aabe2a8afda2728c777bc9c6c8a7427d6de44df3b03b86e9a0c"
+    },
+    {
+      "name": "finanzen_common-0.1.0.tar.gz",
+      "url": "https://github.com/1ASI0657-2620-9199/back/releases/download/v0.1.1/finanzen_common-0.1.0.tar.gz",
+      "sha256": "b42ef510b69a25e7613989156cb95f178fbf12c1be4ac9e32b4d3f86401a293e"
+    }
+  ]
+}

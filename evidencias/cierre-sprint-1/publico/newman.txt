@@ -1,0 +1,68 @@
+{
+  "captured_at_utc": "2026-10-10T09:42:30.489Z",
+  "timezone": "America/Lima",
+  "base_url": "https://finanzen-financial-records.onrender.com",
+  "environment": "Public HTTPS service",
+  "backend_commit": "f9d837e35b0f15eab7aa02b85c7a0b49a62a8d1b"
+}
+
+newman
+
+FinanZen - Sprint 1 evidence
+
+→ 01-health
+  GET https://finanzen-financial-records.onrender.com/health [200 OK, 398B, 1333ms]
+  √  HTTP 200
+
+→ 02-income
+  POST https://finanzen-financial-records.onrender.com/api/v1/transactions [201 Created, 712B, 479ms]
+  √  HTTP 201
+
+→ 03-replay
+  POST https://finanzen-financial-records.onrender.com/api/v1/transactions [200 OK, 706B, 497ms]
+  √  HTTP 200
+  √  Same movement ID
+
+→ 04-conflict
+  POST https://finanzen-financial-records.onrender.com/api/v1/transactions [409 Conflict, 431B, 494ms]
+  √  HTTP 409
+
+→ 05-expense
+  POST https://finanzen-financial-records.onrender.com/api/v1/transactions [201 Created, 708B, 645ms]
+  √  HTTP 201
+
+→ 06-list
+  GET https://finanzen-financial-records.onrender.com/api/v1/transactions [200 OK, 1.01kB, 384ms]
+  √  HTTP 200
+  √  Two movements
+
+→ 07-summary
+  GET https://finanzen-financial-records.onrender.com/api/v1/summary?month=2026-10&currency=PEN [200 OK, 520B, 489ms]
+  √  HTTP 200
+  √  Monthly totals
+
+→ 08-invalid-month
+  GET https://finanzen-financial-records.onrender.com/api/v1/summary?month=2026-13&currency=PEN [422 Unprocessable Entity, 409B, 185ms]
+  √  HTTP 422
+
+┌─────────────────────────┬─────────────────────┬─────────────────────┐
+│                         │            executed │              failed │
+├─────────────────────────┼─────────────────────┼─────────────────────┤
+│              iterations │                   1 │                   0 │
+├─────────────────────────┼─────────────────────┼─────────────────────┤
+│                requests │                   8 │                   0 │
+├─────────────────────────┼─────────────────────┼─────────────────────┤
+│            test-scripts │                   8 │                   0 │
+├─────────────────────────┼─────────────────────┼─────────────────────┤
+│      prerequest-scripts │                   1 │                   0 │
+├─────────────────────────┼─────────────────────┼─────────────────────┤
+│              assertions │                  11 │                   0 │
+├─────────────────────────┴─────────────────────┴─────────────────────┤
+│ total run duration: 5.2s                                            │
+├─────────────────────────────────────────────────────────────────────┤
+│ total data received: 2.01kB (approx)                                │
+├─────────────────────────────────────────────────────────────────────┤
+│ average response time: 563ms [min: 185ms, max: 1333ms, s.d.: 315ms] │
+└─────────────────────────────────────────────────────────────────────┘
+(node:46228) [DEP0176] DeprecationWarning: fs.F_OK is deprecated, use fs.constants.F_OK instead
+(Use `node --trace-deprecation ...` to show where the warning was created)

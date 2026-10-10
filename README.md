@@ -26,10 +26,14 @@ Cada componente tiene su propio repositorio e historial Git. Este repositorio co
 | Evidencias del Sprint 1 | 2026-10-10 | Backend/API existentes y statement 202620 | Capítulo V ampliado: Repository, configuración, diagrama local, commits, endpoints, respuestas reales, log de pruebas y guía de capturas/video |
 | Persistencia y capturas | 2026-10-10 | Backend con SQLite/PostgreSQL y ejecución HTTP local | Render Free + Neon preparado, 8 tests, 11 comprobaciones Newman, 13 capturas y grabación real; publicación cloud pendiente de acceso a las herramientas |
 | Deployment cloud | 2026-10-10 | Render Free y Neon Free reales | API Live, URL HTTPS, 13 capturas públicas adicionales, grabación, 8 peticiones/11 aserciones Newman y persistencia tras reiniciar Render |
+| Cierre técnico del Sprint 1 | 2026-10-10 | Backend v0.1.1 y biblioteca 0.1.0 | Doce pruebas, seis escenarios Gherkin locales y cinco públicos, GitFlow con tres PR, release con wheel/sdist, C4 Deployment, Trello real y video explicado |
 
 **API pública:** [Swagger](https://finanzen-financial-records.onrender.com/docs)
 · [Health](https://finanzen-financial-records.onrender.com/health)
 · [Evidencias del deployment](evidencias/deployment/publico/README.md).
+· [Evidencias del cierre del Sprint 1](evidencias/cierre-sprint-1/README.md).
+
+Documento compartido: [Google Docs del equipo](https://docs.google.com/document/d/1Q70r6_MAmjk9BNTKyIEDe3r9cuEV_UPJrb6Ec3v47Tk/edit?tab=t.0).
 
 El PDF no registra fechas ni autores en su tabla de versiones. Esta tabla
 documenta los artefactos disponibles, sin atribuir nuevas entrevistas ni
@@ -56,6 +60,9 @@ trabajo de desarrollo a integrantes específicos.
    con colección de Postman y resultados reales de la API.
 10. [Deployment y capturas incorporadas](evidencias/deployment/README.md):
     logs, Swagger, Newman, persistencia y grabación; estado del despliegue público.
+11. [Cierre del Sprint 1](evidencias/cierre-sprint-1/README.md): librería,
+    Gherkin, C4, GitFlow, tablero, video narrado y release desplegada.
+12. [Reporte Word con evidencias integradas](entrega/FinanZen-Reporte-Actualizado.docx).
 
 ## Criterio de actualización
 
@@ -77,7 +84,7 @@ lo propuesto de lo implementado.
 
 | Componente | Evidencia actual | Pendientes |
 | --- | --- | --- |
-| [Back](https://github.com/1ASI0657-2620-9199/back/blob/main/README.md) | FastAPI, SQLite/PostgreSQL, registros idempotentes, resumen, 8 pruebas y deployment Render Free/Neon Free verificado | Identidad real, presupuesto, eventos, IoT, análisis, educación y auditoría |
+| [Back](https://github.com/1ASI0657-2620-9199/back/blob/main/README.md) | FastAPI 0.1.1, SQLite/PostgreSQL, finanzen-common, registros idempotentes, resumen, 12 pruebas, Gherkin y deployment Render Free/Neon Free verificado | Identidad real, presupuesto, eventos, IoT, análisis, educación y auditoría |
 | [Front](https://github.com/1ASI0657-2620-9199/front/blob/main/README.md) | Panel web conectado a la API | Autenticación y pantallas de las capacidades pendientes |
 | [Landing](https://github.com/1ASI0657-2620-9199/landing/blob/main/README.md) | Repositorio preparado, sin código | Diseño, implementación y contenido de US13/US14 |
 | [Mobile](https://github.com/1ASI0657-2620-9199/mobile/blob/main/README.md) | Repositorio preparado, sin código | Implementación del cliente móvil |
@@ -93,5 +100,9 @@ Student Outcome, perfiles individuales del equipo, configuración de despliegue,
 evidencia de despliegue en nube, colaboración y Kanban tienen desarrollo ausente
 o insuficiente en la fuente. Esta actualización completa configuración y
 evidencias de deployment Render/Neon con una URL real y persistencia remota.
-Student Outcome, perfiles, colaboración, Kanban y resultados de carga requieren
-sus actividades reales. El capítulo V detalla esos límites.
+Se incorporó el Kanban público real del equipo. Student Outcome, perfiles,
+participación verificable de todos los integrantes y resultados de carga
+requieren sus actividades reales. La aceptación académica de Render/Neon,
+las nuevas capturas de Postman Desktop y el desglose de los incrementos
+adicionales en Trello siguen sujetos a evidencia externa. El capítulo V
+detalla esos límites.

@@ -13,7 +13,8 @@ const baseUrl = process.env.FINANZEN_EVIDENCE_BASE_URL || 'http://127.0.0.1:8766
 if (remote && new URL(baseUrl).protocol !== 'https:') {
   throw new Error('Remote evidence requires an HTTPS URL.');
 }
-const output = path.join(report, 'evidencias/deployment', remote ? 'publico' : 'local');
+const output = process.env.FINANZEN_EVIDENCE_OUTPUT ? path.resolve(process.env.FINANZEN_EVIDENCE_OUTPUT) :
+  path.join(report, 'evidencias/deployment', remote ? 'publico' : 'local');
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const escapeHtml = (text) => String(text).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 

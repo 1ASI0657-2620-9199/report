@@ -1,0 +1,2 @@
+Structurizr CLI 2025.11.09
+Exit code: 0

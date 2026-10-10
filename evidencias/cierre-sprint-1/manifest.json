@@ -1,0 +1,18 @@
+{
+  "captured_at_utc": "2026-10-10T10:08:08.032822+00:00",
+  "timezone": "America/Lima",
+  "backend_release": "v0.1.1",
+  "backend_commit": "f9d837e35b0f15eab7aa02b85c7a0b49a62a8d1b",
+  "public_api_version": "0.1.1",
+  "pytest_passed": 12,
+  "bdd_local_passed": 6,
+  "bdd_public_passed": 5,
+  "bdd_public_local_only_excluded": 1,
+  "newman_requests": 8,
+  "newman_assertions": 11,
+  "newman_failures": 0,
+  "evidence_sources": "Original command logs, public HTTPS requests, real browser captures and Structurizr source.",
+  "video_voice": "Synthetic Microsoft Sabina Desktop; not attributed to a student",
+  "word_drawings_total": 43,
+  "collaboration_snapshot_note": "GitHub inventory captured before committing this report update; only Darkdren verified."
+}

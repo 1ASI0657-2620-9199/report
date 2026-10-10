@@ -1,0 +1,64 @@
+{
+  "voice": "Microsoft Sabina Desktop; synthetic narration",
+  "duration_seconds": 126.953469,
+  "presentation": "Explanation using unchanged real execution screenshots",
+  "scenes": [
+    {
+      "start_seconds": 0,
+      "duration_seconds": 17.85,
+      "section": "API y alcance",
+      "narration": "FinanZen cuenta con una API pública de registros financieros, desplegada en Render y conectada a PostgreSQL persistente en Neon. Esta demostración utiliza capturas de operaciones reales y narración sintética. La versión publicada es cero punto uno punto uno.",
+      "source_image": "evidencias/cierre-sprint-1/publico/03-swagger-endpoints.png"
+    },
+    {
+      "start_seconds": 17.85,
+      "duration_seconds": 11.99,
+      "section": "Health",
+      "narration": "El endpoint health respondió con estado doscientos y confirma que el Financial Records Service está operativo. Swagger permite consultar y ejecutar las operaciones del contrato Open API.",
+      "source_image": "evidencias/cierre-sprint-1/publico/04-health.png"
+    },
+    {
+      "start_seconds": 29.84,
+      "duration_seconds": 14.31,
+      "section": "Registro de ingreso",
+      "narration": "La creación de un ingreso de mil soles devuelve estado doscientos uno y un identificador de movimiento. Se envían una identidad de demostración y una clave idempotente. Esta identidad no constituye autenticación real.",
+      "source_image": "evidencias/cierre-sprint-1/publico/05-create-income.png"
+    },
+    {
+      "start_seconds": 44.15,
+      "duration_seconds": 13.38,
+      "section": "Repetición idempotente",
+      "narration": "Al repetir la misma solicitud con la misma clave, la API devuelve doscientos, conserva el identificador y marca la respuesta como una repetición. Así se evita crear un segundo ingreso por un reintento.",
+      "source_image": "evidencias/cierre-sprint-1/publico/08-replay.png"
+    },
+    {
+      "start_seconds": 57.52,
+      "duration_seconds": 13.83,
+      "section": "Conflicto de clave",
+      "narration": "Si se cambia el importe y se conserva la clave, el servicio devuelve conflicto cuatrocientos nueve. La biblioteca finanzen common calcula la huella del contenido y mantiene compatibilidad con los registros anteriores.",
+      "source_image": "evidencias/cierre-sprint-1/publico/09-conflict.png"
+    },
+    {
+      "start_seconds": 71.36,
+      "duration_seconds": 16.42,
+      "section": "Resumen mensual",
+      "narration": "Después de registrar mil soles de ingreso y ciento veinticinco soles con cincuenta céntimos de egreso, el resumen mensual presenta un saldo de ochocientos setenta y cuatro soles con cincuenta céntimos. Los movimientos se filtran por usuario, mes y moneda.",
+      "source_image": "evidencias/cierre-sprint-1/publico/07-summary.png"
+    },
+    {
+      "start_seconds": 87.78,
+      "duration_seconds": 19.03,
+      "section": "Validación del incremento",
+      "narration": "La validación incluye doce pruebas automatizadas con SQLite, PostgreSQL y la biblioteca propia. También se ejecutaron seis escenarios Gherkin locales y cinco contra el servicio público. La colección Postman ejecutada con Newman aprobó once aserciones en ocho solicitudes.",
+      "source_image": "evidencias/cierre-sprint-1/pytest.png"
+    },
+    {
+      "start_seconds": 106.81,
+      "duration_seconds": 20.04,
+      "section": "Despliegue y persistencia",
+      "narration": "El diagrama muestra el cliente, la API en Render y PostgreSQL en Neon con conexión TLS. Se comprobó que el servicio conserva los datos al reiniciar, y que la nueva versión puede repetir una transacción creada antes de extraer la biblioteca sin duplicarla. Las pruebas utilizan datos sintéticos.",
+      "source_image": "arquitectura/deployment.png"
+    }
+  ],
+  "source_audio_duration_seconds": 126.85
+}

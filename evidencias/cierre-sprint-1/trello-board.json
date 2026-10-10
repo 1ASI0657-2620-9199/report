@@ -1,0 +1,146 @@
+{
+  "id": "6ac9efe20800c9987acc6220",
+  "name": "FinanZen - Sprint 1",
+  "url": "https://trello.com/b/BIj8fpkf/finanzen-sprint-1",
+  "closed": false,
+  "dateLastActivity": "2026-10-10T07:58:10.764Z",
+  "lists": [
+    {
+      "id": "6ac9efe96be5e3bc92c15199",
+      "name": "TO DO",
+      "closed": false
+    },
+    {
+      "id": "6ac9efea784d6ac9ab6f2514",
+      "name": "IN PROGRESS",
+      "closed": false
+    },
+    {
+      "id": "6ac9efed6ebb8bbee7422794",
+      "name": "TO REVIEW",
+      "closed": false
+    },
+    {
+      "id": "6ac9eff0fec34c817cd5cea6",
+      "name": "DONE",
+      "closed": false
+    }
+  ],
+  "cards": [
+    {
+      "id": "6ac9effb400022344ee3d6d3",
+      "name": "US01 - Registrar datos financieros",
+      "idList": "6ac9eff0fec34c817cd5cea6",
+      "idMembers": [],
+      "closed": false,
+      "url": "https://trello.com/c/sV6ozOFH/1-us01-registrar-datos-financieros",
+      "desc": "Descripción: Permitir al usuario registrar información financiera para mantener un historial de sus movimientos.\nResponsable: Rodrigo Oblitas\nEstimación: 8 SP\nEstado: Done"
+    },
+    {
+      "id": "6ac9effea8679e5d3743f720",
+      "name": "TASK-01 - Crear Financial Records Service",
+      "idList": "6ac9eff0fec34c817cd5cea6",
+      "idMembers": [],
+      "closed": false,
+      "url": "https://trello.com/c/XOrqEx1p/2-task-01-crear-financial-records-service",
+      "desc": "Descripción: Implementar la estructura inicial del microservicio utilizando Python y FastAPI.\nResponsable: Renzo Revilla\nEstimación: 3 horas\nEstado: Done"
+    },
+    {
+      "id": "6ac9f000563cff1fb66ae109",
+      "name": "TASK-02 - Definir modelo de transacción",
+      "idList": "6ac9eff0fec34c817cd5cea6",
+      "idMembers": [],
+      "closed": false,
+      "url": "https://trello.com/c/cdq5YiiL/3-task-02-definir-modelo-de-transacci%C3%B3n",
+      "desc": "Descripción: Definir el modelo para ingresos y egresos, incluyendo cuenta, tipo, importe, moneda, categoría, fecha y descripción.\nResponsable: Joan Aguirre\nEstimación: 2 horas\nEstado: Done"
+    },
+    {
+      "id": "6ac9f00291df65a9aae528d2",
+      "name": "TASK-03 - Implementar POST /api/v1/transactions",
+      "idList": "6ac9eff0fec34c817cd5cea6",
+      "idMembers": [],
+      "closed": false,
+      "url": "https://trello.com/c/c0NIcxuz/4-task-03-implementar-post-api-v1-transactions",
+      "desc": "Descripción: Implementar el endpoint para registrar movimientos financieros.\nResponsable: Renzo Revilla\nEstimación: 3 horas\nEstado: Done"
+    },
+    {
+      "id": "6ac9f0043cfee8838a63641c",
+      "name": "TASK-04 - Implementar GET /api/v1/transactions",
+      "idList": "6ac9eff0fec34c817cd5cea6",
+      "idMembers": [],
+      "closed": false,
+      "url": "https://trello.com/c/HvS31S9K/5-task-04-implementar-get-api-v1-transactions",
+      "desc": "Descripción: Implementar el endpoint para consultar los movimientos correspondientes al usuario.\nResponsable: Rodrigo Oblitas\nEstimación: 2 horas\nEstado: Done"
+    },
+    {
+      "id": "6ac9f006d52c2c99c8c752d9",
+      "name": "TASK-05 - Implementar GET /api/v1/summary",
+      "idList": "6ac9eff0fec34c817cd5cea6",
+      "idMembers": [],
+      "closed": false,
+      "url": "https://trello.com/c/NAs3HIGO/6-task-05-implementar-get-api-v1-summary",
+      "desc": "Descripción: Implementar el endpoint para obtener ingresos, egresos, saldo y cantidad de movimientos del periodo.\nResponsable: Joan Aguirre\nEstimación: 3 horas\nEstado: Done"
+    },
+    {
+      "id": "6ac9f0083acb65da9f90c70d",
+      "name": "TASK-06 - Implementar idempotencia",
+      "idList": "6ac9eff0fec34c817cd5cea6",
+      "idMembers": [],
+      "closed": false,
+      "url": "https://trello.com/c/h2T222iQ/7-task-06-implementar-idempotencia",
+      "desc": "Descripción: Incorporar Idempotency-Key para evitar registros duplicados durante reintentos.\nResponsable: Renzo Revilla\nEstimación: 2 horas\nEstado: Done"
+    },
+    {
+      "id": "6ac9f00a265c7956e332ee40",
+      "name": "TASK-07 - Aislamiento por usuario",
+      "idList": "6ac9eff0fec34c817cd5cea6",
+      "idMembers": [],
+      "closed": false,
+      "url": "https://trello.com/c/qvfWQcwJ/8-task-07-aislamiento-por-usuario",
+      "desc": "Descripción: Utilizar temporalmente X-User-Id para separar las transacciones correspondientes a cada usuario.\nResponsable: Rodrigo Oblitas\nEstimación: 2 horas\nEstado: Done"
+    },
+    {
+      "id": "6ac9f00c1029adbe03bdfe17",
+      "name": "TASK-08 - Implementar persistencia con SQLite",
+      "idList": "6ac9eff0fec34c817cd5cea6",
+      "idMembers": [],
+      "closed": false,
+      "url": "https://trello.com/c/2dB1M1PH/9-task-08-implementar-persistencia-con-sqlite",
+      "desc": "Descripción: Implementar persistencia local utilizando SQLite.\nResponsable: Joan Aguirre\nEstimación: 2 horas\nEstado: Done"
+    },
+    {
+      "id": "6ac9f00e6af433cf1fd84c98",
+      "name": "TASK-09 - Documentar API con Swagger",
+      "idList": "6ac9eff0fec34c817cd5cea6",
+      "idMembers": [],
+      "closed": false,
+      "url": "https://trello.com/c/uYYotQ1U/10-task-09-documentar-api-con-swagger",
+      "desc": "Descripción: Documentar automáticamente los endpoints REST mediante OpenAPI/Swagger.\nResponsable: Renzo Revilla\nEstimación: 1 hora\nEstado: Done"
+    },
+    {
+      "id": "6ac9f010a88c94754915a5f9",
+      "name": "TASK-10 - Implementar Testing Suite",
+      "idList": "6ac9eff0fec34c817cd5cea6",
+      "idMembers": [],
+      "closed": false,
+      "url": "https://trello.com/c/sEUdRkUI/11-task-10-implementar-testing-suite",
+      "desc": "Descripción: Implementar pruebas automatizadas para idempotencia, resumen, aislamiento entre usuarios y disponibilidad del frontend.\nResponsable: Joan Aguirre\nEstimación: 3 horas\nEstado: Done"
+    },
+    {
+      "id": "6ac9f0127f581f26c747cf56",
+      "name": "TASK-11 - Integrar frontend funcional",
+      "idList": "6ac9eff0fec34c817cd5cea6",
+      "idMembers": [],
+      "closed": false,
+      "url": "https://trello.com/c/MUC2Cxm5/12-task-11-integrar-frontend-funcional",
+      "desc": "Descripción: Implementar una interfaz básica conectada al microservicio para visualizar y registrar movimientos.\nResponsable: Rodrigo Oblitas\nEstimación: 3 horas\nEstado: Done"
+    }
+  ],
+  "members": [
+    {
+      "id": "6413fc2bac18ab30156936cc",
+      "username": "renzorevilla1",
+      "fullName": "renzo revilla"
+    }
+  ]
+}

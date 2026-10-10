@@ -1,0 +1,7 @@
+Structurizr CLI 2025.11.09
+Exit code: 0
+Exporting workspace from deployment.dsl
+ - exporting with StructurizrPlantUMLExporter
+ - writing /usr/local/structurizr/export/structurizr-FinanZenDeployment.puml
+ - writing /usr/local/structurizr/export/structurizr-FinanZenDeployment-key.puml
+ - finished
