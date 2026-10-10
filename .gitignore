@@ -31,7 +31,6 @@ build/
 
 # Herramientas locales
 .idea/
-.vscode/
 .DS_Store
 Thumbs.db
 entregables/
@@ -39,3 +38,7 @@ entregables/
 # Copia temporal de la grabación; se conserva demostracion.webm como artefacto.
 evidencias/deployment/*/video/
 evidencias/cierre-sprint-1/publico/video/
+branch_structure.json
+temp_auto_push.bat
+temp_interactive_push.bat
+.gitignore
