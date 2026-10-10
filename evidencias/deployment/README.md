@@ -2,7 +2,10 @@
 
 [Capítulo V](../../capitulos/05-implementacion.md) · [Guía del backend](https://github.com/1ASI0657-2620-9199/back/blob/main/DEPLOYMENT.md).
 
-**Estado cloud:** configuración gratuita preparada; cuentas Render/Neon por conectar.
+**Estado cloud:** configuración gratuita preparada; publicación pendiente de acceso a las herramientas.
+El usuario informó que conectó Render y Neon y el catálogo confirma los plugins
+instalados. Esta sesión no recibió herramientas de esos proveedores; faltan
+crear/inspeccionar recursos desde un chat compatible.
 Todavía no existe una URL pública verificada ni logs de un despliegue cloud.
 Las evidencias de esta carpeta se capturaron realmente en **entorno local** el
 10 de octubre de 2026, aproximadamente a las 03:15 America/Lima.
@@ -71,7 +74,7 @@ mantienen los planes gratuitos y sus cuotas. [Neon Free](https://neon.com/blog/n
 
 ## Evidencias cloud que faltan
 
-Una vez conectadas las cuentas se incorporarán: URL HTTPS real, estado Live,
+Una vez disponibles las herramientas cloud se incorporarán: URL HTTPS real, estado Live,
 ID de deploy, commit publicado, logs de build/deploy, peticiones/capturas contra
 esa URL y comprobación de persistencia después de reiniciar el servicio remoto.
 La configuración preparada no se presenta como un despliegue ya realizado.

@@ -9,7 +9,8 @@ Los nombres sugeridos del checklist inicial no son rutas a archivos existentes.
 **Actualización:** ya se incorporaron [13 capturas, logs y una grabación real](../deployment/README.md)
 de Swagger, pytest, Newman, persistencia local y GitHub. La tabla de nombres
 sugeridos de abajo conserva el checklist inicial; consultar el nuevo índice
-para los archivos que ya existen. La publicación cloud espera las cuentas conectadas.
+para los archivos que ya existen. Los plugins aparecen instalados; la publicación
+cloud espera una sesión con acceso a sus herramientas.
 
 ## Evidencias disponibles
 

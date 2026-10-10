@@ -282,8 +282,9 @@ El arranque en Render falla si falta PostgreSQL, evitando escribir datos en SQLi
 El comando cloud escucha en `0.0.0.0:$PORT` y utiliza `/health` como health check.
 
 La [vista de arquitectura prevista y evidencias](../evidencias/deployment/README.md)
-identifica los recursos por crear. Las cuentas siguen por conectar y no existe
-URL pública verificada. CON-05 sigue pendiente.
+identifica los recursos por crear. El usuario informó que conectó ambas cuentas
+y el catálogo confirma los plugins instalados, pero esta sesión carece de sus
+herramientas cloud. No existe URL pública verificada. CON-05 sigue pendiente.
 
 ## 5.3. MicroServices Implementation
 
@@ -495,7 +496,7 @@ La comprobación detuvo y reinició realmente el proceso Uvicorn: los dos IDs
 permanecieron iguales. Esta prueba acredita persistencia PostgreSQL local.
 
 El [índice de deployment](../evidencias/deployment/README.md) documenta actividades,
-arquitectura preparada y evidencias pendientes. Faltan conectar cuentas, crear
+arquitectura preparada y evidencias pendientes. Falta acceder a las herramientas, crear
 recursos gratuitos, obtener URL HTTPS, capturar build/Live y verificar la
 persistencia en nube. Ninguna captura local se presenta como deployment cloud.
 
