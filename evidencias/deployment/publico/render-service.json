@@ -1,0 +1,28 @@
+{
+  "id": "srv-db4vl25ckfvc738e4hp0",
+  "name": "finanzen-financial-records",
+  "type": "web_service",
+  "repo": "https://github.com/1ASI0657-2620-9199/back",
+  "branch": "main",
+  "createdAt": "2026-10-10T08:42:49.851572Z",
+  "updatedAt": "2026-10-10T08:43:31.031924Z",
+  "dashboardUrl": "https://dashboard.render.com/web/srv-db4vl25ckfvc738e4hp0",
+  "autoDeployTrigger": "checksPass",
+  "suspended": "not_suspended",
+  "serviceDetails": {
+    "url": "https://finanzen-financial-records.onrender.com",
+    "plan": "free",
+    "region": "virginia",
+    "runtime": "python",
+    "numInstances": 1,
+    "healthCheckPath": "/health",
+    "envSpecificDetails": {
+      "buildCommand": "python -m pip install -r requirements.txt",
+      "startCommand": "python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT --workers 1"
+    }
+  },
+  "environment_variable_names": [
+    "DATABASE_URL",
+    "PYTHON_VERSION"
+  ]
+}

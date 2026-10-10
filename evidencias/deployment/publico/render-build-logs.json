@@ -1,0 +1,2116 @@
+{
+  "hasMore": false,
+  "logs": [
+    {
+      "id": "74da6a20-3165-443d-aa39-47571ebaa854",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "\u001b[34m\u001b[1m==>\u001b(B\u001b[m \u001b[1mIt looks like we don't have access to your repo, but we'll try to clone it anyway.\u001b(B\u001b[m",
+      "timestamp": "2026-10-10T08:42:52.852855781Z"
+    },
+    {
+      "id": "e0c0194f-a0fb-471a-9be6-1acb8a46de03",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "\u001b[34m\u001b[1m==>\u001b(B\u001b[m \u001b[1mCloning from https://github.com/1ASI0657-2620-9199/back\u001b(B\u001b[m",
+      "timestamp": "2026-10-10T08:42:52.852878403Z"
+    },
+    {
+      "id": "5ad2b4bf-7b0b-47ce-9158-aeb0d8646f01",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "\u001b[34m\u001b[1m==>\u001b(B\u001b[m \u001b[1mChecking out commit 525ac3fd678b72340aaec689f444301b5afe073c in branch main\u001b(B\u001b[m",
+      "timestamp": "2026-10-10T08:42:53.11745996Z"
+    },
+    {
+      "id": "fee5c7a4-7d12-444f-baa2-e2fae85316a6",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "\u001b[34;1m==>\u001b[0;22m \u001b[1mUsing Python version 3.11.9 via environment variable PYTHON_VERSION\u001b[22m",
+      "timestamp": "2026-10-10T08:42:53.936786735Z"
+    },
+    {
+      "id": "13548de3-02f0-48d8-a435-d96c42b790b0",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "\u001b[34;1m==>\u001b[0;22m \u001b[1mDocs on specifying a Python version: https://render.com/docs/python-version\u001b[22m",
+      "timestamp": "2026-10-10T08:42:53.936795632Z"
+    },
+    {
+      "id": "1114c9be-747b-4aa2-8e0f-6a05742859b2",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "\u001b[34;1m==>\u001b[0;22m \u001b[1mInstalling Python version 3.11.9...\u001b[22m",
+      "timestamp": "2026-10-10T08:42:53.936901479Z"
+    },
+    {
+      "id": "860840e0-d531-4053-ac3e-ea95ac7c139b",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "\u001b[34m\u001b[1m==>\u001b(B\u001b[m \u001b[1mUsing Poetry version 2.1.3 (default)\u001b(B\u001b[m",
+      "timestamp": "2026-10-10T08:42:57.834781705Z"
+    },
+    {
+      "id": "345fd7be-b411-40a4-9e4d-736e083532d6",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "\u001b[34m\u001b[1m==>\u001b(B\u001b[m \u001b[1mDocs on specifying a Poetry version: https://render.com/docs/poetry-version\u001b(B\u001b[m",
+      "timestamp": "2026-10-10T08:42:57.873251406Z"
+    },
+    {
+      "id": "04a3fb00-8058-4849-9602-cf6eb9a7621c",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "\u001b[34m\u001b[1m==>\u001b(B\u001b[m \u001b[1mRunning build command 'python -m pip install -r requirements.txt'...\u001b(B\u001b[m",
+      "timestamp": "2026-10-10T08:42:57.925069762Z"
+    },
+    {
+      "id": "be9e1ff3-78e7-4338-a2e7-96698c302f10",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Collecting fastapi==0.122.0 (from -r requirements.txt (line 1))",
+      "timestamp": "2026-10-10T08:42:58.361047598Z"
+    },
+    {
+      "id": "5083c48c-db25-40be-8360-1fc95bb8bf37",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "  Downloading fastapi-0.122.0-py3-none-any.whl.metadata (30 kB)",
+      "timestamp": "2026-10-10T08:42:58.399258404Z"
+    },
+    {
+      "id": "5f37e4ba-52d2-418a-ba81-0b432cce92dd",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Collecting httpx==0.28.1 (from -r requirements.txt (line 2))",
+      "timestamp": "2026-10-10T08:42:58.429966057Z"
+    },
+    {
+      "id": "e4580fe0-df6a-4db0-907e-9f7abff59337",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "  Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)",
+      "timestamp": "2026-10-10T08:42:58.433204368Z"
+    },
+    {
+      "id": "cfd14f48-2300-443a-82f3-7c8f4fe39a6a",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Collecting pydantic==2.12.5 (from -r requirements.txt (line 3))",
+      "timestamp": "2026-10-10T08:42:58.558242919Z"
+    },
+    {
+      "id": "0bfc974f-f877-4f8e-a4ea-baf9b8a1945b",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "  Downloading pydantic-2.12.5-py3-none-any.whl.metadata (90 kB)",
+      "timestamp": "2026-10-10T08:42:58.561548442Z"
+    },
+    {
+      "id": "9baef17a-92c7-4464-9428-218e5502f14a",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "     \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 90.6/90.6 kB 15.4 MB/s eta 0:00:00",
+      "timestamp": "2026-10-10T08:42:58.568913264Z"
+    },
+    {
+      "id": "853a9c95-6d08-45b4-9237-a099c04bd2cf",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Collecting pg8000==1.31.5 (from -r requirements.txt (line 4))",
+      "timestamp": "2026-10-10T08:42:58.595924599Z"
+    },
+    {
+      "id": "790088e6-7283-4abb-8c3b-43ecdda3c5c2",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "  Downloading pg8000-1.31.5-py3-none-any.whl.metadata (88 kB)",
+      "timestamp": "2026-10-10T08:42:58.598873782Z"
+    },
+    {
+      "id": "e17a5761-66f2-4136-9492-c8cec4554fe7",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "     \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 88.8/88.8 kB 47.9 MB/s eta 0:00:00",
+      "timestamp": "2026-10-10T08:42:58.602100201Z"
+    },
+    {
+      "id": "4b75483d-8645-4b82-8e92-4a87251a7930",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Collecting pytest==8.3.5 (from -r requirements.txt (line 5))",
+      "timestamp": "2026-10-10T08:42:58.653639728Z"
+    },
+    {
+      "id": "44585a19-9d6d-4c2f-9427-82167712a5db",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "  Downloading pytest-8.3.5-py3-none-any.whl.metadata (7.6 kB)",
+      "timestamp": "2026-10-10T08:42:58.656449908Z"
+    },
+    {
+      "id": "82e339c6-b157-49b4-982d-994213e682fa",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Collecting uvicorn==0.38.0 (from -r requirements.txt (line 6))",
+      "timestamp": "2026-10-10T08:42:58.689999374Z"
+    },
+    {
+      "id": "7197b628-6d1e-4320-9221-4394f06d6b25",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "  Downloading uvicorn-0.38.0-py3-none-any.whl.metadata (6.8 kB)",
+      "timestamp": "2026-10-10T08:42:58.692802165Z"
+    },
+    {
+      "id": "ce3f0d19-5cb0-4cb5-b012-686867a1b09d",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Collecting starlette<0.51.0,>=0.40.0 (from fastapi==0.122.0->-r requirements.txt (line 1))",
+      "timestamp": "2026-10-10T08:42:58.746588398Z"
+    },
+    {
+      "id": "0d9aa6f3-0d03-4880-8fa6-09bc66c9072e",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "  Downloading starlette-0.50.0-py3-none-any.whl.metadata (6.3 kB)",
+      "timestamp": "2026-10-10T08:42:58.749567507Z"
+    },
+    {
+      "id": "f67387ac-0d5a-4c64-9ded-730f201ac22d",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Collecting typing-extensions>=4.8.0 (from fastapi==0.122.0->-r requirements.txt (line 1))",
+      "timestamp": "2026-10-10T08:42:58.794520086Z"
+    },
+    {
+      "id": "ea5fcbec-137d-4aca-9e46-9e7aa1e9f0a7",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "  Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)",
+      "timestamp": "2026-10-10T08:42:58.798174834Z"
+    },
+    {
+      "id": "e2174dd0-1c19-4454-94fc-569c695eb3b6",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Collecting annotated-doc>=0.0.2 (from fastapi==0.122.0->-r requirements.txt (line 1))",
+      "timestamp": "2026-10-10T08:42:58.809028129Z"
+    },
+    {
+      "id": "afbf40b6-2fb9-4e84-912e-44d988adffd0",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "  Downloading annotated_doc-0.0.5-py3-none-any.whl.metadata (6.5 kB)",
+      "timestamp": "2026-10-10T08:42:58.811691247Z"
+    },
+    {
+      "id": "3363a455-4acb-4360-8261-e84fbdb94be8",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Collecting anyio (from httpx==0.28.1->-r requirements.txt (line 2))",
+      "timestamp": "2026-10-10T08:42:58.842235567Z"
+    },
+    {
+      "id": "5ea94f50-dc76-48a9-91d4-543fbbde0604",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "  Downloading anyio-4.15.1-py3-none-any.whl.metadata (4.7 kB)",
+      "timestamp": "2026-10-10T08:42:58.845446281Z"
+    },
+    {
+      "id": "ac45331d-28d9-460a-a302-bdfd5702a24b",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Collecting certifi (from httpx==0.28.1->-r requirements.txt (line 2))",
+      "timestamp": "2026-10-10T08:42:58.866779705Z"
+    },
+    {
+      "id": "bc22d2d4-5034-4cd7-af38-e0a094befa38",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "  Downloading certifi-2026.7.22-py3-none-any.whl.metadata (2.5 kB)",
+      "timestamp": "2026-10-10T08:42:58.869958723Z"
+    },
+    {
+      "id": "0572c979-9a0f-4fce-a581-4362d05d2a16",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Collecting httpcore==1.* (from httpx==0.28.1->-r requirements.txt (line 2))",
+      "timestamp": "2026-10-10T08:42:58.891637846Z"
+    },
+    {
+      "id": "372e80c2-ce39-44ba-a354-f6dca7489f88",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "  Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)",
+      "timestamp": "2026-10-10T08:42:58.894459784Z"
+    },
+    {
+      "id": "a9a9bbb7-5e63-4809-94b4-9ce83006aeb0",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Collecting idna (from httpx==0.28.1->-r requirements.txt (line 2))",
+      "timestamp": "2026-10-10T08:42:58.911444221Z"
+    },
+    {
+      "id": "c002de21-40f0-438c-bc15-b165c82b32f0",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "  Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)",
+      "timestamp": "2026-10-10T08:42:58.914903156Z"
+    },
+    {
+      "id": "9c1639ad-d0b1-426a-b60d-8aaf87520d7b",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Collecting annotated-types>=0.6.0 (from pydantic==2.12.5->-r requirements.txt (line 3))",
+      "timestamp": "2026-10-10T08:42:58.949855537Z"
+    },
+    {
+      "id": "6001f058-22cf-4db4-bc94-0f7198dd7dd0",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "  Downloading annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)",
+      "timestamp": "2026-10-10T08:42:58.952588098Z"
+    },
+    {
+      "id": "665d4f34-31db-41f1-be79-fe2e0e37e396",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Collecting pydantic-core==2.41.5 (from pydantic==2.12.5->-r requirements.txt (line 3))",
+      "timestamp": "2026-10-10T08:42:59.645204841Z"
+    },
+    {
+      "id": "54bb5cd2-7ec1-4bda-8f6d-2c1aaa1d7615",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "  Downloading pydantic_core-2.41.5-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (7.3 kB)",
+      "timestamp": "2026-10-10T08:42:59.648272596Z"
+    },
+    {
+      "id": "d44321fa-0dec-47cb-91d8-55b6b9fffe1e",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Collecting typing-inspection>=0.4.2 (from pydantic==2.12.5->-r requirements.txt (line 3))",
+      "timestamp": "2026-10-10T08:42:59.663382557Z"
+    },
+    {
+      "id": "ad07c1ad-dee8-4868-8cc5-1df868f967a2",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "  Downloading typing_inspection-0.4.4-py3-none-any.whl.metadata (2.6 kB)",
+      "timestamp": "2026-10-10T08:42:59.666097912Z"
+    },
+    {
+      "id": "a3f5ca1e-31c5-4289-b022-2eb342f21cf3",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Collecting python-dateutil>=2.8.2 (from pg8000==1.31.5->-r requirements.txt (line 4))",
+      "timestamp": "2026-10-10T08:42:59.683662478Z"
+    },
+    {
+      "id": "932c1c2f-85e6-4b83-a1e0-f45ffc048cd7",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "  Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)",
+      "timestamp": "2026-10-10T08:42:59.686715167Z"
+    },
+    {
+      "id": "b2d1857c-0867-4842-84ae-6ac2e6202d0f",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Collecting scramp>=1.4.5 (from pg8000==1.31.5->-r requirements.txt (line 4))",
+      "timestamp": "2026-10-10T08:42:59.70238139Z"
+    },
+    {
+      "id": "e38b72a0-9831-4135-a211-8b13e82e7b92",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "  Downloading scramp-1.4.17-py3-none-any.whl.metadata (22 kB)",
+      "timestamp": "2026-10-10T08:42:59.705225137Z"
+    },
+    {
+      "id": "c6e614dd-8899-469a-903f-0aec45f5b04a",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Collecting iniconfig (from pytest==8.3.5->-r requirements.txt (line 5))",
+      "timestamp": "2026-10-10T08:42:59.723910765Z"
+    },
+    {
+      "id": "504207ad-3162-4af6-9e6a-c2895ebeedde",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "  Downloading iniconfig-2.3.1-py3-none-any.whl.metadata (2.8 kB)",
+      "timestamp": "2026-10-10T08:42:59.72663095Z"
+    },
+    {
+      "id": "2efbbdc5-ab7a-42d5-98e5-094bf345fd29",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Collecting packaging (from pytest==8.3.5->-r requirements.txt (line 5))",
+      "timestamp": "2026-10-10T08:42:59.747597073Z"
+    },
+    {
+      "id": "c6d89fc8-2716-422f-8785-8ba93761372a",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "  Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)",
+      "timestamp": "2026-10-10T08:42:59.750148252Z"
+    },
+    {
+      "id": "775fdb4a-add6-4b16-acc8-5ebf4658bdd1",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Collecting pluggy<2,>=1.5 (from pytest==8.3.5->-r requirements.txt (line 5))",
+      "timestamp": "2026-10-10T08:42:59.76581278Z"
+    },
+    {
+      "id": "e037a3ea-a309-4936-ac42-f1c625901fd7",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "  Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)",
+      "timestamp": "2026-10-10T08:42:59.768559659Z"
+    },
+    {
+      "id": "902cd7e6-d20b-4b5e-b05b-8ab5d2a1c0e7",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Collecting click>=7.0 (from uvicorn==0.38.0->-r requirements.txt (line 6))",
+      "timestamp": "2026-10-10T08:42:59.832782174Z"
+    },
+    {
+      "id": "bea40972-24e9-4d88-a20a-8d93b6352b38",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "  Downloading click-8.5.0-py3-none-any.whl.metadata (2.6 kB)",
+      "timestamp": "2026-10-10T08:42:59.836147448Z"
+    },
+    {
+      "id": "6fee8d49-8e0f-4f2b-805d-a8e5801389fc",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Collecting h11>=0.8 (from uvicorn==0.38.0->-r requirements.txt (line 6))",
+      "timestamp": "2026-10-10T08:42:59.848233599Z"
+    },
+    {
+      "id": "f3736d83-7aa2-4410-9a71-7e6b2591c99e",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "  Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)",
+      "timestamp": "2026-10-10T08:42:59.850764459Z"
+    },
+    {
+      "id": "aa263fa7-68e9-471e-aac4-b414536220e8",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Collecting six>=1.5 (from python-dateutil>=2.8.2->pg8000==1.31.5->-r requirements.txt (line 4))",
+      "timestamp": "2026-10-10T08:42:59.883820989Z"
+    },
+    {
+      "id": "bb627c69-103f-411c-9a47-39eb104dc176",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "  Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)",
+      "timestamp": "2026-10-10T08:42:59.886650385Z"
+    },
+    {
+      "id": "e65e0ca0-a619-404e-a876-64aa2a071a39",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Collecting asn1crypto>=1.5.1 (from scramp>=1.4.5->pg8000==1.31.5->-r requirements.txt (line 4))",
+      "timestamp": "2026-10-10T08:42:59.904065515Z"
+    },
+    {
+      "id": "f7a24aad-9cab-4cb8-a759-3288c7b458bc",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "  Downloading asn1crypto-1.5.1-py2.py3-none-any.whl.metadata (13 kB)",
+      "timestamp": "2026-10-10T08:42:59.90679817Z"
+    },
+    {
+      "id": "92fca023-8980-4341-b19f-f3b74b280f85",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Downloading fastapi-0.122.0-py3-none-any.whl (110 kB)",
+      "timestamp": "2026-10-10T08:42:59.95934503Z"
+    },
+    {
+      "id": "0ce62230-d89b-4db0-90a0-85413cbebb45",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 110.7/110.7 kB 49.7 MB/s eta 0:00:00",
+      "timestamp": "2026-10-10T08:42:59.962998115Z"
+    },
+    {
+      "id": "b2f5141d-ac0d-435a-a8c6-d89df4fdd0b6",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Downloading httpx-0.28.1-py3-none-any.whl (73 kB)",
+      "timestamp": "2026-10-10T08:42:59.965989867Z"
+    },
+    {
+      "id": "1153e8f5-7d3a-410c-91d6-6d3e49207292",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 73.5/73.5 kB 47.1 MB/s eta 0:00:00",
+      "timestamp": "2026-10-10T08:42:59.968813757Z"
+    },
+    {
+      "id": "115db5f6-65d0-4fd1-b5a9-282cc4f40e20",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Downloading pydantic-2.12.5-py3-none-any.whl (463 kB)",
+      "timestamp": "2026-10-10T08:42:59.971474714Z"
+    },
+    {
+      "id": "2dd9c8dd-986c-4673-8d3d-725c7f03414f",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 463.6/463.6 kB 110.2 MB/s eta 0:00:00",
+      "timestamp": "2026-10-10T08:42:59.977139166Z"
+    },
+    {
+      "id": "56fd908e-14f9-447b-b791-65f803befc8d",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Downloading pg8000-1.31.5-py3-none-any.whl (57 kB)",
+      "timestamp": "2026-10-10T08:42:59.979998469Z"
+    },
+    {
+      "id": "179d898a-c4d5-4b7b-bb06-6799b65c4fad",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 57.8/57.8 kB 37.9 MB/s eta 0:00:00",
+      "timestamp": "2026-10-10T08:42:59.982613837Z"
+    },
+    {
+      "id": "4b0f7956-01c0-4fa4-a457-c842df9fe7dd",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Downloading pytest-8.3.5-py3-none-any.whl (343 kB)",
+      "timestamp": "2026-10-10T08:42:59.985569059Z"
+    },
+    {
+      "id": "97f8f460-5261-43d7-9be9-31c20423764e",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 343.6/343.6 kB 61.1 MB/s eta 0:00:00",
+      "timestamp": "2026-10-10T08:42:59.992600697Z"
+    },
+    {
+      "id": "a9ee683a-9feb-4859-8510-cb6d7483e806",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Downloading uvicorn-0.38.0-py3-none-any.whl (68 kB)",
+      "timestamp": "2026-10-10T08:42:59.99532455Z"
+    },
+    {
+      "id": "144ad7b0-8d07-4b18-8901-5a1d3e45edbf",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 68.1/68.1 kB 44.0 MB/s eta 0:00:00",
+      "timestamp": "2026-10-10T08:42:59.998040149Z"
+    },
+    {
+      "id": "f920d953-cb28-4e89-9b3e-91f2e078ad66",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)",
+      "timestamp": "2026-10-10T08:43:00.000647401Z"
+    },
+    {
+      "id": "a39f64a1-0774-4853-bac2-2f952bb83e4a",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 78.8/78.8 kB 52.2 MB/s eta 0:00:00",
+      "timestamp": "2026-10-10T08:43:00.00330593Z"
+    },
+    {
+      "id": "66aed62a-1610-49ca-97f3-17ca449a8f31",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Downloading pydantic_core-2.41.5-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)",
+      "timestamp": "2026-10-10T08:43:00.0058753Z"
+    },
+    {
+      "id": "da341e85-5092-4924-b45f-9ab69335ec08",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 2.1/2.1 MB 116.3 MB/s eta 0:00:00",
+      "timestamp": "2026-10-10T08:43:00.024974869Z"
+    },
+    {
+      "id": "b5f7d965-4885-4a21-a99b-79fb86a614de",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Downloading annotated_doc-0.0.5-py3-none-any.whl (5.3 kB)",
+      "timestamp": "2026-10-10T08:43:00.027860169Z"
+    },
+    {
+      "id": "67ad666b-47df-4cfd-994f-ec82d4960814",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Downloading annotated_types-0.8.0-py3-none-any.whl (13 kB)",
+      "timestamp": "2026-10-10T08:43:00.03171591Z"
+    },
+    {
+      "id": "2f96f72c-7957-428c-9bce-e8a7b82aa92e",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Downloading click-8.5.0-py3-none-any.whl (125 kB)",
+      "timestamp": "2026-10-10T08:43:00.035475344Z"
+    },
+    {
+      "id": "fb16a048-9e4a-479a-8200-3d9de15da655",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 125.3/125.3 kB 76.0 MB/s eta 0:00:00",
+      "timestamp": "2026-10-10T08:43:00.038579355Z"
+    },
+    {
+      "id": "68184337-86e8-4960-8c5d-dbe11c22912e",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Downloading h11-0.16.0-py3-none-any.whl (37 kB)",
+      "timestamp": "2026-10-10T08:43:00.041124808Z"
+    },
+    {
+      "id": "96483466-e620-489c-93b7-1d3c1b5f102b",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)",
+      "timestamp": "2026-10-10T08:43:00.04486402Z"
+    },
+    {
+      "id": "6a8815eb-52a3-4de8-8b60-3edc04005759",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)",
+      "timestamp": "2026-10-10T08:43:00.048608341Z"
+    },
+    {
+      "id": "1e8753ce-b46e-48f6-a789-e45135f39983",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 229.9/229.9 kB 118.7 MB/s eta 0:00:00",
+      "timestamp": "2026-10-10T08:43:00.052016028Z"
+    },
+    {
+      "id": "53e4cddc-53ec-4b19-88e6-42c73d6215e9",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Downloading scramp-1.4.17-py3-none-any.whl (16 kB)",
+      "timestamp": "2026-10-10T08:43:00.054616254Z"
+    },
+    {
+      "id": "7acde810-b32c-488d-9886-6a9eff6124af",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Downloading starlette-0.50.0-py3-none-any.whl (74 kB)",
+      "timestamp": "2026-10-10T08:43:00.058566474Z"
+    },
+    {
+      "id": "8fe9ea79-b7a3-4159-a32a-576073ce9f90",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 74.0/74.0 kB 50.1 MB/s eta 0:00:00",
+      "timestamp": "2026-10-10T08:43:00.061239645Z"
+    },
+    {
+      "id": "7b6752b2-0a2d-4b37-a10e-9db3aa7e3832",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Downloading anyio-4.15.1-py3-none-any.whl (132 kB)",
+      "timestamp": "2026-10-10T08:43:00.063886407Z"
+    },
+    {
+      "id": "e530e090-1561-4c1d-a6aa-b2a161bab1b7",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 132.1/132.1 kB 82.5 MB/s eta 0:00:00",
+      "timestamp": "2026-10-10T08:43:00.066656777Z"
+    },
+    {
+      "id": "602eabe4-7502-4e80-bb11-e677ae7034fb",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Downloading idna-3.20-py3-none-any.whl (69 kB)",
+      "timestamp": "2026-10-10T08:43:00.069200396Z"
+    },
+    {
+      "id": "6ed948da-8601-47e7-877e-1d091ac48540",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 69.6/69.6 kB 45.7 MB/s eta 0:00:00",
+      "timestamp": "2026-10-10T08:43:00.07180913Z"
+    },
+    {
+      "id": "a6457111-1740-4cdf-ad60-699c082cc3d8",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)",
+      "timestamp": "2026-10-10T08:43:00.07444685Z"
+    },
+    {
+      "id": "d78030bc-73d6-4a7d-8866-c10639fa21ae",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 45.6/45.6 kB 29.6 MB/s eta 0:00:00",
+      "timestamp": "2026-10-10T08:43:00.076963753Z"
+    },
+    {
+      "id": "9ec6ae8e-fa49-4eda-959d-2de88da12d43",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Downloading typing_inspection-0.4.4-py3-none-any.whl (14 kB)",
+      "timestamp": "2026-10-10T08:43:00.079813162Z"
+    },
+    {
+      "id": "c4e3dae9-2b17-4e7c-90f1-e5de2ed37b55",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Downloading certifi-2026.7.22-py3-none-any.whl (136 kB)",
+      "timestamp": "2026-10-10T08:43:00.083610619Z"
+    },
+    {
+      "id": "9cd916d5-ba65-4054-8258-55143d372f25",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 137.0/137.0 kB 87.8 MB/s eta 0:00:00",
+      "timestamp": "2026-10-10T08:43:00.08654502Z"
+    },
+    {
+      "id": "b9e8d6ce-df49-4260-b429-81a8bca4d47d",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Downloading iniconfig-2.3.1-py3-none-any.whl (7.6 kB)",
+      "timestamp": "2026-10-10T08:43:00.089095266Z"
+    },
+    {
+      "id": "be87cc98-b8fb-4060-b1b0-a623da32e8c0",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Downloading packaging-26.3-py3-none-any.whl (129 kB)",
+      "timestamp": "2026-10-10T08:43:00.092827705Z"
+    },
+    {
+      "id": "6ec1fb77-5256-4e30-8d58-0798c2f4115f",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 130.0/130.0 kB 84.9 MB/s eta 0:00:00",
+      "timestamp": "2026-10-10T08:43:00.095565319Z"
+    },
+    {
+      "id": "529acd58-920d-498d-914e-91f6763dfeda",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Downloading asn1crypto-1.5.1-py2.py3-none-any.whl (105 kB)",
+      "timestamp": "2026-10-10T08:43:00.09803677Z"
+    },
+    {
+      "id": "a2c76da7-5875-4ffa-a3fc-a20f27537078",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 105.0/105.0 kB 69.2 MB/s eta 0:00:00",
+      "timestamp": "2026-10-10T08:43:00.100694128Z"
+    },
+    {
+      "id": "eb8321c0-9964-4092-bead-25759ef2228a",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)",
+      "timestamp": "2026-10-10T08:43:00.103484975Z"
+    },
+    {
+      "id": "d4362696-1d0b-449a-b498-bfb16c3c264e",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Installing collected packages: asn1crypto, typing-extensions, six, scramp, pluggy, packaging, iniconfig, idna, h11, click, certifi, annotated-types, annotated-doc, uvicorn, typing-inspection, python-dateutil, pytest, pydantic-core, httpcore, anyio, starlette, pydantic, pg8000, httpx, fastapi",
+      "timestamp": "2026-10-10T08:43:00.211449395Z"
+    },
+    {
+      "id": "6120baeb-1038-469d-b60c-5a5d5e2a630e",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "Successfully installed annotated-doc-0.0.5 annotated-types-0.8.0 anyio-4.15.1 asn1crypto-1.5.1 certifi-2026.7.22 click-8.5.0 fastapi-0.122.0 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 idna-3.20 iniconfig-2.3.1 packaging-26.3 pg8000-1.31.5 pluggy-1.6.0 pydantic-2.12.5 pydantic-core-2.41.5 pytest-8.3.5 python-dateutil-2.9.0.post0 scramp-1.4.17 six-1.17.0 starlette-0.50.0 typing-extensions-4.16.0 typing-inspection-0.4.4 uvicorn-0.38.0",
+      "timestamp": "2026-10-10T08:43:01.316024037Z"
+    },
+    {
+      "id": "707b409a-79e2-42e2-bd9e-92194dc70f13",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "",
+      "timestamp": "2026-10-10T08:43:01.408791983Z"
+    },
+    {
+      "id": "85596fde-dc5f-4438-b44c-c2700ff3e64d",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "notice"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "[notice] A new release of pip is available: 24.0 -> 26.2.1",
+      "timestamp": "2026-10-10T08:43:01.408804999Z"
+    },
+    {
+      "id": "758c9845-a3e8-4219-8167-c1be583cbbef",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "notice"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "[notice] To update, run: pip install --upgrade pip",
+      "timestamp": "2026-10-10T08:43:01.408806644Z"
+    },
+    {
+      "id": "57a10228-4c7b-4dc6-b1b9-7cf79d1c8f59",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "\u001b[34;1m==>\u001b[0;22m \u001b[1mUploading build...\u001b[22m",
+      "timestamp": "2026-10-10T08:43:02.967818217Z"
+    },
+    {
+      "id": "f016a5a2-3ef1-426a-99f3-1108c74d4168",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "\u001b[34;1m==>\u001b[0;22m \u001b[1mUploaded in 4.8s. Compression took 1.2s\u001b[22m",
+      "timestamp": "2026-10-10T08:43:08.980305949Z"
+    },
+    {
+      "id": "ea51bb27-c268-4f80-a9fc-76d58c00756f",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "\u001b[32;1m==>\u001b[0;22m \u001b[1mBuild successful \ud83c\udf89\u001b[22m",
+      "timestamp": "2026-10-10T08:43:08.983246764Z"
+    }
+  ],
+  "nextEndTime": "2026-10-10T08:44:52.051587585Z",
+  "nextStartTime": "2026-10-10T08:43:08.983246765Z"
+}

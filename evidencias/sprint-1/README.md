@@ -9,8 +9,9 @@ Los nombres sugeridos del checklist inicial no son rutas a archivos existentes.
 **Actualización:** ya se incorporaron [13 capturas, logs y una grabación real](../deployment/README.md)
 de Swagger, pytest, Newman, persistencia local y GitHub. La tabla de nombres
 sugeridos de abajo conserva el checklist inicial; consultar el nuevo índice
-para los archivos que ya existen. Los plugins aparecen instalados; la publicación
-cloud espera una sesión con acceso a sus herramientas.
+para los archivos que ya existen. La [publicación cloud](../deployment/publico/README.md)
+ya está verificada y añade otras 13 capturas, grabación, logs y prueba de
+persistencia tras reiniciar Render Free con PostgreSQL Neon Free.
 
 ## Evidencias disponibles
 
@@ -106,8 +107,9 @@ Duración sugerida: 3–5 minutos; no es una duración exigida por el statement.
   en `f218113`; el capítulo V documenta ese cambio y los patrones aún pendientes.
 - **Librería propia (5.1.3):** paquete reutilizable, patrones, consumo y pruebas.
   `finanzen_common` sigue siendo una propuesta.
-- **Deployment:** pasos realizados durante el sprint. Añadir recursos, URL y
-  capturas cloud cuando existan; el índice reserva el despliegue cloud completo para TF1.
+- **Deployment:** completado con Render Free y Neon Free; las evidencias públicas
+  están enlazadas en 5.2.4 y 5.3.1.4–5.3.1.6. El índice del statement reserva
+  el despliegue cloud completo para TF1.
 
 ## Reproducir los archivos de evidencia
 

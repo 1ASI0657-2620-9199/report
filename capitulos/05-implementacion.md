@@ -156,7 +156,7 @@ Las ocho pruebas y la ejecución de Newman verifican el comportamiento conservad
 | Pydantic | 2.12.5 | Implementado |
 | Uvicorn | 0.38.0 | Servidor local |
 | SQLite | Módulo estándar de Python | Persistencia local |
-| PostgreSQL / pg8000 | PostgreSQL 17 / pg8000 1.31.5 | Integración local probada; Neon cloud por crear |
+| PostgreSQL / pg8000 | PostgreSQL 17 / pg8000 1.31.5 | Integración local y deployment Neon Free verificados |
 | pytest / httpx | 8.3.5 / 0.28.1 | Pruebas automatizadas |
 | HTML, CSS, JavaScript | Panel sin compilación | Implementado |
 | Postman / Newman | Colección del Sprint 1 ejecutada con Newman | 8 peticiones, 11 aserciones; capturas originales de Postman Desktop históricas |
@@ -277,16 +277,35 @@ ejecución local, no infraestructura cloud.
 Se añadió el [Blueprint Render Free](https://github.com/1ASI0657-2620-9199/back/blob/main/render.yaml),
 validado contra el schema oficial, y la
 [guía de deployment](https://github.com/1ASI0657-2620-9199/back/blob/main/DEPLOYMENT.md).
-La API se prepara para Render Free y los datos para Neon Free PostgreSQL,
+La API está publicada en Render Free y los datos en Neon Free PostgreSQL,
 con `DATABASE_URL` privada y conexión TLS. No se requiere disco de pago.
 El arranque en Render falla si falta PostgreSQL, evitando escribir datos en SQLite efímero.
 `DATABASE_URL` selecciona PostgreSQL; `FINANZEN_DB_PATH` conserva el modo SQLite local.
 El comando cloud escucha en `0.0.0.0:$PORT` y utiliza `/health` como health check.
 
-La [vista de arquitectura prevista y evidencias](../evidencias/deployment/README.md)
-identifica los recursos por crear. El usuario informó que conectó ambas cuentas
-y el catálogo confirma los plugins instalados, pero esta sesión carece de sus
-herramientas cloud. No existe URL pública verificada. CON-05 sigue pendiente.
+La [vista de arquitectura y evidencias](../evidencias/deployment/README.md)
+identifica los recursos creados y su validación pública el 10 de octubre de 2026:
+
+| Elemento cloud | Configuración verificada |
+| --- | --- |
+| URL API | https://finanzen-financial-records.onrender.com |
+| Render Web Service | `srv-db4vl25ckfvc738e4hp0`, plan **Free**, Virginia, Python 3.11.9 |
+| Neon PostgreSQL | Proyecto `dawn-bird-07958545`, PostgreSQL 17, organización **Free**, `aws-us-east-1` |
+| Conexión | `DATABASE_URL` privada, pooling PostgreSQL y TLS verificado |
+| Datos | En Neon; sin disco de pago en Render |
+| Health y contrato | `/health`, `/docs`, `/openapi.json`: HTTP 200 |
+
+```mermaid
+flowchart LR
+    C[Cliente HTTPS: Swagger o Postman] --> R[Render Free: FastAPI y Uvicorn]
+    R -->|PostgreSQL con TLS| N[(Neon Free: transactions)]
+    G[GitHub: back/main] -->|Código y configuración| R
+```
+
+Los [registros del servicio](../evidencias/deployment/publico/render-service.json)
+y [recursos Neon](../evidencias/deployment/publico/neon-resources.json) documentan
+esta configuración sin revelar credenciales. CON-05 conserva la restricción
+original del PDF; la decisión aplicada en esta entrega usa Render y Neon.
 
 ## 5.3. MicroServices Implementation
 
@@ -446,6 +465,17 @@ servidor local Uvicorn con PostgreSQL del 10 de octubre de 2026:
 
 ![Figura 5.4: vista de la salida real de Newman; no es la interfaz de Postman Desktop, ejecución local, 10 de octubre de 2026](../evidencias/deployment/local/01-newman.png)
 
+**Validación adicional en nube:** la misma colección se ejecutó contra
+`https://finanzen-financial-records.onrender.com`: **8 peticiones, 11 aserciones,
+0 fallos**. Se adjuntan [log público](../evidencias/deployment/publico/newman.txt),
+[reporte JSON](../evidencias/deployment/publico/newman.json),
+[respuestas Swagger públicas](../evidencias/deployment/publico/swagger-http.json)
+y [grabación del servicio público](../evidencias/deployment/publico/demostracion.webm).
+Los POST demostraron 201/200/409 y el resumen devolvió saldo PEN 874.50.
+La grabación muestra interacción real, sin narración.
+
+![Figura 5.5: resumen mensual ejecutado en Swagger contra la URL pública, HTTP 200 y saldo PEN 874.50, 10 de octubre de 2026](../evidencias/deployment/publico/07-summary.png)
+
 #### 5.3.1.5. Microservices Documentation Evidence for Sprint Review
 
 FastAPI genera Swagger y OpenAPI a partir de la aplicación. Se conserva un
@@ -455,6 +485,10 @@ inventados para capacidades futuras.
 
 Base local: `http://127.0.0.1:8000`. [Swagger local](http://127.0.0.1:8000/docs)
 y [OpenAPI local](http://127.0.0.1:8000/openapi.json) requieren el servidor iniciado.
+
+Servicio publicado: [Swagger público](https://finanzen-financial-records.onrender.com/docs)
+y [OpenAPI público](https://finanzen-financial-records.onrender.com/openapi.json).
+Se conserva el [contrato descargado del servidor cloud](../evidencias/deployment/publico/openapi.json).
 
 | Acción | Llamada y parámetros | Respuesta |
 | --- | --- | --- |
@@ -513,9 +547,40 @@ respuestas: [contrato](../evidencias/deployment/local/03-swagger-endpoints.png),
 [resumen con HTTP 200](../evidencias/deployment/local/07-summary.png).
 El [índice completo](../evidencias/deployment/README.md) explica cada captura y su apartado.
 
-![Figura 5.5: contrato y operaciones disponibles en Swagger local, 10 de octubre de 2026](../evidencias/deployment/local/03-swagger-endpoints.png)
+![Figura 5.6: contrato y operaciones disponibles en Swagger local, 10 de octubre de 2026](../evidencias/deployment/local/03-swagger-endpoints.png)
+
+![Figura 5.7: contrato de Swagger publicado en Render, con sus operaciones disponibles, 10 de octubre de 2026](../evidencias/deployment/publico/03-swagger-endpoints.png)
 
 #### 5.3.1.6. Software Deployment Evidence for Sprint Review
+
+**Despliegue realizado:** Render Free + Neon Free, verificado el 10 de octubre
+de 2026. URL real: https://finanzen-financial-records.onrender.com.
+
+| Actividad realizada | Resultado y evidencia |
+| --- | --- |
+| Crear PostgreSQL | Neon Free, PostgreSQL 17, región US East 1; [recursos verificados](../evidencias/deployment/publico/neon-resources.json) |
+| Crear servicio API | Render Free desde `back/main`, Python/Uvicorn y variable privada; [configuración](../evidencias/deployment/publico/render-service.json) |
+| Instalar y construir | Build successful; [log original](../evidencias/deployment/publico/render-build-logs.json) y [vista](../evidencias/deployment/publico/14-render-build.png) |
+| Publicar | Deploy `dep-db4vl2tckfvc738e4j60`, commit `525ac3f`, estado `live`; [registro](../evidencias/deployment/publico/render-deploys.json) |
+| Validar acceso público | Health, Swagger y OpenAPI HTTP 200; [resultado](../evidencias/deployment/publico/public-endpoints.json) |
+| Validar operaciones | Newman: 8 peticiones, 11 aserciones, 0 fallos; [reporte](../evidencias/deployment/publico/newman.json) |
+| Reiniciar Render | Solicitud aceptada y nuevo arranque en logs; [solicitud](../evidencias/deployment/publico/reinicio-solicitud.json), [log original](../evidencias/deployment/publico/render-runtime-logs.json) y [vista](../evidencias/deployment/publico/15-render-runtime.png) |
+| Comprobar persistencia | Dos IDs conservados, saldo PEN 92.66 y replay HTTP 200 sin duplicados; [resultado antes/después](../evidencias/deployment/publico/persistencia.json) |
+
+La prueba de persistencia creó datos sintéticos con un usuario independiente:
+ingreso 105.00 y gasto 12.34. El nuevo arranque quedó registrado a las 03:46:03
+America/Lima. Por eso su saldo difiere del saldo 874.50 de la demostración Swagger.
+La configuración mantiene la conexión PostgreSQL privada y no utiliza disco de pago.
+
+![Figura 5.8: vista de la respuesta real de Render, servicio Free y deploy live; no es el dashboard, 10 de octubre de 2026](../evidencias/deployment/publico/12-render-live.png)
+
+![Figura 5.9: vista de la prueba real de persistencia tras reiniciar Render, 10 de octubre de 2026](../evidencias/deployment/publico/16-persistence.png)
+
+El [índice cloud completo](../evidencias/deployment/publico/README.md) reúne
+13 capturas públicas, grabación y registros originales. Las vistas de logs/API
+están identificadas; las capturas de Swagger muestran el servicio HTTPS real.
+
+**Antecedente local:** se conserva la verificación previa realizada antes de publicar.
 
 Se preparó la configuración gratuita Render/Neon y se ejecutó Uvicorn con
 PostgreSQL 17 local. Se incorporan el
@@ -530,17 +595,17 @@ la URL local, fecha y commit utilizado. El
 [log original de Uvicorn](../evidencias/deployment/local/uvicorn.txt) complementa
 la captura del arranque.
 
-![Figura 5.6: IDs conservados al detener y reiniciar Uvicorn con PostgreSQL local, 10 de octubre de 2026](../evidencias/deployment/local/10-persistence.png)
+![Figura 5.10: IDs conservados al detener y reiniciar Uvicorn con PostgreSQL local, 10 de octubre de 2026](../evidencias/deployment/local/10-persistence.png)
 
-El [índice de deployment](../evidencias/deployment/README.md) documenta actividades,
-arquitectura preparada y evidencias pendientes. Falta acceder a las herramientas, crear
-recursos gratuitos, obtener URL HTTPS, capturar build/Live y verificar la
-persistencia en nube. Ninguna captura local se presenta como deployment cloud.
+El [índice de deployment](../evidencias/deployment/README.md) distingue evidencias
+locales y públicas. La publicación, los logs y la persistencia remota ya están
+verificados; las capturas locales anteriores conservan su identificación de entorno.
 
 El índice del statement ubica el despliegue cloud completo en TF1 y permite
 URL local para documentar sprints previos al despliegue de Web Services.
-La ejecución local no completa CON-05. No se dispone de URL ni capturas de
-un despliegue en AWS, Azure o Google Cloud.
+El proveedor aplicado por decisión del usuario es Render/Neon. CON-05 del PDF
+menciona AWS, Azure o Google Cloud; se conserva como restricción académica original.
+No se presenta el servicio Render como un deployment directo en esos proveedores.
 
 #### 5.3.1.7. Team Collaboration Insights during Sprint
 
@@ -563,10 +628,11 @@ enlaces y datos del equipo que faltan para completar los apartados del Sprint 1.
 - PDF, transcripción de las 109 páginas, figuras y README histórico conservados.
 - Informe ampliado con entrevistas, 14 historias, drivers y cinco iteraciones ADD.
 - Pruebas, contrato OpenAPI, script de comprobación y empaquetado reproducible.
-- Adaptador SQLite/PostgreSQL, ocho pruebas aprobadas y configuración Render Free/Neon Free preparada.
+- Adaptador SQLite/PostgreSQL, ocho pruebas aprobadas y configuración Render Free/Neon Free publicada.
 - Once capturas reales, colección ejecutada con Newman y grabación local de Swagger.
 - Capturas reales de GitHub Actions aprobado y del commit de PostgreSQL; trece imágenes en total.
+- API publicada en Render Free con Neon Free, trece capturas públicas adicionales, grabación y persistencia remota verificada.
 - Repositorios landing y mobile preparados sin código, según confirmación del usuario.
 
 Siguen pendientes autenticación, cuentas/saldos, presupuestos, alertas,
-eventos, IoT, proyecciones, educación, auditoría y despliegue en nube.
+eventos, IoT, proyecciones, educación y auditoría.

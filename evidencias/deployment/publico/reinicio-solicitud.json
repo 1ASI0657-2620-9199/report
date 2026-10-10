@@ -1,0 +1,62 @@
+{
+  "base_url": "https://finanzen-financial-records.onrender.com",
+  "service_id": "srv-db4vl25ckfvc738e4hp0",
+  "user_id": "cloud-persistence-61f112d8-8cba-4879-a9e0-dce076481633",
+  "idempotency_key": "persistence-d21e0cd6-d1bb-4669-bc8e-3b4725423a78",
+  "request_body": {
+    "account_id": "cloud-demo",
+    "type": "income",
+    "amount": "105.00",
+    "currency": "PEN",
+    "category": "demo",
+    "occurred_at": "2026-10-10T08:00:00Z",
+    "description": "Validacion de persistencia cloud"
+  },
+  "before": {
+    "status": 200,
+    "body": [
+      {
+        "account_id": "cloud-demo",
+        "type": "expense",
+        "amount": "12.34",
+        "currency": "PEN",
+        "category": "demo",
+        "occurred_at": "2026-10-10T08:00:00Z",
+        "description": "Validacion de persistencia cloud",
+        "id": "af261053-b5f8-4081-bcdc-e41bf9a3a89d",
+        "user_id": "cloud-persistence-61f112d8-8cba-4879-a9e0-dce076481633",
+        "created_at": "2026-10-10T08:45:44.026466Z"
+      },
+      {
+        "account_id": "cloud-demo",
+        "type": "income",
+        "amount": "105.00",
+        "currency": "PEN",
+        "category": "demo",
+        "occurred_at": "2026-10-10T08:00:00Z",
+        "description": "Validacion de persistencia cloud",
+        "id": "49c17296-07e8-409f-a078-508e5428a1bc",
+        "user_id": "cloud-persistence-61f112d8-8cba-4879-a9e0-dce076481633",
+        "created_at": "2026-10-10T08:45:43.542417Z"
+      }
+    ],
+    "idempotent_replayed": null
+  },
+  "summary_before": {
+    "status": 200,
+    "body": {
+      "user_id": "cloud-persistence-61f112d8-8cba-4879-a9e0-dce076481633",
+      "month": "2026-10",
+      "currency": "PEN",
+      "income": "105.00",
+      "expenses": "12.34",
+      "balance": "92.66",
+      "transaction_count": 2
+    },
+    "idempotent_replayed": null
+  },
+  "restart_requested_at_utc": "2026-10-10T08:45:45.017668+00:00",
+  "restart_response": {
+    "http_status": 200
+  }
+}

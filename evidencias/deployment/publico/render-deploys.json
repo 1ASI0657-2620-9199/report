@@ -1,0 +1,19 @@
+[
+  {
+    "deploy": {
+      "id": "dep-db4vl2tckfvc738e4j60",
+      "commit": {
+        "id": "525ac3fd678b72340aaec689f444301b5afe073c",
+        "message": "docs: clarify deployment access after plugin installation",
+        "createdAt": "2026-10-10T08:29:15Z"
+      },
+      "status": "live",
+      "trigger": "manual",
+      "createdAt": "2026-10-10T08:42:51.022184Z",
+      "updatedAt": "2026-10-10T08:44:04.675067Z",
+      "startedAt": "2026-10-10T08:42:51.01857Z",
+      "finishedAt": "2026-10-10T08:43:30.946443Z"
+    },
+    "cursor": "NS3MeuTfO7RsMnRja2Z2YzczOGU0ajYw"
+  }
+]

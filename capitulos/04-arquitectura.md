@@ -160,6 +160,12 @@ Estas restricciones describen el objetivo académico. La organización del códi
 no acredita por sí sola uso de las herramientas de diagramación ni despliegue
 en alguno de los proveedores de nube.
 
+Actualización de implementación: el backend se publicó en Render Free con
+PostgreSQL Neon Free, por elección del usuario. La
+[configuración y evidencia real](05-implementacion.md) describen ese despliegue.
+CON-05 conserva los proveedores del documento fuente; no se atribuye a esta
+entrega un deployment directo en AWS, Azure o Google Cloud.
+
 ### 4.2.5. Architectural Concerns
 
 | ID | Riesgo o preocupación | Tratamiento previsto | Drivers |

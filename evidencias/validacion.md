@@ -20,6 +20,11 @@ apuntan a GitHub; los enlaces relativos del informe se resuelven dentro de repor
 
 ## Suite del backend
 
+**Deployment público verificado:** [API y evidencias cloud](deployment/publico/README.md).
+Render Free/Neon Free, deploy `live`, health/Swagger/OpenAPI HTTP 200,
+8 peticiones y 11 aserciones Newman sin fallos. Después de reiniciar Render,
+se conservaron IDs, saldo e idempotencia. Se adjuntan capturas y grabación públicas.
+
 La validación vigente para la preparación cloud está en
 [deployment](deployment/README.md): **8 passed in 1.43s** con SQLite/PostgreSQL,
 8 peticiones y 11 aserciones Newman sin fallos, capturas de Swagger y reinicio
@@ -52,7 +57,8 @@ identifica el commit y la hora de ejecución en America/Lima. Se conservaron
 [ocho respuestas reales](sprint-1/respuestas-api.json) obtenidas con TestClient,
 SQLite temporal y datos de muestra. La [guía del Sprint 1](sprint-1/README.md)
 conserva el checklist original. Las nuevas capturas técnicas se incorporaron
-en deployment; colaboración, Kanban y la publicación cloud siguen pendientes.
+en deployment; colaboración y Kanban siguen pendientes. La publicación cloud
+ya se completó y cuenta con su conjunto separado de evidencias públicas.
 
 ## Frontend e integración
 

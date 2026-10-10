@@ -2,15 +2,18 @@
 
 [Capítulo V](../../capitulos/05-implementacion.md) · [Guía del backend](https://github.com/1ASI0657-2620-9199/back/blob/main/DEPLOYMENT.md).
 
-**Estado cloud:** configuración gratuita preparada; publicación pendiente de acceso a las herramientas.
-El usuario informó que conectó Render y Neon y el catálogo confirma los plugins
-instalados. Esta sesión no recibió herramientas de esos proveedores; faltan
-crear/inspeccionar recursos desde un chat compatible.
-Todavía no existe una URL pública verificada ni logs de un despliegue cloud.
-Las evidencias de esta carpeta se capturaron realmente en **entorno local** el
-10 de octubre de 2026, aproximadamente a las 03:15 America/Lima.
+**Estado cloud: desplegado y verificado** el 10 de octubre de 2026.
+API: https://finanzen-financial-records.onrender.com ·
+[Swagger público](https://finanzen-financial-records.onrender.com/docs).
+Render Free y Neon Free confirmados; deploy `live`, endpoints HTTP 200,
+8 peticiones/11 aserciones Newman y persistencia comprobada tras reiniciar Render.
+Consultar las [13 capturas públicas, grabación y registros cloud](publico/README.md).
 
-## Resultado de la validación
+Las evidencias locales anteriores se conservan en `local/`, capturadas
+aproximadamente a las 03:15 America/Lima. Las públicas están en `publico/` y
+documentan los recursos reales; el índice identifica el entorno de cada conjunto.
+
+## Resultado de la validación local anterior
 
 | Comprobación | Resultado | Archivo |
 | --- | --- | --- |
@@ -27,7 +30,7 @@ vistas de logs renderizadas no se presentan como capturas de Postman Desktop.
 La grabación es una evidencia local sin voz; el equipo debe añadir la explicación
 oral/enlace publicado si la entrega requiere ese formato.
 
-## Capturas incorporadas
+## Capturas locales incorporadas
 
 | Captura | Qué muestra | Apartado |
 | --- | --- | --- |
@@ -49,7 +52,7 @@ oral/enlace publicado si la entrega requiere ese formato.
 
 ![Resumen mensual ejecutado realmente en Swagger, entorno local](local/07-summary.png)
 
-## Arquitectura preparada para publicar
+## Arquitectura publicada
 
 ```mermaid
 flowchart LR
@@ -58,26 +61,26 @@ flowchart LR
     G[GitHub: back en main] -->|Build tras checks aprobados| R
 ```
 
-Esta vista representa los recursos por crear. El [Blueprint gratuito](https://github.com/1ASI0657-2620-9199/back/blob/main/render.yaml)
-fue validado contra el schema oficial de Render. No contiene un disco o servicio
-de pago. `DATABASE_URL` se introduce como secreto al aplicar la configuración.
+Esta vista representa los recursos desplegados. El [Blueprint gratuito](https://github.com/1ASI0657-2620-9199/back/blob/main/render.yaml)
+fue validado contra el schema oficial de Render. La creación por la API de Render
+aplicó la misma configuración Free; no se creó un disco o servicio de pago.
+`DATABASE_URL` se configuró como variable privada.
 El servidor impide usar SQLite efímero si detecta ejecución en Render sin esa variable.
 
-Los datos quedan en Neon, por lo que sobreviven a reinicios de Render. La prueba
-local acredita el comportamiento del backend con PostgreSQL; falta verificarlo
-contra los recursos cloud reales una vez creados.
+Los datos quedan en Neon. La [prueba remota](publico/persistencia.json) confirma
+IDs, saldo e idempotencia después de reiniciar Render, además de la prueba local.
 
 Según los límites consultados, Neon Free incluye 1 GB y 100 CU-horas por
 proyecto/mes, y Render Free puede dormir tras 15 minutos de inactividad. Se
 mantienen los planes gratuitos y sus cuotas. [Neon Free](https://neon.com/blog/neon-free-plan-1-gb-per-project),
 [Render Free](https://render.com/docs/free).
 
-## Evidencias cloud que faltan
+## Evidencias cloud obtenidas
 
-Una vez disponibles las herramientas cloud se incorporarán: URL HTTPS real, estado Live,
-ID de deploy, commit publicado, logs de build/deploy, peticiones/capturas contra
-esa URL y comprobación de persistencia después de reiniciar el servicio remoto.
-La configuración preparada no se presenta como un despliegue ya realizado.
+Ya se incorporaron URL HTTPS real, estado `live`, ID de deploy, commit publicado,
+logs de build/runtime, peticiones y capturas públicas, además de persistencia
+después del reinicio. El [índice cloud](publico/README.md) relaciona cada evidencia
+con los puntos del capítulo V.
 
 Los apartados de colaboración, Kanban, BDD y librería propia requieren sus
 actividades reales; estas capturas técnicas no los reemplazan.

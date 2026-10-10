@@ -1,0 +1,4177 @@
+{
+  "collection": {
+    "item": [
+      {
+        "id": "e22897a7-9323-48a0-bd81-bbaba202736c",
+        "name": "01-health",
+        "request": {
+          "url": {
+            "path": [
+              "health"
+            ],
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "method": "GET"
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "prerequest",
+            "script": {
+              "id": "f329c5b6-f7a5-4f42-a884-eb7380633bb1",
+              "type": "text/javascript",
+              "exec": [
+                "pm.collectionVariables.set('evidenceRunId', pm.variables.replaceIn('{{$guid}}'));"
+              ],
+              "_lastExecutionId": "64cfee1b-8a24-48ed-92b0-1bcaffacfd47"
+            }
+          },
+          {
+            "listen": "test",
+            "script": {
+              "id": "3c09537e-a69f-4d2a-a209-0266fefff43f",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP 200', function () { pm.response.to.have.status(200); });"
+              ],
+              "_lastExecutionId": "9a3708eb-4e63-4425-9dd7-b66fb4f51edc"
+            }
+          }
+        ]
+      },
+      {
+        "id": "5df834ce-e225-43b0-b358-13f650b276bf",
+        "name": "02-income",
+        "request": {
+          "url": {
+            "path": [
+              "api",
+              "v1",
+              "transactions"
+            ],
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "X-User-Id",
+              "value": "evidence-{{evidenceRunId}}"
+            },
+            {
+              "key": "Idempotency-Key",
+              "value": "income-{{evidenceRunId}}"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"account_id\": \"cash-account\",\n  \"type\": \"income\",\n  \"amount\": \"1000.00\",\n  \"currency\": \"PEN\",\n  \"category\": \"salary\",\n  \"occurred_at\": \"2026-10-01T10:00:00Z\",\n  \"description\": \"Ingreso de demostración Sprint 1\"\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "2d72e555-f1ae-4c56-924c-a8c561db2b89",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP 201', function () { pm.response.to.have.status(201); });",
+                "pm.collectionVariables.set('incomeId', pm.response.json().id);"
+              ],
+              "_lastExecutionId": "1ca80375-f06d-4697-bdc0-caef588149a4"
+            }
+          }
+        ]
+      },
+      {
+        "id": "d52a51c7-811f-4bd4-b02c-4d21a239459e",
+        "name": "03-replay",
+        "request": {
+          "url": {
+            "path": [
+              "api",
+              "v1",
+              "transactions"
+            ],
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "X-User-Id",
+              "value": "evidence-{{evidenceRunId}}"
+            },
+            {
+              "key": "Idempotency-Key",
+              "value": "income-{{evidenceRunId}}"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"account_id\": \"cash-account\",\n  \"type\": \"income\",\n  \"amount\": \"1000.00\",\n  \"currency\": \"PEN\",\n  \"category\": \"salary\",\n  \"occurred_at\": \"2026-10-01T10:00:00Z\",\n  \"description\": \"Ingreso de demostración Sprint 1\"\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "84521cef-e708-482f-8494-38918e828f98",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP 200', function () { pm.response.to.have.status(200); });",
+                "pm.test('Same movement ID', function () { pm.expect(pm.response.json().id).to.eql(pm.collectionVariables.get('incomeId')); });"
+              ],
+              "_lastExecutionId": "de89ee9a-a447-4bdf-a9cc-9ac33dcc4fdb"
+            }
+          }
+        ]
+      },
+      {
+        "id": "37973bed-a6bd-41b4-abf9-168408e0188a",
+        "name": "04-conflict",
+        "request": {
+          "url": {
+            "path": [
+              "api",
+              "v1",
+              "transactions"
+            ],
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "X-User-Id",
+              "value": "evidence-{{evidenceRunId}}"
+            },
+            {
+              "key": "Idempotency-Key",
+              "value": "income-{{evidenceRunId}}"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"account_id\": \"cash-account\",\n  \"type\": \"income\",\n  \"amount\": \"2000.00\",\n  \"currency\": \"PEN\",\n  \"category\": \"salary\",\n  \"occurred_at\": \"2026-10-01T10:00:00Z\",\n  \"description\": \"Ingreso de demostración Sprint 1\"\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "5a45847c-cfdf-45bb-9aaf-f9307dfb6702",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP 409', function () { pm.response.to.have.status(409); });"
+              ],
+              "_lastExecutionId": "8285851a-789d-4654-a156-5868f166f4b7"
+            }
+          }
+        ]
+      },
+      {
+        "id": "8eb76ce3-ab3c-4f14-9df3-b46a60ffe765",
+        "name": "05-expense",
+        "request": {
+          "url": {
+            "path": [
+              "api",
+              "v1",
+              "transactions"
+            ],
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "X-User-Id",
+              "value": "evidence-{{evidenceRunId}}"
+            },
+            {
+              "key": "Idempotency-Key",
+              "value": "expense-{{evidenceRunId}}"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"account_id\": \"cash-account\",\n  \"type\": \"expense\",\n  \"amount\": \"125.50\",\n  \"currency\": \"PEN\",\n  \"category\": \"food\",\n  \"occurred_at\": \"2026-10-01T10:00:00Z\",\n  \"description\": \"Gasto de demostración Sprint 1\"\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "946e776c-77d1-4973-b432-31d0c5831716",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP 201', function () { pm.response.to.have.status(201); });"
+              ],
+              "_lastExecutionId": "5cf4660b-dcad-4cdd-a0f9-0499a95af887"
+            }
+          }
+        ]
+      },
+      {
+        "id": "6c7f9e67-c3ca-4a5d-84df-61cb68aca2e3",
+        "name": "06-list",
+        "request": {
+          "url": {
+            "path": [
+              "api",
+              "v1",
+              "transactions"
+            ],
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "X-User-Id",
+              "value": "evidence-{{evidenceRunId}}"
+            }
+          ],
+          "method": "GET"
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "d47a8afd-a3e1-4b10-82d9-20bcbfac5f35",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP 200', function () { pm.response.to.have.status(200); });",
+                "pm.test('Two movements', function () { pm.expect(pm.response.json().length).to.eql(2); });"
+              ],
+              "_lastExecutionId": "8b2f31f0-6715-4881-a399-643809848e6d"
+            }
+          }
+        ]
+      },
+      {
+        "id": "771ad18c-a69c-477c-9e15-394f40e36f2f",
+        "name": "07-summary",
+        "request": {
+          "url": {
+            "path": [
+              "api",
+              "v1",
+              "summary"
+            ],
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "query": [
+              {
+                "key": "month",
+                "value": "2026-10"
+              },
+              {
+                "key": "currency",
+                "value": "PEN"
+              }
+            ],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "X-User-Id",
+              "value": "evidence-{{evidenceRunId}}"
+            }
+          ],
+          "method": "GET"
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "e826a7d8-a323-4cdd-bc7b-5d0a809a3d63",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP 200', function () { pm.response.to.have.status(200); });",
+                "pm.test('Monthly totals', function () { const r = pm.response.json(); pm.expect(Number(r.income)).to.eql(1000); pm.expect(Number(r.expenses)).to.eql(125.5); pm.expect(Number(r.balance)).to.eql(874.5); pm.expect(r.transaction_count).to.eql(2); });"
+              ],
+              "_lastExecutionId": "4b5e64bf-ecf0-4e02-bbc3-8d6a370214c6"
+            }
+          }
+        ]
+      },
+      {
+        "id": "e3dd6263-5a76-4eb1-9d7b-b07eff3f1cc0",
+        "name": "08-invalid-month",
+        "request": {
+          "url": {
+            "path": [
+              "api",
+              "v1",
+              "summary"
+            ],
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "query": [
+              {
+                "key": "month",
+                "value": "2026-13"
+              },
+              {
+                "key": "currency",
+                "value": "PEN"
+              }
+            ],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "X-User-Id",
+              "value": "evidence-{{evidenceRunId}}"
+            }
+          ],
+          "method": "GET"
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "4cd5702f-e921-4854-9fde-f1ee0d7756c2",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP 422', function () { pm.response.to.have.status(422); });"
+              ],
+              "_lastExecutionId": "ebc192e7-8830-493e-99d0-bc99eb560a35"
+            }
+          }
+        ]
+      }
+    ],
+    "event": [],
+    "variable": [
+      {
+        "type": "any",
+        "value": "http://127.0.0.1:8000",
+        "key": "baseUrl"
+      },
+      {
+        "type": "any",
+        "value": "",
+        "key": "evidenceRunId"
+      }
+    ],
+    "info": {
+      "_postman_id": "4385fb5a-7ca2-4cec-97ad-bbce259ba563",
+      "name": "FinanZen - Sprint 1 evidence",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+      "description": {
+        "content": "Run requests 01 through 08 in order. Each run starts a new demo user; captures and video are pending.",
+        "type": "text/plain"
+      }
+    }
+  },
+  "environment": {
+    "id": "0493aca1-1296-4bc9-a72a-03031bf4fef2",
+    "values": [
+      {
+        "type": "any",
+        "value": "https://finanzen-financial-records.onrender.com",
+        "key": "baseUrl"
+      }
+    ]
+  },
+  "globals": {
+    "id": "bc0c238d-f16a-40c8-bbf8-32fad8e45c07",
+    "values": []
+  },
+  "run": {
+    "stats": {
+      "iterations": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "items": {
+        "total": 8,
+        "pending": 0,
+        "failed": 0
+      },
+      "scripts": {
+        "total": 9,
+        "pending": 0,
+        "failed": 0
+      },
+      "prerequests": {
+        "total": 8,
+        "pending": 0,
+        "failed": 0
+      },
+      "requests": {
+        "total": 8,
+        "pending": 0,
+        "failed": 0
+      },
+      "tests": {
+        "total": 8,
+        "pending": 0,
+        "failed": 0
+      },
+      "assertions": {
+        "total": 11,
+        "pending": 0,
+        "failed": 0
+      },
+      "testScripts": {
+        "total": 8,
+        "pending": 0,
+        "failed": 0
+      },
+      "prerequestScripts": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      }
+    },
+    "timings": {
+      "responseAverage": 423.625,
+      "responseMin": 192,
+      "responseMax": 687,
+      "responseSd": 126.47325557207738,
+      "dnsAverage": 0,
+      "dnsMin": 0,
+      "dnsMax": 0,
+      "dnsSd": 0,
+      "firstByteAverage": 0,
+      "firstByteMin": 0,
+      "firstByteMax": 0,
+      "firstByteSd": 0,
+      "started": 1791621852494,
+      "completed": 1791621856561
+    },
+    "executions": [
+      {
+        "cursor": {
+          "position": 0,
+          "iteration": 0,
+          "length": 8,
+          "cycles": 1,
+          "empty": false,
+          "eof": false,
+          "bof": true,
+          "cr": false,
+          "ref": "c37222c7-b771-41c9-b821-0b31ff6cce4f",
+          "httpRequestId": "a44b470d-d54c-4275-9913-f992be80d063"
+        },
+        "item": {
+          "id": "e22897a7-9323-48a0-bd81-bbaba202736c",
+          "name": "01-health",
+          "request": {
+            "url": {
+              "path": [
+                "health"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "f329c5b6-f7a5-4f42-a884-eb7380633bb1",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.collectionVariables.set('evidenceRunId', pm.variables.replaceIn('{{$guid}}'));"
+                ],
+                "_lastExecutionId": "64cfee1b-8a24-48ed-92b0-1bcaffacfd47"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "3c09537e-a69f-4d2a-a209-0266fefff43f",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 200', function () { pm.response.to.have.status(200); });"
+                ],
+                "_lastExecutionId": "9a3708eb-4e63-4425-9dd7-b66fb4f51edc"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "https",
+            "path": [
+              "health"
+            ],
+            "host": [
+              "finanzen-financial-records",
+              "onrender",
+              "com"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "5b7c7311-0055-460e-ab18-823ed56b13e7",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "finanzen-financial-records.onrender.com",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET"
+        },
+        "response": {
+          "id": "58f6c425-01dd-4b35-993d-ef4fccaebd39",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Sat, 10 Oct 2026 08:44:13 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "47"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Content-Encoding",
+              "value": "br"
+            },
+            {
+              "key": "rndr-id",
+              "value": "de2f7221-8edc-40be"
+            },
+            {
+              "key": "Server",
+              "value": "cloudflare"
+            },
+            {
+              "key": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "x-render-origin-server",
+              "value": "uvicorn"
+            },
+            {
+              "key": "cf-cache-status",
+              "value": "DYNAMIC"
+            },
+            {
+              "key": "CF-RAY",
+              "value": "a4845784a97b2fce-SCL"
+            },
+            {
+              "key": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              115,
+              116,
+              97,
+              116,
+              117,
+              115,
+              34,
+              58,
+              34,
+              111,
+              107,
+              34,
+              44,
+              34,
+              115,
+              101,
+              114,
+              118,
+              105,
+              99,
+              101,
+              34,
+              58,
+              34,
+              102,
+              105,
+              110,
+              97,
+              110,
+              99,
+              105,
+              97,
+              108,
+              45,
+              114,
+              101,
+              99,
+              111,
+              114,
+              100,
+              115,
+              45,
+              115,
+              101,
+              114,
+              118,
+              105,
+              99,
+              101,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 460,
+          "responseSize": 53
+        },
+        "id": "e22897a7-9323-48a0-bd81-bbaba202736c",
+        "assertions": [
+          {
+            "assertion": "HTTP 200",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "8f888f21-d5da-4091-9e25-8829a398967a",
+          "length": 8,
+          "cycles": 1,
+          "position": 1,
+          "iteration": 0,
+          "httpRequestId": "860dcf3c-f172-45ba-a265-b0e064904e43"
+        },
+        "item": {
+          "id": "5df834ce-e225-43b0-b358-13f650b276bf",
+          "name": "02-income",
+          "request": {
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "X-User-Id",
+                "value": "evidence-{{evidenceRunId}}"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "income-{{evidenceRunId}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account_id\": \"cash-account\",\n  \"type\": \"income\",\n  \"amount\": \"1000.00\",\n  \"currency\": \"PEN\",\n  \"category\": \"salary\",\n  \"occurred_at\": \"2026-10-01T10:00:00Z\",\n  \"description\": \"Ingreso de demostración Sprint 1\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "2d72e555-f1ae-4c56-924c-a8c561db2b89",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 201', function () { pm.response.to.have.status(201); });",
+                  "pm.collectionVariables.set('incomeId', pm.response.json().id);"
+                ],
+                "_lastExecutionId": "1ca80375-f06d-4697-bdc0-caef588149a4"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "https",
+            "path": [
+              "api",
+              "v1",
+              "transactions"
+            ],
+            "host": [
+              "finanzen-financial-records",
+              "onrender",
+              "com"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "X-User-Id",
+              "value": "evidence-8da99ea5-b567-4e9c-8ca9-63de283b26e7"
+            },
+            {
+              "key": "Idempotency-Key",
+              "value": "income-8da99ea5-b567-4e9c-8ca9-63de283b26e7"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "c574df3e-ce44-4cde-ab2a-af5d72efc521",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "finanzen-financial-records.onrender.com",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "217",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"account_id\": \"cash-account\",\n  \"type\": \"income\",\n  \"amount\": \"1000.00\",\n  \"currency\": \"PEN\",\n  \"category\": \"salary\",\n  \"occurred_at\": \"2026-10-01T10:00:00Z\",\n  \"description\": \"Ingreso de demostración Sprint 1\"\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "6cd938eb-5502-453a-9b80-6ff8287a0c88",
+          "status": "Created",
+          "code": 201,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Sat, 10 Oct 2026 08:44:13 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "236"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Content-Encoding",
+              "value": "br"
+            },
+            {
+              "key": "idempotent-replayed",
+              "value": "false"
+            },
+            {
+              "key": "rndr-id",
+              "value": "f454c4b8-7b1b-498d"
+            },
+            {
+              "key": "Server",
+              "value": "cloudflare"
+            },
+            {
+              "key": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "x-render-origin-server",
+              "value": "uvicorn"
+            },
+            {
+              "key": "cf-cache-status",
+              "value": "DYNAMIC"
+            },
+            {
+              "key": "CF-RAY",
+              "value": "a48457868acb2fce-SCL"
+            },
+            {
+              "key": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              97,
+              99,
+              99,
+              111,
+              117,
+              110,
+              116,
+              95,
+              105,
+              100,
+              34,
+              58,
+              34,
+              99,
+              97,
+              115,
+              104,
+              45,
+              97,
+              99,
+              99,
+              111,
+              117,
+              110,
+              116,
+              34,
+              44,
+              34,
+              116,
+              121,
+              112,
+              101,
+              34,
+              58,
+              34,
+              105,
+              110,
+              99,
+              111,
+              109,
+              101,
+              34,
+              44,
+              34,
+              97,
+              109,
+              111,
+              117,
+              110,
+              116,
+              34,
+              58,
+              34,
+              49,
+              48,
+              48,
+              48,
+              46,
+              48,
+              48,
+              34,
+              44,
+              34,
+              99,
+              117,
+              114,
+              114,
+              101,
+              110,
+              99,
+              121,
+              34,
+              58,
+              34,
+              80,
+              69,
+              78,
+              34,
+              44,
+              34,
+              99,
+              97,
+              116,
+              101,
+              103,
+              111,
+              114,
+              121,
+              34,
+              58,
+              34,
+              115,
+              97,
+              108,
+              97,
+              114,
+              121,
+              34,
+              44,
+              34,
+              111,
+              99,
+              99,
+              117,
+              114,
+              114,
+              101,
+              100,
+              95,
+              97,
+              116,
+              34,
+              58,
+              34,
+              50,
+              48,
+              50,
+              54,
+              45,
+              49,
+              48,
+              45,
+              48,
+              49,
+              84,
+              49,
+              48,
+              58,
+              48,
+              48,
+              58,
+              48,
+              48,
+              90,
+              34,
+              44,
+              34,
+              100,
+              101,
+              115,
+              99,
+              114,
+              105,
+              112,
+              116,
+              105,
+              111,
+              110,
+              34,
+              58,
+              34,
+              73,
+              110,
+              103,
+              114,
+              101,
+              115,
+              111,
+              32,
+              100,
+              101,
+              32,
+              100,
+              101,
+              109,
+              111,
+              115,
+              116,
+              114,
+              97,
+              99,
+              105,
+              195,
+              179,
+              110,
+              32,
+              83,
+              112,
+              114,
+              105,
+              110,
+              116,
+              32,
+              49,
+              34,
+              44,
+              34,
+              105,
+              100,
+              34,
+              58,
+              34,
+              53,
+              102,
+              48,
+              51,
+              55,
+              51,
+              49,
+              50,
+              45,
+              53,
+              100,
+              51,
+              98,
+              45,
+              52,
+              98,
+              98,
+              101,
+              45,
+              57,
+              99,
+              50,
+              53,
+              45,
+              55,
+              99,
+              100,
+              102,
+              56,
+              49,
+              52,
+              99,
+              100,
+              98,
+              55,
+              49,
+              34,
+              44,
+              34,
+              117,
+              115,
+              101,
+              114,
+              95,
+              105,
+              100,
+              34,
+              58,
+              34,
+              101,
+              118,
+              105,
+              100,
+              101,
+              110,
+              99,
+              101,
+              45,
+              56,
+              100,
+              97,
+              57,
+              57,
+              101,
+              97,
+              53,
+              45,
+              98,
+              53,
+              54,
+              55,
+              45,
+              52,
+              101,
+              57,
+              99,
+              45,
+              56,
+              99,
+              97,
+              57,
+              45,
+              54,
+              51,
+              100,
+              101,
+              50,
+              56,
+              51,
+              98,
+              50,
+              54,
+              101,
+              55,
+              34,
+              44,
+              34,
+              99,
+              114,
+              101,
+              97,
+              116,
+              101,
+              100,
+              95,
+              97,
+              116,
+              34,
+              58,
+              34,
+              50,
+              48,
+              50,
+              54,
+              45,
+              49,
+              48,
+              45,
+              49,
+              48,
+              84,
+              48,
+              56,
+              58,
+              52,
+              52,
+              58,
+              49,
+              51,
+              46,
+              55,
+              52,
+              48,
+              56,
+              50,
+              57,
+              90,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 687,
+          "responseSize": 333
+        },
+        "id": "5df834ce-e225-43b0-b358-13f650b276bf",
+        "assertions": [
+          {
+            "assertion": "HTTP 201",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "1e05a283-fc64-4fba-ac71-b6cec999b30f",
+          "length": 8,
+          "cycles": 1,
+          "position": 2,
+          "iteration": 0,
+          "httpRequestId": "31e699cf-9452-4ef5-8671-422ce7c3bed5"
+        },
+        "item": {
+          "id": "d52a51c7-811f-4bd4-b02c-4d21a239459e",
+          "name": "03-replay",
+          "request": {
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "X-User-Id",
+                "value": "evidence-{{evidenceRunId}}"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "income-{{evidenceRunId}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account_id\": \"cash-account\",\n  \"type\": \"income\",\n  \"amount\": \"1000.00\",\n  \"currency\": \"PEN\",\n  \"category\": \"salary\",\n  \"occurred_at\": \"2026-10-01T10:00:00Z\",\n  \"description\": \"Ingreso de demostración Sprint 1\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "84521cef-e708-482f-8494-38918e828f98",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Same movement ID', function () { pm.expect(pm.response.json().id).to.eql(pm.collectionVariables.get('incomeId')); });"
+                ],
+                "_lastExecutionId": "de89ee9a-a447-4bdf-a9cc-9ac33dcc4fdb"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "https",
+            "path": [
+              "api",
+              "v1",
+              "transactions"
+            ],
+            "host": [
+              "finanzen-financial-records",
+              "onrender",
+              "com"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "X-User-Id",
+              "value": "evidence-8da99ea5-b567-4e9c-8ca9-63de283b26e7"
+            },
+            {
+              "key": "Idempotency-Key",
+              "value": "income-8da99ea5-b567-4e9c-8ca9-63de283b26e7"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "d6c16192-de59-44b3-afff-efdfbe29cd39",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "finanzen-financial-records.onrender.com",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "217",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"account_id\": \"cash-account\",\n  \"type\": \"income\",\n  \"amount\": \"1000.00\",\n  \"currency\": \"PEN\",\n  \"category\": \"salary\",\n  \"occurred_at\": \"2026-10-01T10:00:00Z\",\n  \"description\": \"Ingreso de demostración Sprint 1\"\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "945f3887-9e8b-40ac-95d4-906447c59659",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Sat, 10 Oct 2026 08:44:14 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "236"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Content-Encoding",
+              "value": "br"
+            },
+            {
+              "key": "idempotent-replayed",
+              "value": "true"
+            },
+            {
+              "key": "rndr-id",
+              "value": "96c4c71b-f189-497c"
+            },
+            {
+              "key": "Server",
+              "value": "cloudflare"
+            },
+            {
+              "key": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "x-render-origin-server",
+              "value": "uvicorn"
+            },
+            {
+              "key": "cf-cache-status",
+              "value": "DYNAMIC"
+            },
+            {
+              "key": "CF-RAY",
+              "value": "a484578b5d862fce-SCL"
+            },
+            {
+              "key": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              97,
+              99,
+              99,
+              111,
+              117,
+              110,
+              116,
+              95,
+              105,
+              100,
+              34,
+              58,
+              34,
+              99,
+              97,
+              115,
+              104,
+              45,
+              97,
+              99,
+              99,
+              111,
+              117,
+              110,
+              116,
+              34,
+              44,
+              34,
+              116,
+              121,
+              112,
+              101,
+              34,
+              58,
+              34,
+              105,
+              110,
+              99,
+              111,
+              109,
+              101,
+              34,
+              44,
+              34,
+              97,
+              109,
+              111,
+              117,
+              110,
+              116,
+              34,
+              58,
+              34,
+              49,
+              48,
+              48,
+              48,
+              46,
+              48,
+              48,
+              34,
+              44,
+              34,
+              99,
+              117,
+              114,
+              114,
+              101,
+              110,
+              99,
+              121,
+              34,
+              58,
+              34,
+              80,
+              69,
+              78,
+              34,
+              44,
+              34,
+              99,
+              97,
+              116,
+              101,
+              103,
+              111,
+              114,
+              121,
+              34,
+              58,
+              34,
+              115,
+              97,
+              108,
+              97,
+              114,
+              121,
+              34,
+              44,
+              34,
+              111,
+              99,
+              99,
+              117,
+              114,
+              114,
+              101,
+              100,
+              95,
+              97,
+              116,
+              34,
+              58,
+              34,
+              50,
+              48,
+              50,
+              54,
+              45,
+              49,
+              48,
+              45,
+              48,
+              49,
+              84,
+              49,
+              48,
+              58,
+              48,
+              48,
+              58,
+              48,
+              48,
+              90,
+              34,
+              44,
+              34,
+              100,
+              101,
+              115,
+              99,
+              114,
+              105,
+              112,
+              116,
+              105,
+              111,
+              110,
+              34,
+              58,
+              34,
+              73,
+              110,
+              103,
+              114,
+              101,
+              115,
+              111,
+              32,
+              100,
+              101,
+              32,
+              100,
+              101,
+              109,
+              111,
+              115,
+              116,
+              114,
+              97,
+              99,
+              105,
+              195,
+              179,
+              110,
+              32,
+              83,
+              112,
+              114,
+              105,
+              110,
+              116,
+              32,
+              49,
+              34,
+              44,
+              34,
+              105,
+              100,
+              34,
+              58,
+              34,
+              53,
+              102,
+              48,
+              51,
+              55,
+              51,
+              49,
+              50,
+              45,
+              53,
+              100,
+              51,
+              98,
+              45,
+              52,
+              98,
+              98,
+              101,
+              45,
+              57,
+              99,
+              50,
+              53,
+              45,
+              55,
+              99,
+              100,
+              102,
+              56,
+              49,
+              52,
+              99,
+              100,
+              98,
+              55,
+              49,
+              34,
+              44,
+              34,
+              117,
+              115,
+              101,
+              114,
+              95,
+              105,
+              100,
+              34,
+              58,
+              34,
+              101,
+              118,
+              105,
+              100,
+              101,
+              110,
+              99,
+              101,
+              45,
+              56,
+              100,
+              97,
+              57,
+              57,
+              101,
+              97,
+              53,
+              45,
+              98,
+              53,
+              54,
+              55,
+              45,
+              52,
+              101,
+              57,
+              99,
+              45,
+              56,
+              99,
+              97,
+              57,
+              45,
+              54,
+              51,
+              100,
+              101,
+              50,
+              56,
+              51,
+              98,
+              50,
+              54,
+              101,
+              55,
+              34,
+              44,
+              34,
+              99,
+              114,
+              101,
+              97,
+              116,
+              101,
+              100,
+              95,
+              97,
+              116,
+              34,
+              58,
+              34,
+              50,
+              48,
+              50,
+              54,
+              45,
+              49,
+              48,
+              45,
+              49,
+              48,
+              84,
+              48,
+              56,
+              58,
+              52,
+              52,
+              58,
+              49,
+              51,
+              46,
+              55,
+              52,
+              48,
+              56,
+              50,
+              57,
+              90,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 386,
+          "responseSize": 333
+        },
+        "id": "d52a51c7-811f-4bd4-b02c-4d21a239459e",
+        "assertions": [
+          {
+            "assertion": "HTTP 200",
+            "skipped": false
+          },
+          {
+            "assertion": "Same movement ID",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "3554ce0e-053b-463e-bd3c-af41e91bfc27",
+          "length": 8,
+          "cycles": 1,
+          "position": 3,
+          "iteration": 0,
+          "httpRequestId": "b0db9650-fc96-4499-980b-0d361dc5f7c9"
+        },
+        "item": {
+          "id": "37973bed-a6bd-41b4-abf9-168408e0188a",
+          "name": "04-conflict",
+          "request": {
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "X-User-Id",
+                "value": "evidence-{{evidenceRunId}}"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "income-{{evidenceRunId}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account_id\": \"cash-account\",\n  \"type\": \"income\",\n  \"amount\": \"2000.00\",\n  \"currency\": \"PEN\",\n  \"category\": \"salary\",\n  \"occurred_at\": \"2026-10-01T10:00:00Z\",\n  \"description\": \"Ingreso de demostración Sprint 1\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "5a45847c-cfdf-45bb-9aaf-f9307dfb6702",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 409', function () { pm.response.to.have.status(409); });"
+                ],
+                "_lastExecutionId": "8285851a-789d-4654-a156-5868f166f4b7"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "https",
+            "path": [
+              "api",
+              "v1",
+              "transactions"
+            ],
+            "host": [
+              "finanzen-financial-records",
+              "onrender",
+              "com"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "X-User-Id",
+              "value": "evidence-8da99ea5-b567-4e9c-8ca9-63de283b26e7"
+            },
+            {
+              "key": "Idempotency-Key",
+              "value": "income-8da99ea5-b567-4e9c-8ca9-63de283b26e7"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "7c980b48-1fee-45e1-bff4-36b6fa97436a",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "finanzen-financial-records.onrender.com",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "217",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"account_id\": \"cash-account\",\n  \"type\": \"income\",\n  \"amount\": \"2000.00\",\n  \"currency\": \"PEN\",\n  \"category\": \"salary\",\n  \"occurred_at\": \"2026-10-01T10:00:00Z\",\n  \"description\": \"Ingreso de demostración Sprint 1\"\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "04336a3c-fa5f-4ef8-b9fd-f6e0d83716ab",
+          "status": "Conflict",
+          "code": 409,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Sat, 10 Oct 2026 08:44:14 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "77"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Content-Encoding",
+              "value": "br"
+            },
+            {
+              "key": "rndr-id",
+              "value": "d739d938-069e-42db"
+            },
+            {
+              "key": "Server",
+              "value": "cloudflare"
+            },
+            {
+              "key": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "x-render-origin-server",
+              "value": "uvicorn"
+            },
+            {
+              "key": "cf-cache-status",
+              "value": "DYNAMIC"
+            },
+            {
+              "key": "CF-RAY",
+              "value": "a484578e5f152fce-SCL"
+            },
+            {
+              "key": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              100,
+              101,
+              116,
+              97,
+              105,
+              108,
+              34,
+              58,
+              34,
+              84,
+              104,
+              101,
+              32,
+              73,
+              100,
+              101,
+              109,
+              112,
+              111,
+              116,
+              101,
+              110,
+              99,
+              121,
+              45,
+              75,
+              101,
+              121,
+              32,
+              119,
+              97,
+              115,
+              32,
+              97,
+              108,
+              114,
+              101,
+              97,
+              100,
+              121,
+              32,
+              117,
+              115,
+              101,
+              100,
+              32,
+              119,
+              105,
+              116,
+              104,
+              32,
+              97,
+              32,
+              100,
+              105,
+              102,
+              102,
+              101,
+              114,
+              101,
+              110,
+              116,
+              32,
+              114,
+              101,
+              113,
+              117,
+              101,
+              115,
+              116,
+              32,
+              98,
+              111,
+              100,
+              121,
+              46,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 422,
+          "responseSize": 80
+        },
+        "id": "37973bed-a6bd-41b4-abf9-168408e0188a",
+        "assertions": [
+          {
+            "assertion": "HTTP 409",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "4a716cc9-6d65-4e36-876a-cbeab40d7f88",
+          "length": 8,
+          "cycles": 1,
+          "position": 4,
+          "iteration": 0,
+          "httpRequestId": "20de6ac2-28c9-4992-83c9-f3bf91fd2112"
+        },
+        "item": {
+          "id": "8eb76ce3-ab3c-4f14-9df3-b46a60ffe765",
+          "name": "05-expense",
+          "request": {
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "X-User-Id",
+                "value": "evidence-{{evidenceRunId}}"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "expense-{{evidenceRunId}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account_id\": \"cash-account\",\n  \"type\": \"expense\",\n  \"amount\": \"125.50\",\n  \"currency\": \"PEN\",\n  \"category\": \"food\",\n  \"occurred_at\": \"2026-10-01T10:00:00Z\",\n  \"description\": \"Gasto de demostración Sprint 1\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "946e776c-77d1-4973-b432-31d0c5831716",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 201', function () { pm.response.to.have.status(201); });"
+                ],
+                "_lastExecutionId": "5cf4660b-dcad-4cdd-a0f9-0499a95af887"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "https",
+            "path": [
+              "api",
+              "v1",
+              "transactions"
+            ],
+            "host": [
+              "finanzen-financial-records",
+              "onrender",
+              "com"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "X-User-Id",
+              "value": "evidence-8da99ea5-b567-4e9c-8ca9-63de283b26e7"
+            },
+            {
+              "key": "Idempotency-Key",
+              "value": "expense-8da99ea5-b567-4e9c-8ca9-63de283b26e7"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "523286f0-0ea4-4682-b9ca-098731d46b6d",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "finanzen-financial-records.onrender.com",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "213",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"account_id\": \"cash-account\",\n  \"type\": \"expense\",\n  \"amount\": \"125.50\",\n  \"currency\": \"PEN\",\n  \"category\": \"food\",\n  \"occurred_at\": \"2026-10-01T10:00:00Z\",\n  \"description\": \"Gasto de demostración Sprint 1\"\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "dca5fe78-b2a2-4f1f-ac17-398477c432d4",
+          "status": "Created",
+          "code": 201,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Sat, 10 Oct 2026 08:44:15 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "232"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Content-Encoding",
+              "value": "br"
+            },
+            {
+              "key": "idempotent-replayed",
+              "value": "false"
+            },
+            {
+              "key": "rndr-id",
+              "value": "8b6cfea0-d351-4b38"
+            },
+            {
+              "key": "Server",
+              "value": "cloudflare"
+            },
+            {
+              "key": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "x-render-origin-server",
+              "value": "uvicorn"
+            },
+            {
+              "key": "cf-cache-status",
+              "value": "DYNAMIC"
+            },
+            {
+              "key": "CF-RAY",
+              "value": "a484579188e32fce-SCL"
+            },
+            {
+              "key": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              97,
+              99,
+              99,
+              111,
+              117,
+              110,
+              116,
+              95,
+              105,
+              100,
+              34,
+              58,
+              34,
+              99,
+              97,
+              115,
+              104,
+              45,
+              97,
+              99,
+              99,
+              111,
+              117,
+              110,
+              116,
+              34,
+              44,
+              34,
+              116,
+              121,
+              112,
+              101,
+              34,
+              58,
+              34,
+              101,
+              120,
+              112,
+              101,
+              110,
+              115,
+              101,
+              34,
+              44,
+              34,
+              97,
+              109,
+              111,
+              117,
+              110,
+              116,
+              34,
+              58,
+              34,
+              49,
+              50,
+              53,
+              46,
+              53,
+              48,
+              34,
+              44,
+              34,
+              99,
+              117,
+              114,
+              114,
+              101,
+              110,
+              99,
+              121,
+              34,
+              58,
+              34,
+              80,
+              69,
+              78,
+              34,
+              44,
+              34,
+              99,
+              97,
+              116,
+              101,
+              103,
+              111,
+              114,
+              121,
+              34,
+              58,
+              34,
+              102,
+              111,
+              111,
+              100,
+              34,
+              44,
+              34,
+              111,
+              99,
+              99,
+              117,
+              114,
+              114,
+              101,
+              100,
+              95,
+              97,
+              116,
+              34,
+              58,
+              34,
+              50,
+              48,
+              50,
+              54,
+              45,
+              49,
+              48,
+              45,
+              48,
+              49,
+              84,
+              49,
+              48,
+              58,
+              48,
+              48,
+              58,
+              48,
+              48,
+              90,
+              34,
+              44,
+              34,
+              100,
+              101,
+              115,
+              99,
+              114,
+              105,
+              112,
+              116,
+              105,
+              111,
+              110,
+              34,
+              58,
+              34,
+              71,
+              97,
+              115,
+              116,
+              111,
+              32,
+              100,
+              101,
+              32,
+              100,
+              101,
+              109,
+              111,
+              115,
+              116,
+              114,
+              97,
+              99,
+              105,
+              195,
+              179,
+              110,
+              32,
+              83,
+              112,
+              114,
+              105,
+              110,
+              116,
+              32,
+              49,
+              34,
+              44,
+              34,
+              105,
+              100,
+              34,
+              58,
+              34,
+              102,
+              49,
+              98,
+              54,
+              100,
+              57,
+              51,
+              48,
+              45,
+              49,
+              57,
+              99,
+              48,
+              45,
+              52,
+              57,
+              52,
+              101,
+              45,
+              56,
+              56,
+              48,
+              97,
+              45,
+              56,
+              97,
+              99,
+              51,
+              49,
+              98,
+              98,
+              49,
+              54,
+              99,
+              55,
+              98,
+              34,
+              44,
+              34,
+              117,
+              115,
+              101,
+              114,
+              95,
+              105,
+              100,
+              34,
+              58,
+              34,
+              101,
+              118,
+              105,
+              100,
+              101,
+              110,
+              99,
+              101,
+              45,
+              56,
+              100,
+              97,
+              57,
+              57,
+              101,
+              97,
+              53,
+              45,
+              98,
+              53,
+              54,
+              55,
+              45,
+              52,
+              101,
+              57,
+              99,
+              45,
+              56,
+              99,
+              97,
+              57,
+              45,
+              54,
+              51,
+              100,
+              101,
+              50,
+              56,
+              51,
+              98,
+              50,
+              54,
+              101,
+              55,
+              34,
+              44,
+              34,
+              99,
+              114,
+              101,
+              97,
+              116,
+              101,
+              100,
+              95,
+              97,
+              116,
+              34,
+              58,
+              34,
+              50,
+              48,
+              50,
+              54,
+              45,
+              49,
+              48,
+              45,
+              49,
+              48,
+              84,
+              48,
+              56,
+              58,
+              52,
+              52,
+              58,
+              49,
+              53,
+              46,
+              50,
+              51,
+              51,
+              54,
+              49,
+              48,
+              90,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 416,
+          "responseSize": 329
+        },
+        "id": "8eb76ce3-ab3c-4f14-9df3-b46a60ffe765",
+        "assertions": [
+          {
+            "assertion": "HTTP 201",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "ad93381f-9526-425e-a29d-821af851eef0",
+          "length": 8,
+          "cycles": 1,
+          "position": 5,
+          "iteration": 0,
+          "httpRequestId": "db36110a-1325-403b-bf3d-b80d1189a8b0"
+        },
+        "item": {
+          "id": "6c7f9e67-c3ca-4a5d-84df-61cb68aca2e3",
+          "name": "06-list",
+          "request": {
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "X-User-Id",
+                "value": "evidence-{{evidenceRunId}}"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "d47a8afd-a3e1-4b10-82d9-20bcbfac5f35",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Two movements', function () { pm.expect(pm.response.json().length).to.eql(2); });"
+                ],
+                "_lastExecutionId": "8b2f31f0-6715-4881-a399-643809848e6d"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "https",
+            "path": [
+              "api",
+              "v1",
+              "transactions"
+            ],
+            "host": [
+              "finanzen-financial-records",
+              "onrender",
+              "com"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "X-User-Id",
+              "value": "evidence-8da99ea5-b567-4e9c-8ca9-63de283b26e7"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "c4e7f1cc-70dc-43fd-bd9e-4f4fe04ee97f",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "finanzen-financial-records.onrender.com",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET"
+        },
+        "response": {
+          "id": "2fb39fed-a8dc-4e2d-b69f-a16fecf7ef1f",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Sat, 10 Oct 2026 08:44:15 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "298"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Content-Encoding",
+              "value": "br"
+            },
+            {
+              "key": "rndr-id",
+              "value": "5663e158-f671-4612"
+            },
+            {
+              "key": "Server",
+              "value": "cloudflare"
+            },
+            {
+              "key": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "x-render-origin-server",
+              "value": "uvicorn"
+            },
+            {
+              "key": "cf-cache-status",
+              "value": "DYNAMIC"
+            },
+            {
+              "key": "CF-RAY",
+              "value": "a4845794aa832fce-SCL"
+            },
+            {
+              "key": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              91,
+              123,
+              34,
+              97,
+              99,
+              99,
+              111,
+              117,
+              110,
+              116,
+              95,
+              105,
+              100,
+              34,
+              58,
+              34,
+              99,
+              97,
+              115,
+              104,
+              45,
+              97,
+              99,
+              99,
+              111,
+              117,
+              110,
+              116,
+              34,
+              44,
+              34,
+              116,
+              121,
+              112,
+              101,
+              34,
+              58,
+              34,
+              101,
+              120,
+              112,
+              101,
+              110,
+              115,
+              101,
+              34,
+              44,
+              34,
+              97,
+              109,
+              111,
+              117,
+              110,
+              116,
+              34,
+              58,
+              34,
+              49,
+              50,
+              53,
+              46,
+              53,
+              48,
+              34,
+              44,
+              34,
+              99,
+              117,
+              114,
+              114,
+              101,
+              110,
+              99,
+              121,
+              34,
+              58,
+              34,
+              80,
+              69,
+              78,
+              34,
+              44,
+              34,
+              99,
+              97,
+              116,
+              101,
+              103,
+              111,
+              114,
+              121,
+              34,
+              58,
+              34,
+              102,
+              111,
+              111,
+              100,
+              34,
+              44,
+              34,
+              111,
+              99,
+              99,
+              117,
+              114,
+              114,
+              101,
+              100,
+              95,
+              97,
+              116,
+              34,
+              58,
+              34,
+              50,
+              48,
+              50,
+              54,
+              45,
+              49,
+              48,
+              45,
+              48,
+              49,
+              84,
+              49,
+              48,
+              58,
+              48,
+              48,
+              58,
+              48,
+              48,
+              90,
+              34,
+              44,
+              34,
+              100,
+              101,
+              115,
+              99,
+              114,
+              105,
+              112,
+              116,
+              105,
+              111,
+              110,
+              34,
+              58,
+              34,
+              71,
+              97,
+              115,
+              116,
+              111,
+              32,
+              100,
+              101,
+              32,
+              100,
+              101,
+              109,
+              111,
+              115,
+              116,
+              114,
+              97,
+              99,
+              105,
+              195,
+              179,
+              110,
+              32,
+              83,
+              112,
+              114,
+              105,
+              110,
+              116,
+              32,
+              49,
+              34,
+              44,
+              34,
+              105,
+              100,
+              34,
+              58,
+              34,
+              102,
+              49,
+              98,
+              54,
+              100,
+              57,
+              51,
+              48,
+              45,
+              49,
+              57,
+              99,
+              48,
+              45,
+              52,
+              57,
+              52,
+              101,
+              45,
+              56,
+              56,
+              48,
+              97,
+              45,
+              56,
+              97,
+              99,
+              51,
+              49,
+              98,
+              98,
+              49,
+              54,
+              99,
+              55,
+              98,
+              34,
+              44,
+              34,
+              117,
+              115,
+              101,
+              114,
+              95,
+              105,
+              100,
+              34,
+              58,
+              34,
+              101,
+              118,
+              105,
+              100,
+              101,
+              110,
+              99,
+              101,
+              45,
+              56,
+              100,
+              97,
+              57,
+              57,
+              101,
+              97,
+              53,
+              45,
+              98,
+              53,
+              54,
+              55,
+              45,
+              52,
+              101,
+              57,
+              99,
+              45,
+              56,
+              99,
+              97,
+              57,
+              45,
+              54,
+              51,
+              100,
+              101,
+              50,
+              56,
+              51,
+              98,
+              50,
+              54,
+              101,
+              55,
+              34,
+              44,
+              34,
+              99,
+              114,
+              101,
+              97,
+              116,
+              101,
+              100,
+              95,
+              97,
+              116,
+              34,
+              58,
+              34,
+              50,
+              48,
+              50,
+              54,
+              45,
+              49,
+              48,
+              45,
+              49,
+              48,
+              84,
+              48,
+              56,
+              58,
+              52,
+              52,
+              58,
+              49,
+              53,
+              46,
+              50,
+              51,
+              51,
+              54,
+              49,
+              48,
+              90,
+              34,
+              125,
+              44,
+              123,
+              34,
+              97,
+              99,
+              99,
+              111,
+              117,
+              110,
+              116,
+              95,
+              105,
+              100,
+              34,
+              58,
+              34,
+              99,
+              97,
+              115,
+              104,
+              45,
+              97,
+              99,
+              99,
+              111,
+              117,
+              110,
+              116,
+              34,
+              44,
+              34,
+              116,
+              121,
+              112,
+              101,
+              34,
+              58,
+              34,
+              105,
+              110,
+              99,
+              111,
+              109,
+              101,
+              34,
+              44,
+              34,
+              97,
+              109,
+              111,
+              117,
+              110,
+              116,
+              34,
+              58,
+              34,
+              49,
+              48,
+              48,
+              48,
+              46,
+              48,
+              48,
+              34,
+              44,
+              34,
+              99,
+              117,
+              114,
+              114,
+              101,
+              110,
+              99,
+              121,
+              34,
+              58,
+              34,
+              80,
+              69,
+              78,
+              34,
+              44,
+              34,
+              99,
+              97,
+              116,
+              101,
+              103,
+              111,
+              114,
+              121,
+              34,
+              58,
+              34,
+              115,
+              97,
+              108,
+              97,
+              114,
+              121,
+              34,
+              44,
+              34,
+              111,
+              99,
+              99,
+              117,
+              114,
+              114,
+              101,
+              100,
+              95,
+              97,
+              116,
+              34,
+              58,
+              34,
+              50,
+              48,
+              50,
+              54,
+              45,
+              49,
+              48,
+              45,
+              48,
+              49,
+              84,
+              49,
+              48,
+              58,
+              48,
+              48,
+              58,
+              48,
+              48,
+              90,
+              34,
+              44,
+              34,
+              100,
+              101,
+              115,
+              99,
+              114,
+              105,
+              112,
+              116,
+              105,
+              111,
+              110,
+              34,
+              58,
+              34,
+              73,
+              110,
+              103,
+              114,
+              101,
+              115,
+              111,
+              32,
+              100,
+              101,
+              32,
+              100,
+              101,
+              109,
+              111,
+              115,
+              116,
+              114,
+              97,
+              99,
+              105,
+              195,
+              179,
+              110,
+              32,
+              83,
+              112,
+              114,
+              105,
+              110,
+              116,
+              32,
+              49,
+              34,
+              44,
+              34,
+              105,
+              100,
+              34,
+              58,
+              34,
+              53,
+              102,
+              48,
+              51,
+              55,
+              51,
+              49,
+              50,
+              45,
+              53,
+              100,
+              51,
+              98,
+              45,
+              52,
+              98,
+              98,
+              101,
+              45,
+              57,
+              99,
+              50,
+              53,
+              45,
+              55,
+              99,
+              100,
+              102,
+              56,
+              49,
+              52,
+              99,
+              100,
+              98,
+              55,
+              49,
+              34,
+              44,
+              34,
+              117,
+              115,
+              101,
+              114,
+              95,
+              105,
+              100,
+              34,
+              58,
+              34,
+              101,
+              118,
+              105,
+              100,
+              101,
+              110,
+              99,
+              101,
+              45,
+              56,
+              100,
+              97,
+              57,
+              57,
+              101,
+              97,
+              53,
+              45,
+              98,
+              53,
+              54,
+              55,
+              45,
+              52,
+              101,
+              57,
+              99,
+              45,
+              56,
+              99,
+              97,
+              57,
+              45,
+              54,
+              51,
+              100,
+              101,
+              50,
+              56,
+              51,
+              98,
+              50,
+              54,
+              101,
+              55,
+              34,
+              44,
+              34,
+              99,
+              114,
+              101,
+              97,
+              116,
+              101,
+              100,
+              95,
+              97,
+              116,
+              34,
+              58,
+              34,
+              50,
+              48,
+              50,
+              54,
+              45,
+              49,
+              48,
+              45,
+              49,
+              48,
+              84,
+              48,
+              56,
+              58,
+              52,
+              52,
+              58,
+              49,
+              51,
+              46,
+              55,
+              52,
+              48,
+              56,
+              50,
+              57,
+              90,
+              34,
+              125,
+              93
+            ]
+          },
+          "cookie": [],
+          "responseTime": 382,
+          "responseSize": 665
+        },
+        "id": "6c7f9e67-c3ca-4a5d-84df-61cb68aca2e3",
+        "assertions": [
+          {
+            "assertion": "HTTP 200",
+            "skipped": false
+          },
+          {
+            "assertion": "Two movements",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "f422bd7a-108f-4557-ab45-5f2bb922dd3f",
+          "length": 8,
+          "cycles": 1,
+          "position": 6,
+          "iteration": 0,
+          "httpRequestId": "37dc123d-29e4-4c38-a3f4-6d0ca7002f8b"
+        },
+        "item": {
+          "id": "771ad18c-a69c-477c-9e15-394f40e36f2f",
+          "name": "07-summary",
+          "request": {
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "summary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "month",
+                  "value": "2026-10"
+                },
+                {
+                  "key": "currency",
+                  "value": "PEN"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "X-User-Id",
+                "value": "evidence-{{evidenceRunId}}"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "e826a7d8-a323-4cdd-bc7b-5d0a809a3d63",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Monthly totals', function () { const r = pm.response.json(); pm.expect(Number(r.income)).to.eql(1000); pm.expect(Number(r.expenses)).to.eql(125.5); pm.expect(Number(r.balance)).to.eql(874.5); pm.expect(r.transaction_count).to.eql(2); });"
+                ],
+                "_lastExecutionId": "4b5e64bf-ecf0-4e02-bbc3-8d6a370214c6"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "https",
+            "path": [
+              "api",
+              "v1",
+              "summary"
+            ],
+            "host": [
+              "finanzen-financial-records",
+              "onrender",
+              "com"
+            ],
+            "query": [
+              {
+                "key": "month",
+                "value": "2026-10"
+              },
+              {
+                "key": "currency",
+                "value": "PEN"
+              }
+            ],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "X-User-Id",
+              "value": "evidence-8da99ea5-b567-4e9c-8ca9-63de283b26e7"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "0da5c8dd-2acf-41b8-b1b0-a224fb692533",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "finanzen-financial-records.onrender.com",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET"
+        },
+        "response": {
+          "id": "75f55df2-2103-46a5-b6cb-50b31a7d8442",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Sat, 10 Oct 2026 08:44:16 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "138"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Content-Encoding",
+              "value": "br"
+            },
+            {
+              "key": "rndr-id",
+              "value": "bd6e47de-0a67-4175"
+            },
+            {
+              "key": "Server",
+              "value": "cloudflare"
+            },
+            {
+              "key": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "x-render-origin-server",
+              "value": "uvicorn"
+            },
+            {
+              "key": "cf-cache-status",
+              "value": "DYNAMIC"
+            },
+            {
+              "key": "CF-RAY",
+              "value": "a48457978bfd2fce-SCL"
+            },
+            {
+              "key": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              117,
+              115,
+              101,
+              114,
+              95,
+              105,
+              100,
+              34,
+              58,
+              34,
+              101,
+              118,
+              105,
+              100,
+              101,
+              110,
+              99,
+              101,
+              45,
+              56,
+              100,
+              97,
+              57,
+              57,
+              101,
+              97,
+              53,
+              45,
+              98,
+              53,
+              54,
+              55,
+              45,
+              52,
+              101,
+              57,
+              99,
+              45,
+              56,
+              99,
+              97,
+              57,
+              45,
+              54,
+              51,
+              100,
+              101,
+              50,
+              56,
+              51,
+              98,
+              50,
+              54,
+              101,
+              55,
+              34,
+              44,
+              34,
+              109,
+              111,
+              110,
+              116,
+              104,
+              34,
+              58,
+              34,
+              50,
+              48,
+              50,
+              54,
+              45,
+              49,
+              48,
+              34,
+              44,
+              34,
+              99,
+              117,
+              114,
+              114,
+              101,
+              110,
+              99,
+              121,
+              34,
+              58,
+              34,
+              80,
+              69,
+              78,
+              34,
+              44,
+              34,
+              105,
+              110,
+              99,
+              111,
+              109,
+              101,
+              34,
+              58,
+              34,
+              49,
+              48,
+              48,
+              48,
+              46,
+              48,
+              48,
+              34,
+              44,
+              34,
+              101,
+              120,
+              112,
+              101,
+              110,
+              115,
+              101,
+              115,
+              34,
+              58,
+              34,
+              49,
+              50,
+              53,
+              46,
+              53,
+              48,
+              34,
+              44,
+              34,
+              98,
+              97,
+              108,
+              97,
+              110,
+              99,
+              101,
+              34,
+              58,
+              34,
+              56,
+              55,
+              52,
+              46,
+              53,
+              48,
+              34,
+              44,
+              34,
+              116,
+              114,
+              97,
+              110,
+              115,
+              97,
+              99,
+              116,
+              105,
+              111,
+              110,
+              95,
+              99,
+              111,
+              117,
+              110,
+              116,
+              34,
+              58,
+              50,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 444,
+          "responseSize": 174
+        },
+        "id": "771ad18c-a69c-477c-9e15-394f40e36f2f",
+        "assertions": [
+          {
+            "assertion": "HTTP 200",
+            "skipped": false
+          },
+          {
+            "assertion": "Monthly totals",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "7a0f8e19-fe19-4820-a84d-2e646fec85af",
+          "length": 8,
+          "cycles": 1,
+          "position": 7,
+          "iteration": 0,
+          "httpRequestId": "17ed546f-2901-4e3a-aef1-3c88591608f7"
+        },
+        "item": {
+          "id": "e3dd6263-5a76-4eb1-9d7b-b07eff3f1cc0",
+          "name": "08-invalid-month",
+          "request": {
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "summary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "month",
+                  "value": "2026-13"
+                },
+                {
+                  "key": "currency",
+                  "value": "PEN"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "X-User-Id",
+                "value": "evidence-{{evidenceRunId}}"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "4cd5702f-e921-4854-9fde-f1ee0d7756c2",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 422', function () { pm.response.to.have.status(422); });"
+                ],
+                "_lastExecutionId": "ebc192e7-8830-493e-99d0-bc99eb560a35"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "https",
+            "path": [
+              "api",
+              "v1",
+              "summary"
+            ],
+            "host": [
+              "finanzen-financial-records",
+              "onrender",
+              "com"
+            ],
+            "query": [
+              {
+                "key": "month",
+                "value": "2026-13"
+              },
+              {
+                "key": "currency",
+                "value": "PEN"
+              }
+            ],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "X-User-Id",
+              "value": "evidence-8da99ea5-b567-4e9c-8ca9-63de283b26e7"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "192ebf3d-3668-4295-b215-fcf7b9ad0dc5",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "finanzen-financial-records.onrender.com",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET"
+        },
+        "response": {
+          "id": "85615c09-658a-4791-afff-24de6ba0a21a",
+          "status": "Unprocessable Entity",
+          "code": 422,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Sat, 10 Oct 2026 08:44:16 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "50"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Content-Encoding",
+              "value": "br"
+            },
+            {
+              "key": "rndr-id",
+              "value": "b576ecae-e2a6-4b48"
+            },
+            {
+              "key": "Server",
+              "value": "cloudflare"
+            },
+            {
+              "key": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "x-render-origin-server",
+              "value": "uvicorn"
+            },
+            {
+              "key": "cf-cache-status",
+              "value": "DYNAMIC"
+            },
+            {
+              "key": "CF-RAY",
+              "value": "a484579add982fce-SCL"
+            },
+            {
+              "key": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              100,
+              101,
+              116,
+              97,
+              105,
+              108,
+              34,
+              58,
+              34,
+              109,
+              111,
+              110,
+              116,
+              104,
+              32,
+              109,
+              117,
+              115,
+              116,
+              32,
+              117,
+              115,
+              101,
+              32,
+              116,
+              104,
+              101,
+              32,
+              89,
+              89,
+              89,
+              89,
+              45,
+              77,
+              77,
+              32,
+              102,
+              111,
+              114,
+              109,
+              97,
+              116,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 192,
+          "responseSize": 46
+        },
+        "id": "e3dd6263-5a76-4eb1-9d7b-b07eff3f1cc0",
+        "assertions": [
+          {
+            "assertion": "HTTP 422",
+            "skipped": false
+          }
+        ]
+      }
+    ],
+    "transfers": {
+      "responseTotal": 2013
+    },
+    "failures": [],
+    "error": null
+  }
+}

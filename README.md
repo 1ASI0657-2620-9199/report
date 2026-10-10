@@ -25,6 +25,11 @@ Cada componente tiene su propio repositorio e historial Git. Este repositorio co
 | Repositorios independientes | 2026-10-10 | Organización 1ASI0657-2620-9199 | Cinco repositorios: back, report, landing, front y mobile; enlaces, ejecución y validaciones adaptados |
 | Evidencias del Sprint 1 | 2026-10-10 | Backend/API existentes y statement 202620 | Capítulo V ampliado: Repository, configuración, diagrama local, commits, endpoints, respuestas reales, log de pruebas y guía de capturas/video |
 | Persistencia y capturas | 2026-10-10 | Backend con SQLite/PostgreSQL y ejecución HTTP local | Render Free + Neon preparado, 8 tests, 11 comprobaciones Newman, 13 capturas y grabación real; publicación cloud pendiente de acceso a las herramientas |
+| Deployment cloud | 2026-10-10 | Render Free y Neon Free reales | API Live, URL HTTPS, 13 capturas públicas adicionales, grabación, 8 peticiones/11 aserciones Newman y persistencia tras reiniciar Render |
+
+**API pública:** [Swagger](https://finanzen-financial-records.onrender.com/docs)
+· [Health](https://finanzen-financial-records.onrender.com/health)
+· [Evidencias del deployment](evidencias/deployment/publico/README.md).
 
 El PDF no registra fechas ni autores en su tabla de versiones. Esta tabla
 documenta los artefactos disponibles, sin atribuir nuevas entrevistas ni
@@ -72,7 +77,7 @@ lo propuesto de lo implementado.
 
 | Componente | Evidencia actual | Pendientes |
 | --- | --- | --- |
-| [Back](https://github.com/1ASI0657-2620-9199/back/blob/main/README.md) | FastAPI, SQLite/PostgreSQL, registros idempotentes, resumen, 8 pruebas y configuración gratuita Render/Neon | Acceder a las herramientas cloud y publicar; identidad real, presupuesto, eventos, IoT, análisis, educación y auditoría |
+| [Back](https://github.com/1ASI0657-2620-9199/back/blob/main/README.md) | FastAPI, SQLite/PostgreSQL, registros idempotentes, resumen, 8 pruebas y deployment Render Free/Neon Free verificado | Identidad real, presupuesto, eventos, IoT, análisis, educación y auditoría |
 | [Front](https://github.com/1ASI0657-2620-9199/front/blob/main/README.md) | Panel web conectado a la API | Autenticación y pantallas de las capacidades pendientes |
 | [Landing](https://github.com/1ASI0657-2620-9199/landing/blob/main/README.md) | Repositorio preparado, sin código | Diseño, implementación y contenido de US13/US14 |
 | [Mobile](https://github.com/1ASI0657-2620-9199/mobile/blob/main/README.md) | Repositorio preparado, sin código | Implementación del cliente móvil |
@@ -86,5 +91,7 @@ constituye autenticación y no demuestra el cumplimiento íntegro de QA-01.
 
 Student Outcome, perfiles individuales del equipo, configuración de despliegue,
 evidencia de despliegue en nube, colaboración y Kanban tienen desarrollo ausente
-o insuficiente en la fuente. No se inventan URLs de despliegue, revisiones,
-sprints adicionales ni resultados de carga. El capítulo V detalla esos límites.
+o insuficiente en la fuente. Esta actualización completa configuración y
+evidencias de deployment Render/Neon con una URL real y persistencia remota.
+Student Outcome, perfiles, colaboración, Kanban y resultados de carga requieren
+sus actividades reales. El capítulo V detalla esos límites.

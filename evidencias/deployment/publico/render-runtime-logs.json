@@ -1,0 +1,2557 @@
+{
+  "hasMore": false,
+  "logs": [
+    {
+      "id": "db4vn2flot8c73d6pelg",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "\u001b[0;34m\u001b[1m==> \u001b[0m\u001b[1mDeploying...\u001b[0m",
+      "timestamp": "2026-10-10T08:43:10.074760705Z"
+    },
+    {
+      "id": "db4vn2flot8c73d6pel0",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "\u001b[0;34m\u001b[1m==> \u001b[0m\u001b[1mSetting WEB_CONCURRENCY=1 by default, based on available CPUs in the instance\u001b[0m",
+      "timestamp": "2026-10-10T08:43:10.245808267Z"
+    },
+    {
+      "id": "29264387-9fd4-43fc-9b41-d2b932cc20b2",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "\u001b[32m\u001b[1m==>\u001b(B\u001b[m \u001b[1mRunning 'python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT --workers 1'\u001b(B\u001b[m",
+      "timestamp": "2026-10-10T08:43:22.010009077Z"
+    },
+    {
+      "id": "cafdf735-5480-4367-bd7b-e94f5d0f3b59",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     Started server process [57]",
+      "timestamp": "2026-10-10T08:43:29.30640762Z"
+    },
+    {
+      "id": "da60eab2-a741-4a4f-b5a9-7b2b5015d3f2",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     Waiting for application startup.",
+      "timestamp": "2026-10-10T08:43:29.30642791Z"
+    },
+    {
+      "id": "25b264e1-4ada-4126-b41f-b33083cd0f41",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     Application startup complete.",
+      "timestamp": "2026-10-10T08:43:30.05558555Z"
+    },
+    {
+      "id": "996be1be-51a7-4d26-b7f3-013546ea3acc",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     Uvicorn running on http://0.0.0.0:10000 (Press CTRL+C to quit)",
+      "timestamp": "2026-10-10T08:43:30.055901599Z"
+    },
+    {
+      "id": "0b9c38b6-4d75-4f8d-a99b-25ac4d2aae50",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:44210 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:43:30.41306668Z"
+    },
+    {
+      "id": "8c301cdf-7f13-4118-8355-bfc09afd30cd",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     127.0.0.1:58526 - \"HEAD / HTTP/1.1\" 404 Not Found",
+      "timestamp": "2026-10-10T08:43:30.501408293Z"
+    },
+    {
+      "id": "92abdbae-a8c1-44d2-a94e-2f27e5330719",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:44212 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:43:30.501438033Z"
+    },
+    {
+      "id": "db4vn2flot8c73d6pekg",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "\u001b[0;32m\u001b[1m==> \u001b[0m\u001b[1mYour service is live \ud83c\udf89\u001b[0m",
+      "timestamp": "2026-10-10T08:43:31.103554088Z"
+    },
+    {
+      "id": "782a49e7-09d1-4a63-aef8-02a06978318d",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     35.197.36.229:0 - \"GET / HTTP/1.1\" 404 Not Found",
+      "timestamp": "2026-10-10T08:43:31.240910095Z"
+    },
+    {
+      "id": "db4vn2flot8c73d6pek0",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "\u001b[0;32m\u001b[1m==> \u001b[0m\u001b[1m\u001b[0m",
+      "timestamp": "2026-10-10T08:43:31.259769485Z"
+    },
+    {
+      "id": "db4vn2flot8c73d6pejg",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "\u001b[0;32m\u001b[1m==> \u001b[0m\u001b[1m///////////////////////////////////////////////////////////\u001b[0m",
+      "timestamp": "2026-10-10T08:43:31.262280225Z"
+    },
+    {
+      "id": "db4vn2flot8c73d6pej0",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "\u001b[0;32m\u001b[1m==> \u001b[0m\u001b[1m\u001b[0m",
+      "timestamp": "2026-10-10T08:43:31.26457636Z"
+    },
+    {
+      "id": "db4vn2flot8c73d6peig",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "\u001b[0;32m\u001b[1m==> \u001b[0m\u001b[1mAvailable at your primary URL https://finanzen-financial-records.onrender.com\u001b[0m",
+      "timestamp": "2026-10-10T08:43:31.266869606Z"
+    },
+    {
+      "id": "db4vn2flot8c73d6pei0",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "\u001b[0;32m\u001b[1m==> \u001b[0m\u001b[1m\u001b[0m",
+      "timestamp": "2026-10-10T08:43:31.269867856Z"
+    },
+    {
+      "id": "db4vn2flot8c73d6pehg",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "\u001b[0;32m\u001b[1m==> \u001b[0m\u001b[1m///////////////////////////////////////////////////////////\u001b[0m",
+      "timestamp": "2026-10-10T08:43:31.27259106Z"
+    },
+    {
+      "id": "4dd98453-a981-4a26-8bcc-d93c2d7685bf",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:39852 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:43:35.416965494Z"
+    },
+    {
+      "id": "6d45aa16-da3d-4484-87ac-b2fae91016d8",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:39854 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:43:40.241891602Z"
+    },
+    {
+      "id": "cf3f778f-c97b-469f-904c-1a79847c2ad7",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:39868 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:43:40.419988604Z"
+    },
+    {
+      "id": "bb435d0c-0f86-4135-95f0-74cda70761ba",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:41508 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:43:45.416710947Z"
+    },
+    {
+      "id": "b7f5f147-ca40-4697-9df0-7121bf6c4827",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:41510 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:43:50.416653705Z"
+    },
+    {
+      "id": "d59873b9-336f-450a-b0ad-e6a918ccd388",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:59012 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:43:55.416412688Z"
+    },
+    {
+      "id": "681e9e6f-f096-46a5-a9d6-5677ac6b8511",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:59018 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:44:00.416817368Z"
+    },
+    {
+      "id": "c6749a74-3270-45c1-a57a-dfdadaa9a473",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:56950 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:44:05.416765797Z"
+    },
+    {
+      "id": "9023e7d4-21d8-442a-ace6-2f75cdf437bf",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:56960 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:44:10.241885579Z"
+    },
+    {
+      "id": "e95edf3e-05de-4c7d-94fa-cabef3e6d18c",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:56970 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:44:10.417621849Z"
+    },
+    {
+      "id": "851e07ac-9900-4c9a-9b28-04225a910045",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     38.224.75.37:0 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:44:12.991727217Z"
+    },
+    {
+      "id": "dd698ed0-7bb9-4fdd-a3f3-233d01c4a202",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     38.224.75.37:0 - \"POST /api/v1/transactions HTTP/1.1\" 201 Created",
+      "timestamp": "2026-10-10T08:44:13.765781941Z"
+    },
+    {
+      "id": "61be802b-5efe-4382-b9ff-69db454cf0e0",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     38.224.75.37:0 - \"POST /api/v1/transactions HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:44:14.245099575Z"
+    },
+    {
+      "id": "9cf7dbd2-c696-40a5-96d4-0f9825f5563d",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     38.224.75.37:0 - \"POST /api/v1/transactions HTTP/1.1\" 409 Conflict",
+      "timestamp": "2026-10-10T08:44:14.753663048Z"
+    },
+    {
+      "id": "4d9261d7-b3f5-4bb4-84a5-79701c5898dc",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     38.224.75.37:0 - \"POST /api/v1/transactions HTTP/1.1\" 201 Created",
+      "timestamp": "2026-10-10T08:44:15.268821276Z"
+    },
+    {
+      "id": "fe80deea-0fbe-49fa-8d3e-d944aa9e163c",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:50680 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:44:15.416699745Z"
+    },
+    {
+      "id": "5755e9f5-03a7-4394-8e7c-5b4e4bbcc98f",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     38.224.75.37:0 - \"GET /api/v1/transactions HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:44:15.736201973Z"
+    },
+    {
+      "id": "e19b299e-692b-4cd2-b1bc-bb06683be534",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     38.224.75.37:0 - \"GET /api/v1/summary?month=2026-10&currency=PEN HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:44:16.247259362Z"
+    },
+    {
+      "id": "882dd9b0-deb5-40b9-be97-e22f49a136c9",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     38.224.75.37:0 - \"GET /api/v1/summary?month=2026-13&currency=PEN HTTP/1.1\" 422 Unprocessable Entity",
+      "timestamp": "2026-10-10T08:44:16.529732004Z"
+    },
+    {
+      "id": "9c87d071-4248-4600-aced-cb556d7e0720",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     38.224.75.37:0 - \"GET /docs HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:44:18.468494443Z"
+    },
+    {
+      "id": "8341223c-7eba-40a8-a7bb-670352f214f1",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     38.224.75.37:0 - \"GET /openapi.json HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:44:19.399605429Z"
+    },
+    {
+      "id": "0ef1215e-04eb-4aff-92aa-0a2ab098cc84",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:50690 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:44:20.417457084Z"
+    },
+    {
+      "id": "63d54533-57da-4c44-a61f-6c0a0c696661",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     38.224.75.37:0 - \"GET /docs HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:44:22.150003842Z"
+    },
+    {
+      "id": "be1a9610-ccc1-4688-92af-c96e6b2a08da",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     38.224.75.37:0 - \"GET /openapi.json HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:44:22.479413134Z"
+    },
+    {
+      "id": "20c22ff9-a19f-425a-a460-f1f6df98d1cf",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     38.224.75.37:0 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:44:24.22280653Z"
+    },
+    {
+      "id": "8411493d-674d-4447-af04-3f5596c1f093",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     38.224.75.37:0 - \"GET /docs HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:44:25.411807683Z"
+    },
+    {
+      "id": "d84afd6f-243f-4678-9f4c-3e45bf680966",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:54994 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:44:25.415954694Z"
+    },
+    {
+      "id": "42466a2a-4f4a-46bc-ab58-e630a19fff6b",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     38.224.75.37:0 - \"GET /openapi.json HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:44:25.659454338Z"
+    },
+    {
+      "id": "c189b0ce-82fc-4433-80b0-ee09dabd2c8a",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     38.224.75.37:0 - \"POST /api/v1/transactions HTTP/1.1\" 201 Created",
+      "timestamp": "2026-10-10T08:44:27.599336207Z"
+    },
+    {
+      "id": "1f58d427-e271-4786-9f7e-b2056492f6a0",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     38.224.75.37:0 - \"POST /api/v1/transactions HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:44:29.244552819Z"
+    },
+    {
+      "id": "cc335a79-001f-4b9a-a0da-63c4a39a8cc5",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:55010 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:44:30.416032565Z"
+    },
+    {
+      "id": "24c92e11-1e6b-4980-ad6f-18f56ecebbce",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     38.224.75.37:0 - \"POST /api/v1/transactions HTTP/1.1\" 409 Conflict",
+      "timestamp": "2026-10-10T08:44:31.143518898Z"
+    },
+    {
+      "id": "a7e027b7-5086-44e1-950e-aeaa6b8f26a2",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     38.224.75.37:0 - \"POST /api/v1/transactions HTTP/1.1\" 201 Created",
+      "timestamp": "2026-10-10T08:44:32.958713927Z"
+    },
+    {
+      "id": "71ccef5e-1f84-4beb-9a84-ab6007189247",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     38.224.75.37:0 - \"GET /docs HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:44:33.172536301Z"
+    },
+    {
+      "id": "bf18b8c2-bfaf-49e2-800a-773e29c58bc5",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     38.224.75.37:0 - \"GET /openapi.json HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:44:33.45937474Z"
+    },
+    {
+      "id": "6b7da970-9de2-4af4-a8fa-9b5714e73e74",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     38.224.75.37:0 - \"GET /api/v1/transactions HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:44:35.233075173Z"
+    },
+    {
+      "id": "33a5d622-5c81-46f0-809f-baae9e5768bd",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:54940 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:44:35.416319553Z"
+    },
+    {
+      "id": "ef5f5171-dd3e-4ae3-b6c7-cec6d6858d6c",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     38.224.75.37:0 - \"GET /docs HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:44:36.541110846Z"
+    },
+    {
+      "id": "924da834-7ef0-431a-8cf6-7888447b719d",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     38.224.75.37:0 - \"GET /openapi.json HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:44:36.858027735Z"
+    },
+    {
+      "id": "1c075d5a-186a-44f9-9f0a-dad986aa4e28",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     38.224.75.37:0 - \"GET /api/v1/summary?month=2026-10&currency=PEN HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:44:38.735351308Z"
+    },
+    {
+      "id": "5b34da17-3c0c-4f02-b0c6-024d339896bd",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:54952 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:44:40.242044911Z"
+    },
+    {
+      "id": "91f6210e-82d9-4cb1-817e-8e89e7c798b7",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:54964 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:44:40.416306692Z"
+    },
+    {
+      "id": "f190c822-4ee4-4cbb-b1c6-cb14e047cc18",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:51940 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:44:45.416102186Z"
+    },
+    {
+      "id": "0d0ce0a6-c4a2-42ac-b9ea-d624b7c645d2",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     38.224.75.37:0 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:44:48.050733856Z"
+    },
+    {
+      "id": "c1b796f8-066f-496a-bfcc-9c6ff370fbcd",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     38.224.75.37:0 - \"GET /docs HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:44:48.386690653Z"
+    },
+    {
+      "id": "fef3416d-b862-4919-acbc-209ee9aad894",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     38.224.75.37:0 - \"GET /openapi.json HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:44:48.951473923Z"
+    },
+    {
+      "id": "e33b8540-cd39-406e-b554-988bd44ac0fa",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:51944 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:44:50.416460395Z"
+    },
+    {
+      "id": "49eec809-8e3e-4c3d-91c9-89359103caf0",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:41372 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:44:55.419447644Z"
+    },
+    {
+      "id": "b3a20df0-e347-4fb5-acd1-2161491b6804",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:41374 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:45:00.415867089Z"
+    },
+    {
+      "id": "58a87231-8582-46d3-9739-76a3f4f04fcb",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:44484 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:45:05.416968157Z"
+    },
+    {
+      "id": "e5c38db7-83ab-47fb-88ea-5154f0b1486e",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:44498 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:45:10.24172758Z"
+    },
+    {
+      "id": "b3293929-8996-435d-bf6d-1bd99dee3ad7",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:44514 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:45:10.416031832Z"
+    },
+    {
+      "id": "96adccbc-98d2-4475-a2e8-98d46d8dd1e2",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:53030 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:45:15.41671724Z"
+    },
+    {
+      "id": "29d2d8a8-a29b-4641-851d-568906cfcefd",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:53038 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:45:20.41672505Z"
+    },
+    {
+      "id": "bf24192b-99a1-4fed-a9a4-b0ca7a6cf00d",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     38.224.75.37:0 - \"GET / HTTP/1.1\" 404 Not Found",
+      "timestamp": "2026-10-10T08:45:21.772828683Z"
+    },
+    {
+      "id": "92423edc-0c53-4bb4-8a68-765cffda4587",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:50124 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:45:25.416559995Z"
+    },
+    {
+      "id": "98a7357d-b949-4e8b-afd5-9cfb403491af",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:50132 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:45:30.41600371Z"
+    },
+    {
+      "id": "299e3cee-9b9a-48d3-be10-61bde7958889",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     38.224.75.37:0 - \"GET / HTTP/1.1\" 404 Not Found",
+      "timestamp": "2026-10-10T08:45:33.029404245Z"
+    },
+    {
+      "id": "7dc48030-3640-4e1e-99a9-657440fd3290",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     38.224.75.37:0 - \"GET /favicon.ico HTTP/1.1\" 404 Not Found",
+      "timestamp": "2026-10-10T08:45:33.367975881Z"
+    },
+    {
+      "id": "4dbaa96c-3ca7-4a59-956b-647dce20a36a",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:48300 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:45:35.416840902Z"
+    },
+    {
+      "id": "580b5a36-bf35-45c2-a637-0bfd73ed9c50",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:48304 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:45:40.241745818Z"
+    },
+    {
+      "id": "59332401-c5fd-400e-b78a-7706ce2505f3",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:48314 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:45:40.41828686Z"
+    },
+    {
+      "id": "f066e67d-9e60-4dd2-b8fe-85ef10548a53",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     38.224.75.37:0 - \"POST /api/v1/transactions HTTP/1.1\" 201 Created",
+      "timestamp": "2026-10-10T08:45:43.566069115Z"
+    },
+    {
+      "id": "6c90c0b2-0cea-4dd7-b241-e94304d98508",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     38.224.75.37:0 - \"POST /api/v1/transactions HTTP/1.1\" 201 Created",
+      "timestamp": "2026-10-10T08:45:44.049097638Z"
+    },
+    {
+      "id": "c8974c0a-93a6-4f0f-8484-ef28dfb1c491",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     38.224.75.37:0 - \"GET /api/v1/transactions HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:45:44.532252534Z"
+    },
+    {
+      "id": "025dd773-399c-43c5-855c-12ca9a7d5825",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     38.224.75.37:0 - \"GET /api/v1/summary?month=2026-10&currency=PEN HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:45:45.026420404Z"
+    },
+    {
+      "id": "94dfdaa3-8935-49bf-821e-5a192f6cb285",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:46522 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:45:45.416267895Z"
+    },
+    {
+      "id": "e1253bbd-dd85-46fd-b818-07f2c24449d9",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:46524 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:45:50.416122951Z"
+    },
+    {
+      "id": "0bc8a7e1-7421-4ec3-a056-e02e83c4fc21",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-xsfzl"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "\u001b[32m\u001b[1m==>\u001b(B\u001b[m \u001b[1mRunning 'python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT --workers 1'\u001b(B\u001b[m",
+      "timestamp": "2026-10-10T08:45:53.686711257Z"
+    },
+    {
+      "id": "59ad5012-6346-496c-ab2f-b6d2abcf3bea",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:47810 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:45:55.419139011Z"
+    },
+    {
+      "id": "93f9821b-d58f-44bc-b243-6bbbeac8f3b0",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:47826 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:46:00.4165006Z"
+    },
+    {
+      "id": "e0bb0c32-8472-47d8-af36-98d5f6f41ed8",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-xsfzl"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     Started server process [57]",
+      "timestamp": "2026-10-10T08:46:02.879387405Z"
+    },
+    {
+      "id": "da972cc9-7ecf-4740-8ed1-262c143b83c2",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-xsfzl"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     Waiting for application startup.",
+      "timestamp": "2026-10-10T08:46:02.879413136Z"
+    },
+    {
+      "id": "2f733f69-11e0-4aec-ab66-b127f0407eec",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-xsfzl"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     Application startup complete.",
+      "timestamp": "2026-10-10T08:46:03.678043048Z"
+    },
+    {
+      "id": "09ab109c-2c2f-4724-8da6-7ec9ab685d4c",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-xsfzl"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     Uvicorn running on http://0.0.0.0:10000 (Press CTRL+C to quit)",
+      "timestamp": "2026-10-10T08:46:03.678407687Z"
+    },
+    {
+      "id": "14d5fe67-216f-4331-94d5-f48a4bd5a244",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-xsfzl"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     127.0.0.1:56154 - \"HEAD / HTTP/1.1\" 404 Not Found",
+      "timestamp": "2026-10-10T08:46:04.549673504Z"
+    },
+    {
+      "id": "7aebf527-84a6-4abd-8dad-c5fca0c68241",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.126:38142 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:46:05.416745086Z"
+    },
+    {
+      "id": "924bcbfa-5e8d-42d0-aa68-32ce6ee0a773",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-xsfzl"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.152:54514 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:46:06.287175308Z"
+    },
+    {
+      "id": "aa7dee51-7f5f-4af2-9cb8-a67a3ab0fdd7",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-xsfzl"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.152:54522 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:46:06.290521919Z"
+    },
+    {
+      "id": "943cbf15-e5ea-4ead-8a25-3dfa64dcec6c",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     Shutting down",
+      "timestamp": "2026-10-10T08:46:06.577289451Z"
+    },
+    {
+      "id": "b6c0390e-3c09-496e-90be-76cd76bc5dcc",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     Waiting for application shutdown.",
+      "timestamp": "2026-10-10T08:46:06.677766917Z"
+    },
+    {
+      "id": "e3b77da5-8a97-4dd6-8ae9-909c418bcca6",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     Application shutdown complete.",
+      "timestamp": "2026-10-10T08:46:06.67788212Z"
+    },
+    {
+      "id": "5b24a35d-e452-401d-b04d-60637164b89e",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-grtdt"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     Finished server process [57]",
+      "timestamp": "2026-10-10T08:46:06.678054525Z"
+    },
+    {
+      "id": "f9f51072-c66c-4d26-ba54-e65bafc27cb7",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-xsfzl"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.152:48102 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:46:11.290908963Z"
+    },
+    {
+      "id": "0a799d4e-5f96-4585-9023-cab4b67077ac",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-xsfzl"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.152:48118 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:46:16.024769936Z"
+    },
+    {
+      "id": "a53aa5e9-fa11-4c55-bc5e-39cf8339da83",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-xsfzl"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.152:48126 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:46:16.291126293Z"
+    },
+    {
+      "id": "07c002d7-c599-453d-ad02-2f71de781930",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-xsfzl"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.152:33214 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:46:21.291069014Z"
+    },
+    {
+      "id": "a5080ce1-5793-4baa-b8a8-e75b105b8d6e",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-xsfzl"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.152:33222 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:46:26.292355685Z"
+    },
+    {
+      "id": "752fb6a6-2cdb-4988-88e6-2d5a1f72b866",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-xsfzl"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.152:36770 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:46:31.290848659Z"
+    },
+    {
+      "id": "a430a51a-2e58-427b-8fca-7c459a85fedb",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-xsfzl"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.152:36774 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:46:36.290663659Z"
+    },
+    {
+      "id": "de60a37a-afb1-4847-83b5-eb6ee3188322",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-xsfzl"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.152:45238 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:46:41.291624833Z"
+    },
+    {
+      "id": "f9634e8c-47e5-45bd-bb2b-92a8848988e1",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-xsfzl"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.152:45244 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:46:46.025126602Z"
+    },
+    {
+      "id": "dffa979b-d542-452a-abff-48da6932b0dd",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-xsfzl"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.152:45252 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:46:46.291534432Z"
+    },
+    {
+      "id": "12abda92-277a-481a-8fe6-cee1de25bb73",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-xsfzl"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.152:57432 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:46:51.291004851Z"
+    },
+    {
+      "id": "e7074ee5-f349-4525-aaa5-821cff721928",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-xsfzl"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.152:57446 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:46:56.291485617Z"
+    },
+    {
+      "id": "401621f4-2a29-4b36-b015-50386354e607",
+      "labels": [
+        {
+          "name": "resource",
+          "value": "srv-db4vl25ckfvc738e4hp0"
+        },
+        {
+          "name": "instance",
+          "value": "srv-db4vl25ckfvc738e4hp0-xsfzl"
+        },
+        {
+          "name": "level",
+          "value": "info"
+        },
+        {
+          "name": "type",
+          "value": "app"
+        }
+      ],
+      "message": "INFO:     10.235.27.152:41124 - \"GET /health HTTP/1.1\" 200 OK",
+      "timestamp": "2026-10-10T08:47:01.290567219Z"
+    }
+  ],
+  "nextEndTime": "2026-10-10T08:43:10.074760705Z",
+  "nextStartTime": "2026-10-03T08:47:05.356158195Z"
+}
