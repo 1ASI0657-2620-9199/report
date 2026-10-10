@@ -59,6 +59,8 @@ La ejecución del 10 de octubre de 2026 produjo **8 passed in 1.43s**:
 El resultado anterior de cuatro pruebas se conserva como evidencia histórica.
 Los escenarios BDD siguen pendientes; consultar 5.3.1.3.
 
+![Figura 5.1: vista del registro real de pytest, ocho pruebas aprobadas con SQLite y PostgreSQL local, 10 de octubre de 2026](../evidencias/deployment/local/02-pytest.png)
+
 ### 5.1.2. Pattern Based Backend Application(s)
 
 Repository está implementado en `FinancialRecordsRepository`. Los contratos
@@ -355,6 +357,8 @@ el de front incluye el panel y su comprobación de integración. No hay un commi
 por cada TASK ni se atribuye esta incorporación al sprint histórico del PDF.
 El equipo debe añadir futuros avances reales con la misma estructura.
 
+![Figura 5.2: página real del commit f218113 que incorpora PostgreSQL y configuración gratuita, GitHub, 10 de octubre de 2026](../evidencias/deployment/local/13-backend-commit.png)
+
 #### 5.3.1.3. Testing Suite Evidence for Sprint Review
 
 El PDF registra tres comportamientos con resultado Passed. La suite incorporada
@@ -370,6 +374,13 @@ La [salida actual](../evidencias/deployment/local/pytest.txt) contiene ocho prue
 aprobadas; se incorpora una [vista del registro real](../evidencias/deployment/local/02-pytest.png).
 La suite respalda el recorte de registro de movimientos de US01 y el
 resumen mensual de PF-02; no valida todos los criterios de US01 ni presupuestos/alertas.
+
+El [workflow verificado](https://github.com/1ASI0657-2620-9199/back/actions/runs/38037169861)
+terminó con estado **Success** sobre `f218113`. Su
+[registro de estado](../evidencias/deployment/local/github-actions.json)
+identifica el run y el commit; la imagen siguiente muestra la página real de GitHub.
+
+![Figura 5.3: validación del backend aprobada en GitHub Actions, 10 de octubre de 2026](../evidencias/deployment/local/12-github-actions.png)
 
 El statement solicita archivos `.feature`, escenarios Gherkin, relación con
 historias y commits. El backend utiliza pytest/TestClient y no contiene
@@ -417,6 +428,23 @@ Las vistas de registros identifican a Newman como runner; no son capturas de
 Postman Desktop. La [grabación real](../evidencias/deployment/local/demostracion.webm)
 muestra Swagger y registros locales, sin narración. El enlace publicado y la
 explicación oral del equipo quedan pendientes si la entrega los requiere.
+
+Evidencias de ejecución ubicadas en este apartado; todas corresponden al
+servidor local Uvicorn con PostgreSQL del 10 de octubre de 2026:
+
+| Evidencia | Resultado demostrado |
+| --- | --- |
+| [Ejecución Newman](../evidencias/deployment/local/01-newman.png) | Ocho peticiones y once aserciones sin fallos |
+| [Health en Swagger](../evidencias/deployment/local/04-health.png) | HTTP 200, servicio operativo |
+| [Crear ingreso](../evidencias/deployment/local/05-create-income.png) | HTTP 201 para PEN 1000.00 |
+| [Repetición idempotente](../evidencias/deployment/local/08-replay.png) | HTTP 200 y mismo ID |
+| [Conflicto idempotente](../evidencias/deployment/local/09-conflict.png) | HTTP 409 por otro importe con la misma clave |
+| [Listado](../evidencias/deployment/local/06-list.png) | Dos movimientos del usuario de muestra |
+| [Resumen mensual](../evidencias/deployment/local/07-summary.png) | Ingreso 1000.00, gasto 125.50 y saldo 874.50 |
+| [Registro HTTP](../evidencias/deployment/local/swagger-http.json) | Operaciones y respuestas observadas en Swagger |
+| [Grabación](../evidencias/deployment/local/demostracion.webm) | Interacciones reales con Swagger y vistas de los registros, sin narración |
+
+![Figura 5.4: vista de la salida real de Newman; no es la interfaz de Postman Desktop, ejecución local, 10 de octubre de 2026](../evidencias/deployment/local/01-newman.png)
 
 #### 5.3.1.5. Microservices Documentation Evidence for Sprint Review
 
@@ -485,6 +513,8 @@ respuestas: [contrato](../evidencias/deployment/local/03-swagger-endpoints.png),
 [resumen con HTTP 200](../evidencias/deployment/local/07-summary.png).
 El [índice completo](../evidencias/deployment/README.md) explica cada captura y su apartado.
 
+![Figura 5.5: contrato y operaciones disponibles en Swagger local, 10 de octubre de 2026](../evidencias/deployment/local/03-swagger-endpoints.png)
+
 #### 5.3.1.6. Software Deployment Evidence for Sprint Review
 
 Se preparó la configuración gratuita Render/Neon y se ejecutó Uvicorn con
@@ -494,6 +524,13 @@ la [comprobación de persistencia](../evidencias/deployment/local/persistencia.j
 y su [vista antes/después](../evidencias/deployment/local/10-persistence.png).
 La comprobación detuvo y reinició realmente el proceso Uvicorn: los dos IDs
 permanecieron iguales. Esta prueba acredita persistencia PostgreSQL local.
+
+El [registro del entorno](../evidencias/deployment/local/metadata.json) identifica
+la URL local, fecha y commit utilizado. El
+[log original de Uvicorn](../evidencias/deployment/local/uvicorn.txt) complementa
+la captura del arranque.
+
+![Figura 5.6: IDs conservados al detener y reiniciar Uvicorn con PostgreSQL local, 10 de octubre de 2026](../evidencias/deployment/local/10-persistence.png)
 
 El [índice de deployment](../evidencias/deployment/README.md) documenta actividades,
 arquitectura preparada y evidencias pendientes. Falta acceder a las herramientas, crear
