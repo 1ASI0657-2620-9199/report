@@ -23,6 +23,7 @@ Cada componente tiene su propio repositorio e historial Git. Este repositorio co
 | Hito 1 conservado | Fecha no indicada | README previo del repositorio | Introducción, competidores y diseño de entrevistas |
 | Actualización del informe | 2026-10-10 | PDF proporcionado y código del MVP | Datos de portada corregidos; capítulos II–V ampliados; fuentes y figuras conservadas y evidencia reproducible |
 | Repositorios independientes | 2026-10-10 | Organización 1ASI0657-2620-9199 | Cinco repositorios: back, report, landing, front y mobile; enlaces, ejecución y validaciones adaptados |
+| Evidencias del Sprint 1 | 2026-10-10 | Backend/API existentes y statement 202620 | Capítulo V ampliado: Repository, configuración, diagrama local, commits, endpoints, respuestas reales, log de pruebas y guía de capturas/video |
 
 El PDF no registra fechas ni autores en su tabla de versiones. Esta tabla
 documenta los artefactos disponibles, sin atribuir nuevas entrevistas ni
@@ -45,6 +46,8 @@ trabajo de desarrollo a integrantes específicos.
    [transcripción completa](fuentes/transcripcion_pdf.md),
    [enlaces del PDF](fuentes/enlaces_pdf.md) y [figuras](assets/README.md).
 8. [README del hito anterior](historico/README_hito1.md).
+9. [Evidencias del Sprint 1 y archivos por agregar](evidencias/sprint-1/README.md),
+   con colección de Postman y resultados reales de la API.
 
 ## Criterio de actualización
 

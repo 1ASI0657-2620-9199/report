@@ -1,0 +1,287 @@
+{
+  "info": {
+    "name": "FinanZen - Sprint 1 evidence",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Run requests 01 through 08 in order. Each run starts a new demo user; captures and video are pending."
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:8000"
+    },
+    {
+      "key": "evidenceRunId",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "01-health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/health"
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.collectionVariables.set('evidenceRunId', pm.variables.replaceIn('{{$guid}}'));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200', function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "02-income",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-User-Id",
+            "value": "evidence-{{evidenceRunId}}"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "income-{{evidenceRunId}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/transactions",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"account_id\": \"cash-account\",\n  \"type\": \"income\",\n  \"amount\": \"1000.00\",\n  \"currency\": \"PEN\",\n  \"category\": \"salary\",\n  \"occurred_at\": \"2026-10-01T10:00:00Z\",\n  \"description\": \"Ingreso de demostración Sprint 1\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 201', function () { pm.response.to.have.status(201); });",
+              "pm.collectionVariables.set('incomeId', pm.response.json().id);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "03-replay",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-User-Id",
+            "value": "evidence-{{evidenceRunId}}"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "income-{{evidenceRunId}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/transactions",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"account_id\": \"cash-account\",\n  \"type\": \"income\",\n  \"amount\": \"1000.00\",\n  \"currency\": \"PEN\",\n  \"category\": \"salary\",\n  \"occurred_at\": \"2026-10-01T10:00:00Z\",\n  \"description\": \"Ingreso de demostración Sprint 1\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200', function () { pm.response.to.have.status(200); });",
+              "pm.test('Same movement ID', function () { pm.expect(pm.response.json().id).to.eql(pm.collectionVariables.get('incomeId')); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "04-conflict",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-User-Id",
+            "value": "evidence-{{evidenceRunId}}"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "income-{{evidenceRunId}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/transactions",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"account_id\": \"cash-account\",\n  \"type\": \"income\",\n  \"amount\": \"2000.00\",\n  \"currency\": \"PEN\",\n  \"category\": \"salary\",\n  \"occurred_at\": \"2026-10-01T10:00:00Z\",\n  \"description\": \"Ingreso de demostración Sprint 1\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 409', function () { pm.response.to.have.status(409); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "05-expense",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-User-Id",
+            "value": "evidence-{{evidenceRunId}}"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "expense-{{evidenceRunId}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/transactions",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"account_id\": \"cash-account\",\n  \"type\": \"expense\",\n  \"amount\": \"125.50\",\n  \"currency\": \"PEN\",\n  \"category\": \"food\",\n  \"occurred_at\": \"2026-10-01T10:00:00Z\",\n  \"description\": \"Gasto de demostración Sprint 1\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 201', function () { pm.response.to.have.status(201); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "06-list",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-User-Id",
+            "value": "evidence-{{evidenceRunId}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/transactions"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200', function () { pm.response.to.have.status(200); });",
+              "pm.test('Two movements', function () { pm.expect(pm.response.json().length).to.eql(2); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "07-summary",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-User-Id",
+            "value": "evidence-{{evidenceRunId}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/summary?month=2026-10&currency=PEN"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200', function () { pm.response.to.have.status(200); });",
+              "pm.test('Monthly totals', function () { const r = pm.response.json(); pm.expect(Number(r.income)).to.eql(1000); pm.expect(Number(r.expenses)).to.eql(125.5); pm.expect(Number(r.balance)).to.eql(874.5); pm.expect(r.transaction_count).to.eql(2); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "08-invalid-month",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-User-Id",
+            "value": "evidence-{{evidenceRunId}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/summary?month=2026-13&currency=PEN"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 422', function () { pm.response.to.have.status(422); });"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

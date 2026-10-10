@@ -3,6 +3,12 @@
 [Volver al informe](../README.md) · Fuente: páginas físicas 95–109 del PDF,
 actualizada con el código y la validación de esta entrega.
 
+Esta ampliación documenta el **Financial Records Service** existente: registro
+de ingresos/egresos, consulta de movimientos y resumen mensual. Los requisitos
+de evidencia se contrastan con `Trabajo Final_1ASI0657_202620.docx`, proporcionado
+como statement. Las propuestas y las capturas pendientes se distinguen de las
+evidencias ya obtenidas. Consultar la [guía de evidencias del Sprint 1](../evidencias/sprint-1/README.md).
+
 ## 5.1. Testing Suites & General Patterns
 
 ### 5.1.1. Backend Application Core Testing Suite
@@ -32,11 +38,44 @@ Para futuros incrementos, el PDF propone separar pruebas unitarias,
 integración, persistencia y contratos. Esa estructura sigue siendo una propuesta;
 la suite actual conserva un archivo de pruebas de API.
 
+Para repetir la suite desde `back`:
+
+```powershell
+python -m pytest -q -p no:cacheprovider
+```
+
+La ejecución del 10 de octubre de 2026 produjo **4 passed in 0.77s**; se adjunta
+la [salida real de pytest](../evidencias/sprint-1/pytest.txt). Las aserciones comprueban
+estados HTTP y datos: mismo ID ante una repetición, conflicto ante otro cuerpo,
+saldo de `874.50` y dos movimientos visibles para el usuario de prueba.
+La captura de terminal y los escenarios BDD requeridos para la revisión del
+sprint permanecen pendientes; se detallan en 5.3.1.3 y en la guía de evidencias.
+
 ### 5.1.2. Pattern Based Backend Application(s)
 
 Repository está implementado en `FinancialRecordsRepository`. Los contratos
 REST se exponen bajo `/api/v1`, y FastAPI genera OpenAPI/Swagger.
 La persistencia local usa una única tabla de transacciones.
+
+| Elemento | Responsabilidad | Código |
+| --- | --- | --- |
+| `app/main.py` | Rutas HTTP, cabeceras, respuestas y composición de la aplicación | [Endpoints](https://github.com/1ASI0657-2620-9199/back/blob/6ff8141000371271d8b91ebc8d0b7ed5fdea1906/app/main.py) |
+| `app/models.py` | Contratos Pydantic para validar movimientos y representar respuestas | [Modelos](https://github.com/1ASI0657-2620-9199/back/blob/6ff8141000371271d8b91ebc8d0b7ed5fdea1906/app/models.py) |
+| `FinancialRecordsRepository` | Esquema, inserción, consulta y cálculo del resumen | [Repository](https://github.com/1ASI0657-2620-9199/back/blob/6ff8141000371271d8b91ebc8d0b7ed5fdea1906/app/repository.py) |
+
+```mermaid
+flowchart LR
+    C[Cliente HTTP: panel, Postman o Swagger] --> A[Rutas FastAPI]
+    A --> M[Contratos Pydantic]
+    A --> R[FinancialRecordsRepository]
+    R --> D[(SQLite: transactions)]
+```
+
+Repository concentra el SQL fuera de los endpoints: estos delegan en
+`create_transaction`, `list_transactions` y `monthly_summary`. La restricción
+única por usuario/clave y el hash del cuerpo permiten reconocer repeticiones y
+conflictos. `Decimal` permite sumar importes. La dependencia es sobre la clase
+concreta; no existe una interfaz abstracta ni una capa independiente de casos de uso.
 
 Microservicios adicionales, Facade entre subsistemas, Observer, Gateway y
 Database per Service para múltiples dominios forman parte del diseño objetivo,
@@ -75,6 +114,16 @@ La descripción OpenAPI se corrigió para no afirmar que US10–US12 estén comp
 No se realizó la refactorización arquitectónica completa ni se cambió la
 tecnología de persistencia.
 
+El código actual selecciona el frontend mediante `FINANZEN_FRONTEND_PATH` o
+la carpeta vecina `front`, y solo monta archivos estáticos si la ruta existe.
+Las pruebas `test_frontend_is_served` y `test_backend_runs_without_frontend`
+respaldan la ruta personalizada y la ejecución de la API sin cliente web.
+
+El commit `6ff8141` incorpora el proyecto independiente; su padre solo contiene
+el README inicial. Ese historial no permite presentar un diff de refactorización
+del backend anterior. Para completar este apartado se necesita un cambio de
+patrón identificable, comparación antes/después y pruebas que preserven el comportamiento.
+
 ## 5.2. Software Configuration Management
 
 ### 5.2.1. Software Development Environment Configuration
@@ -96,6 +145,20 @@ Dependencias fijadas en [requirements.txt](https://github.com/1ASI0657-2620-9199
 Los pasos de instalación están en [back](https://github.com/1ASI0657-2620-9199/back/blob/main/README.md) y
 [front](https://github.com/1ASI0657-2620-9199/front/blob/main/README.md).
 
+Preparación del entorno Windows desde `back`:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m pytest -q -p no:cacheprovider
+.\.venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8000
+```
+
+Se utilizan Git/GitHub para versionar código, pytest/TestClient para pruebas,
+Swagger/OpenAPI para documentar la API y Postman para las capturas por realizar.
+La elección del gestor de tareas y las referencias de acceso/descarga de las
+herramientas utilizadas por el equipo deben completar este apartado.
+
 ### 5.2.2. Source Code Management
 
 La ubicación común es la [organización FinanZen](https://github.com/orgs/1ASI0657-2620-9199/repositories).
@@ -116,6 +179,13 @@ La estrategia académica propuesta es GitFlow (`main`, `develop`, `feature/*`,
 propuestas como ramas ya creadas. La versión de API existente es `0.1.0`; eso
 no constituye una etiqueta de release publicada.
 
+Al revisar el remoto de `back` el 10 de octubre de 2026 se encuentra la rama
+`main`, sin etiquetas publicadas. Las convenciones propuestas son
+`feature/<id>-<descripcion>`, `release/<version>` y `hotfix/<descripcion>`, con
+nombres en inglés y versiones `MAJOR.MINOR.PATCH`. Se debe evidenciar su uso
+real cuando el equipo las adopte. Los commits de 5.3.1.2 incorporan los proyectos;
+no prueban la autoría histórica de cada tarea del PDF.
+
 ### 5.2.3. Source Code Style Guide & Conventions
 
 Se conservan los nombres del código. El PDF propone PEP 8, PEP 257,
@@ -128,6 +198,18 @@ instala dependencias y ejecuta su suite. El frontend valida su JavaScript y
 la integración con una copia del backend. El reporte comprueba sus enlaces
 internos y la integridad del PDF fuente mediante su propio workflow.
 No se afirma haber ejecutado linter, formatter o verificación de tipos.
+
+| Convención | Ejemplo verificable del backend |
+| --- | --- |
+| Nombres en inglés y `snake_case` | `create_transaction`, `monthly_summary`, `database_path` |
+| Clases en `PascalCase` | `TransactionCreate`, `MonthlySummary`, `FinancialRecordsRepository` |
+| Constantes en mayúsculas | `MONTH_PATTERN`; valores `INCOME` y `EXPENSE` del enum |
+| Anotaciones de tipos | `list[TransactionResponse]`, `Decimal`, `str \| None` |
+| Recursos REST en plural | `/api/v1/transactions` |
+| Pruebas nombradas por comportamiento | `test_create_is_idempotent_and_rejects_key_reuse` |
+
+Las convenciones del frontend y de Gherkin deben completarse por separado.
+Estos ejemplos no constituyen una auditoría automática de estilo.
 
 ### 5.2.4. Software Deployment Configuration
 
@@ -143,6 +225,31 @@ python -m uvicorn app.main:app --host 127.0.0.1 --port 8000
 Panel en `http://127.0.0.1:8000`, Swagger en `/docs`, OpenAPI en `/openapi.json`
 y estado en `/health`. La carpeta `data` y la tabla se inicializan al arrancar.
 SQLite, cachés, secretos y entornos virtuales no se versionan.
+
+Vista del despliegue local con los elementos de una vista C4 de despliegue:
+
+```mermaid
+flowchart TB
+    subgraph Local[Equipo de desarrollo - entorno local]
+        B[Navegador: panel o Swagger]
+        P[Postman: cliente HTTP]
+        subgraph Runtime[Proceso Python - Uvicorn - puerto 8000]
+            API[Financial Records Service - FastAPI]
+        end
+        F[Archivos del repositorio front: HTML, CSS y JavaScript]
+        DB[(Archivo SQLite: data/financial_records.db)]
+        B -->|HTTP / y /api/v1| API
+        P -->|HTTP /health y /api/v1| API
+        API -->|Lee archivos estáticos si existen| F
+        API -->|Lectura y escritura con sqlite3| DB
+    end
+```
+
+El panel es opcional y se sirve desde el mismo proceso que expone la API.
+`FINANZEN_DB_PATH` cambia el archivo de persistencia y
+`FINANZEN_FRONTEND_PATH` cambia la ubicación del panel. La guía del Sprint 1
+indica cómo usar una base separada para las capturas. Este diagrama representa
+ejecución local, no infraestructura cloud.
 
 No hay Dockerfile, infraestructura de nube ni URL pública de despliegue
 verificada. CON-05 sigue pendiente.
@@ -177,6 +284,20 @@ La marca Done de US01 corresponde al recorte del sprint en el PDF. Sus
 criterios de cuentas/saldos y su equivalencia con el registro de movimientos
 requieren revisión; se documentan como cobertura parcial en el capítulo III.
 
+Trazabilidad comprobable del incremento:
+
+| Trabajo del backlog fuente | Código y comportamiento actual | Alcance |
+| --- | --- | --- |
+| TASK-02/03/06/08 | Modelo, POST, idempotencia y tabla SQLite | Registro de movimientos |
+| TASK-04/07 | GET de movimientos filtrado por `X-User-Id` | Separación lógica por identidad suministrada; no login |
+| TASK-05 | GET de resumen por mes y moneda | Ingresos, gastos, saldo y cantidad de movimientos |
+| TASK-09/10 | OpenAPI y cuatro pruebas pytest | Contrato y pruebas disponibles; BDD pendiente |
+| TASK-11 | Panel del repositorio `front` conectado a la API | Cliente web existente |
+
+Faltan captura y URL pública del board y la tabla con descomposición US → tarea,
+descripción, horas, responsable y estado, validada por el equipo. La tabla
+histórica no reemplaza un tablero actual ni acredita cuentas/saldos iniciales de US01.
+
 #### 5.3.1.2. Development Evidence for Sprint Review
 
 La evidencia original describe once archivos del servicio inicial y el commit
@@ -188,11 +309,36 @@ La evidencia actual está en [back/app](https://github.com/1ASI0657-2620-9199/ba
 [back/tests](https://github.com/1ASI0657-2620-9199/back/tree/main/tests) y [front](https://github.com/1ASI0657-2620-9199/front/tree/main/). El README del repositorio
 ya dirige al informe y a cada componente, en lugar de contener todo el reporte.
 
+Commits reales de incorporación a los repositorios independientes; fechas en
+America/Lima (`UTC-05:00`):
+
+| Repository | Branch de integración | Commit Id | Commit Message | Commit Message Body | Committed on (Date) |
+| --- | --- | --- | --- | --- | --- |
+| `1ASI0657-2620-9199/back` | `main` | [6ff8141](https://github.com/1ASI0657-2620-9199/back/commit/6ff8141000371271d8b91ebc8d0b7ed5fdea1906) | `feat: initialize independent FinanZen back project` | Sin cuerpo | 2026-10-10 02:39:35 -05:00 |
+| `1ASI0657-2620-9199/front` | `main` | [e0b1ac5](https://github.com/1ASI0657-2620-9199/front/commit/e0b1ac5b272004863300c2a8a4eb2c5222a58111) | `feat: initialize independent FinanZen front project` | Sin cuerpo | 2026-10-10 02:39:53 -05:00 |
+
+El commit de back incluye rutas, contratos, persistencia, tests y workflow;
+el de front incluye el panel y su comprobación de integración. No hay un commit
+por cada TASK ni se atribuye esta incorporación al sprint histórico del PDF.
+El equipo debe añadir futuros avances reales con la misma estructura.
+
 #### 5.3.1.3. Testing Suite Evidence for Sprint Review
 
 El PDF registra tres comportamientos con resultado Passed. La suite incorporada
 contiene cuatro pruebas y se ejecuta nuevamente para esta entrega. Los resultados
 actuales se detallan en [evidencias/validacion.md](../evidencias/validacion.md).
+
+| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on (Date) | Evidencia de testing |
+| --- | --- | --- | --- | --- | --- | --- |
+| `1ASI0657-2620-9199/back` | `main` | [6ff8141](https://github.com/1ASI0657-2620-9199/back/commit/6ff8141000371271d8b91ebc8d0b7ed5fdea1906) | `feat: initialize independent FinanZen back project` | Sin cuerpo | 2026-10-10 02:39:35 -05:00 | Incorpora `tests/test_api.py` y el workflow de pytest |
+
+La [salida capturada](../evidencias/sprint-1/pytest.txt) contiene cuatro pruebas
+aprobadas. La suite respalda el recorte de registro de movimientos de US01 y el
+resumen mensual de PF-02; no valida todos los criterios de US01 ni presupuestos/alertas.
+
+El statement solicita archivos `.feature`, escenarios Gherkin, relación con
+historias y commits. El backend utiliza pytest/TestClient y no contiene
+`.feature`; esta parte queda pendiente de implementación y ejecución.
 
 #### 5.3.1.4. Execution Evidence for Sprint Review
 
@@ -212,6 +358,26 @@ Las capturas de Postman del PDF muestran pruebas históricas del servicio local:
 La comprobación de esta entrega utiliza TestClient y registra por separado sus
 resultados; las capturas originales no se presentan como nuevas ejecuciones.
 
+Se adjuntan [ocho respuestas reales de la API](../evidencias/sprint-1/respuestas-api.json)
+obtenidas con TestClient y SQLite temporal. Incluyen cuerpo y cabeceras de
+solicitud, estado HTTP y cuerpo de respuesta:
+
+| Operación | Resultado observado |
+| --- | --- |
+| Health | HTTP 200; servicio `financial-records-service` en estado `ok` |
+| Crear ingreso de PEN 1000.00 | HTTP 201; ID del movimiento generado |
+| Repetir ingreso con la misma clave y cuerpo | HTTP 200; mismo ID; `Idempotent-Replayed: true` |
+| Reutilizar clave con otro importe | HTTP 409; conflicto idempotente |
+| Crear gasto de PEN 125.50 | HTTP 201 |
+| Consultar movimientos | HTTP 200; dos movimientos del usuario de muestra |
+| Resumen de octubre de 2026 | HTTP 200; ingresos 1000.00, gastos 125.50, saldo 874.50 |
+| Consultar mes `2026-13` | HTTP 422; mes inválido |
+
+La [colección de Postman](../evidencias/sprint-1/FinanZen-Sprint1.postman_collection.json)
+permite reproducir estas operaciones en el servidor local. Faltan capturas
+nuevas y enlace al video explicativo. El JSON de TestClient no se presenta
+como evidencia de una ejecución en Postman.
+
 #### 5.3.1.5. Microservices Documentation Evidence for Sprint Review
 
 FastAPI genera Swagger y OpenAPI a partir de la aplicación. Se conserva un
@@ -219,11 +385,73 @@ FastAPI genera Swagger y OpenAPI a partir de la aplicación. Se conserva un
 guía del backend. El contrato describe el servicio disponible, sin endpoints
 inventados para capacidades futuras.
 
+Base local: `http://127.0.0.1:8000`. [Swagger local](http://127.0.0.1:8000/docs)
+y [OpenAPI local](http://127.0.0.1:8000/openapi.json) requieren el servidor iniciado.
+
+| Acción | Llamada y parámetros | Respuesta |
+| --- | --- | --- |
+| Estado | `GET /health`; sin cabeceras financieras | 200: `status` y `service` |
+| Registrar movimiento | `POST /api/v1/transactions`; `X-User-Id`, `Idempotency-Key` y cuerpo JSON | 201 nuevo, 200 repetido, 409 conflicto, 422 datos inválidos |
+| Consultar movimientos | `GET /api/v1/transactions`; `X-User-Id`; sin query params | 200: arreglo de movimientos; 422 si falta la cabecera |
+| Resumen mensual | `GET /api/v1/summary?month=2026-10&currency=PEN`; `X-User-Id`; mes obligatorio, moneda opcional (PEN) | 200: ingresos, gastos, saldo y cantidad; 422 para entradas inválidas o requeridas ausentes |
+
+`X-User-Id` admite de 1 a 80 caracteres. `Idempotency-Key` admite de 8 a 120
+caracteres y es obligatorio en el POST. El cuerpo requiere `account_id`, `type`
+(`income` o `expense`), `amount` positivo con hasta dos decimales y `category`.
+`currency` es opcional (PEN, tres letras mayúsculas), `occurred_at` es opcional
+(fecha/hora actual UTC) y `description` es opcional (hasta 240 caracteres).
+Se fija `occurred_at` en los ejemplos para que el cuerpo sea idéntico al repetirlo.
+
+Ejemplo de registro incluido en la colección:
+
+```json
+{
+  "account_id": "cash-account",
+  "type": "income",
+  "amount": "1000.00",
+  "currency": "PEN",
+  "category": "salary",
+  "occurred_at": "2026-10-01T10:00:00Z",
+  "description": "Ingreso de demostración Sprint 1"
+}
+```
+
+La respuesta agrega `id`, `user_id` y `created_at`. Los valores generados se
+conservan en el JSON capturado. Resumen observado después del ingreso y gasto:
+
+```json
+{
+  "user_id": "sprint1-evidence-user",
+  "month": "2026-10",
+  "currency": "PEN",
+  "income": "1000.00",
+  "expenses": "125.50",
+  "balance": "874.50",
+  "transaction_count": 2
+}
+```
+
+El saldo es ingresos menos gastos y el conteo corresponde al mes y moneda
+consultados. Los importes se serializan como cadenas decimales.
+
+| Repository | Commit de documentación | Artefacto |
+| --- | --- | --- |
+| [back](https://github.com/1ASI0657-2620-9199/back) | [6ff8141](https://github.com/1ASI0657-2620-9199/back/commit/6ff8141000371271d8b91ebc8d0b7ed5fdea1906) | Metadatos/contratos FastAPI y README de Swagger/OpenAPI |
+| [report](https://github.com/1ASI0657-2620-9199/report) | [5176faa](https://github.com/1ASI0657-2620-9199/report/commit/5176faa24f59e8506e6eedb564bdd7b208d3cfeb) | `evidencias/openapi.json` y guía del servicio |
+
+Faltan capturas explicadas de peticiones, parámetros y respuestas en Swagger.
+
 #### 5.3.1.6. Software Deployment Evidence for Sprint Review
 
-Pendiente de evidencia de despliegue en AWS, Azure o Google Cloud. El archivo
-fuente no aporta URL ni capturas de un entorno cloud. La ejecución verificada
-es local y no completa CON-05.
+La configuración disponible es local: instalación de dependencias, arranque
+con Uvicorn, inicialización de SQLite y rutas de estado/documentación. Faltan
+capturas y explicación de los pasos de deployment realizados durante el sprint.
+Las cuentas, recursos e integración cloud deben documentarse cuando existan.
+
+El índice del statement ubica el despliegue cloud completo en TF1 y permite
+URL local para documentar sprints previos al despliegue de Web Services.
+La ejecución local no completa CON-05. No se dispone de URL ni capturas de
+un despliegue en AWS, Azure o Google Cloud.
 
 #### 5.3.1.7. Team Collaboration Insights during Sprint
 
@@ -234,6 +462,9 @@ responsables, sin inventar reuniones, revisiones ni conclusiones de colaboració
 
 El PDF contiene el título sin enlace o tablero verificable. Queda pendiente
 incorporar una evidencia real de Kanban.
+
+La [guía de evidencias](../evidencias/sprint-1/README.md) especifica las capturas,
+enlaces y datos del equipo que faltan para completar los apartados del Sprint 1.
 
 ## Cambios y pendientes de esta entrega
 

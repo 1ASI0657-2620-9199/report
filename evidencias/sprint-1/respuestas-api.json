@@ -1,0 +1,210 @@
+{
+  "captured_at_america_lima": "2026-10-10T02:49:18-05:00",
+  "backend_commit": "6ff8141000371271d8b91ebc8d0b7ed5fdea1906",
+  "execution": "FastAPI TestClient; temporary SQLite; synthetic demonstration data",
+  "requests": [
+    {
+      "scenario": "01-health",
+      "method": "GET",
+      "path": "/health",
+      "request_headers": {},
+      "request_body": null,
+      "status_code": 200,
+      "idempotent_replayed": null,
+      "response_body": {
+        "status": "ok",
+        "service": "financial-records-service"
+      }
+    },
+    {
+      "scenario": "02-income",
+      "method": "POST",
+      "path": "/api/v1/transactions",
+      "request_headers": {
+        "X-User-Id": "sprint1-evidence-user",
+        "Idempotency-Key": "sprint1-evidence-income"
+      },
+      "request_body": {
+        "account_id": "cash-account",
+        "type": "income",
+        "amount": "1000.00",
+        "currency": "PEN",
+        "category": "salary",
+        "occurred_at": "2026-10-01T10:00:00Z",
+        "description": "Ingreso de demostración Sprint 1"
+      },
+      "status_code": 201,
+      "idempotent_replayed": "false",
+      "response_body": {
+        "account_id": "cash-account",
+        "type": "income",
+        "amount": "1000.00",
+        "currency": "PEN",
+        "category": "salary",
+        "occurred_at": "2026-10-01T10:00:00Z",
+        "description": "Ingreso de demostración Sprint 1",
+        "id": "ee4be3d5-cf0a-4184-b7fe-52c7c34e039e",
+        "user_id": "sprint1-evidence-user",
+        "created_at": "2026-10-10T07:49:18.773482Z"
+      }
+    },
+    {
+      "scenario": "03-replay",
+      "method": "POST",
+      "path": "/api/v1/transactions",
+      "request_headers": {
+        "X-User-Id": "sprint1-evidence-user",
+        "Idempotency-Key": "sprint1-evidence-income"
+      },
+      "request_body": {
+        "account_id": "cash-account",
+        "type": "income",
+        "amount": "1000.00",
+        "currency": "PEN",
+        "category": "salary",
+        "occurred_at": "2026-10-01T10:00:00Z",
+        "description": "Ingreso de demostración Sprint 1"
+      },
+      "status_code": 200,
+      "idempotent_replayed": "true",
+      "response_body": {
+        "account_id": "cash-account",
+        "type": "income",
+        "amount": "1000.00",
+        "currency": "PEN",
+        "category": "salary",
+        "occurred_at": "2026-10-01T10:00:00Z",
+        "description": "Ingreso de demostración Sprint 1",
+        "id": "ee4be3d5-cf0a-4184-b7fe-52c7c34e039e",
+        "user_id": "sprint1-evidence-user",
+        "created_at": "2026-10-10T07:49:18.773482Z"
+      }
+    },
+    {
+      "scenario": "04-conflict",
+      "method": "POST",
+      "path": "/api/v1/transactions",
+      "request_headers": {
+        "X-User-Id": "sprint1-evidence-user",
+        "Idempotency-Key": "sprint1-evidence-income"
+      },
+      "request_body": {
+        "account_id": "cash-account",
+        "type": "income",
+        "amount": "2000.00",
+        "currency": "PEN",
+        "category": "salary",
+        "occurred_at": "2026-10-01T10:00:00Z",
+        "description": "Ingreso de demostración Sprint 1"
+      },
+      "status_code": 409,
+      "idempotent_replayed": null,
+      "response_body": {
+        "detail": "The Idempotency-Key was already used with a different request body."
+      }
+    },
+    {
+      "scenario": "05-expense",
+      "method": "POST",
+      "path": "/api/v1/transactions",
+      "request_headers": {
+        "X-User-Id": "sprint1-evidence-user",
+        "Idempotency-Key": "sprint1-evidence-expense"
+      },
+      "request_body": {
+        "account_id": "cash-account",
+        "type": "expense",
+        "amount": "125.50",
+        "currency": "PEN",
+        "category": "food",
+        "occurred_at": "2026-10-01T10:00:00Z",
+        "description": "Gasto de demostración Sprint 1"
+      },
+      "status_code": 201,
+      "idempotent_replayed": "false",
+      "response_body": {
+        "account_id": "cash-account",
+        "type": "expense",
+        "amount": "125.50",
+        "currency": "PEN",
+        "category": "food",
+        "occurred_at": "2026-10-01T10:00:00Z",
+        "description": "Gasto de demostración Sprint 1",
+        "id": "3d0b7573-f281-4429-8074-3a158f56f28c",
+        "user_id": "sprint1-evidence-user",
+        "created_at": "2026-10-10T07:49:18.785004Z"
+      }
+    },
+    {
+      "scenario": "06-list",
+      "method": "GET",
+      "path": "/api/v1/transactions",
+      "request_headers": {
+        "X-User-Id": "sprint1-evidence-user"
+      },
+      "request_body": null,
+      "status_code": 200,
+      "idempotent_replayed": null,
+      "response_body": [
+        {
+          "account_id": "cash-account",
+          "type": "expense",
+          "amount": "125.50",
+          "currency": "PEN",
+          "category": "food",
+          "occurred_at": "2026-10-01T10:00:00Z",
+          "description": "Gasto de demostración Sprint 1",
+          "id": "3d0b7573-f281-4429-8074-3a158f56f28c",
+          "user_id": "sprint1-evidence-user",
+          "created_at": "2026-10-10T07:49:18.785004Z"
+        },
+        {
+          "account_id": "cash-account",
+          "type": "income",
+          "amount": "1000.00",
+          "currency": "PEN",
+          "category": "salary",
+          "occurred_at": "2026-10-01T10:00:00Z",
+          "description": "Ingreso de demostración Sprint 1",
+          "id": "ee4be3d5-cf0a-4184-b7fe-52c7c34e039e",
+          "user_id": "sprint1-evidence-user",
+          "created_at": "2026-10-10T07:49:18.773482Z"
+        }
+      ]
+    },
+    {
+      "scenario": "07-summary",
+      "method": "GET",
+      "path": "/api/v1/summary?month=2026-10&currency=PEN",
+      "request_headers": {
+        "X-User-Id": "sprint1-evidence-user"
+      },
+      "request_body": null,
+      "status_code": 200,
+      "idempotent_replayed": null,
+      "response_body": {
+        "user_id": "sprint1-evidence-user",
+        "month": "2026-10",
+        "currency": "PEN",
+        "income": "1000.00",
+        "expenses": "125.50",
+        "balance": "874.50",
+        "transaction_count": 2
+      }
+    },
+    {
+      "scenario": "08-invalid-month",
+      "method": "GET",
+      "path": "/api/v1/summary?month=2026-13&currency=PEN",
+      "request_headers": {
+        "X-User-Id": "sprint1-evidence-user"
+      },
+      "request_body": null,
+      "status_code": 422,
+      "idempotent_replayed": null,
+      "response_body": {
+        "detail": "month must use the YYYY-MM format"
+      }
+    }
+  ]
+}

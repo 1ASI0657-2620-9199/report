@@ -35,6 +35,13 @@ Las cuatro pruebas usan bases temporales y comprueban:
 
 Resultado observado: **4 passed in 1.00s**.
 
+En la ampliación del capítulo V se volvió a ejecutar la misma suite el
+10 de octubre de 2026: **4 passed in 0.77s**. La [salida capturada](sprint-1/pytest.txt)
+identifica el commit y la hora de ejecución en America/Lima. Se conservaron
+[ocho respuestas reales](sprint-1/respuestas-api.json) obtenidas con TestClient,
+SQLite temporal y datos de muestra. La [guía del Sprint 1](sprint-1/README.md)
+identifica las capturas de Postman, Swagger y colaboración todavía pendientes.
+
 ## Frontend e integración
 
 Clonar `back` y `front` en un mismo directorio padre. Dentro de `front`:
@@ -76,6 +83,12 @@ Resultado observado:
 ```text
 Report: 58 internal links OK; original PDF checksum OK.
 ```
+
+Después de ampliar el capítulo V y agregar la guía del Sprint 1, el verificador
+reporta **73 enlaces internos correctos** y mantiene intacto el checksum del PDF.
+La colección preparada contiene ocho peticiones; sus scripts JavaScript pasan
+la comprobación de sintaxis de Node. Queda pendiente ejecutarla en Postman y
+capturar la interacción; esta comprobación no acredita una ejecución allí.
 
 ## Integración continua y límites
 
