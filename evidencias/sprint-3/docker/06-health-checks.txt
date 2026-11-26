@@ -1,0 +1,26 @@
+FinanZen>cd
+C:\Users\rodri\OneDrive\Desktop\6to Ciclo\Open Source\examen final\FinanZen\back
+
+FinanZen>python ..\report\scripts\verificar_health_docker.py
+GET http://127.0.0.1:8080/services/financial/health
+HTTP 200 | status=ok | transport=kafka
+Outbox: {"pending": 0, "dead_letters": 0}
+Workers: {"financial-outbox": true}
+
+GET http://127.0.0.1:8080/services/budgets/health
+HTTP 200 | status=ok | transport=kafka
+Outbox: {"pending": 0, "dead_letters": 0}
+Workers: {"budgets-outbox": true, "budgets-consumer": true}
+
+GET http://127.0.0.1:8080/services/notifications/health
+HTTP 200 | status=ok | transport=kafka
+Outbox: {"pending": 0, "dead_letters": 0}
+Workers: {"notifications-outbox": true, "notifications-consumer": true, "notifications-delivery": true}
+
+GET http://127.0.0.1:8080/services/devices/health
+HTTP 200 | status=ok | transport=kafka
+Outbox: {"pending": 0, "dead_letters": 0}
+Workers: {"devices-outbox": true}
+
+
+FinanZen>

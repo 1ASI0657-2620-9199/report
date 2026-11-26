@@ -1,0 +1,30 @@
+{
+  "case": "07-logs-servicios",
+  "captured_at": "2026-11-26T13:48:10.128012-05:00",
+  "application": "cmd.exe",
+  "window_title": "FinanZen - CMD - 07-logs-servicios",
+  "window_class": "CASCADIA_HOSTING_WINDOW_CLASS",
+  "process_id": 34288,
+  "method": "PIL.ImageGrab of the visible native CMD window; text read from its console buffer",
+  "rectangle": [
+    50,
+    55,
+    1550,
+    995
+  ],
+  "image_size": [
+    1500,
+    940
+  ],
+  "commands": [
+    "docker compose logs --no-color --tail 6 financial-records budget-service notification-service device-service"
+  ],
+  "exit_codes": [
+    0
+  ],
+  "image": "07-logs-servicios.png",
+  "sha256": "cafc2535ce09da15c6a65038c73dccb649f492cbc49686de08ae1c02782bc795",
+  "transcript": "07-logs-servicios.txt",
+  "image_edited": false,
+  "ai_image_generation": false
+}

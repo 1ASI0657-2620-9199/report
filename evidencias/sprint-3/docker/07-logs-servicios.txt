@@ -1,0 +1,33 @@
+C:\Users\rodri\OneDrive\Desktop\6to Ciclo\Open Source\examen final\FinanZen\back
+
+FinanZen>docker compose logs --no-color --tail 6 financial-records budget-service notification-service device-s
+ervice
+financial-records-1     | INFO:     172.19.0.7:57070 - "GET /operations/events HTTP/1.1" 200 OK
+financial-records-1     | INFO:     172.19.0.7:42792 - "GET /health HTTP/1.1" 200 OK
+financial-records-1     | INFO:     172.19.0.7:42806 - "GET /api/v1/summary?month=2026-11&currency=PEN HTTP/1.1
+" 200 OK
+financial-records-1     | INFO:     172.19.0.7:42810 - "GET /api/v1/transactions HTTP/1.1" 200 OK
+financial-records-1     | INFO:     172.19.0.7:42812 - "GET /api/v1/transactions HTTP/1.1" 200 OK
+financial-records-1     | INFO:     172.19.0.7:42820 - "GET /api/v1/summary?month=2026-11&currency=PEN HTTP/1.1
+" 200 OK
+device-service-1        | INFO:     127.0.0.1:49232 - "GET /health HTTP/1.1" 200 OK
+notification-service-1  | INFO:     172.19.0.7:34492 - "GET /operations/events HTTP/1.1" 200 OK
+notification-service-1  | INFO:     172.19.0.7:41324 - "GET /health HTTP/1.1" 200 OK
+notification-service-1  | INFO:     172.19.0.7:41334 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+notification-service-1  | INFO:     172.19.0.7:41328 - "GET /api/v1/notification-preferences HTTP/1.1" 200 OK
+notification-service-1  | INFO:     172.19.0.7:41344 - "GET /api/v1/notifications HTTP/1.1" 200 OK
+notification-service-1  | INFO:     172.19.0.7:41354 - "GET /api/v1/notification-preferences HTTP/1.1" 200 OK
+device-service-1        | INFO:     172.19.0.7:40970 - "GET /api/v1/devices HTTP/1.1" 200 OK
+device-service-1        | INFO:     172.19.0.7:40984 - "GET /operations/events HTTP/1.1" 200 OK
+device-service-1        | INFO:     172.19.0.7:59394 - "GET /health HTTP/1.1" 200 OK
+device-service-1        | INFO:     172.19.0.7:59406 - "GET /api/v1/devices HTTP/1.1" 200 OK
+device-service-1        | INFO:     172.19.0.7:59408 - "GET /api/v1/devices HTTP/1.1" 200 OK
+budget-service-1        | Kafka message quarantined: service=budgets topic=finanzen.transactions.v1 partition=1
+ offset=17
+budget-service-1        | INFO:     172.19.0.7:55780 - "GET /api/v1/budgets?month=2026-11 HTTP/1.1" 200 OK
+budget-service-1        | INFO:     172.19.0.7:55784 - "GET /operations/events HTTP/1.1" 200 OK
+budget-service-1        | INFO:     172.19.0.7:44492 - "GET /health HTTP/1.1" 200 OK
+budget-service-1        | INFO:     172.19.0.7:44502 - "GET /api/v1/budgets?month=2026-11 HTTP/1.1" 200 OK
+budget-service-1        | INFO:     172.19.0.7:44518 - "GET /api/v1/budgets?month=2026-11 HTTP/1.1" 200 OK
+
+FinanZen>

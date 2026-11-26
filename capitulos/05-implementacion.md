@@ -1,6 +1,8 @@
 # Capítulo V: Product Implementation, Validation & Deployment
 
-[Volver al informe](../README.md). Fuente académica conservada; actualización verificada el 10 de octubre de 2026.
+[Volver al informe](../README.md). Fuente académica conservada; evidencias históricas del Sprint 1 verificadas el 10 de octubre de 2026 y apartados 5.3.3.2, 5.3.3.4 y 5.3.3.6 actualizados el 26 de noviembre de 2026.
+
+**Lectura por entrega:** los apartados 5.1, 5.2 y 5.3.1 describen el estado histórico del Sprint 1. Sus pendientes técnicos corresponden a esa fecha. Las evidencias nuevas de Docker, Kafka y los servicios de Sprint 3 se presentan en 5.3.3; allí se documenta la ejecución local integrada del 26 de noviembre.
 
 ## 5.1. Testing Suites & General Patterns
 
@@ -371,6 +373,121 @@ El equipo conserva en el backlog público los responsables Rodrigo Oblitas, Renz
 ![Kanban real con doce tarjetas en DONE](../evidencias/cierre-sprint-1/trello-board.png)
 
 [Export del tablero](../evidencias/cierre-sprint-1/trello-board.json). El backlog y el alcance se explican en 5.3.1.1. Los nuevos incrementos de biblioteca/BDD/release todavía no tienen tarjetas adicionales en ese tablero; se trazan mediante los PR y commits del reporte.
+
+### 5.3.3. Sprint 3 — Smart Device Integration and Consumption Telemetry
+
+Actualización documental verificada el **26 de noviembre de 2026**, zona horaria **America/Lima**. Los apartados siguientes corresponden a las evidencias de desarrollo, ejecución y despliegue solicitadas para Sprint 3. Conservan el contenido anterior del Sprint 1 y utilizan la implementación integrada de Financial Records, Budget, Notification y Device Integration.
+
+#### 5.3.3.2. Development Evidence for Sprint Review
+
+Se implementó una ejecución distribuida local con Docker Compose: cuatro aplicaciones FastAPI en contenedores independientes, Apache Kafka como Event Bus y Nginx para el frontend y el enrutamiento HTTP. La imagen `finanzen-api:dev` se reutiliza con comandos ASGI diferentes por servicio; cada contenedor monta su propia persistencia. Device Integration recibe lecturas, normaliza Wh/kWh mediante adaptadores y conserva la telemetría separada de los movimientos financieros.
+
+El archivo versionado se llama **`compose.yaml`**; es el archivo de Docker Compose que cumple el papel del `docker-compose.yml` mencionado en el backlog. La evidencia conserva el nombre real del repositorio.
+
+| Artefacto versionado | Implementación verificable |
+| --- | --- |
+| [Dockerfile del backend](https://github.com/1ASI0657-2620-9199/back/blob/f0846ceb886650b425d22ad1c4f940db5915e5f3/Dockerfile) | Python 3.11, instalación de dependencias y biblioteca común, usuario de ejecución sin privilegios, puerto 8000, health check HTTP y etapa independiente de pruebas. |
+| [compose.yaml](https://github.com/1ASI0657-2620-9199/back/blob/f0846ceb886650b425d22ad1c4f940db5915e5f3/compose.yaml) | Cuatro APIs, Kafka 4.1.2 en KRaft, Nginx, dependencias de arranque, health checks y cinco volúmenes. Incluye dos tareas de inicialización de Kafka. |
+| [Dockerfile del frontend](https://github.com/1ASI0657-2620-9199/front/blob/b0998d931bb5d29771de3a849f8b9118c2a0a6bc/Dockerfile) | Imagen Nginx con los archivos HTML, CSS y JavaScript del panel. |
+| [nginx.conf](https://github.com/1ASI0657-2620-9199/front/blob/b0998d931bb5d29771de3a849f8b9118c2a0a6bc/nginx.conf) | Enrutamiento de las operaciones a cada API y acceso a Swagger mediante prefijos por servicio. |
+| [Publicador y consumidores Kafka](https://github.com/1ASI0657-2620-9199/back/blob/f0846ceb886650b425d22ad1c4f940db5915e5f3/app/kafka_transport.py) | Publicación de Outbox con confirmación de Kafka, consumo idempotente, confirmación del offset después de persistir y envío de mensajes inválidos a DLQ. |
+
+La trazabilidad se verificó con Git en CMD y con los archivos presentes en las ramas publicadas. Los commits de configuración e integración son:
+
+| Repositorio | Commit | Fecha | Evidencia de desarrollo |
+| --- | --- | --- | --- |
+| back | [f92595e](https://github.com/1ASI0657-2620-9199/back/commit/f92595e) | 2026-11-26 | `feat: implement Sprint 2 and 3 APIs with Docker and Kafka`: incorpora Dockerfile, Compose, servicios, broker y verificadores. |
+| front | [d9af8bd](https://github.com/1ASI0657-2620-9199/front/commit/d9af8bd) | 2026-11-26 | `feat: add budgets alerts devices and reports to the web panel`: incorpora el panel, Dockerfile de Nginx y configuración del gateway. |
+| back | [f0846ce](https://github.com/1ASI0657-2620-9199/back/commit/f0846ce) | 2026-11-26 | Integración de las APIs y Kafka en main, conservando también el historial de develop. |
+| front | [b0998d9](https://github.com/1ASI0657-2620-9199/front/commit/b0998d9) | 2026-11-26 | Integración del frontend de Sprint 2 y 3 en main. |
+
+![CMD real: repositorio FinanZen, commits y archivos versionados](../evidencias/sprint-3/docker/01-desarrollo-commits.png)
+
+![CMD real: contenido del Dockerfile del backend](../evidencias/sprint-3/docker/02-dockerfile.png)
+
+![CMD real: Compose valida y enumera servicios, volúmenes e imágenes](../evidencias/sprint-3/docker/03-compose-configuracion.png)
+
+Se conservan [copias de los archivos de configuración](../evidencias/sprint-3/docker/fuentes-configuracion/) y un [registro de versiones y hashes](../evidencias/sprint-3/docker/configuracion-versionada.json) para relacionar la configuración capturada con el código publicado.
+
+#### 5.3.3.4. Execution Evidence for Sprint Review
+
+La ejecución se comprobó en una sesión **CMD local**, con el backend y el frontend de FinanZen y el stack Docker en funcionamiento. Se observaron **seis contenedores activos y saludables**: Financial Records, Budget, Notification, Device Integration, Kafka y Nginx. Las tareas `kafka-init` y `kafka-permissions` terminaron con código 0; su función es inicializar recursos antes de iniciar las aplicaciones.
+
+![CMD real: seis contenedores running y healthy, con inicializadores finalizados](../evidencias/sprint-3/docker/04-contenedores-activos.png)
+
+Desde esa misma aplicación de terminal se ejecutó:
+
+~~~cmd
+.\.venv\Scripts\python.exe scripts\verify_docker.py
+~~~
+
+El verificador realizó llamadas HTTP al gateway y publicó/consumió eventos del broker real. La ejecución terminó con código **0** y registró **siete comprobaciones aprobadas**:
+
+| Comprobación ejecutada | Resultado observado |
+| --- | --- |
+| APIs y Swagger de los cuatro servicios | Aplicaciones independientes accesibles a través de Nginx y con transporte Kafka declarado. |
+| Movimiento → presupuesto → alerta | TransactionRecorded actualiza el presupuesto y BudgetThresholdReached produce una notificación in-app entregada. |
+| Repetición HTTP y reentrega Kafka | Se conserva el movimiento original y no se suma dos veces el gasto. |
+| Telemetría normalizada e idempotente | Una lectura de 25000 Wh se registra como 25 kWh; reenviarla mantiene una lectura única y no crea una transacción financiera. |
+| Mensaje inválido | Cinco intentos fallidos de procesamiento antes de su publicación en la DLQ de Kafka. |
+| Outbox y resultado de entrega | Los Outbox quedan sin eventos pendientes y NotificationDelivered se observa en Kafka. |
+| Persistencia por servicio | Las cuatro bases utilizan volúmenes Docker distintos. |
+
+El usuario sintético de esta ejecución fue **`docker-44ecf9af`**. El medidor simulado utilizó una tarifa de **S/ 0.75 por kWh**, por lo que los **25 kWh** tuvieron un costo estimado de **S/ 18.75**. El umbral del dispositivo era **20 kWh**. El costo permaneció como estimación de consumo; el único movimiento financiero del escenario fue el gasto registrado expresamente por el verificador.
+
+![CMD real: ejecución aprobada del verificador integrado](../evidencias/sprint-3/docker/05-ejecucion-integrada.png)
+
+![CMD real: topics de aplicación, telemetría y DLQs existentes en Kafka](../evidencias/sprint-3/docker/08-kafka-topics-consumidor.png)
+
+La [salida capturada de CMD](../evidencias/sprint-3/docker/05-ejecucion-integrada.txt) y el [registro JSON de la ejecución](../evidencias/sprint-3/docker/ejecucion-integrada.json) conservan las comprobaciones, el usuario sintético, los eventos y sus posiciones en Kafka. Esta captura corresponde al modo normal del verificador, sin el argumento `--faults`.
+
+#### 5.3.3.6. Software Deployment Evidence for Sprint Review
+
+**Modalidad de despliegue verificada: Docker Desktop local en Windows, con contenedores Linux y Docker Compose.** La captura registra Docker Engine **29.0.1** y Compose **v2.40.3-desktop.1**. El frontend se publica en `http://127.0.0.1:8080`; Kafka dispone de un listener local en `127.0.0.1:9092` y un listener interno en `kafka:19092`.
+
+La puesta en marcha se verificó sobre el stack existente mediante el siguiente comando, que terminó con código 0 y esperó los health checks de las dependencias:
+
+~~~cmd
+docker compose --progress quiet up -d --wait --wait-timeout 240
+~~~
+
+![CMD real: Docker Compose confirma el despliegue y muestra servicios saludables](../evidencias/sprint-3/docker/09-compose-despliegue.png)
+
+| Servicio activo | Estado capturado | Volumen persistente |
+| --- | --- | --- |
+| financial-records | running / healthy | finanzen_financial-data |
+| budget-service | running / healthy | finanzen_budget-data |
+| notification-service | running / healthy | finanzen_notification-data |
+| device-service | running / healthy | finanzen_telemetry-data |
+| kafka | running / healthy | finanzen_kafka-data |
+| web | running / healthy | Archivos estáticos incorporados en su imagen Nginx. |
+
+Los dos inicializadores concluyen con `Exited (0)`; los seis servicios anteriores permanecen activos. Los volúmenes de Financial Records, Budget, Notification y Telemetry son independientes.
+
+Los health checks HTTP se consultaron realmente desde CMD con el [script de verificación](../scripts/verificar_health_docker.py). La evidencia registró:
+
+| Endpoint | HTTP | Estado | Transporte | Outbox pendiente |
+| --- | --- | --- | --- | --- |
+| /services/financial/health | 200 | ok | kafka | 0 |
+| /services/budgets/health | 200 | ok | kafka | 0 |
+| /services/notifications/health | 200 | ok | kafka | 0 |
+| /services/devices/health | 200 | ok | kafka | 0 |
+
+Todos los trabajadores informados por las cuatro respuestas estaban activos. Las [respuestas completas de health](../evidencias/sprint-3/docker/health-checks.json) conservan los campos originales recibidos por HTTP.
+
+![CMD real: cuatro health checks HTTP 200 y trabajadores activos](../evidencias/sprint-3/docker/06-health-checks.png)
+
+Los logs se obtuvieron directamente de los contenedores con:
+
+~~~cmd
+docker compose logs --no-color --tail 6 financial-records budget-service notification-service device-service
+~~~
+
+![CMD real: logs de los cuatro servicios y respuestas HTTP exitosas](../evidencias/sprint-3/docker/07-logs-servicios.png)
+
+La línea `Kafka message quarantined` de Budget corresponde al mensaje inválido enviado intencionadamente por el verificador para comprobar la DLQ. El [texto capturado de los logs](../evidencias/sprint-3/docker/07-logs-servicios.txt) permite examinar ese registro junto con las respuestas HTTP del escenario.
+
+Las nueve imágenes de estos tres apartados son capturas de una ventana nativa **CMD (cmd.exe)** en el equipo de desarrollo. Se guardaron la [metodología y el índice de evidencias](../evidencias/sprint-3/docker/README.md), las transcripciones del búfer de consola y los metadatos de captura. Las imágenes no se generaron con IA ni se reconstruyeron en una página web.
 
 ## Pendientes que requieren evidencia externa
 

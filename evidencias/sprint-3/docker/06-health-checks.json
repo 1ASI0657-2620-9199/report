@@ -1,0 +1,30 @@
+{
+  "case": "06-health-checks",
+  "captured_at": "2026-11-26T13:48:06.795007-05:00",
+  "application": "cmd.exe",
+  "window_title": "FinanZen - CMD - 06-health-checks",
+  "window_class": "CASCADIA_HOSTING_WINDOW_CLASS",
+  "process_id": 34136,
+  "method": "PIL.ImageGrab of the visible native CMD window; text read from its console buffer",
+  "rectangle": [
+    50,
+    55,
+    1550,
+    995
+  ],
+  "image_size": [
+    1500,
+    940
+  ],
+  "commands": [
+    "python ..\\report\\scripts\\verificar_health_docker.py"
+  ],
+  "exit_codes": [
+    0
+  ],
+  "image": "06-health-checks.png",
+  "sha256": "1a2fb9cc43dd106bd28d802a4aed1f368bf02ad9159134c10e0f638feceee736",
+  "transcript": "06-health-checks.txt",
+  "image_edited": false,
+  "ai_image_generation": false
+}

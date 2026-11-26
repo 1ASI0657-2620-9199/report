@@ -1,0 +1,30 @@
+{
+  "case": "08-kafka-topics-consumidor",
+  "captured_at": "2026-11-26T13:48:16.143378-05:00",
+  "application": "cmd.exe",
+  "window_title": "FinanZen - CMD - 08-kafka-topics-consumidor",
+  "window_class": "CASCADIA_HOSTING_WINDOW_CLASS",
+  "process_id": 30936,
+  "method": "PIL.ImageGrab of the visible native CMD window; text read from its console buffer",
+  "rectangle": [
+    50,
+    55,
+    1550,
+    995
+  ],
+  "image_size": [
+    1500,
+    940
+  ],
+  "commands": [
+    "docker compose exec -T kafka /opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:19092 --list"
+  ],
+  "exit_codes": [
+    0
+  ],
+  "image": "08-kafka-topics-consumidor.png",
+  "sha256": "5d3757b6a392a51456aacd6ee5c44075c31258133ef3f7b512c81aae6cf4c8fc",
+  "transcript": "08-kafka-topics-consumidor.txt",
+  "image_edited": false,
+  "ai_image_generation": false
+}

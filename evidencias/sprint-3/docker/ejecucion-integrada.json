@@ -1,0 +1,232 @@
+{
+  "started_at": "2026-11-26T18:47:54.041256+00:00",
+  "user_id": "docker-44ecf9af",
+  "base_url": "http://127.0.0.1:8080",
+  "checks": [
+    {
+      "name": "Four independent Kafka service APIs and Swagger behind Nginx",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "TransactionRecorded -> BudgetThresholdReached -> delivered in-app notification",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "HTTP replay and actual Kafka redelivery produce no duplicate financial effects",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Telemetry crosses Kafka, normalizes Wh, deduplicates and never creates a financial transaction",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Invalid message retries five times and reaches the real Kafka DLQ",
+      "passed": true,
+      "details": {
+        "topic": "finanzen.transactions.v1.budgets.dlq",
+        "partition": 2,
+        "offset": 0,
+        "body": {
+          "attempts": 5,
+          "body_base64": "eyJldmVudF9pZCI6InBvaXNvbi00NGVjZjlhZi0yOGNmLTRkZGYtYThkNS0yODUyZWZmOTliZTMiLCJldmVudF90eXBlIjoiVHJhbnNhY3Rpb25SZWNvcmRlZCIsInNjaGVtYV92ZXJzaW9uIjoxLCJvY2N1cnJlZF9hdCI6IjIwMjYtMTEtMjZUMTg6NDc6NTcuNDYzNzU1WiIsInBheWxvYWQiOnsidXNlcl9pZCI6ImRvY2tlci00NGVjZjlhZiIsImRlbGliZXJhdGVseV9pbnZhbGlkIjp0cnVlfX0=",
+          "dead_letter_id": "finanzen-budgets-v1:finanzen.transactions.v1:1:17",
+          "error_type": "ValidationError",
+          "failed_at": "2026-11-26T18:48:01.243308+00:00",
+          "offset": 17,
+          "original_topic": "finanzen.transactions.v1",
+          "partition": 1,
+          "service": "budgets"
+        }
+      }
+    },
+    {
+      "name": "All outboxes drained and NotificationDelivered observable on Kafka",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Database per Service: four distinct Docker volumes",
+      "passed": true,
+      "details": [
+        "finanzen_budget-data",
+        "finanzen_telemetry-data",
+        "finanzen_financial-data",
+        "finanzen_notification-data"
+      ]
+    }
+  ],
+  "events": [
+    {
+      "topic": "finanzen.transactions.v1",
+      "partition": 1,
+      "offset": 15,
+      "body": {
+        "event_id": "transaction:db7bdf22-00b5-4cd5-a179-785db11abccb",
+        "event_type": "TransactionRecorded",
+        "schema_version": 1,
+        "occurred_at": "2026-11-26T18:47:55.001420Z",
+        "payload": {
+          "account_id": "cash-account",
+          "type": "expense",
+          "amount": "85.00",
+          "currency": "PEN",
+          "category": "food",
+          "occurred_at": "2026-11-26T18:47:54.041256Z",
+          "description": "Docker/Kafka acceptance",
+          "id": "db7bdf22-00b5-4cd5-a179-785db11abccb",
+          "user_id": "docker-44ecf9af",
+          "created_at": "2026-11-26T18:47:55.001420Z"
+        }
+      }
+    },
+    {
+      "topic": "finanzen.budget-thresholds.v1",
+      "partition": 1,
+      "offset": 7,
+      "body": {
+        "event_id": "budget:ff1b8a11-4488-4f81-8bd0-514da9a01c52:revision:1:threshold:80",
+        "event_type": "BudgetThresholdReached",
+        "schema_version": 1,
+        "occurred_at": "2026-11-26T18:47:55.292251Z",
+        "payload": {
+          "user_id": "docker-44ecf9af",
+          "budget_id": "ff1b8a11-4488-4f81-8bd0-514da9a01c52",
+          "category": "food",
+          "month": "2026-11",
+          "currency": "PEN",
+          "threshold": 80,
+          "spent": "85.00",
+          "limit_amount": "100"
+        }
+      }
+    },
+    {
+      "topic": "finanzen.notification-results.v1",
+      "partition": 1,
+      "offset": 10,
+      "body": {
+        "event_id": "72311936-ef9d-4af2-8fed-84d85ea8ee9c",
+        "event_type": "NotificationDelivered",
+        "schema_version": 1,
+        "occurred_at": "2026-11-26T18:47:55.687841Z",
+        "payload": {
+          "notification_id": "budget:ff1b8a11-4488-4f81-8bd0-514da9a01c52:revision:1:threshold:80",
+          "user_id": "docker-44ecf9af",
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "topic": "finanzen.transactions.v1",
+      "partition": 1,
+      "offset": 16,
+      "body": {
+        "event_id": "transaction:db7bdf22-00b5-4cd5-a179-785db11abccb",
+        "event_type": "TransactionRecorded",
+        "schema_version": 1,
+        "occurred_at": "2026-11-26T18:47:55.001420Z",
+        "payload": {
+          "account_id": "cash-account",
+          "type": "expense",
+          "amount": "85.00",
+          "currency": "PEN",
+          "category": "food",
+          "occurred_at": "2026-11-26T18:47:54.041256Z",
+          "description": "Docker/Kafka acceptance",
+          "id": "db7bdf22-00b5-4cd5-a179-785db11abccb",
+          "user_id": "docker-44ecf9af",
+          "created_at": "2026-11-26T18:47:55.001420Z"
+        }
+      }
+    },
+    {
+      "topic": "finanzen.telemetry.v1",
+      "partition": 1,
+      "offset": 3,
+      "body": {
+        "event_id": "reading:4848a3a6-7b03-40e0-b24c-c10a2a7e0dcd",
+        "event_type": "ConsumptionReadingNormalized",
+        "schema_version": 1,
+        "occurred_at": "2026-11-26T18:47:57.190483Z",
+        "payload": {
+          "id": "4848a3a6-7b03-40e0-b24c-c10a2a7e0dcd",
+          "reading_id": "docker-reading-44ecf9af-28cf-4ddf-a8d5-2852eff99be3",
+          "device_id": "ab6739c1-6b29-47f1-9d6a-16e04d3d02a5",
+          "user_id": "docker-44ecf9af",
+          "source": "simulator",
+          "value": "25",
+          "raw_value": "25000",
+          "raw_unit": "Wh",
+          "occurred_at": "2026-11-26T18:47:54.041256+00:00",
+          "received_at": "2026-11-26T18:47:57.190483+00:00",
+          "month": "2026-11",
+          "estimated_cost": "18.75",
+          "fingerprint": "16d8cc888fef4fe9afbfa13d928522859b6c9b5cba5eeed974911df9e74656f2",
+          "measurement_type": "energy_consumption",
+          "unit": "kWh",
+          "validation_status": "valid",
+          "currency": "PEN",
+          "device_name": "Medidor Docker",
+          "monthly_kwh": "25",
+          "monthly_limit_kwh": "20",
+          "threshold_reached": true
+        }
+      }
+    },
+    {
+      "topic": "finanzen.transactions.v1",
+      "partition": 1,
+      "offset": 17,
+      "body": {
+        "event_id": "poison-44ecf9af-28cf-4ddf-a8d5-2852eff99be3",
+        "event_type": "TransactionRecorded",
+        "schema_version": 1,
+        "occurred_at": "2026-11-26T18:47:57.463755Z",
+        "payload": {
+          "user_id": "docker-44ecf9af",
+          "deliberately_invalid": true
+        }
+      }
+    },
+    {
+      "topic": "finanzen.notification-results.v1",
+      "partition": 1,
+      "offset": 11,
+      "body": {
+        "event_id": "60f2c4f2-f6e3-4d2b-a5d4-d9c716f8b07f",
+        "event_type": "NotificationDelivered",
+        "schema_version": 1,
+        "occurred_at": "2026-11-26T18:47:57.693448Z",
+        "payload": {
+          "notification_id": "reading:4848a3a6-7b03-40e0-b24c-c10a2a7e0dcd",
+          "user_id": "docker-44ecf9af",
+          "attempts": 1
+        }
+      }
+    },
+    {
+      "topic": "finanzen.transactions.v1.budgets.dlq",
+      "partition": 2,
+      "offset": 0,
+      "body": {
+        "attempts": 5,
+        "body_base64": "eyJldmVudF9pZCI6InBvaXNvbi00NGVjZjlhZi0yOGNmLTRkZGYtYThkNS0yODUyZWZmOTliZTMiLCJldmVudF90eXBlIjoiVHJhbnNhY3Rpb25SZWNvcmRlZCIsInNjaGVtYV92ZXJzaW9uIjoxLCJvY2N1cnJlZF9hdCI6IjIwMjYtMTEtMjZUMTg6NDc6NTcuNDYzNzU1WiIsInBheWxvYWQiOnsidXNlcl9pZCI6ImRvY2tlci00NGVjZjlhZiIsImRlbGliZXJhdGVseV9pbnZhbGlkIjp0cnVlfX0=",
+        "dead_letter_id": "finanzen-budgets-v1:finanzen.transactions.v1:1:17",
+        "error_type": "ValidationError",
+        "failed_at": "2026-11-26T18:48:01.243308+00:00",
+        "offset": 17,
+        "original_topic": "finanzen.transactions.v1",
+        "partition": 1,
+        "service": "budgets"
+      }
+    }
+  ],
+  "fault_tests_enabled": false,
+  "containers": "{\"Command\":\"\\\"python -m uvicorn s…\\\"\",\"CreatedAt\":\"2026-11-26 12:55:37 -0500 -05\",\"ExitCode\":0,\"Health\":\"healthy\",\"ID\":\"c34218ada4ed\",\"Image\":\"finanzen-api:dev\",\"Labels\":\"com.docker.compose.image=sha256:cf713b9d399c54dd15a2805fe3d7281302f51f4cae8da8f542519739464e45f2,com.docker.compose.oneoff=False,com.docker.compose.project.working_dir=C:\\\\Users\\\\rodri\\\\OneDrive\\\\Desktop\\\\6to Ciclo\\\\Open Source\\\\examen final\\\\FinanZen\\\\back,com.docker.compose.version=2.40.3,com.docker.compose.project=finanzen,com.docker.compose.project.config_files=C:\\\\Users\\\\rodri\\\\OneDrive\\\\Desktop\\\\6to Ciclo\\\\Open Source\\\\examen final\\\\FinanZen\\\\back\\\\compose.yaml,com.docker.compose.replace=budget-service-1,com.docker.compose.service=budget-service,desktop.docker.io/ports.scheme=v2,com.docker.compose.config-hash=c9332e7fddbf1c0600f32be11a213df445a23933472b2e50bd5a439eae3f4ae5,com.docker.compose.container-number=1,com.docker.compose.depends_on=kafka-init:service_completed_successfully:false\",\"LocalVolumes\":\"1\",\"Mounts\":\"finanzen_budge…\",\"Name\":\"finanzen-budget-service-1\",\"Names\":\"finanzen-budget-service-1\",\"Networks\":\"finanzen_finanzen\",\"Ports\":\"8000/tcp\",\"Project\":\"finanzen\",\"Publishers\":[{\"URL\":\"\",\"TargetPort\":8000,\"PublishedPort\":0,\"Protocol\":\"tcp\"}],\"RunningFor\":\"52 minutes ago\",\"Service\":\"budget-service\",\"Size\":\"0B\",\"State\":\"running\",\"Status\":\"Up 50 minutes (healthy)\"}\n{\"Command\":\"\\\"python -m uvicorn s…\\\"\",\"CreatedAt\":\"2026-11-26 12:55:37 -0500 -05\",\"ExitCode\":0,\"Health\":\"healthy\",\"ID\":\"3fbc992bc15f\",\"Image\":\"finanzen-api:dev\",\"Labels\":\"com.docker.compose.config-hash=e98ddbcc27372c953880dbe82b02a5d7432497f866d54f3ed4a224e198b5e215,com.docker.compose.container-number=1,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=C:\\\\Users\\\\rodri\\\\OneDrive\\\\Desktop\\\\6to Ciclo\\\\Open Source\\\\examen final\\\\FinanZen\\\\back\\\\compose.yaml,desktop.docker.io/ports.scheme=v2,com.docker.compose.depends_on=kafka-init:service_completed_successfully:false,com.docker.compose.image=sha256:cf713b9d399c54dd15a2805fe3d7281302f51f4cae8da8f542519739464e45f2,com.docker.compose.project=finanzen,com.docker.compose.project.working_dir=C:\\\\Users\\\\rodri\\\\OneDrive\\\\Desktop\\\\6to Ciclo\\\\Open Source\\\\examen final\\\\FinanZen\\\\back,com.docker.compose.replace=device-service-1,com.docker.compose.service=device-service,com.docker.compose.version=2.40.3\",\"LocalVolumes\":\"1\",\"Mounts\":\"finanzen_telem…\",\"Name\":\"finanzen-device-service-1\",\"Names\":\"finanzen-device-service-1\",\"Networks\":\"finanzen_finanzen\",\"Ports\":\"8000/tcp\",\"Project\":\"finanzen\",\"Publishers\":[{\"URL\":\"\",\"TargetPort\":8000,\"PublishedPort\":0,\"Protocol\":\"tcp\"}],\"RunningFor\":\"52 minutes ago\",\"Service\":\"device-service\",\"Size\":\"0B\",\"State\":\"running\",\"Status\":\"Up 50 minutes (healthy)\"}\n{\"Command\":\"\\\"python -m uvicorn a…\\\"\",\"CreatedAt\":\"2026-11-26 12:55:37 -0500 -05\",\"ExitCode\":0,\"Health\":\"healthy\",\"ID\":\"bd9e7326b56d\",\"Image\":\"finanzen-api:dev\",\"Labels\":\"com.docker.compose.project=finanzen,com.docker.compose.version=2.40.3,desktop.docker.io/ports.scheme=v2,com.docker.compose.project.config_files=C:\\\\Users\\\\rodri\\\\OneDrive\\\\Desktop\\\\6to Ciclo\\\\Open Source\\\\examen final\\\\FinanZen\\\\back\\\\compose.yaml,com.docker.compose.project.working_dir=C:\\\\Users\\\\rodri\\\\OneDrive\\\\Desktop\\\\6to Ciclo\\\\Open Source\\\\examen final\\\\FinanZen\\\\back,com.docker.compose.replace=financial-records-1,com.docker.compose.service=financial-records,com.docker.compose.config-hash=dbea663c340397826919a1f9ebdca682cc09921b29304af7f4d1d4a0df24cc32,com.docker.compose.container-number=1,com.docker.compose.depends_on=kafka-init:service_completed_successfully:false,com.docker.compose.image=sha256:cf713b9d399c54dd15a2805fe3d7281302f51f4cae8da8f542519739464e45f2,com.docker.compose.oneoff=False\",\"LocalVolumes\":\"1\",\"Mounts\":\"finanzen_finan…\",\"Name\":\"finanzen-financial-records-1\",\"Names\":\"finanzen-financial-records-1\",\"Networks\":\"finanzen_finanzen\",\"Ports\":\"8000/tcp\",\"Project\":\"finanzen\",\"Publishers\":[{\"URL\":\"\",\"TargetPort\":8000,\"PublishedPort\":0,\"Protocol\":\"tcp\"}],\"RunningFor\":\"52 minutes ago\",\"Service\":\"financial-records\",\"Size\":\"0B\",\"State\":\"running\",\"Status\":\"Up 50 minutes (healthy)\"}\n{\"Command\":\"\\\"/__cacert_entrypoin…\\\"\",\"CreatedAt\":\"2026-11-26 12:52:51 -0500 -05\",\"ExitCode\":0,\"Health\":\"healthy\",\"ID\":\"408e593e84e5\",\"Image\":\"apache/kafka:4.1.2\",\"Labels\":\"com.docker.compose.oneoff=False,com.docker.compose.project=finanzen,com.docker.compose.project.config_files=C:\\\\Users\\\\rodri\\\\OneDrive\\\\Desktop\\\\6to Ciclo\\\\Open Source\\\\examen final\\\\FinanZen\\\\back\\\\compose.yaml,org.label-schema.build-date=2026-02-25,org.label-schema.vcs-url=https://github.com/apache/kafka,com.docker.compose.project.working_dir=C:\\\\Users\\\\rodri\\\\OneDrive\\\\Desktop\\\\6to Ciclo\\\\Open Source\\\\examen final\\\\FinanZen\\\\back,desktop.docker.io/ports/9092/tcp=127.0.0.1:9092,com.docker.compose.replace=kafka-1,com.docker.compose.service=kafka,com.docker.compose.version=2.40.3,org.label-schema.name=kafka,com.docker.compose.depends_on=kafka-permissions:service_completed_successfully:false,com.docker.compose.image=sha256:5cc2a2fd93fa2687b44015eee04fb2c3edd9e526bd64bf8bec5ff1e268772e0e,desktop.docker.io/ports.scheme=v2,org.label-schema.description=Apache Kafka,maintainer=Apache Kafka,com.docker.compose.config-hash=4e53d36375cf6c9de4c5d28c5340fe264c4b634b6fe4ab75a08e7d880848d8dc,com.docker.compose.container-number=1\",\"LocalVolumes\":\"4\",\"Mounts\":\"d00dc5bcc3004b…,502ab8dfdc7abf…,finanzen_kafka…,762fd8d6207b7c…\",\"Name\":\"finanzen-kafka-1\",\"Names\":\"finanzen-kafka-1\",\"Networks\":\"finanzen_finanzen\",\"Ports\":\"127.0.0.1:9092-\\u003e9092/tcp\",\"Project\":\"finanzen\",\"Publishers\":[{\"URL\":\"127.0.0.1\",\"TargetPort\":9092,\"PublishedPort\":9092,\"Protocol\":\"tcp\"}],\"RunningFor\":\"55 minutes ago\",\"Service\":\"kafka\",\"Size\":\"0B\",\"State\":\"running\",\"Status\":\"Up 51 minutes (healthy)\"}\n{\"Command\":\"\\\"/bin/bash -ec 'for …\\\"\",\"CreatedAt\":\"2026-11-26 12:48:01 -0500 -05\",\"ExitCode\":0,\"Health\":\"\",\"ID\":\"e7a3895608e3\",\"Image\":\"apache/kafka:4.1.2\",\"Labels\":\"com.docker.compose.project=finanzen,com.docker.compose.version=2.40.3,org.label-schema.vcs-url=https://github.com/apache/kafka,com.docker.compose.oneoff=False,com.docker.compose.service=kafka-init,maintainer=Apache Kafka,org.label-schema.description=Apache Kafka,org.label-schema.name=kafka,com.docker.compose.config-hash=126d7438aeebc1ef7bd35d86a733a5d58e71d3aec6a04e38760546a5854c04dc,com.docker.compose.depends_on=kafka:service_healthy:false,org.label-schema.build-date=2026-02-25,com.docker.compose.container-number=1,com.docker.compose.project.config_files=C:\\\\Users\\\\rodri\\\\OneDrive\\\\Desktop\\\\6to Ciclo\\\\Open Source\\\\examen final\\\\FinanZen\\\\back\\\\compose.yaml,com.docker.compose.project.working_dir=C:\\\\Users\\\\rodri\\\\OneDrive\\\\Desktop\\\\6to Ciclo\\\\Open Source\\\\examen final\\\\FinanZen\\\\back,desktop.docker.io/ports.scheme=v2,com.docker.compose.image=sha256:5cc2a2fd93fa2687b44015eee04fb2c3edd9e526bd64bf8bec5ff1e268772e0e\",\"LocalVolumes\":\"3\",\"Mounts\":\"1ca3d48f851035…,ecf2f3f1e964e5…,9d674bb9dc9037…\",\"Name\":\"finanzen-kafka-init-1\",\"Names\":\"finanzen-kafka-init-1\",\"Networks\":\"finanzen_finanzen\",\"Ports\":\"\",\"Project\":\"finanzen\",\"Publishers\":[],\"RunningFor\":\"About an hour ago\",\"Service\":\"kafka-init\",\"Size\":\"0B\",\"State\":\"exited\",\"Status\":\"Exited (0) 50 minutes ago\"}\n{\"Command\":\"\\\"python -c 'import o…\\\"\",\"CreatedAt\":\"2026-11-26 12:48:57 -0500 -05\",\"ExitCode\":0,\"Health\":\"\",\"ID\":\"c075de061876\",\"Image\":\"python:3.11-slim\",\"Labels\":\"com.docker.compose.depends_on=,com.docker.compose.image=sha256:61e01f72680f86a5279ad510818ab7b2ee9f049822589d4e34e33e044360356c,com.docker.compose.project.config_files=C:\\\\Users\\\\rodri\\\\OneDrive\\\\Desktop\\\\6to Ciclo\\\\Open Source\\\\examen final\\\\FinanZen\\\\back\\\\compose.yaml,com.docker.compose.project.working_dir=C:\\\\Users\\\\rodri\\\\OneDrive\\\\Desktop\\\\6to Ciclo\\\\Open Source\\\\examen final\\\\FinanZen\\\\back,com.docker.compose.container-number=1,com.docker.compose.oneoff=False,com.docker.compose.project=finanzen,com.docker.compose.service=kafka-permissions,com.docker.compose.version=2.40.3,desktop.docker.io/ports.scheme=v2,com.docker.compose.config-hash=797bd59aa84f64ad1443bbb1ffaac1884203022ffde69775ad2be09ebea2e762\",\"LocalVolumes\":\"1\",\"Mounts\":\"finanzen_kafka…\",\"Name\":\"finanzen-kafka-permissions-1\",\"Names\":\"finanzen-kafka-permissions-1\",\"Networks\":\"none\",\"Ports\":\"\",\"Project\":\"finanzen\",\"Publishers\":[],\"RunningFor\":\"59 minutes ago\",\"Service\":\"kafka-permissions\",\"Size\":\"0B\",\"State\":\"exited\",\"Status\":\"Exited (0) 51 minutes ago\"}\n{\"Command\":\"\\\"python -m uvicorn s…\\\"\",\"CreatedAt\":\"2026-11-26 12:57:48 -0500 -05\",\"ExitCode\":0,\"Health\":\"healthy\",\"ID\":\"386f82e2f26c\",\"Image\":\"finanzen-api:dev\",\"Labels\":\"com.docker.compose.project=finanzen,com.docker.compose.project.config_files=C:\\\\Users\\\\rodri\\\\OneDrive\\\\Desktop\\\\6to Ciclo\\\\Open Source\\\\examen final\\\\FinanZen\\\\back\\\\compose.yaml,com.docker.compose.service=notification-service,com.docker.compose.project.working_dir=C:\\\\Users\\\\rodri\\\\OneDrive\\\\Desktop\\\\6to Ciclo\\\\Open Source\\\\examen final\\\\FinanZen\\\\back,com.docker.compose.replace=notification-service-1,com.docker.compose.version=2.40.3,desktop.docker.io/ports.scheme=v2,com.docker.compose.config-hash=a0e0d2142af07db1421f0a12b4f4012f890a057530d8d0dd583427a0a12ee73c,com.docker.compose.container-number=1,com.docker.compose.depends_on=,com.docker.compose.image=sha256:4111b29fa710a00ab74e470fd4ee478e1050ac42137a82e264ab07027877ffc0,com.docker.compose.oneoff=False\",\"LocalVolumes\":\"1\",\"Mounts\":\"finanzen_notif…\",\"Name\":\"finanzen-notification-service-1\",\"Names\":\"finanzen-notification-service-1\",\"Networks\":\"finanzen_finanzen\",\"Ports\":\"8000/tcp\",\"Project\":\"finanzen\",\"Publishers\":[{\"URL\":\"\",\"TargetPort\":8000,\"PublishedPort\":0,\"Protocol\":\"tcp\"}],\"RunningFor\":\"50 minutes ago\",\"Service\":\"notification-service\",\"Size\":\"0B\",\"State\":\"running\",\"Status\":\"Up 50 minutes (healthy)\"}\n{\"Command\":\"\\\"/docker-entrypoint.…\\\"\",\"CreatedAt\":\"2026-11-26 12:55:39 -0500 -05\",\"ExitCode\":0,\"Health\":\"healthy\",\"ID\":\"b438d215ef9a\",\"Image\":\"finanzen-web:dev\",\"Labels\":\"com.docker.compose.replace=web-1,com.docker.compose.version=2.40.3,desktop.docker.io/ports/80/tcp=127.0.0.1:8080,maintainer=NGINX Docker Maintainers \\u003cdocker-maint@nginx.com\\u003e,com.docker.compose.config-hash=b4f8a2a01b9bf225dca2da5eaa34471f360b135c1a25380652e31dc4c36969a4,com.docker.compose.container-number=1,com.docker.compose.depends_on=financial-records:service_healthy:false,budget-service:service_healthy:false,notification-service:service_healthy:false,device-service:service_healthy:false,com.docker.compose.image=sha256:e644b0739db22af46ca71e5980a46ffee47f0a4140c03cb26758f1f0544c0934,com.docker.compose.project.config_files=C:\\\\Users\\\\rodri\\\\OneDrive\\\\Desktop\\\\6to Ciclo\\\\Open Source\\\\examen final\\\\FinanZen\\\\back\\\\compose.yaml,com.docker.compose.project.working_dir=C:\\\\Users\\\\rodri\\\\OneDrive\\\\Desktop\\\\6to Ciclo\\\\Open Source\\\\examen final\\\\FinanZen\\\\back,com.docker.compose.service=web,desktop.docker.io/ports.scheme=v2,com.docker.compose.oneoff=False,com.docker.compose.project=finanzen\",\"LocalVolumes\":\"0\",\"Mounts\":\"\",\"Name\":\"finanzen-web-1\",\"Names\":\"finanzen-web-1\",\"Networks\":\"finanzen_finanzen\",\"Ports\":\"127.0.0.1:8080-\\u003e80/tcp\",\"Project\":\"finanzen\",\"Publishers\":[{\"URL\":\"127.0.0.1\",\"TargetPort\":80,\"PublishedPort\":8080,\"Protocol\":\"tcp\"}],\"RunningFor\":\"52 minutes ago\",\"Service\":\"web\",\"Size\":\"0B\",\"State\":\"running\",\"Status\":\"Up 51 minutes (healthy)\"}\n",
+  "completed_at": "2026-11-26T18:48:01.923365+00:00",
+  "result": "passed"
+}
