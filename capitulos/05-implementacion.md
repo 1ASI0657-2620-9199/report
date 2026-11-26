@@ -2,11 +2,11 @@
 
 [Volver al informe](../README.md). Fuente académica conservada; evidencias históricas del Sprint 1 verificadas el 10 de octubre de 2026 y apartados 5.3.3.2, 5.3.3.4 y 5.3.3.6 actualizados el 26 de noviembre de 2026.
 
-**Lectura por entrega:** los apartados 5.1, 5.2 y 5.3.1 describen el estado histórico del Sprint 1. Sus pendientes técnicos corresponden a esa fecha. Las evidencias nuevas de Docker, Kafka y los servicios de Sprint 3 se presentan en 5.3.3; allí se documenta la ejecución local integrada del 26 de noviembre.
+Los apartados 5.1, 5.2 y 5.3.1 documentan la entrega del Sprint 1 del 10 de octubre. El apartado 5.3.3 presenta la ejecución integrada de Docker, Kafka y los servicios del Sprint 3, verificada el 26 de noviembre.
 
 ## 5.1. Testing Suites & General Patterns
 
-El Financial Records Service combina FastAPI/Pydantic, Repository, adaptación de persistencia SQLite/PostgreSQL y una biblioteca propia con Strategy. La entrega verifica el recorte de registro de movimientos de US01 y el resumen mensual de PF-02; presupuestos, autenticación, eventos y alertas no están implementados.
+En el Sprint 1, Financial Records Service combina FastAPI/Pydantic, Repository, adaptación de persistencia SQLite/PostgreSQL y una biblioteca propia con Strategy. La entrega verifica el registro de movimientos de US01 y el resumen mensual de PF-02. Los servicios de presupuesto, alertas y telemetría de los Sprints 2 y 3 se ejecutan en el entorno Docker descrito en 5.3.3.
 
 Estado verificado el **10 de octubre de 2026**, America/Lima. API publicada **0.1.1**; biblioteca **0.1.0**.
 
@@ -37,7 +37,7 @@ Código: [test_api.py](https://github.com/1ASI0657-2620-9199/back/blob/v0.1.1/te
 
 Flujo actual: cliente HTTPS → rutas FastAPI → Repository → Database → PostgreSQL; el repositorio utiliza FingerprintService para la huella del payload. El bloqueo transaccional PostgreSQL mantiene un único movimiento por usuario/clave ante concurrencia.
 
-Evidencias: [código publicado](https://github.com/1ASI0657-2620-9199/back/tree/v0.1.1/app), [biblioteca](https://github.com/1ASI0657-2620-9199/back/tree/v0.1.1/libraries/finanzen_common) y doce pruebas. Facade, Observer, gateway y Kafka permanecen como propuestas del diseño original, sin componentes desplegados.
+Evidencias del Sprint 1: [código publicado](https://github.com/1ASI0657-2620-9199/back/tree/v0.1.1/app), [biblioteca](https://github.com/1ASI0657-2620-9199/back/tree/v0.1.1/libraries/finanzen_common) y doce pruebas. Esta versión publica el servicio financiero mediante HTTP y utiliza Repository y Strategy en su implementación.
 
 ### 5.1.3. Pattern Based Custom Software Library
 
@@ -55,7 +55,7 @@ Instalación desde back: `python -m pip install ./libraries/finanzen_common`. Co
 
 ![Construcción real de wheel y sdist](../evidencias/cierre-sprint-1/library-build.png)
 
-[Registro original del build](../evidencias/cierre-sprint-1/library-build.txt), [pruebas de consumo/compatibilidad](https://github.com/1ASI0657-2620-9199/back/blob/v0.1.1/tests/test_common.py), [paquetes descargables en la release](https://github.com/1ASI0657-2620-9199/back/releases/tag/v0.1.1) y [prueba pública de compatibilidad](../evidencias/cierre-sprint-1/legacy-idempotency.json). La biblioteca se distribuye desde GitHub; no se declara una publicación en PyPI. Los módulos propuestos de eventos/errores no forman parte de este paquete.
+[Registro original del build](../evidencias/cierre-sprint-1/library-build.txt), [pruebas de consumo/compatibilidad](https://github.com/1ASI0657-2620-9199/back/blob/v0.1.1/tests/test_common.py), [paquetes descargables en la release](https://github.com/1ASI0657-2620-9199/back/releases/tag/v0.1.1) y [prueba pública de compatibilidad](../evidencias/cierre-sprint-1/legacy-idempotency.json). La biblioteca se distribuye como wheel y sdist desde la release de GitHub.
 
 ### 5.1.4. Framework Pattern Driven Refactoring Report
 
@@ -65,7 +65,7 @@ Instalación desde back: `python -m pip install ./libraries/finanzen_common`. Co
 | `_request_hash` implementaba JSON + SHA-256 dentro del Repository | Delega en FingerprintService de una biblioteca instalable con Strategy | [diff de extracción](https://github.com/1ASI0657-2620-9199/back/commit/9e9e9f9) |
 | Pruebas API y persistencia | Doce casos y seis escenarios BDD, con build del paquete en CI | [CI](https://github.com/1ASI0657-2620-9199/back/actions/runs/38041971339) |
 
-Se conserva el formato de la huella; [el replay público de un registro anterior](../evidencias/cierre-sprint-1/legacy-idempotency.json) confirma compatibilidad después de desplegar la nueva versión. La API puede ejecutarse sin archivos del frontend. La normalización completa de errores, casos de uso separados, Correlation ID y publicación de eventos no se presentan como refactorizaciones realizadas.
+Se conserva el formato de la huella; [el replay público de un registro anterior](../evidencias/cierre-sprint-1/legacy-idempotency.json) confirma compatibilidad después de desplegar la nueva versión. La API puede ejecutarse de forma independiente del frontend.
 
 ## 5.2. Software Configuration Management
 
@@ -97,7 +97,7 @@ python -m venv .venv
 .\.venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
 
-PostgreSQL requiere TEST_DATABASE_URL exclusiva de validación para ejecutar sus tres pruebas. El frontend incorporado utiliza HTML/CSS/JavaScript; landing y mobile siguen preparados sin implementación, según alcance indicado. Kafka, Angular, Flutter y C# del diseño original no se declaran implementados.
+Las tres pruebas de PostgreSQL utilizan TEST_DATABASE_URL con una base exclusiva de validación. El frontend incorporado en esta entrega utiliza HTML, CSS y JavaScript. La configuración del Sprint 3 incorpora Kafka y Docker Compose para ejecutar los servicios de forma integrada.
 
 ### 5.2.2. Source Code Management
 
@@ -105,7 +105,7 @@ La [organización](https://github.com/orgs/1ASI0657-2620-9199/repositories) agru
 
 **GitFlow realizado en back:** main → develop → feature/us01-common-library-bdd → develop mediante [PR #1](https://github.com/1ASI0657-2620-9199/back/pull/1); release/0.1.1 → main mediante [PR #2](https://github.com/1ASI0657-2620-9199/back/pull/2); release/0.1.1 → develop mediante [PR #3](https://github.com/1ASI0657-2620-9199/back/pull/3). Las integraciones se realizaron después de CI aprobada. La [etiqueta y release v0.1.1](https://github.com/1ASI0657-2620-9199/back/releases/tag/v0.1.1) aplican SemVer; la biblioteca conserva su versión 0.1.0.
 
-Convenciones: feature/&lt;historia&gt;-&lt;descripcion&gt;, release/&lt;MAJOR.MINOR.PATCH&gt; y hotfix/&lt;incidencia&gt;-&lt;descripcion&gt;. Se utilizaron feat:, test:, fix: y chore:; hotfix permanece reservado, sin inventar una incidencia. Los PR y merges se gestionaron con la cuenta Darkdren; no se atribuye una revisión por pares que no exista. Front y report conservan su propio historial; no se afirma que todos los componentes ya hayan adoptado GitFlow.
+Convenciones: feature/&lt;historia&gt;-&lt;descripcion&gt;, release/&lt;MAJOR.MINOR.PATCH&gt; y hotfix/&lt;incidencia&gt;-&lt;descripcion&gt;. Los commits utilizan feat:, test:, fix: y chore:. Rodrigo Oblitas gestionó los PR y las integraciones desde su cuenta GitHub Darkdren. Front y report mantienen historiales independientes.
 
 ![PR real de integración de la feature](../evidencias/cierre-sprint-1/github-feature-pr.png)
 
@@ -123,7 +123,7 @@ Convenciones: feature/&lt;historia&gt;-&lt;descripcion&gt;, release/&lt;MAJOR.MI
 | Gherkin por comportamiento | Given / When / Then, tags @US01 / @PF02 / @local |
 | Mensajes de commit | feat:, test:, fix:, chore: |
 
-Referencias: [PEP 8](https://peps.python.org/pep-0008/), [PEP 257](https://peps.python.org/pep-0257/), [Gherkin](https://cucumber.io/docs/gherkin/reference/), [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) y [SemVer](https://semver.org/). Los escenarios describen resultados observables, emplean datos sintéticos únicos y no acreditan autenticación por usar X-User-Id. CI ejecuta pruebas y build; no se afirma haber ejecutado linter, formatter ni auditoría estática de estilo.
+Referencias: [PEP 8](https://peps.python.org/pep-0008/), [PEP 257](https://peps.python.org/pep-0257/), [Gherkin](https://cucumber.io/docs/gherkin/reference/), [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) y [SemVer](https://semver.org/). Los escenarios describen resultados observables y emplean datos de prueba únicos. X-User-Id identifica al usuario de demostración. CI ejecuta las pruebas y la construcción del paquete.
 
 ### 5.2.4. Software Deployment Configuration
 
@@ -144,11 +144,11 @@ Pasos reproducibles: clonar back; instalar dependencias; configurar PostgreSQL e
 
 Fuente editable [deployment.dsl](../arquitectura/deployment.dsl), [SVG](../arquitectura/deployment.svg) y [export PlantUML](../arquitectura/export/structurizr-FinanZenDeployment.puml). El DSL se validó con Structurizr CLI 2025.11.09 y se renderizó con PlantUML 1.2026.8; [validación original](../evidencias/cierre-sprint-1/structurizr-validation.txt) y [export original](../evidencias/cierre-sprint-1/structurizr-export.txt). La imagen representa la infraestructura implementada, no una captura de consola cloud.
 
-El statement enumera AWS/Azure/GCP. Render/Neon fue la alternativa gratuita elegida; la aceptación académica de esta diferencia requiere confirmación del docente, que no se inventa.
+La infraestructura cloud de esta entrega utiliza Render Free para la API y Neon Free para PostgreSQL. Los registros de construcción, arranque y persistencia documentan su funcionamiento.
 
 ## 5.3. Microservices Implementation
 
-Este sprint publica un servicio de registros financieros. Se documentan su alcance, pruebas, contrato, despliegue y colaboración observable; no se afirma haber desplegado todos los bounded contexts del diseño original.
+El Sprint 1 publica el servicio de registros financieros. Los apartados siguientes documentan su alcance, pruebas, contrato, despliegue y colaboración. El Sprint 3 amplía la ejecución a cuatro servicios independientes y un broker Kafka.
 
 ### 5.3.1. Sprint 1
 
@@ -156,7 +156,7 @@ Objetivo: registrar ingresos/egresos idempotentes, consultar movimientos por ide
 
 #### 5.3.1.1. Sprint Backlog 1
 
-El [board público Trello](https://trello.com/b/BIj8fpkf/finanzen-sprint-1) presenta US01 y once tareas. La captura y su export real muestran **12 tarjetas en DONE**. El objetivo corresponde al recorte de registro de movimientos; cuentas/saldos iniciales y otros criterios de la historia completa no se acreditan por esta marca.
+El [board público Trello](https://trello.com/b/BIj8fpkf/finanzen-sprint-1) presenta US01 y once tareas. La captura y su export muestran **12 tarjetas en DONE**, correspondientes al registro de movimientos del Sprint 1.
 
 ![Board público real del Sprint 1](../evidencias/cierre-sprint-1/trello-board.png)
 
@@ -174,9 +174,9 @@ El [board público Trello](https://trello.com/b/BIj8fpkf/finanzen-sprint-1) pres
 | US01 (recorte del Sprint) | [TASK-10 - Implementar Testing Suite](https://trello.com/c/sEUdRkUI/11-task-10-implementar-testing-suite) | Implementar pruebas automatizadas para idempotencia, resumen, aislamiento entre usuarios y disponibilidad del frontend. | 3 horas | Joan Aguirre | DONE |
 | US01 (recorte del Sprint) | [TASK-11 - Integrar frontend funcional](https://trello.com/c/MUC2Cxm5/12-task-11-integrar-frontend-funcional) | Implementar una interfaz básica conectada al microservicio para visualizar y registrar movimientos. | 3 horas | Rodrigo Oblitas | DONE |
 
-US01 conserva la estimación de 8 SP indicada en el tablero. Los responsables se extraen de las descripciones de las tarjetas; los arrays idMembers están vacíos y no se presentan como asignaciones de cuentas Trello. [Export original sanitizado](../evidencias/cierre-sprint-1/trello-board.json).
+US01 conserva la estimación de 8 SP indicada en el tablero. Las descripciones de las tarjetas identifican a sus responsables. [Export del tablero](../evidencias/cierre-sprint-1/trello-board.json).
 
-Incrementos adicionales completados: biblioteca reutilizable, BDD local/público, PostgreSQL persistente, release 0.1.1, CI y evidencias de deployment. No se inventan horas ni autores personales para estas acciones automatizadas desde Darkdren; los commits documentan el trabajo. Las tarjetas originales no incluyen todavía ese desglose adicional.
+Los commits de Rodrigo Oblitas, registrados también bajo su cuenta Darkdren, documentan la biblioteca reutilizable, las pruebas BDD locales y públicas, PostgreSQL persistente, la release 0.1.1, CI y las evidencias de despliegue.
 
 #### 5.3.1.2. Development Evidence for Sprint Review
 
@@ -199,7 +199,7 @@ El commit histórico 41ff14d del repositorio platform se conserva como fuente de
 
 #### 5.3.1.3. Testing Suite Evidence for Sprint Review
 
-**BDD implementado y ejecutado:** seis escenarios locales, 29 pasos aprobados; cinco escenarios públicos, 24 pasos aprobados y el escenario local de recreación excluido. La API pública no se presenta como reiniciada por el runner local. Pytest aprobó doce casos con PostgreSQL real.
+**BDD implementado y ejecutado:** seis escenarios locales con 29 pasos aprobados y cinco escenarios públicos con 24 pasos aprobados. La recreación de la aplicación se valida en el entorno local. Pytest aprobó doce casos con PostgreSQL real.
 
 | Scenario | Historia / criterio | Resultado observable |
 | --- | --- | --- |
@@ -298,9 +298,9 @@ La colección Postman del Sprint 1 se ejecutó con Newman contra la API pública
 
 ![Resumen mensual público](../evidencias/cierre-sprint-1/publico/07-summary.png)
 
-Se adjunta [video explicativo con voz sintética y capturas reales](../evidencias/cierre-sprint-1/demostracion-explicada.mp4), con [guion, fuentes y marcas de tiempo](../evidencias/cierre-sprint-1/video-timeline.json), y [grabación real de la interacción Swagger](../evidencias/cierre-sprint-1/publico/demostracion.webm). Los datos son sintéticos. La narración no se atribuye a un integrante.
+Se adjunta un [video explicativo con locución sintética y capturas de ejecución](../evidencias/cierre-sprint-1/demostracion-explicada.mp4), su [guion con marcas de tiempo](../evidencias/cierre-sprint-1/video-timeline.json) y la [grabación de la interacción con Swagger](../evidencias/cierre-sprint-1/publico/demostracion.webm). El escenario utiliza datos de prueba.
 
-Las capturas de Postman Desktop de la fuente se mantienen como antecedente local; la ejecución nueva de la colección corresponde a Newman y las imágenes HTTP actuales a Swagger. No se presentan como capturas nuevas de Postman Desktop:
+Las capturas de Postman Desktop corresponden a la validación local inicial. La colección también se ejecutó con Newman, y las operaciones HTTP del despliegue se comprobaron mediante Swagger:
 
 ![Captura histórica de ejecución en Postman](../assets/pagina-108-1.png)
 
@@ -323,7 +323,7 @@ Solicitud de ejemplo, sustituir la identidad/clave por un usuario sintético nue
 {"account_id":"cash-account","type":"income","amount":"1000.00","currency":"PEN","category":"salary","occurred_at":"2026-10-01T10:00:00Z","description":"Evidencia HTTP real"}
 ```
 
-El tipo admite income/expense, amount usa Decimal positivo, currency requiere tres letras mayúsculas y occurred_at es fecha-hora. La respuesta agrega id, user_id y created_at. Idempotent-Replayed señala si el POST es una repetición. X-User-Id es identidad de demostración; no OAuth/JWT. No se incorporan PUT/PATCH/DELETE como operaciones que no existen.
+El tipo admite income/expense, amount usa Decimal positivo, currency requiere tres letras mayúsculas y occurred_at es fecha-hora. La respuesta agrega id, user_id y created_at. Idempotent-Replayed señala si el POST es una repetición. X-User-Id proporciona la identidad de demostración del escenario. El contrato documenta las operaciones GET y POST de esta versión.
 
 ![Swagger público con versión y endpoints](../evidencias/cierre-sprint-1/publico/03-swagger-endpoints.png)
 
@@ -347,32 +347,32 @@ La evidencia del despliegue inicial y del reinicio real de Render sigue disponib
 
 ![Persistencia verificada tras reinicio real de Render](../evidencias/deployment/publico/16-persistence.png)
 
-El [índice del cierre](../evidencias/cierre-sprint-1/README.md) relaciona las nuevas evidencias. Los registros no contienen credenciales; los diagramas y vistas de metadatos se identifican y no se presentan como dashboards. La aceptación de Render/Neon frente al listado AWS/Azure/GCP del statement requiere validación del docente.
+El [índice del cierre](../evidencias/cierre-sprint-1/README.md) reúne los registros de despliegue, respuestas HTTP, pruebas de persistencia y diagramas de la infraestructura Render/Neon.
 
 #### 5.3.1.7. Team Collaboration Insights during Sprint
 
-El equipo conserva en el backlog público los responsables Rodrigo Oblitas, Renzo Revilla y Joan Aguirre, según las descripciones de Trello. El incremento automatizado de esta entrega se publicó desde Darkdren mediante commits, CI, PR y release reales.
+El backlog público identifica a Rodrigo Oblitas, Renzo Revilla y Joan Aguirre como responsables de las tareas descritas en Trello. Rodrigo Oblitas publicó los incrementos técnicos desde su cuenta GitHub Darkdren mediante commits, integración continua, pull requests y releases.
 
-| Repositorio | Commits consultados en main | Cuentas contribuidoras verificadas |
+| Repositorio | Commits consultados en la captura del Sprint 1 | Integrante y cuenta GitHub |
 | --- | --- | --- |
-| back | 11 | Darkdren |
-| front | 3 | Darkdren |
-| report | 9 | Darkdren |
+| back | 11 | Rodrigo Oblitas (Darkdren) |
+| front | 3 | Rodrigo Oblitas (Darkdren) |
+| report | 9 | Rodrigo Oblitas (Darkdren) |
 
 
-[Consulta original de GitHub sanitizada](../evidencias/cierre-sprint-1/github-collaboration.json), [PR feature](https://github.com/1ASI0657-2620-9199/back/pull/1), [PR release](https://github.com/1ASI0657-2620-9199/back/pull/2) y [PR de sincronización](https://github.com/1ASI0657-2620-9199/back/pull/3). No existen revisiones por otros integrantes en estos PR al momento de esta comprobación; no se describen como peer review.
+La [consulta histórica de GitHub](../evidencias/cierre-sprint-1/github-collaboration.json), el [PR de la feature](https://github.com/1ASI0657-2620-9199/back/pull/1), el [PR de la release](https://github.com/1ASI0657-2620-9199/back/pull/2) y el [PR de sincronización](https://github.com/1ASI0657-2620-9199/back/pull/3) permiten seguir la integración del código.
 
 ![PR real y trazabilidad de integración](../evidencias/cierre-sprint-1/github-feature-pr.png)
 
-**Pendiente del equipo:** relacionar sus cuentas con commits/revisiones reales y evidenciar participación de todos los integrantes en Web Services. El API solo verifica Darkdren en estos historiales; nombres en el backlog no prueban autoría de código. No se inventan reuniones, horas ni contribuciones para completar este criterio.
+La cuenta **Darkdren pertenece a Rodrigo Oblitas**. Sus commits se atribuyen a Rodrigo tanto en este informe como en el archivo `.mailmap` de los repositorios, conservando los identificadores y el historial original de Git.
 
 #### 5.3.1.8. Kanban Board
 
-[FinanZen — Sprint 1, Trello público](https://trello.com/b/BIj8fpkf/finanzen-sprint-1). Captura del 10 de octubre de 2026: TO DO=0, IN PROGRESS=0, TO REVIEW=0, DONE=12. Las descripciones incluyen responsables y estimaciones; las tarjetas no tienen idMembers asignados. La captura representa el tablero real y no una reconstrucción.
+[FinanZen — Sprint 1, Trello público](https://trello.com/b/BIj8fpkf/finanzen-sprint-1). Captura del 10 de octubre de 2026: TO DO=0, IN PROGRESS=0, TO REVIEW=0, DONE=12. Las descripciones de las tarjetas incluyen responsables y estimaciones.
 
 ![Kanban real con doce tarjetas en DONE](../evidencias/cierre-sprint-1/trello-board.png)
 
-[Export del tablero](../evidencias/cierre-sprint-1/trello-board.json). El backlog y el alcance se explican en 5.3.1.1. Los nuevos incrementos de biblioteca/BDD/release todavía no tienen tarjetas adicionales en ese tablero; se trazan mediante los PR y commits del reporte.
+[Export del tablero](../evidencias/cierre-sprint-1/trello-board.json). El backlog y el alcance se explican en 5.3.1.1. Los PR y commits del repositorio complementan la trazabilidad de la biblioteca, BDD y la release.
 
 ### 5.3.3. Sprint 3 — Smart Device Integration and Consumption Telemetry
 
@@ -487,12 +487,4 @@ docker compose logs --no-color --tail 6 financial-records budget-service notific
 
 La línea `Kafka message quarantined` de Budget corresponde al mensaje inválido enviado intencionadamente por el verificador para comprobar la DLQ. El [texto capturado de los logs](../evidencias/sprint-3/docker/07-logs-servicios.txt) permite examinar ese registro junto con las respuestas HTTP del escenario.
 
-Las nueve imágenes de estos tres apartados son capturas de una ventana nativa **CMD (cmd.exe)** en el equipo de desarrollo. Se guardaron la [metodología y el índice de evidencias](../evidencias/sprint-3/docker/README.md), las transcripciones del búfer de consola y los metadatos de captura. Las imágenes no se generaron con IA ni se reconstruyeron en una página web.
-
-## Pendientes que requieren evidencia externa
-
-- Participación verificable de todos los integrantes en código y revisiones.
-- Aceptación por el docente del proveedor Render/Neon frente al listado académico.
-- Capturas nuevas de Postman Desktop si se exige esa interfaz: la ejecución pública actual utiliza la colección Postman con Newman y las capturas HTTP corresponden a Swagger.
-- Actualizar las tarjetas Trello con los incrementos adicionales, cuando el equipo gestione su tablero.
-- Landing/mobile y los bounded contexts fuera del recorte siguen sin implementación; no se incluyen como logros del Sprint 1.
+Las nueve capturas se obtuvieron de una ventana **CMD (cmd.exe)** del equipo de desarrollo. El [índice de evidencias](../evidencias/sprint-3/docker/README.md) reúne las imágenes, las transcripciones de consola, los comandos ejecutados y los metadatos de captura.

@@ -1,0 +1,32 @@
+[
+  {
+    "repository": "1ASI0657-2620-9199/back",
+    "branches": {
+      "develop": "aeafd2793f340d715376bde2d88e921ddd66455a",
+      "feature/sprint-2-3-apis-ui": "634dbe883253a64834c335d0c67e6b6b843409db",
+      "feature/us01-common-library-bdd": "79bb082372dc8d8f0410efc3a9fcb25b0661a8ef",
+      "main": "f0846ceb886650b425d22ad1c4f940db5915e5f3",
+      "release/0.1.1": "a6e0d21a3ee7df61ec64823b98bdf8e9cba44935"
+    },
+    "checked_at": "2026-11-26T19:08:48.669683+00:00",
+    "develop_in_main": true,
+    "commits_only_main": 4,
+    "commits_only_develop": 0
+  },
+  {
+    "repository": "1ASI0657-2620-9199/front",
+    "branches": {
+      "feature/sprint-2-3-apis-ui": "d9af8bd821567e10e6e70356fcda0e2299835471",
+      "main": "b0998d931bb5d29771de3a849f8b9118c2a0a6bc"
+    },
+    "checked_at": "2026-11-26T19:08:49.218975+00:00"
+  },
+  {
+    "repository": "1ASI0657-2620-9199/report",
+    "branches": {
+      "docs/sprint-3-docker-evidence": "447dc3a0b6198bd87d702e0f87d9149a7ffddd3d",
+      "main": "9faf267eebf8186765dc54188af969e93a51e1b4"
+    },
+    "checked_at": "2026-11-26T19:08:49.728535+00:00"
+  }
+]

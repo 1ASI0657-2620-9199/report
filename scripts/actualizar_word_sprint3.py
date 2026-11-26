@@ -107,7 +107,9 @@ def main():
         return p
 
     source = CHAPTER.read_text(encoding="utf-8")
-    block = source[source.index(START):source.index(END)]
+    start = source.index(START)
+    end = source.find(END, start)
+    block = source[start:end if end >= 0 else len(source)]
     lines = block.splitlines()
     pictures = []
     i = 0
