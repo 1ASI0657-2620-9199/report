@@ -1,0 +1,15 @@
+FinanZen>cd
+C:\Users\rodri\OneDrive\Desktop\6to Ciclo\Open Source\examen final\FinanZen\back
+
+FinanZen>docker compose --progress quiet up -d --wait --wait-timeout 240
+
+FinanZen>docker compose ps --format "table {{.Service}}\t{{.State}}\t{{.Status}}"
+SERVICE                STATE     STATUS
+budget-service         running   Up 6 seconds (healthy)
+device-service         running   Up 6 seconds (healthy)
+financial-records      running   Up 6 seconds (healthy)
+kafka                  running   Up 54 minutes (healthy)
+notification-service   running   Up 53 minutes (healthy)
+web                    running   Up 55 minutes (healthy)
+
+FinanZen>

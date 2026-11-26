@@ -27,6 +27,7 @@ Cada componente tiene su propio repositorio e historial Git. Este repositorio co
 | Persistencia y capturas | 2026-10-10 | Backend con SQLite/PostgreSQL y ejecución HTTP local | Render Free + Neon preparado, 8 tests, 11 comprobaciones Newman, 13 capturas y grabación real; publicación cloud pendiente de acceso a las herramientas |
 | Deployment cloud | 2026-10-10 | Render Free y Neon Free reales | API Live, URL HTTPS, 13 capturas públicas adicionales, grabación, 8 peticiones/11 aserciones Newman y persistencia tras reiniciar Render |
 | Cierre técnico del Sprint 1 | 2026-10-10 | Backend v0.1.1 y biblioteca 0.1.0 | Doce pruebas, seis escenarios Gherkin locales y cinco públicos, GitFlow con tres PR, release con wheel/sdist, C4 Deployment, Trello real y video explicado |
+| Docker y Kafka del Sprint 3 | 2026-11-26 | back f0846ce y front b0998d9 | Apartados 5.3.3.2, 5.3.3.4 y 5.3.3.6 en Markdown y Word: nueve capturas reales de CMD, siete comprobaciones integradas, seis servicios saludables, logs y health checks |
 
 **API pública:** [Swagger](https://finanzen-financial-records.onrender.com/docs)
 · [Health](https://finanzen-financial-records.onrender.com/health)
@@ -35,11 +36,18 @@ Cada componente tiene su propio repositorio e historial Git. Este repositorio co
 
 Documento compartido: [Google Docs del equipo](https://docs.google.com/document/d/1Q70r6_MAmjk9BNTKyIEDe3r9cuEV_UPJrb6Ec3v47Tk/edit?tab=t.0).
 
-El capítulo V del documento compartido está actualizado: veinte apartados
+La actualización histórica del capítulo V en el documento compartido contiene veinte apartados
 verificados, tablas y enlaces a diecinueve imágenes de evidencia distintas.
 Los capítulos anteriores se conservaron. La inserción de imágenes dentro de
 Google Docs requiere iniciar sesión; el [Word de entrega](entrega/FinanZen-Reporte-Actualizado.docx)
 ya las integra. [Verificación de la actualización](evidencias/cierre-sprint-1/google-doc-update.json).
+
+**Actualización del 26 de noviembre:** los tres apartados de Docker/Kafka de
+Sprint 3 están integrados en el [capítulo V](capitulos/05-implementacion.md) y en
+el [Word de entrega](entrega/FinanZen-Reporte-Actualizado.docx). Las nueve capturas
+provienen de CMD local y tienen registros originales en el
+[índice de Sprint 3](evidencias/sprint-3/docker/README.md). Esta actualización no
+se ha aplicado al Google Docs compartido.
 
 El PDF no registra fechas ni autores en su tabla de versiones. Esta tabla
 documenta los artefactos disponibles, sin atribuir nuevas entrevistas ni
@@ -69,6 +77,8 @@ trabajo de desarrollo a integrantes específicos.
 11. [Cierre del Sprint 1](evidencias/cierre-sprint-1/README.md): librería,
     Gherkin, C4, GitFlow, tablero, video narrado y release desplegada.
 12. [Reporte Word con evidencias integradas](entrega/FinanZen-Reporte-Actualizado.docx).
+13. [Docker y Kafka del Sprint 3](evidencias/sprint-3/docker/README.md): desarrollo,
+    ejecución integrada y despliegue local con capturas reales de CMD.
 
 ## Criterio de actualización
 

@@ -1,0 +1,15 @@
+FinanZen>cd
+C:\Users\rodri\OneDrive\Desktop\6to Ciclo\Open Source\examen final\FinanZen\back
+
+FinanZen>docker compose exec -T kafka /opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:19092 --list
+__consumer_offsets
+finanzen.budget-thresholds.v1
+finanzen.budget-thresholds.v1.notifications.dlq
+finanzen.notification-delivery.dlq
+finanzen.notification-results.v1
+finanzen.telemetry.v1
+finanzen.telemetry.v1.notifications.dlq
+finanzen.transactions.v1
+finanzen.transactions.v1.budgets.dlq
+
+FinanZen>

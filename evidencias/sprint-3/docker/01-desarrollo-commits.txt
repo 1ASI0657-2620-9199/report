@@ -1,0 +1,30 @@
+C:\Users\rodri\OneDrive\Desktop\6to Ciclo\Open Source\examen final\FinanZen\back
+
+FinanZen>git remote get-url origin
+https://github.com/1ASI0657-2620-9199/back.git
+
+FinanZen>git log -1 --oneline -- Dockerfile compose.yaml
+f92595e feat: implement Sprint 2 and 3 APIs with Docker and Kafka
+
+FinanZen>git log -1 --date=short --format="%h %ad %an" -- Dockerfile compose.yaml
+f92595e 2026-11-26 Rodrigo Oblitas
+
+FinanZen>git ls-files Dockerfile compose.yaml requirements-kafka.txt
+Dockerfile
+compose.yaml
+requirements-kafka.txt
+
+FinanZen>docker compose config --services
+kafka-permissions
+kafka
+kafka-init
+device-service
+financial-records
+notification-service
+budget-service
+web
+
+FinanZen>git -C ..\front log -1 --format="%h %s" -- Dockerfile nginx.conf
+d9af8bd feat: add budgets alerts devices and reports to the web panel
+
+FinanZen>

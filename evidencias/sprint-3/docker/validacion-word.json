@@ -1,0 +1,106 @@
+{
+  "source_document_sha256": "00bfd36242a533ae0fc4db36c65a48a511920ab4a057301b107324bbca7ae7c1",
+  "updated_document_sha256": "f369dcd7cd19b862f05e97d4a30226faf5958cf8e5261a03d31d4d633ddae165",
+  "original_media_count": 43,
+  "updated_media_count": 52,
+  "earlier_body_elements_preserved": true,
+  "original_media_preserved_byte_for_byte": true,
+  "headings_inserted": [
+    "5.3.3. Sprint 3 — Smart Device Integration and Consumption Telemetry",
+    "5.3.3.2. Development Evidence for Sprint Review",
+    "5.3.3.4. Execution Evidence for Sprint Review",
+    "5.3.3.6. Software Deployment Evidence for Sprint Review"
+  ],
+  "pictures_inserted": [
+    {
+      "path": "evidencias/sprint-3/docker/01-desarrollo-commits.png",
+      "sha256": "fe0ddf624cf783022a9702af9ff93fd720d18b6728f266fe9fb2d2246bcbdb0c",
+      "caption": "CMD real: repositorio FinanZen, commits y archivos versionados"
+    },
+    {
+      "path": "evidencias/sprint-3/docker/02-dockerfile.png",
+      "sha256": "a597c79b9215a0e0a30c346c8df8e0a6e736c131d946a049cdc2df365fc99384",
+      "caption": "CMD real: contenido del Dockerfile del backend"
+    },
+    {
+      "path": "evidencias/sprint-3/docker/03-compose-configuracion.png",
+      "sha256": "b39d8c808081672c6395a7e35750f5834dc78d6c3d7f0b785340a2d6807dc213",
+      "caption": "CMD real: Compose valida y enumera servicios, volúmenes e imágenes"
+    },
+    {
+      "path": "evidencias/sprint-3/docker/04-contenedores-activos.png",
+      "sha256": "64cc7bbf208573a6d4570c1dd1db1311d8735c5ba5854fe0e148c6180de0f34a",
+      "caption": "CMD real: seis contenedores running y healthy, con inicializadores finalizados"
+    },
+    {
+      "path": "evidencias/sprint-3/docker/05-ejecucion-integrada.png",
+      "sha256": "8f4381e9ca9e4456c40b8a3e2cf1e47e451b28c5d0258df526ad1c8839376984",
+      "caption": "CMD real: ejecución aprobada del verificador integrado"
+    },
+    {
+      "path": "evidencias/sprint-3/docker/08-kafka-topics-consumidor.png",
+      "sha256": "5d3757b6a392a51456aacd6ee5c44075c31258133ef3f7b512c81aae6cf4c8fc",
+      "caption": "CMD real: topics de aplicación, telemetría y DLQs existentes en Kafka"
+    },
+    {
+      "path": "evidencias/sprint-3/docker/09-compose-despliegue.png",
+      "sha256": "03a6a4aadae55e26cbe655b5969bdb46e3a8bb28983a040cfc74b27499317754",
+      "caption": "CMD real: Docker Compose confirma el despliegue y muestra servicios saludables"
+    },
+    {
+      "path": "evidencias/sprint-3/docker/06-health-checks.png",
+      "sha256": "1a2fb9cc43dd106bd28d802a4aed1f368bf02ad9159134c10e0f638feceee736",
+      "caption": "CMD real: cuatro health checks HTTP 200 y trabajadores activos"
+    },
+    {
+      "path": "evidencias/sprint-3/docker/07-logs-servicios.png",
+      "sha256": "cafc2535ce09da15c6a65038c73dccb649f492cbc49686de08ae1c02782bc795",
+      "caption": "CMD real: logs de los cuatro servicios y respuestas HTTP exitosas"
+    }
+  ],
+  "original_media_sha256": {
+    "word/media/image14.png": "152ad8b5f56dcbbcb76d252a9dc1f03fb9858c1b85a0bfb1b93f6e1dfde81b56",
+    "word/media/image4.png": "b3349190da49cbbb1a573cd7739ddd1dd441d62930420a00858c664e7b26f2e5",
+    "word/media/image8.png": "c81d288e7407d6e16fcbd3c1894d62d3704ec97f82902f1f009dafd3a0487470",
+    "word/media/image23.png": "916dcdf7651339f70d90a3a9867916c3bd957ce3cc1e759c83a68a29f2599a77",
+    "word/media/image7.png": "c804125ee9902ac9c640d95c6908af8ead01922fb8eb8646eaa6ede0337f18f3",
+    "word/media/image19.png": "0c831b1d7bc219441a4291506c5eeb0891367eb1cb19cd8ee6f876badf47b15e",
+    "word/media/image24.png": "4e155ac7d77ac90f401e576aa083e1f29fba440cbff8efae2fe013af3fac6870",
+    "word/media/image21.png": "33cbfc34f6a29cbf9ef406e2b71cc61b6753d4cc5f6d34e340e4c9ef82898108",
+    "word/media/image16.png": "ab951c5d5c6204a5dc69a31bd154610bf0483f5116103d56b2190657a047fa24",
+    "word/media/image13.png": "b9c0993090b4b6d4ccb4fb4bc67acab89f8fedbd78542cd2f95e76ee5fc817e1",
+    "word/media/image5.png": "25d9ab7a0b1f970ecb7684d2f9f3266913ec0e6bcc69414f62136026fc0da931",
+    "word/media/image12.png": "1e437604026d2efe0513ecb39ede71e370334731842ef7d37f5daee67a81743b",
+    "word/media/image1.png": "911cfb14cf3c019fabc6301d2eca169989959c0fa0f6efa3e12dd4af5db3a8f0",
+    "word/media/image6.png": "ac6501003a602368952954072efac20ea5c3e9fd0bdfa39712203bff1f01931e",
+    "word/media/image10.png": "b1d282b534dea3a684ceff051eac782668b6c7c78a1c103e06fa92e348e2ec77",
+    "word/media/image2.png": "1d8e7ee60377f9b260b570a10d08823c338f829783023ce05afbc2f99a333025",
+    "word/media/image11.jpg": "18b22187c63c791dd4bc749a243a92a54e28857a2169ac0e761a4ddd3e91f13b",
+    "word/media/image22.png": "7cb1d0248194cecc87b80ccaec6cf11e4e24ca719d7e1d05dffda820fea16a74",
+    "word/media/image20.jpg": "9b1bb71ad85659377c2ee3bd0e1f3bf6f2a646191481f3c8ed86ed1d6e3fe963",
+    "word/media/image3.png": "144a3687e1ac3775639ab8aa4f1a0f2406e78a8e453801d84a82c5a7be98684c",
+    "word/media/image9.jpg": "8ba4536ffb8c298e8dcd9fd6b132603dea8d98113dccc88e60836510df955151",
+    "word/media/image18.png": "477a0c282ec59bd9b616e9a85a3736fba385797a39a73dbf7fe32acb682a66f1",
+    "word/media/image15.png": "d7b988ca43f5a499a2c9ac1e174e3db633c66f85de8c143496c815ddd6f9bf5b",
+    "word/media/image17.png": "0aad862e17159b538deb0e51261357a2d76ad120b65a200434a3bafcf0479a58",
+    "word/media/image25.png": "595c68c80cf7150cb5bbe88f2f7dd224cb7546d1cad0d73081b3a12c62f496ae",
+    "word/media/image26.png": "aca5c9ca01a72c97a1458aa59d7bd8fe5c52a179bf7c84cb18ddda5360f04614",
+    "word/media/image27.png": "efcb40912fe5f3582b5656f8a755e680a86a469471eca5c8b2d65d5dd8967ec1",
+    "word/media/image28.png": "a0c54b03d285ea44e32fd8622f8a97c3eb92cfc8d571f1091e81fff85eb1a4d7",
+    "word/media/image29.png": "7fc2ef5259c573cd17207f97969f8c9f14d3a13fe28e80942ad6c07825e5f1b8",
+    "word/media/image30.png": "7dcaa127b01b1af18d6eee3c1e8fc69959c20d71ca2049cc869e73ae74527d90",
+    "word/media/image31.png": "c06911793945d958457fb2b4e02e54ac3889064f31a49b077404c7ed7c4740fa",
+    "word/media/image32.png": "4d8060856a08c2125b9b74040b1a3f37e726b96229489569d1346c4c2587bdf5",
+    "word/media/image33.png": "2737bcd6cb492568c812d1eb3026ce44fc160111eead5e90ccfbd0a7ca5506e2",
+    "word/media/image34.png": "53fc67af4a36d10d73bf7351a84875b52bcdd4322c0bcd8272b12da1888ed066",
+    "word/media/image35.png": "6d0eed51da0e0858f58a7297415bf273245b94022f410661c667d55ae2da220c",
+    "word/media/image36.png": "8d163d61ebd5cff17d7f6a8b92dad609562e015d4e9cc5e291f637433d3cf9d5",
+    "word/media/image37.png": "290e3e18708b3408512e3bcb303f52478f4d5a148ff072164374864c1c46183b",
+    "word/media/image38.png": "72b904f1cfc9babc59e86e51f0246eaf36d6b49b2c951d26bbe0f67fc6cc6eff",
+    "word/media/image39.png": "a8ff28d2e2b2bce91ef0390f54a1c831eacc821aff2d229cf69288a91c8f44f6",
+    "word/media/image40.png": "3efdd41e14b7d54defdc4e7bb05ecec9fa726c2af7b0e63c389e197c0da91ecd",
+    "word/media/image41.png": "66f096e4c490a84f2f5fc7820a70c0f717c4c5f8a3f6f546c7ad05ce56325817",
+    "word/media/image42.png": "4099c84924c2bf2fa1b75c406e107aaba17f3149d6e6e22f70808287e6f0b335",
+    "word/media/image43.png": "a7d2bf64aa372f577e7eb02c4c22b84bc7c40c6972cea226bf6dab6ad665d829"
+  }
+}

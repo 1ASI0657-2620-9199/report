@@ -1,0 +1,30 @@
+FinanZen>docker compose config --quiet
+
+FinanZen>docker compose config --services
+kafka-permissions
+kafka
+kafka-init
+notification-service
+budget-service
+device-service
+financial-records
+web
+
+FinanZen>docker compose config --volumes
+telemetry-data
+notification-data
+financial-data
+kafka-data
+budget-data
+
+FinanZen>docker compose config --images
+finanzen-api:dev
+apache/kafka:4.1.2
+finanzen-api:dev
+finanzen-web:dev
+apache/kafka:4.1.2
+finanzen-api:dev
+finanzen-api:dev
+python:3.11-slim
+
+FinanZen>

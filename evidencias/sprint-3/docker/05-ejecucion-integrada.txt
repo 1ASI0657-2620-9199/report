@@ -1,0 +1,15 @@
+FinanZen>cd
+C:\Users\rodri\OneDrive\Desktop\6to Ciclo\Open Source\examen final\FinanZen\back
+
+FinanZen>.\.venv\Scripts\python.exe scripts\verify_docker.py
+OK: Four independent Kafka service APIs and Swagger behind Nginx
+OK: TransactionRecorded -> BudgetThresholdReached -> delivered in-app notification
+OK: HTTP replay and actual Kafka redelivery produce no duplicate financial effects
+OK: Telemetry crosses Kafka, normalizes Wh, deduplicates and never creates a financial transaction
+OK: Invalid message retries five times and reaches the real Kafka DLQ
+OK: All outboxes drained and NotificationDelivered observable on Kafka
+OK: Database per Service: four distinct Docker volumes
+Evidence: C:\Users\rodri\OneDrive\Desktop\6to Ciclo\Open Source\examen final\FinanZen\back\reports\docker\verif
+ication.json
+
+FinanZen>

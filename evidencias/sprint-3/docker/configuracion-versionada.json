@@ -1,0 +1,30 @@
+[
+  {
+    "repository": "back",
+    "commit": "f0846ceb886650b425d22ad1c4f940db5915e5f3",
+    "path": "Dockerfile",
+    "snapshot": "fuentes-configuracion/backend.Dockerfile",
+    "sha256": "e29298b39c19c37d00ee3d6f33397274e66d10d1fa162bedc141970c33c5145b"
+  },
+  {
+    "repository": "back",
+    "commit": "f0846ceb886650b425d22ad1c4f940db5915e5f3",
+    "path": "compose.yaml",
+    "snapshot": "fuentes-configuracion/compose.yaml",
+    "sha256": "b05b72985197a63d316d487c37ede5c56c746ee0b171e49b853977e7e9bbff19"
+  },
+  {
+    "repository": "front",
+    "commit": "b0998d931bb5d29771de3a849f8b9118c2a0a6bc",
+    "path": "Dockerfile",
+    "snapshot": "fuentes-configuracion/frontend.Dockerfile",
+    "sha256": "c9d603e8a304083c7f468307e94766aa2ff0b915fc01b46ffe1e738ff8817a6a"
+  },
+  {
+    "repository": "front",
+    "commit": "b0998d931bb5d29771de3a849f8b9118c2a0a6bc",
+    "path": "nginx.conf",
+    "snapshot": "fuentes-configuracion/nginx.conf",
+    "sha256": "9987120e86ce3bf1419b87912f266a29a9e128e43814059daa113291345ba1e8"
+  }
+]

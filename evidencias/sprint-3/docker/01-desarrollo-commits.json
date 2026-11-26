@@ -1,0 +1,40 @@
+{
+  "case": "01-desarrollo-commits",
+  "captured_at": "2026-11-26T13:47:41.831060-05:00",
+  "application": "cmd.exe",
+  "window_title": "FinanZen - CMD - 01-desarrollo-commits",
+  "window_class": "CASCADIA_HOSTING_WINDOW_CLASS",
+  "process_id": 30936,
+  "method": "PIL.ImageGrab of the visible native CMD window; text read from its console buffer",
+  "rectangle": [
+    50,
+    55,
+    1550,
+    995
+  ],
+  "image_size": [
+    1500,
+    940
+  ],
+  "commands": [
+    "git remote get-url origin",
+    "git log -1 --oneline -- Dockerfile compose.yaml",
+    "git log -1 --date=short --format=\"%%h %%ad %%an\" -- Dockerfile compose.yaml",
+    "git ls-files Dockerfile compose.yaml requirements-kafka.txt",
+    "docker compose config --services",
+    "git -C ..\\front log -1 --format=\"%%h %%s\" -- Dockerfile nginx.conf"
+  ],
+  "exit_codes": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "image": "01-desarrollo-commits.png",
+  "sha256": "fe0ddf624cf783022a9702af9ff93fd720d18b6728f266fe9fb2d2246bcbdb0c",
+  "transcript": "01-desarrollo-commits.txt",
+  "image_edited": false,
+  "ai_image_generation": false
+}

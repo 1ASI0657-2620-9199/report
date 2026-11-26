@@ -1,0 +1,100 @@
+{
+  "checked_at": "2026-11-26T13:48:04.843389-05:00",
+  "results": [
+    {
+      "url": "http://127.0.0.1:8080/services/financial/health",
+      "http_status": 200,
+      "response": {
+        "status": "ok",
+        "service": "financial",
+        "transport": "kafka",
+        "group_id": null,
+        "outbox": {
+          "pending": 0,
+          "dead_letters": 0
+        },
+        "published": 2,
+        "consumed": 0,
+        "dead_letters": 0,
+        "last_publish_at": "2026-11-26T18:47:55.298108+00:00",
+        "last_consume_at": null,
+        "last_error": null,
+        "workers": {
+          "financial-outbox": true
+        }
+      }
+    },
+    {
+      "url": "http://127.0.0.1:8080/services/budgets/health",
+      "http_status": 200,
+      "response": {
+        "status": "ok",
+        "service": "budgets",
+        "transport": "kafka",
+        "group_id": "finanzen-budgets-v1",
+        "outbox": {
+          "pending": 0,
+          "dead_letters": 0
+        },
+        "published": 2,
+        "consumed": 4,
+        "dead_letters": 1,
+        "last_publish_at": "2026-11-26T18:47:55.590106+00:00",
+        "last_consume_at": "2026-11-26T18:47:56.170854+00:00",
+        "last_error": "ValidationError",
+        "workers": {
+          "budgets-outbox": true,
+          "budgets-consumer": true
+        }
+      }
+    },
+    {
+      "url": "http://127.0.0.1:8080/services/notifications/health",
+      "http_status": 200,
+      "response": {
+        "status": "ok",
+        "service": "notifications",
+        "transport": "kafka",
+        "group_id": "finanzen-notifications-v1",
+        "outbox": {
+          "pending": 0,
+          "dead_letters": 0
+        },
+        "published": 3,
+        "consumed": 2,
+        "dead_letters": 0,
+        "last_publish_at": "2026-11-26T18:47:57.995951+00:00",
+        "last_consume_at": "2026-11-26T18:47:57.431817+00:00",
+        "last_error": null,
+        "workers": {
+          "notifications-outbox": true,
+          "notifications-consumer": true,
+          "notifications-delivery": true
+        }
+      }
+    },
+    {
+      "url": "http://127.0.0.1:8080/services/devices/health",
+      "http_status": 200,
+      "response": {
+        "status": "ok",
+        "service": "devices",
+        "transport": "kafka",
+        "group_id": null,
+        "outbox": {
+          "pending": 0,
+          "dead_letters": 0
+        },
+        "published": 1,
+        "consumed": 0,
+        "dead_letters": 0,
+        "last_publish_at": "2026-11-26T18:47:57.430547+00:00",
+        "last_consume_at": null,
+        "last_error": null,
+        "workers": {
+          "devices-outbox": true
+        }
+      }
+    }
+  ]
+}

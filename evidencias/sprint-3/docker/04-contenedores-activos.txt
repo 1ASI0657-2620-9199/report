@@ -1,0 +1,21 @@
+FinanZen>cd
+C:\Users\rodri\OneDrive\Desktop\6to Ciclo\Open Source\examen final\FinanZen\back
+
+FinanZen>docker compose version
+Docker Compose version v2.40.3-desktop.1
+
+FinanZen>docker version --format "Engine {{.Server.Version}} - Client {{.Client.Version}}"
+Engine 29.0.1 - Client 29.0.1
+
+FinanZen>docker compose ps --all --format "table {{.Name}}\t{{.State}}\t{{.Status}}\t{{.Ports}}"
+NAME                              STATE     STATUS                      PORTS
+finanzen-budget-service-1         running   Up 52 minutes (healthy)     8000/tcp
+finanzen-device-service-1         running   Up 52 minutes (healthy)     8000/tcp
+finanzen-financial-records-1      running   Up 52 minutes (healthy)     8000/tcp
+finanzen-kafka-1                  running   Up 53 minutes (healthy)     127.0.0.1:9092->9092/tcp
+finanzen-kafka-init-1             exited    Exited (0) 52 minutes ago
+finanzen-kafka-permissions-1      exited    Exited (0) 53 minutes ago
+finanzen-notification-service-1   running   Up 51 minutes (healthy)     8000/tcp
+finanzen-web-1                    running   Up 53 minutes (healthy)     127.0.0.1:8080->80/tcp
+
+FinanZen>
