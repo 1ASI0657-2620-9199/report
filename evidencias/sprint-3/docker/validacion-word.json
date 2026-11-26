@@ -1,9 +1,9 @@
 {
   "source_document_sha256": "00bfd36242a533ae0fc4db36c65a48a511920ab4a057301b107324bbca7ae7c1",
-  "updated_document_sha256": "f369dcd7cd19b862f05e97d4a30226faf5958cf8e5261a03d31d4d633ddae165",
+  "updated_document_sha256": "b1986d5d27b2c26153008bd5ca310495f907d56541aa77ab14df645b779f639b",
   "original_media_count": 43,
   "updated_media_count": 52,
-  "earlier_body_elements_preserved": true,
+  "earlier_body_elements_preserved": false,
   "original_media_preserved_byte_for_byte": true,
   "headings_inserted": [
     "5.3.3. Sprint 3 — Smart Device Integration and Consumption Telemetry",
@@ -102,5 +102,15 @@
     "word/media/image41.png": "66f096e4c490a84f2f5fc7820a70c0f717c4c5f8a3f6f546c7ad05ce56325817",
     "word/media/image42.png": "4099c84924c2bf2fa1b75c406e107aaba17f3149d6e6e22f70808287e6f0b335",
     "word/media/image43.png": "a7d2bf64aa372f577e7eb02c4c22b84bc7c40c6972cea226bf6dab6ad665d829"
+  },
+  "initial_insertion_document_sha256": "f369dcd7cd19b862f05e97d4a30226faf5958cf8e5261a03d31d4d633ddae165",
+  "editorial_revision": {
+    "base_document_sha256": "f369dcd7cd19b862f05e97d4a30226faf5958cf8e5261a03d31d4d633ddae165",
+    "paragraphs_updated": 25,
+    "editorial_checklist_elements_removed": 6,
+    "chapters_before_V_preserved": true,
+    "all_52_images_preserved_byte_for_byte": true,
+    "account_attribution": "Darkdren = Rodrigo Oblitas; confirmed by the account holder",
+    "scope": "Chapter V wording and collaboration attribution; execution data unchanged"
   }
 }

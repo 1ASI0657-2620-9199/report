@@ -29,7 +29,6 @@ directorio de trabajo. La terminal no es una página web. El
 [script de captura](../../../scripts/capturar_terminal_cmd.py) abre una consola
 nativa, espera la terminación de los comandos y captura directamente su ventana
 visible con `PIL.ImageGrab`. No dibuja resultados ni modifica las imágenes.
-No se utilizó generación de imágenes con IA.
 
 Cada JSON conserva los comandos, sus códigos de salida, fecha con zona horaria,
 clase y título de ventana, dimensiones y SHA-256 del PNG. Cada TXT conserva el
@@ -93,5 +92,6 @@ los snapshots de configuración publicados aquí corresponden a la sesión
 documentada. Al preparar otra entrega deben copiarse otra vez desde la ejecución
 y revisiones que se quieran documentar.
 
-Los demás apartados de Sprint 3 y las evidencias de colaboración/Kanban del
-equipo quedan fuera de esta actualización de tres apartados.
+La [revisión de ramas](revision-ramas.json) registra las referencias publicadas
+consultadas en GitHub. La cuenta Darkdren corresponde a Rodrigo Oblitas; los
+archivos `.mailmap` de back, front y report unifican la atribución de sus commits.

@@ -16,10 +16,9 @@ de CMD**, para un total de **52 archivos de imagen**. El
 [índice de evidencias de Sprint 3](../evidencias/sprint-3/docker/README.md)
 contiene las capturas, transcripciones, hashes y resultados originales. El
 [registro de validación del Word](../evidencias/sprint-3/docker/validacion-word.json)
-verifica que los elementos anteriores y sus imágenes se conservaron.
+verifica la conservación de las imágenes y registra la revisión de redacción
+del capítulo V.
 
-La narración del video histórico del Sprint 1 es sintética y se identifica como
-tal. Las nueve capturas nuevas de terminal son originales, tomadas de CMD local,
-sin generación de imágenes con IA. Las contribuciones individuales pendientes
-y la aceptación docente del proveedor no se inventan. Esta actualización cubre
-los tres apartados solicitados; no declara cerrado todo el Sprint 3.
+Las capturas de terminal se tomaron de CMD local. El índice conserva los comandos,
+las transcripciones y los resultados de cada ejecución. Los commits de la cuenta
+Darkdren se atribuyen a Rodrigo Oblitas, titular de esa cuenta.
