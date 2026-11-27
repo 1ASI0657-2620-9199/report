@@ -82,6 +82,10 @@ verificación. El PDF conserva la tabla de versiones de la fuente original.
 12. [Reporte Word con evidencias integradas](entrega/FinanZen-Reporte-Actualizado.docx).
 13. [Docker y Kafka del Sprint 3](evidencias/sprint-3/docker/README.md): desarrollo,
     ejecución integrada y despliegue local con capturas reales de CMD.
+14. [Manual para la demostración](entrega/Manual-Demostracion-FinanZen.pdf),
+    [Word editable](entrega/Manual-Demostracion-FinanZen.docx) y
+    [guion breve](entrega/Guion-Demostracion-FinanZen.txt): recorrido de la app,
+    cuentas de ensayo y explicación para la presentación.
 
 ## Criterio de actualización
 

@@ -22,3 +22,17 @@ del capítulo V.
 Las capturas de terminal se tomaron de CMD local. El índice conserva los comandos,
 las transcripciones y los resultados de cada ejecución. Los commits de la cuenta
 Darkdren se atribuyen a Rodrigo Oblitas, titular de esa cuenta.
+
+## Manual para la presentación
+
+- [Manual de demostración en PDF](Manual-Demostracion-FinanZen.pdf).
+- [Manual editable en Word](Manual-Demostracion-FinanZen.docx).
+- [Guion breve para exponer](Guion-Demostracion-FinanZen.txt).
+- [Sesión y capturas verificadas](manual-demo/sesion-verificada.json).
+
+La aplicación de esta demo se ejecuta en **http://127.0.0.1:8080**, en la laptop
+con Docker Desktop. El manual incluye las cuentas de ensayo y respaldo, los pasos
+de la demostración, los importes esperados, Swagger y una explicación de los
+cuatro servicios y Kafka. Para crear nuevas cuentas se utiliza
+`back/scripts/preparar_demostracion.py`; para iniciar Docker y abrir el panel,
+`back/scripts/iniciar_demostracion.cmd`.
