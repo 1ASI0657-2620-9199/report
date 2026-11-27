@@ -1,0 +1,48 @@
+{
+  "verified_at": "2026-11-26T20:21:20.815496-05:00",
+  "deployment": "local Docker Compose with Kafka",
+  "url": "http://127.0.0.1:8080",
+  "live_user": "presentacion-2611-2021-0c15",
+  "backup_user": "respaldo-2611-2021-c250",
+  "month": "2026-11",
+  "backup_summary": {
+    "user_id": "respaldo-2611-2021-c250",
+    "month": "2026-11",
+    "currency": "PEN",
+    "income": "1000",
+    "expenses": "105",
+    "balance": "895",
+    "transaction_count": 3
+  },
+  "device_id": "51f422c8-54f3-4dce-b060-b0c2203589a0",
+  "healthy_services": 6,
+  "api_health_http": 200,
+  "browser_acceptance": "Passed against http://127.0.0.1:8080; desktop and mobile; no JavaScript errors",
+  "application_screenshots": [
+    {
+      "path": "capturas\\01-resumen.png",
+      "sha256": "652762780776b767900c697409f3684ef0ccbe97dd6f631fe1fcdce8d6421fef",
+      "source": "Chrome screenshot of the running application"
+    },
+    {
+      "path": "capturas\\02-presupuestos.png",
+      "sha256": "fd2fde3854fdc8fdfe08f1e753ec526b2606a1f48ebb5c434a19340aae17c7c7",
+      "source": "Chrome screenshot of the running application"
+    },
+    {
+      "path": "capturas\\03-alertas.png",
+      "sha256": "04e0a2dd1d17759c1a7b92729754ca4a2a2e361d48e084a6e185b93ee5d93c92",
+      "source": "Chrome screenshot of the running application"
+    },
+    {
+      "path": "capturas\\04-dispositivos.png",
+      "sha256": "6546bd744bf294ca89eeeafeaeaa02e45334e7d8a0f5705c50cf1fdc1e281f3a",
+      "source": "Chrome screenshot of the running application"
+    },
+    {
+      "path": "capturas\\05-reportes.png",
+      "sha256": "eb66ed7073585aac2f990becbd1082a68c5ad59be26ebf7d061d2238b9059497",
+      "source": "Chrome screenshot of the running application"
+    }
+  ]
+}

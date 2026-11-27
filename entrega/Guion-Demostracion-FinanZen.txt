@@ -1,0 +1,46 @@
+FINANZEN — GUION BREVE PARA LA DEMOSTRACION
+
+Aplicacion local: http://127.0.0.1:8080
+Cuenta en vivo: presentacion-2611-2021-0c15
+Cuenta de respaldo: respaldo-2611-2021-c250
+Periodo preparado: 2026-11
+
+1. PRESENTAR
+"FinanZen organiza movimientos, presupuestos, alertas y consumo de dispositivos."
+Cuenta demo -> identidad en vivo. Balance inicial S/ 1,000.
+
+2. PRESUPUESTO
+Presupuestos -> Crear presupuesto -> Alimentacion, 100, umbral 80 %.
+
+3. GASTO Y ALERTA
+Resumen -> Registrar movimiento -> Gasto 85, Alimentacion, Compra de la semana.
+Balance 915; presupuesto 85 %. Alertas -> aviso de cercania al limite.
+Otro gasto de 20 -> gasto total 105, balance 895, presupuesto 105 %.
+"TransactionRecorded llega a Budget; BudgetThresholdReached llega a Notification."
+
+4. DISPOSITIVO
+Agregar Medidor de casa, simulado, limite 20 kWh, tarifa 0.75.
+Simular 15000 Wh -> 15 kWh, S/ 11.25, una lectura.
+Reenviar ultima lectura -> mismo total y misma cantidad de lecturas.
+Simular otros 10000 Wh -> 25 kWh, S/ 18.75, dos lecturas.
+Alerta de consumo. Volver a Resumen -> balance sigue en 895.
+"El costo es una estimacion; una lectura no se convierte sola en gasto."
+
+5. REPORTE
+Reportes -> fecha de los movimientos -> ingresos 1,000; gastos 105; balance 895.
+Presupuestos -> Ver recomendacion -> ingreso historico 2,000; ahorro 400.
+
+6. ARQUITECTURA
+docker compose ps
+Cuatro APIs + Kafka + Nginx. Base y volumen distintos por servicio.
+Outbox: dato y evento juntos en una transaccion local.
+Idempotencia: reintentar no repite efectos. Retry y DLQ atienden fallas.
+
+CIERRE
+"El flujo financiero y la telemetria funcionan con servicios separados,
+comunicacion asincrona y una ejecucion integrada con Docker."
+
+PARA UN NUEVO ENSAYO, DESDE back:
+python scripts/preparar_demostracion.py
+python scripts/preparar_demostracion.py --completa
+Copiar la nueva identidad desde la terminal a Cuenta demo.
